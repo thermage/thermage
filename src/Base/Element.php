@@ -127,6 +127,13 @@ abstract class Element
         return $this;
     }
 
+    public function capitalize()
+    {
+        $this->value->capitalize();
+
+        return $this;
+    }
+
     /**
      * Get element.
      */
