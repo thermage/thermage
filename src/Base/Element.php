@@ -120,6 +120,13 @@ abstract class Element
         return $this;
     }
 
+    public function camel()
+    {
+        $this->value->camel();
+
+        return $this;
+    }
+
     /**
      * Get element.
      */
