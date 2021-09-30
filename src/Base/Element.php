@@ -113,6 +113,13 @@ abstract class Element
         return $this;
     }
 
+    public function upper()
+    {
+        $this->value->upper();
+
+        return $this;
+    }
+
     /**
      * Get element.
      */
