@@ -7,7 +7,7 @@ namespace Clirad\Base;
 use function arrays;
 use function strings;
 
-abstract class Element
+abstract class BaseElement
 {
     private $properties;
     private $value;
@@ -27,7 +27,7 @@ abstract class Element
 
     public function renderer()
     {
-        return $this->render;
+        return $this->renderer;
     }
 
     public function properties()
@@ -137,6 +137,10 @@ abstract class Element
 
     public function __call(string $method, array $parameters)
     {
+        if (strings($method)->startsWith('display')) {
+            return $this->display(strings(substr($method, 7))->lower()->toString());
+        }
+
         if (strings($method)->startsWith('color')) {
             return $this->color(strings(substr($method, 5))->kebab()->toString());
         }
@@ -195,11 +199,20 @@ abstract class Element
     }
 
     /**
-     * Render element.
+     * Display element.
      */
-    public function render(): void
+    public function display($type = 'row'): void
     {
-        $this->renderer->writeln($this->toString());
+        switch ($type) {
+            case 'col':
+                $this->renderer->write($this->toString());
+                break;
+            
+            case 'row':
+            default:
+                $this->renderer->writeln($this->toString());
+                break;
+        }
     }
 
     /**

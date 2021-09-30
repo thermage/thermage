@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Clirad;
 
-use Clirad\Components\Line;
+use Clirad\Components\Element;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 use function array_map;
@@ -19,9 +19,9 @@ final class Clirad
         self::$renderer = $renderer;
     }
 
-    public static function line(string $value = ''): Line
+    public static function element(string $value = ''): Element
     {
-        return new Line(
+        return new Element(
             self::$renderer ?? new ConsoleOutput(),
             $value
         );
