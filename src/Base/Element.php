@@ -137,6 +137,10 @@ abstract class Element
 
     public function __call(string $method, array $parameters)
     {
+        if (strings($method)->startsWith('px')) {
+            return $this->px(strings(substr($method, 2))->toInteger());
+        }
+
         if (strings($method)->startsWith('pl')) {
             return $this->pl(strings(substr($method, 2))->toInteger());
         }
