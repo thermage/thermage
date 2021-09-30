@@ -1,0 +1,42 @@
+{
+    "name": "clirad/clirad",
+    "description": "Totally RAD Terminal styling!",
+    "license": "MIT",
+    "keywords": [
+        "clirad"
+    ],
+    "support": {
+      "source": "https://github.com/clirad/clirad",
+      "issues": "https://github.com/clirad/clirad/issues"
+    },
+    "authors": [
+        {
+            "name": "Sergey Romanenko",
+            "email": "sergey.romanenko@flextype.org",
+            "homepage": "https://github.com/Awilum"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "atomastic/macroable": "^2.0",
+        "atomastic/arrays": "^3.0.5",
+        "atomastic/strings": "^3.0.2",
+        "symfony/console": "^5.3"
+    },
+    "autoload":{
+        "psr-4": {
+            "Clirad\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "require-dev": {
+        "doctrine/coding-standard": "9.0.0",
+        "pestphp/pest": "^1.19.0",
+        "phpstan/phpstan": "^0.12.99",
+        "symfony/var-dumper": "^5.3.7"
+    }
+}
