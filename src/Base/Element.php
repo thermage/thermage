@@ -101,6 +101,7 @@ abstract class Element
 
     public function pr(int $value)
     {
+
         $this->value->append(strings(' ')->repeat($value)->toString());
 
         return $this;
@@ -132,6 +133,23 @@ abstract class Element
         $this->value->capitalize();
 
         return $this;
+    }
+
+    public function __call(string $method, array $parameters)
+    {
+        if (strings($method)->startsWith('pl')) {
+            return $this->pl(strings(substr($method, 2))->toInteger());
+        }
+
+        if (strings($method)->startsWith('pr')) {
+            return $this->pr(strings(substr($method, 2))->toInteger());
+        }
+
+        throw new BadMethodCallException(sprintf(
+            'Method %s::%s does not exist.',
+            static::class,
+            $method
+        ));        
     }
 
     /**
