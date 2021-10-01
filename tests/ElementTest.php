@@ -162,6 +162,11 @@ test('test getRenderer', function (): void {
     $this->assertInstanceOf(Renderer::class, $value);
 });
 
+test('test renderer', function (): void {
+    $value = el()->renderer(new BufferedOutput());
+    $this->assertInstanceOf(BufferedOutput::class, $value->getRenderer());
+});
+
 test('magic throw exception BadMethodCallException', function (): void {
     el()->foo();
 })->throws(BadMethodCallException::class);

@@ -124,6 +124,22 @@ abstract class BaseElement
     }
 
     /**
+     * Set base element renderer.
+     *
+     * @param RendererInterface $renderer Base element renderer interface.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function renderer(?RendererInterface $renderer = null): self
+    {
+        $this->renderer = $renderer;
+
+        return $this;
+    }
+
+    /**
      * Set base element color.
      *
      * @param string $color Base element color.
