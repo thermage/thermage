@@ -13,7 +13,7 @@ abstract class BaseElement
     private $value;
     private $renderer;
 
-    final public function __construct($renderer = null, $value)
+    final public function __construct($renderer = null, $value = '')
     {
         $this->properties = arrays([]);
         $this->value      = strings($value);
