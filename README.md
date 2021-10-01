@@ -21,6 +21,38 @@ composer require clirad/clirad
 
 ### Documentation
 
+#### Usage
+
+```php 
+// Display: Stay Rad!
+el('Stay Rad!')
+  ->px20()
+  ->mx10()
+  ->colorBrightGreen()
+  ->bgBrightMagenta()
+  ->underline()
+  ->upper()
+  ->display();
+
+// Display: TAKE A CHILL PILL!
+el()
+  ->value("You Don't Get the Joke") 
+  ->properties(['padding' => [
+                    'left' => 10, 
+                    'right' => 10
+                    ], 
+                    'margin' => [
+                        'left' => 5, 
+                        'right' => 5
+                    ],
+                    'color' => 'bright-greeen', 
+                    'bg' => 'bright-magenta'
+                ])
+  ->underline()
+  ->upper()
+  ->display();
+```
+
 ### Tests
 
 Run tests
