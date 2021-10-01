@@ -49,3 +49,8 @@ test('test reverse', function (): void {
     $value = el('RAD')->reverse()->render();
     expect($value)->toBe('<options=reverse;>RAD</>'); 
 });
+
+test('test conceal', function (): void {
+    $value = el('RAD')->conceal()->render();
+    expect($value)->toBe('<options=conceal;>RAD</>'); 
+});
