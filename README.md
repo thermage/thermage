@@ -23,8 +23,9 @@ composer require clirad/clirad
 
 #### Basic Usage
 
+Simple examle using default renderer.
+
 ```php 
-// Display: Stay Rad!
 el('Stay Rad!')
   ->px20()
   ->mx10()
@@ -35,24 +36,51 @@ el('Stay Rad!')
   ->display();
 ```
 
+Set custom renderer. 
+
 ```php 
-// Display: TAKE A CHILL PILL!
-el()
-  ->value("TAKE A CHILL PILL!") 
-  ->properties(['padding' => [
-                    'left' => 10, 
-                    'right' => 10
-                    ], 
-                    'margin' => [
-                        'left' => 5, 
-                        'right' => 5
-                    ],
-                    'color' => 'bright-greeen', 
-                    'bg' => 'bright-magenta'
-                ])
+el('Stay Rad!')
+  ->render($renderer)
+  ->px20()
+  ->mx10()
+  ->colorBrightGreen()
+  ->bgBrightMagenta()
   ->underline()
   ->upper()
   ->display();
+```
+
+Set custom renderer globaly. 
+
+```php 
+\Clirad\Clirad::setRenderer($renderer);
+
+el('Stay Rad!')
+  ->px20()
+  ->mx10()
+  ->colorBrightGreen()
+  ->bgBrightMagenta()
+  ->underline()
+  ->upper()
+  ->display();
+```
+
+Symfony Console integration example
+
+```php 
+protected function execute(InputInterface $input, OutputInterface $output): int
+{
+    el('Stay Rad!')
+      ->renderer($output)
+      ->px20()
+      ->mx10()
+      ->colorBrightGreen()
+      ->bgBrightMagenta()
+      ->underline()
+      ->upper()
+      ->display();
+    // ...
+}
 ```
 
 #### Clirad
