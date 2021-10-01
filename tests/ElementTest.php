@@ -142,8 +142,8 @@ test('test camel', function (): void {
 });
 
 test('test capitalize', function (): void {
-    $value = el('RAD')->camel()->render();
-    expect($value)->toBe('rAD'); 
+    $value = el('RAD')->capitalize()->render();
+    expect($value)->toBe('Rad'); 
 });
 
 test('test getRenderer', function (): void {
