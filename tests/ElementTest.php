@@ -34,3 +34,8 @@ test('test underscore', function (): void {
     $value = el('RAD')->underscore()->render();
     expect($value)->toBe('<options=underscore;>RAD</>'); 
 });
+
+test('test underline', function (): void {
+    $value = el('RAD')->underline()->render();
+    expect($value)->toBe('<options=underscore;>RAD</>'); 
+});
