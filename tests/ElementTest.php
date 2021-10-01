@@ -24,3 +24,13 @@ test('test bg', function (): void {
     $value = el('RAD')->bg('blue')->render();
     expect($value)->toBe('<bg=blue;>RAD</>'); 
 });
+
+test('test bold', function (): void {
+    $value = el('RAD')->bold()->render();
+    expect($value)->toBe('<options=bold;>RAD</>'); 
+});
+
+test('test underscore', function (): void {
+    $value = el('RAD')->underscore()->render();
+    expect($value)->toBe('<options=underscore;>RAD</>'); 
+});
