@@ -7,10 +7,11 @@ use Clirad\Components\Element;
 use Symfony\Component\Console\Output\ConsoleOutput as Renderer;
 use Symfony\Component\Console\Output\OutputInterface as RendererInterface;
 
-test('test el() helper', function() {
+test('test el helper', function() {
     $this->assertInstanceOf(Element::class, el());
 });
 
-test('test el() helper', function() {
-    $this->assertInstanceOf(Element::class, el());
+test('test setRenderer and getRenderer', function() {
+    Clirad::setRenderer(new Renderer());
+    $this->assertInstanceOf(Renderer::class, Clirad::getRenderer());
 });
