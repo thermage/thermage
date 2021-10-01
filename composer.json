@@ -1,0 +1,41 @@
+{
+    "name": "clirad/clirad",
+    "description": "Clirad provides a fluent and powerful, object-oriented interface for customizing CLI output text color, background, formatting, and more.",
+    "license": "MIT",
+    "keywords": [
+        "clirad", "console", "cli", "terminal"
+    ],
+    "support": {
+      "source": "https://github.com/clirad/clirad",
+      "issues": "https://github.com/clirad/clirad/issues"
+    },
+    "authors": [
+        {
+            "name": "Sergey Romanenko",
+            "email": "sergey.romanenko@flextype.org",
+            "homepage": "https://awilum.github.io"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "atomastic/arrays": "^3.0.5",
+        "atomastic/strings": "^3.0.2",
+        "symfony/console": "^5.3"
+    },
+    "autoload":{
+        "psr-4": {
+            "Clirad\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "require-dev": {
+        "doctrine/coding-standard": "9.0.0",
+        "pestphp/pest": "^1.19.0",
+        "phpstan/phpstan": "^0.12.99",
+        "symfony/var-dumper": "^5.3.7"
+    }
+}
