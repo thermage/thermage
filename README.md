@@ -195,6 +195,10 @@ Root element for all Clirad Components.
             <td>Convert element value first character of every word of string to upper case and the others to lower case.</td>
         </tr>
         <tr>
+            <td><a href="#methods-limit">limit</a></td>
+            <td>Limit the number of characters in the element value.</td>
+        </tr>
+        <tr>
             <td><a href="#methods-render">render</a></td>
             <td>Render base element.</td>
         </tr>
