@@ -7,6 +7,8 @@
 
 <br>
 
+Clirad provides a fluent and powerful, object-oriented interface for customizing CLI output text color, background, formatting, and more.
+
 ### Installation
 
 #### With [Composer](https://getcomposer.org)
