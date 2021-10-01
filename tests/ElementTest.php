@@ -39,3 +39,8 @@ test('test underline', function (): void {
     $value = el('RAD')->underline()->render();
     expect($value)->toBe('<options=underscore;>RAD</>'); 
 });
+
+test('test blink', function (): void {
+    $value = el('RAD')->blink()->render();
+    expect($value)->toBe('<options=blink;>RAD</>'); 
+});
