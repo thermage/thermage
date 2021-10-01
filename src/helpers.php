@@ -7,14 +7,15 @@ use Clirad\Components\Element;
 
 if (! function_exists('el')) {
     /**
-     * Create Element Component.
-     * 
+     * Create element component.
+     *
      * @param string $value      Element value.
      * @param array  $properties Element properties.
-     * 
-     * @return Element Element Component.
+     *
+     * @return Element Returns element component.
      */
-    function el(string $value = '', array $properties = []): Element {
+    function el(string $value = '', array $properties = []): Element
+    {
         return Clirad::element($value, $properties);
     }
 }
