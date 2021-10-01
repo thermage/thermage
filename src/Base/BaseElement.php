@@ -506,11 +506,9 @@ abstract class BaseElement
      *
      * @param string $type Display type.
      *
-     * @return void Void.
-     *
      * @access public
      */
-    public function display(string $type = 'row'): void
+    public function display(string $type = 'row')
     {
         switch ($type) {
             case 'none':
