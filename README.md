@@ -211,7 +211,24 @@ Root element for all Clirad Components.
 
 Same methods as for [Base Element](#base-element).
 
+#### Helpers 
+
 ##### Methods 
+
+<table>
+    <thead>
+        <tr>
+            <th>Helper</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="#methods-el">el</a></td>
+            <td>Create element component.</td>
+        </tr>
+    </tbody>
+</table>
 
 ### Tests
 
