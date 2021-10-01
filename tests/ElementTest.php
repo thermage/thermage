@@ -140,3 +140,8 @@ test('test camel', function (): void {
     $value = el('RaD')->camel()->render();
     expect($value)->toBe('raD'); 
 });
+
+test('test capitalize', function (): void {
+    $value = el('RAD')->camel()->render();
+    expect($value)->toBe('rAD'); 
+});
