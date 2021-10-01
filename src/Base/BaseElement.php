@@ -6,7 +6,7 @@ namespace Clirad\Base;
 
 use Atomastic\Arrays\Arrays;
 use Atomastic\Strings\Strings;
-use Symfony\Component\Console\Output\OutputInterface as SymfonyRendererInterface;
+use Symfony\Component\Console\Output\OutputInterface as RendererInterface;
 
 use function arrays;
 use function sprintf;
@@ -20,7 +20,7 @@ abstract class BaseElement
      *
      * @access private
      */
-    private SymfonyRendererInterface $renderer;
+    private RendererInterface $renderer;
 
     /**
      * Base element properties.
@@ -39,7 +39,7 @@ abstract class BaseElement
     /**
      * Create base element.
      *
-     * @param SymfonyRendererInterface $renderer   Base element renderer interface.
+     * @param RendererInterface $renderer   Base element renderer interface.
      * @param string                   $value      Base element value.
      * @param array                    $properties Base element properties.
      *
@@ -47,7 +47,7 @@ abstract class BaseElement
      *
      * @access public
      */
-    final public function __construct(?SymfonyRendererInterface $renderer = null, string $value = '', array $properties = [])
+    final public function __construct(?RendererInterface $renderer = null, string $value = '', array $properties = [])
     {
         $this->renderer   = $renderer;
         $this->value      = strings($value);
@@ -69,11 +69,11 @@ abstract class BaseElement
     /**
      * Get base element renderer.
      *
-     * @return SymfonyRendererInterface Returns base element renderer.
+     * @return RendererInterface Returns base element renderer.
      *
      * @access public
      */
-    public function getRenderer(): SymfonyRendererInterface
+    public function getRenderer(): RendererInterface
     {
         return $this->renderer;
     }

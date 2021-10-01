@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Clirad;
 
 use Clirad\Components\Element;
-use Symfony\Component\Console\Output\ConsoleOutput as SymfonyRenderer;
-use Symfony\Component\Console\Output\OutputInterface as SymfonyRendererInterface;
+use Symfony\Component\Console\Output\ConsoleOutput as Renderer;
+use Symfony\Component\Console\Output\OutputInterface as RendererInterface;
 
 final class Clirad
 {
@@ -15,20 +15,32 @@ final class Clirad
      *
      * @access private
      */
-    private static SymfonyRendererInterface $renderer;
+    private static RendererInterface $renderer;
 
     /**
      * Set renderer.
      *
-     * @param SymfonyRendererInterface $renderer Renderer interface.
+     * @param RendererInterface $renderer Renderer interface.
      *
      * @return void Void.
      *
      * @access public
      */
-    public static function setRenderer(?SymfonyRendererInterface $renderer = null): void
+    public static function setRenderer(?RendererInterface $renderer = null): void
     {
         self::$renderer = $renderer;
+    }
+
+    /**
+     * Get renderer.
+     *
+     * @return RendererInterface Renderer.
+     *
+     * @access public
+     */
+    public static function getRenderer(): RendererInterface
+    {
+        return self::$renderer;
     }
 
     /**
@@ -44,7 +56,7 @@ final class Clirad
     public static function element(string $value = '', array $properties = []): Element
     {
         return new Element(
-            self::$renderer ?? new SymfonyRenderer(),
+            self::$renderer ?? new Renderer(),
             $value,
             $properties
         );
