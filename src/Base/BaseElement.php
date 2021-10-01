@@ -338,6 +338,23 @@ abstract class BaseElement
     }
 
     /**
+     * Limit the number of characters in the element value.
+     *
+     * @param  int    $limit  Limit of characters.
+     * @param  string $append Text to append to the string IF it gets truncated.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function limit(int $limit = 100, string $append = '...'): self
+    {
+        $this->value->limit($limit, $append);
+
+        return $this;
+    }
+
+    /**
      * Convert element value to lower-case.
      *
      * @return self Returns instance of the BaseElement class.
@@ -509,7 +526,7 @@ abstract class BaseElement
      *
      * @access public
      */
-    public function display(string $type = 'row')
+    public function display(string $type = 'row'): void
     {
         switch ($type) {
             case 'none':
