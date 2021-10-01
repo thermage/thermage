@@ -28,7 +28,7 @@ abstract class Colors
         'bright-blue'    => 'bright-blue',
         'bright-magenta' => 'bright-magenta',
         'bright-cyan'    => 'bright-cyan',
-        'bright-cyan'    => 'bright-cyan',
+        'bright-white'   => 'bright-white',
     ];
 
     /**
