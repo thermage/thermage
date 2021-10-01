@@ -84,6 +84,28 @@ abstract class BaseElement
         return $this;
     }
 
+    public function mx(int $value)
+    {
+        $this->properties->set('margin.left', $value / 2);
+        $this->properties->set('margin.right', $value / 2);
+
+        return $this;
+    }
+
+    public function ml(int $value)
+    {
+        $this->properties->set('margin.left', $value);
+
+        return $this;
+    }
+
+    public function mr(int $value)
+    {
+        $this->properties->set('margin.right', $value);
+
+        return $this;
+    }
+
     public function px(int $value)
     {
         $this->properties->set('padding.left', $value / 2);
@@ -148,6 +170,18 @@ abstract class BaseElement
             return $this->color(strings(substr($method, 5))->kebab()->toString());
         }
 
+        if (strings($method)->startsWith('mx')) {
+            return $this->mx(strings(substr($method, 2))->toInteger());
+        }
+
+        if (strings($method)->startsWith('ml')) {
+            return $this->ml(strings(substr($method, 2))->toInteger());
+        }
+
+        if (strings($method)->startsWith('mr')) {
+            return $this->mr(strings(substr($method, 2))->toInteger());
+        }
+
         if (strings($method)->startsWith('px')) {
             return $this->px(strings(substr($method, 2))->toInteger());
         }
@@ -205,6 +239,15 @@ abstract class BaseElement
         } else {
             $element = (string) $this->value;
         }
+
+        if ($this->properties->has('margin.left')) {
+            $element = (string) strings($element)->prepend((string) strings(' ')->repeat($this->properties->get('margin.left')));            
+        }
+
+        if ($this->properties->has('margin.right')) {
+            $element = (string) strings($element)->append((string) strings(' ')->repeat($this->properties->get('margin.right')));  
+        }
+        
 
         return $element;
     }
