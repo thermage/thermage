@@ -135,3 +135,8 @@ test('test upper', function (): void {
     $value = el('rad')->upper()->render();
     expect($value)->toBe('RAD'); 
 });
+
+test('test camel', function (): void {
+    $value = el('RaD')->camel()->render();
+    expect($value)->toBe('raD'); 
+});
