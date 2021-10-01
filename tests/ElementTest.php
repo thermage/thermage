@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Clirad\Clirad;
 use Clirad\Components\Element;
 use Symfony\Component\Console\Output\ConsoleOutput as Renderer;
+use Symfony\Component\Console\Output\BufferedOutput;
 
 test('test el helper', function (): void {
     $this->assertInstanceOf(Element::class, el());
@@ -181,4 +182,31 @@ test('test limit', function (): void {
 test('test repeat', function (): void {
     $value = el('RAD')->repeat(3)->render();
     expect($value)->toBe('RADRADRAD'); 
+});
+
+test('test display', function (): void {
+    Clirad::setRenderer($output = new BufferedOutput());
+    $value = el('RAD')->display();
+    expect($output->fetch())->toBe("RAD\n"); 
+
+    $value = el('RAD')->display('col');
+    expect($output->fetch())->toBe("RAD"); 
+
+    $value = el('RAD')->display('row');
+    expect($output->fetch())->toBe("RAD\n");  
+
+    $value = el('RAD')->display('none');
+    expect($output->fetch())->toBe(""); 
+});
+
+test('test magic display', function (): void {
+    Clirad::setRenderer($output = new BufferedOutput());
+    $value = el('RAD')->displayCol();
+    expect($output->fetch())->toBe("RAD"); 
+
+    $value = el('RAD')->displayRow();
+    expect($output->fetch())->toBe("RAD\n");  
+
+    $value = el('RAD')->displayNone();
+    expect($output->fetch())->toBe(""); 
 });

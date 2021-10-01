@@ -432,13 +432,13 @@ abstract class BaseElement
      * @param string $method     Method.
      * @param array  $parameters Parameters.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return mixed Returns mixed content.
      *
      * @throws BadMethodCallException If method not found.
      *
      * @access public
      */
-    public function __call(string $method, array $parameters): self
+    public function __call(string $method, array $parameters)
     {
         if (strings($method)->startsWith('display')) {
             return $this->display(strings(substr($method, 7))->lower()->toString());
@@ -550,7 +550,7 @@ abstract class BaseElement
     {
         switch ($type) {
             case 'none':
-                // ... display none
+                $this->renderer->write('');
                 break;
 
             case 'col':
