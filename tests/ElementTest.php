@@ -20,6 +20,11 @@ test('test color', function (): void {
     expect($value)->toBe('<fg=blue;>RAD</>'); 
 });
 
+test('test magic color', function (): void {
+    $value = el('RAD')->colorBlue('blue')->render();
+    expect($value)->toBe('<fg=blue;>RAD</>'); 
+});
+
 test('test bg', function (): void {
     $value = el('RAD')->bg('blue')->render();
     expect($value)->toBe('<bg=blue;>RAD</>'); 
@@ -150,5 +155,4 @@ test('test getRenderer', function (): void {
     $value = el()->getRenderer();
     $this->assertInstanceOf(Renderer::class, $value);
 });
-
 
