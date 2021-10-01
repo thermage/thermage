@@ -70,6 +70,7 @@ Symfony Console integration example:
 ```php 
 protected function execute(InputInterface $input, OutputInterface $output): int
 {
+    
     el('Stay Rad!')
       ->renderer($output)
       ->px20()
@@ -79,6 +80,7 @@ protected function execute(InputInterface $input, OutputInterface $output): int
       ->underline()
       ->upper()
       ->display();
+      
     // ...
 }
 ```
