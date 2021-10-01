@@ -10,6 +10,7 @@ use BadMethodCallException;
 use Symfony\Component\Console\Output\OutputInterface as RendererInterface;
 
 use function arrays;
+use function intval;
 use function sprintf;
 use function strings;
 use function substr;
@@ -150,7 +151,7 @@ abstract class BaseElement
      */
     public function color(string $color): self
     {
-        $this->properties->set('color', $color);
+        $this->properties->set('color', Colors::get($color));
 
         return $this;
     }
@@ -166,7 +167,7 @@ abstract class BaseElement
      */
     public function bg(string $color): self
     {
-        $this->properties->set('bg', $color);
+        $this->properties->set('bg', Colors::get($color));
 
         return $this;
     }
