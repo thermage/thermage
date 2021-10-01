@@ -7,6 +7,7 @@ namespace Clirad\Base;
 use Atomastic\Arrays\Arrays;
 use Atomastic\Strings\Strings;
 use Symfony\Component\Console\Output\OutputInterface as RendererInterface;
+use BadMethodCallException;
 
 use function arrays;
 use function sprintf;
