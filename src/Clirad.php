@@ -19,11 +19,12 @@ final class Clirad
         self::$renderer = $renderer;
     }
 
-    public static function element(string $value = ''): Element
+    public static function element(string $value = '', array $properties = []): Element
     {
         return new Element(
             self::$renderer ?? new ConsoleOutput(),
-            $value
+            $value,
+            $properties
         );
     }
 }
