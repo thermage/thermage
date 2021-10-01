@@ -169,3 +169,11 @@ test('test magic __toString', function (): void {
     $value = el('RAD');
     expect((string) $value)->toBe('RAD'); 
 });
+
+test('test limit', function (): void {
+    $value = el('RAD')->limit(1)->render();
+    expect($value)->toBe('R...'); 
+
+    $value = el('RAD')->limit(1, '')->render();
+    expect($value)->toBe('R'); 
+});
