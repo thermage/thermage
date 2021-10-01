@@ -19,8 +19,7 @@ Clirad provides a fluent and powerful, object-oriented interface for customizing
 composer require clirad/clirad
 ```
 
-### Resources
-* [Documentation](https://digital.flextype.org/clirad)
+### Documentation
 
 ### Tests
 
