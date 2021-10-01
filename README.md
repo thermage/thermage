@@ -33,7 +33,9 @@ el('Stay Rad!')
   ->underline()
   ->upper()
   ->display();
+```
 
+```php 
 // Display: TAKE A CHILL PILL!
 el()
   ->value("You Don't Get the Joke") 
