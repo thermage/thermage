@@ -59,7 +59,7 @@ el()
 
 Common Clirad class. 
 
-#### Methods 
+##### Methods 
 
 <table>
     <thead>
@@ -88,7 +88,7 @@ Common Clirad class.
 
 Root element for all Clirad Components.
 
-#### Methods 
+##### Methods 
 
 <table>
     <thead>
@@ -207,11 +207,11 @@ Root element for all Clirad Components.
 
 #### Components 
 
-#### Element
+##### Element
 
 Same methods as for [Base Element](#base-element).
 
-#### Methods 
+##### Methods 
 
 ### Tests
 
