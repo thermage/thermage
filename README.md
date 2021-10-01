@@ -55,9 +55,38 @@ el()
   ->display();
 ```
 
+#### Clirad
+
+Common Clirad class. 
+
+#### Methods 
+
+<table>
+    <thead>
+        <tr>
+            <th>Method</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="#methods-setRenderer">setRenderer</a></td>
+            <td>Set renderer.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-getRenderer">getRenderer</a></td>
+            <td>Get renderer.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-getRenderer">element</a></td>
+            <td>Create element component.</td>
+        </tr>
+    </tbody>
+</table>
+
 #### Base Element
 
-Root element for all Clirad components.
+Root element for all Clirad Components.
 
 #### Methods 
 
@@ -166,15 +195,23 @@ Root element for all Clirad components.
             <td>Convert element value first character of every word of string to upper case and the others to lower case.</td>
         </tr>
         <tr>
-            <td><a href="#methods-render">Render base element.</a></td>
+            <td><a href="#methods-render">render</a></td>
             <td>Render base element.</td>
         </tr>
         <tr>
-            <td><a href="#methods-display">Display base element.</a></td>
+            <td><a href="#methods-display">display</a></td>
             <td>Display base element.</td>
         </tr>
     </tbody>
 </table>
+
+#### Components 
+
+#### Element
+
+Same methods as for [Base Element](#base-element).
+
+#### Methods 
 
 ### Tests
 
