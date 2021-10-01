@@ -6,8 +6,8 @@ namespace Clirad\Base;
 
 use Atomastic\Arrays\Arrays;
 use Atomastic\Strings\Strings;
-use Symfony\Component\Console\Output\OutputInterface as RendererInterface;
 use BadMethodCallException;
+use Symfony\Component\Console\Output\OutputInterface as RendererInterface;
 
 use function arrays;
 use function sprintf;
@@ -41,8 +41,8 @@ abstract class BaseElement
      * Create base element.
      *
      * @param RendererInterface $renderer   Base element renderer interface.
-     * @param string                   $value      Base element value.
-     * @param array                    $properties Base element properties.
+     * @param string            $value      Base element value.
+     * @param array             $properties Base element properties.
      *
      * @return BaseElement Returns base element component.
      *
@@ -509,7 +509,7 @@ abstract class BaseElement
      *
      * @access public
      */
-    public function display(string $type = 'row')
+    public function display(string $type = 'row'): void
     {
         switch ($type) {
             case 'none':
