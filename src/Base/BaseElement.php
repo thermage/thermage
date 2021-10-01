@@ -208,6 +208,10 @@ abstract class BaseElement
     public function display($type = 'row'): void
     {
         switch ($type) {
+            case 'none':
+                // ... display none
+                break;
+
             case 'col':
                 $this->renderer->write($this->toString());
                 break;
