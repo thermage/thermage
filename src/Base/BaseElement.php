@@ -381,7 +381,7 @@ abstract class BaseElement
 
         return $this;
     }
-    
+
     /**
      * Repeated element value given a multiplier.
      *
@@ -433,6 +433,8 @@ abstract class BaseElement
      * @param array  $parameters Parameters.
      *
      * @return self Returns instance of the BaseElement class.
+     *
+     * @throws BadMethodCallException If method not found.
      *
      * @access public
      */
@@ -540,9 +542,11 @@ abstract class BaseElement
      *
      * @param string $type Display type.
      *
+     * @throws BadMethodCallException If method not found.
+     *
      * @access public
      */
-    public function display(string $type = 'row'): void
+    public function display(string $type = 'row')
     {
         switch ($type) {
             case 'none':
