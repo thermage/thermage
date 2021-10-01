@@ -86,23 +86,22 @@ abstract class BaseElement
 
     public function px(int $value)
     {
-        $this->value->prepend(strings(' ')->repeat($value)->toString());
-        $this->value->append(strings(' ')->repeat($value)->toString());
+        $this->properties->set('padding.left', $value / 2);
+        $this->properties->set('padding.right', $value / 2);
 
         return $this;
     }
 
     public function pl(int $value)
     {
-        $this->value->prepend(strings(' ')->repeat($value)->toString());
+        $this->properties->set('padding.left', $value);
 
         return $this;
     }
 
     public function pr(int $value)
     {
-
-        $this->value->append(strings(' ')->repeat($value)->toString());
+        $this->properties->set('padding.right', $value);
 
         return $this;
     }
@@ -187,6 +186,14 @@ abstract class BaseElement
 
         if ($this->properties->has('options')) {
             $options = 'options=' . arrays($this->properties->get('options'))->toString(',') . ';';
+        }
+
+        if ($this->properties->has('padding.left')) {
+            $this->value->prepend((string) strings(' ')->repeat($this->properties->get('padding.left')));            
+        }
+
+        if ($this->properties->has('padding.right')) {
+            $this->value->append((string) strings(' ')->repeat($this->properties->get('padding.right')));            
         }
 
         if ($fg || $bg || $options) {
