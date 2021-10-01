@@ -37,7 +37,7 @@ final class Clirad
     }
 
     /**
-     * Get Element Component.
+     * Create Element Component.
      * 
      * @param string $value      Element value.
      * @param array  $properties Element properties.
