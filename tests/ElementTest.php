@@ -177,3 +177,8 @@ test('test limit', function (): void {
     $value = el('RAD')->limit(1, '')->render();
     expect($value)->toBe('R'); 
 });
+
+test('test repeat', function (): void {
+    $value = el('RAD')->repeat(3)->render();
+    expect($value)->toBe('RADRADRAD'); 
+});
