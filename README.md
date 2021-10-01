@@ -23,7 +23,7 @@ composer require clirad/clirad
 
 #### Basic Usage
 
-Simple examle using default renderer.
+Simple example of usage with default renderer:
 
 ```php 
 el('Stay Rad!')
@@ -36,7 +36,7 @@ el('Stay Rad!')
   ->display();
 ```
 
-Set custom renderer. 
+Using custom renderer:
 
 ```php 
 el('Stay Rad!')
@@ -50,7 +50,7 @@ el('Stay Rad!')
   ->display();
 ```
 
-Set custom renderer globaly. 
+Using custom renderer globaly:
 
 ```php 
 \Clirad\Clirad::setRenderer($renderer);
@@ -65,7 +65,7 @@ el('Stay Rad!')
   ->display();
 ```
 
-Symfony Console integration example
+Symfony Console integration example:
 
 ```php 
 protected function execute(InputInterface $input, OutputInterface $output): int
