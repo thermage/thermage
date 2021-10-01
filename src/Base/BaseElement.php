@@ -4,140 +4,236 @@ declare(strict_types=1);
 
 namespace Clirad\Base;
 
-use Symfony\Component\Console\Output\ConsoleOutput as SymfonyRenderer;
-use Symfony\Component\Console\Output\OutputInterface as SymfonyRendererInterface;
-use Atomastic\Strings\Strings;
 use Atomastic\Arrays\Arrays;
+use Atomastic\Strings\Strings;
+use Symfony\Component\Console\Output\OutputInterface as SymfonyRendererInterface;
 
 use function arrays;
+use function sprintf;
 use function strings;
+use function substr;
 
 abstract class BaseElement
 {
-    /** 
-     * Element Renderer.
-     * 
-     * @var SymfonyRendererInterface
-     * 
+    /**
+     * Base element renderer.
+     *
      * @access private
      */
     private SymfonyRendererInterface $renderer;
 
     /**
-     * Element properties.
-     * 
-     * @var Arrays
-     * 
+     * Base element properties.
+     *
      * @access private
      */
     private Arrays $properties;
 
     /**
-     * Element value.
-     * 
-     * @var Strings
-     * 
+     * Base element value.
+     *
      * @access private
      */
     private Strings $value;
 
     /**
-     * Create Base Element.
-     * 
-     * @param SymfonyRendererInterface $renderer   Elemetn renderer interface.
-     * @param string                   $value      Element value.
-     * @param array                    $properties Element properties.
-     * 
-     * @access public 
-     * 
-     * @return Element Element Component.
+     * Create base element.
+     *
+     * @param SymfonyRendererInterface $renderer   Base element renderer interface.
+     * @param string                   $value      Base element value.
+     * @param array                    $properties Base element properties.
+     *
+     * @return BaseElement Returns base element component.
+     *
+     * @access public
      */
-    final public function __construct(SymfonyRendererInterface $renderer = null, string $value = '', array $properties = [])
+    final public function __construct(?SymfonyRendererInterface $renderer = null, string $value = '', array $properties = [])
     {
         $this->renderer   = $renderer;
         $this->value      = strings($value);
         $this->properties = arrays($properties);
     }
 
-    public function getValue()
+    /**
+     * Get base element value.
+     *
+     * @return Strings Returns base element value.
+     *
+     * @access public
+     */
+    public function getValue(): Strings
     {
         return $this->value;
     }
 
-    public function getRenderer()
+    /**
+     * Get base element renderer.
+     *
+     * @return SymfonyRendererInterface Returns base element renderer.
+     *
+     * @access public
+     */
+    public function getRenderer(): SymfonyRendererInterface
     {
         return $this->renderer;
     }
 
-    public function getProperties()
+    /**
+     * Get base element properties.
+     *
+     * @return Arrays Returns base element properties.
+     *
+     * @access public
+     */
+    public function getProperties(): Arrays
     {
         return $this->properties;
     }
 
-    public function value($value)
+    /**
+     * Set base element value.
+     *
+     * @param string $value Base element value.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function value(string $value = ''): self
     {
         $this->value = strings($value);
 
         return $this;
     }
 
-    public function properties(array $properties)
+    /**
+     * Set base element properties.
+     *
+     * @param string $properties Base element properties.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function properties(array $properties = []): self
     {
         $this->properties = arrays($properties);
 
         return $this;
     }
 
-    public function color($color)
+    /**
+     * Set base element color.
+     *
+     * @param string $color Base element color.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function color(string $color): self
     {
         $this->properties->set('color', $color);
 
         return $this;
     }
 
-    public function bg($color)
+    /**
+     * Set base element background color.
+     *
+     * @param string $color Base element background color.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function bg(string $color): self
     {
         $this->properties->set('bg', $color);
 
         return $this;
     }
 
-    public function bold()
+    /**
+     * Set base element bold property.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function bold(): self
     {
         $this->properties->set('options.bold', 'bold');
 
         return $this;
     }
 
-    public function underline()
+    /**
+     * Set base element underline property.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function underline(): self
     {
         $this->properties->set('options.underscore', 'underscore');
 
         return $this;
     }
 
-    public function blink()
+    /**
+     * Set base element blink property.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function blink(): self
     {
         $this->properties->set('options.blink', 'blink');
 
         return $this;
     }
 
-    public function reverse()
+    /**
+     * Set base element reverse property.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function reverse(): self
     {
         $this->properties->set('options.reverse', 'reverse');
 
         return $this;
     }
 
-    public function conceal()
+    /**
+     * Set base element conceal property.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function conceal(): self
     {
         $this->properties->set('options.conceal', 'conceal');
 
         return $this;
     }
 
-    public function mx(int $value)
+    /**
+     * Set base element margin x property.
+     *
+     * @param int $value Maring x.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function mx(int $value): self
     {
         $this->properties->set('margin.left', $value / 2);
         $this->properties->set('margin.right', $value / 2);
@@ -145,21 +241,48 @@ abstract class BaseElement
         return $this;
     }
 
-    public function ml(int $value)
+    /**
+     * Set base element margin left property.
+     *
+     * @param int $value Maring left.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function ml(int $value): self
     {
         $this->properties->set('margin.left', $value);
 
         return $this;
     }
 
-    public function mr(int $value)
+    /**
+     * Set base element margin right property.
+     *
+     * @param int $value Maring right.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function mr(int $value): self
     {
         $this->properties->set('margin.right', $value);
 
         return $this;
     }
 
-    public function px(int $value)
+    /**
+     * Set base element padding x property.
+     *
+     * @param int $value Padding x.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function px(int $value): self
     {
         $this->properties->set('padding.left', $value / 2);
         $this->properties->set('padding.right', $value / 2);
@@ -167,49 +290,105 @@ abstract class BaseElement
         return $this;
     }
 
-    public function pl(int $value)
+    /**
+     * Set base element padding left property.
+     *
+     * @param int $value Padding left.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function pl(int $value): self
     {
         $this->properties->set('padding.left', $value);
 
         return $this;
     }
 
-    public function pr(int $value)
+    /**
+     * Set base element padding right property.
+     *
+     * @param int $value Padding right.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function pr(int $value): self
     {
         $this->properties->set('padding.right', $value);
 
         return $this;
     }
 
-    public function lower()
+    /**
+     * Convert element value to lower-case.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function lower(): self
     {
         $this->value->lower();
 
         return $this;
     }
 
-    public function upper()
+    /**
+     * Convert element value to upper-case.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function upper(): self
     {
         $this->value->upper();
 
         return $this;
     }
 
-    public function camel()
+    /**
+     * Convert element value to camel case.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function camel(): self
     {
         $this->value->camel();
 
         return $this;
     }
 
-    public function capitalize()
+    /**
+     * Convert element value first character of every word of string to upper case and the others to lower case.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function capitalize(): self
     {
         $this->value->capitalize();
 
         return $this;
     }
 
-    public function __call(string $method, array $parameters)
+    /**
+     * Dynamically bind magic methods to the BaseElement class.
+     *
+     * @param string $method     Method.
+     * @param array  $parameters Parameters.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function __call(string $method, array $parameters): self
     {
         if (strings($method)->startsWith('display')) {
             return $this->display(strings(substr($method, 7))->lower()->toString());
@@ -251,7 +430,7 @@ abstract class BaseElement
             'Method %s::%s does not exist.',
             static::class,
             $method
-        ));        
+        ));
     }
 
     /**
@@ -276,11 +455,11 @@ abstract class BaseElement
         }
 
         if ($this->properties->has('padding.left')) {
-            $this->value->prepend((string) strings(' ')->repeat($this->properties->get('padding.left')));            
+            $this->value->prepend((string) strings(' ')->repeat($this->properties->get('padding.left')));
         }
 
         if ($this->properties->has('padding.right')) {
-            $this->value->append((string) strings(' ')->repeat($this->properties->get('padding.right')));            
+            $this->value->append((string) strings(' ')->repeat($this->properties->get('padding.right')));
         }
 
         if ($fg || $bg || $options) {
@@ -294,13 +473,12 @@ abstract class BaseElement
         }
 
         if ($this->properties->has('margin.left')) {
-            $element = (string) strings($element)->prepend((string) strings(' ')->repeat($this->properties->get('margin.left')));            
+            $element = (string) strings($element)->prepend((string) strings(' ')->repeat($this->properties->get('margin.left')));
         }
 
         if ($this->properties->has('margin.right')) {
-            $element = (string) strings($element)->append((string) strings(' ')->repeat($this->properties->get('margin.right')));  
+            $element = (string) strings($element)->append((string) strings(' ')->repeat($this->properties->get('margin.right')));
         }
-        
 
         return $element;
     }
@@ -318,7 +496,7 @@ abstract class BaseElement
             case 'col':
                 $this->renderer->write($this->render());
                 break;
-            
+
             case 'row':
             default:
                 $this->renderer->writeln($this->render());
