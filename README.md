@@ -199,6 +199,10 @@ Root element for all Clirad Components.
             <td>Limit the number of characters in the element value.</td>
         </tr>
         <tr>
+            <td><a href="#methods-repeat">repeat</a></td>
+            <td>Repeated element value given a multiplier.</td>
+        </tr>
+        <tr>
             <td><a href="#methods-render">render</a></td>
             <td>Render base element.</td>
         </tr>
