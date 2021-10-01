@@ -1,9 +1,9 @@
 {
     "name": "clirad/clirad",
-    "description": "Totally RAD Terminal styling!",
+    "description": "Clirad provides a fluent and powerful, object-oriented interface for customizing CLI output text color, background, formatting, and more.",
     "license": "MIT",
     "keywords": [
-        "clirad", "console", "cli"
+        "clirad", "console", "cli", "terminal"
     ],
     "support": {
       "source": "https://github.com/clirad/clirad",
