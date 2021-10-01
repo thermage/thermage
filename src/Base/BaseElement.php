@@ -468,10 +468,6 @@ abstract class BaseElement
             return $this->color(strings(substr($method, 5))->kebab()->toString());
         }
 
-        if (strings($method)->startsWith('w')) {
-            return $this->w(strings(substr($method, 1))->toInteger());
-        }
-
         if (strings($method)->startsWith('mx')) {
             return $this->mx(strings(substr($method, 2))->toInteger());
         }
