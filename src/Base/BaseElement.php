@@ -20,17 +20,17 @@ abstract class BaseElement
         $this->renderer   = $renderer;
     }
 
-    public function value()
+    public function getValue()
     {
         return $this->value;
     }
 
-    public function renderer()
+    public function getRenderer()
     {
         return $this->renderer;
     }
 
-    public function properties()
+    public function getProperties()
     {
         return $this->properties;
     }
