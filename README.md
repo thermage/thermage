@@ -149,6 +149,30 @@ Root element for all Clirad components.
             <td><a href="#methods-mr">mr</a></td>
             <td>Set base element padding right property.</td>
         </tr>
+        <tr>
+            <td><a href="#methods-lower">lower</a></td>
+            <td>Convert element value to lower-case.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-upper">upper</a></td>
+            <td>Convert element value to upper-case.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-camel">camel</a></td>
+            <td>Convert element value to camel case.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-capitalize">capitalize</a></td>
+            <td>Convert element value first character of every word of string to upper case and the others to lower case.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-render">Render base element.</a></td>
+            <td>Render base element.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-display">Display base element.</a></td>
+            <td>Display base element.</td>
+        </tr>
     </tbody>
 </table>
 
