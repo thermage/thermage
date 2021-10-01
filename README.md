@@ -57,6 +57,8 @@ el()
 
 #### Base Element
 
+Base Element - is a common root element for all Clirad components.
+
 #### Methods 
 
 <table>
@@ -74,6 +76,18 @@ el()
         <tr>
             <td><a href="#methods-getRenderer">getRenderer</a></td>
             <td>Get base element renderer.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-getProperties">getProperties</a></td>
+            <td>Get base element properties.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-color">color</a></td>
+            <td>Set base element color.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-bg">bg</a></td>
+            <td>Set base element background.</td>
         </tr>
     </tbody>
 </table>
