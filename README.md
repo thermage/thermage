@@ -11,7 +11,7 @@
 
 Clirad provides a fluent and powerful, object-oriented interface for customizing CLI output text color, background, formatting, and more.
 
-### 💾 Installation
+### Installation
 
 #### With [Composer](https://getcomposer.org)
 
@@ -19,7 +19,7 @@ Clirad provides a fluent and powerful, object-oriented interface for customizing
 composer require clirad/clirad
 ```
 
-### 📙 Documentation
+### Documentation
 
 #### Basic Usage
 
@@ -213,7 +213,7 @@ Same methods as for [Base Element](#base-element).
 
 ##### Methods 
 
-### 🔭 Tests
+### Tests
 
 Run tests
 
@@ -221,6 +221,6 @@ Run tests
 ./vendor/bin/pest
 ```
 
-### 🔑 License
+### License
 [The MIT License (MIT)](https://github.com/clirad/clirad/blob/master/LICENSE)
 Copyright (c) 2021 [Sergey Romanenko](https://awilum.github.io)
