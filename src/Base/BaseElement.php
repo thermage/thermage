@@ -51,7 +51,7 @@ abstract class BaseElement
 
     public function color($color)
     {
-        $this->properties->set('fg', $color);
+        $this->properties->set('color', $color);
 
         return $this;
     }
@@ -224,8 +224,8 @@ abstract class BaseElement
         $bg      = null;
         $options = null;
 
-        if ($this->properties->has('fg')) {
-            $fg = 'fg=' . $this->properties->get('fg') . ';';
+        if ($this->properties->has('color')) {
+            $fg = 'fg=' . $this->properties->get('color') . ';';
         }
 
         if ($this->properties->has('bg')) {
