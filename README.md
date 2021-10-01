@@ -65,7 +65,7 @@ el('Stay Rad!')
   ->display();
 ```
 
-Symfony Console integration example:
+[Symfony Console](https://github.com/symfony/console) integration example:
 
 ```php 
 protected function execute(InputInterface $input, OutputInterface $output): int
