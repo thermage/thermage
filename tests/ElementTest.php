@@ -130,3 +130,8 @@ test('test lower', function (): void {
     $value = el('RAD')->lower()->render();
     expect($value)->toBe('rad'); 
 });
+
+test('test upper', function (): void {
+    $value = el('rad')->upper()->render();
+    expect($value)->toBe('RAD'); 
+});
