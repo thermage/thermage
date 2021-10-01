@@ -57,7 +57,7 @@ el()
 
 #### Base Element
 
-Base Element - is a common root element for all Clirad components.
+Root element for all Clirad components.
 
 #### Methods 
 
@@ -82,12 +82,72 @@ Base Element - is a common root element for all Clirad components.
             <td>Get base element properties.</td>
         </tr>
         <tr>
+            <td><a href="#methods-value">value</a></td>
+            <td>Set base element value.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-renderer">renderer</a></td>
+            <td>Set base element renderer.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-properties">properties</a></td>
+            <td>Set base element properties.</td>
+        </tr>
+        <tr>
             <td><a href="#methods-color">color</a></td>
             <td>Set base element color.</td>
         </tr>
         <tr>
             <td><a href="#methods-bg">bg</a></td>
             <td>Set base element background.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-bold">bold</a></td>
+            <td>Set base element bold property.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-underline">underline</a></td>
+            <td>Set base element underline property, alias to underscore.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-underscore">underscore</a></td>
+            <td>Set base element underscore property.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-blink">blink</a></td>
+            <td>Set base element blink property.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-reverse">reverse</a></td>
+            <td>Set base element reverse property.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-conceal">conceal</a></td>
+            <td>Set base element conceal property.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-mx">mx</a></td>
+            <td>Set base element margin x property.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-ml">ml</a></td>
+            <td>Set base element margin left property.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-mr">mr</a></td>
+            <td>Set base element margin right property.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-mx">mx</a></td>
+            <td>Set base element padding x property.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-ml">ml</a></td>
+            <td>Set base element padding left property.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-mr">mr</a></td>
+            <td>Set base element padding right property.</td>
         </tr>
     </tbody>
 </table>
