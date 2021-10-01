@@ -14,3 +14,8 @@ test('test render', function (): void {
     $value = el('RAD')->render();
     expect($value)->toEqual('RAD'); 
 });
+
+test('test color', function (): void {
+    $value = el('asd')->color('blue')->render();
+    expect($value)->toBe('<fg=blue;>asd</>'); 
+});
