@@ -44,3 +44,8 @@ test('test blink', function (): void {
     $value = el('RAD')->blink()->render();
     expect($value)->toBe('<options=blink;>RAD</>'); 
 });
+
+test('test reverse', function (): void {
+    $value = el('RAD')->reverse()->render();
+    expect($value)->toBe('<options=reverse;>RAD</>'); 
+});
