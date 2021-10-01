@@ -434,7 +434,11 @@ abstract class BaseElement
     }
 
     /**
-     * Render element.
+     * Render base element.
+     *
+     * @return string Returns rendered base element.
+     *
+     * @access public
      */
     public function render(): string
     {
@@ -484,9 +488,15 @@ abstract class BaseElement
     }
 
     /**
-     * Display element.
+     * Display base element.
+     *
+     * @param string $type Display type.
+     *
+     * @return void Void.
+     *
+     * @access public
      */
-    public function display($type = 'row'): void
+    public function display(string $type = 'row'): void
     {
         switch ($type) {
             case 'none':
@@ -505,9 +515,9 @@ abstract class BaseElement
     }
 
     /**
-     * Get element.
+     * Get base element as string.
      *
-     * @return string Returns the element string representation.
+     * @return string Returns base element string representation.
      */
     public function __toString(): string
     {
