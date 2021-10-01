@@ -21,12 +21,17 @@ test('test color', function (): void {
 });
 
 test('test magic color', function (): void {
-    $value = el('RAD')->colorBlue('blue')->render();
+    $value = el('RAD')->colorBlue()->render();
     expect($value)->toBe('<fg=blue;>RAD</>'); 
 });
 
 test('test bg', function (): void {
     $value = el('RAD')->bg('blue')->render();
+    expect($value)->toBe('<bg=blue;>RAD</>'); 
+});
+
+test('test magic bg', function (): void {
+    $value = el('RAD')->bgBlue()->render();
     expect($value)->toBe('<bg=blue;>RAD</>'); 
 });
 
