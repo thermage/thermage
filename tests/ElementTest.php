@@ -164,3 +164,8 @@ test('test getRenderer', function (): void {
 test('magic throw exception BadMethodCallException', function (): void {
     el()->foo();
 })->throws(BadMethodCallException::class);
+
+test('test magic __toString', function (): void {
+    $value = el('RAD');
+    expect((string) $value)->toBe('RAD'); 
+});
