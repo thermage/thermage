@@ -145,3 +145,10 @@ test('test capitalize', function (): void {
     $value = el('RAD')->camel()->render();
     expect($value)->toBe('rAD'); 
 });
+
+test('test getRenderer', function (): void {
+    $value = el()->getRenderer();
+    $this->assertInstanceOf(Renderer::class, $value);
+});
+
+
