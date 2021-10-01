@@ -169,13 +169,27 @@ abstract class BaseElement
     }
 
     /**
-     * Set base element underline property.
+     * Set base element underline property, alias to underscore.
      *
      * @return self Returns instance of the BaseElement class.
      *
      * @access public
      */
     public function underline(): self
+    {
+        $this->properties->set('options.underscore', 'underscore');
+
+        return $this;
+    }
+
+    /**
+     * Set base element underscore property.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function underscore(): self
     {
         $this->properties->set('options.underscore', 'underscore');
 
