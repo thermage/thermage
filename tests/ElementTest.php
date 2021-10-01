@@ -125,3 +125,8 @@ test('test magic pl', function (): void {
     $value = el('RAD')->pl10()->render();
     expect($value)->toBe('          RAD'); 
 });
+
+test('test lower', function (): void {
+    $value = el('RAD')->lower()->render();
+    expect($value)->toBe('rad'); 
+});
