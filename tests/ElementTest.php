@@ -16,6 +16,11 @@ test('test render', function (): void {
 });
 
 test('test color', function (): void {
-    $value = el('asd')->color('blue')->render();
-    expect($value)->toBe('<fg=blue;>asd</>'); 
+    $value = el('RAD')->color('blue')->render();
+    expect($value)->toBe('<fg=blue;>RAD</>'); 
+});
+
+test('test bg', function (): void {
+    $value = el('RAD')->bg('blue')->render();
+    expect($value)->toBe('<bg=blue;>RAD</>'); 
 });
