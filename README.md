@@ -21,7 +21,7 @@ composer require clirad/clirad
 
 ### Documentation
 
-#### Usage
+#### Basic Usage
 
 ```php 
 // Display: Stay Rad!
@@ -38,7 +38,7 @@ el('Stay Rad!')
 ```php 
 // Display: TAKE A CHILL PILL!
 el()
-  ->value("You Don't Get the Joke") 
+  ->value("TAKE A CHILL PILL!") 
   ->properties(['padding' => [
                     'left' => 10, 
                     'right' => 10
@@ -54,6 +54,29 @@ el()
   ->upper()
   ->display();
 ```
+
+#### Base Element
+
+#### Methods 
+
+<table>
+    <thead>
+        <tr>
+            <th>Method</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="#methods-getValue">getValue</a></td>
+            <td>Get base element value.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-getRenderer">getRenderer</a></td>
+            <td>Get base element renderer.</td>
+        </tr>
+    </tbody>
+</table>
 
 ### Tests
 
