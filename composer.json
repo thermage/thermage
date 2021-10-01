@@ -3,7 +3,7 @@
     "description": "Totally RAD Terminal styling!",
     "license": "MIT",
     "keywords": [
-        "clirad"
+        "clirad", "console", "cli"
     ],
     "support": {
       "source": "https://github.com/clirad/clirad",
@@ -13,14 +13,13 @@
         {
             "name": "Sergey Romanenko",
             "email": "sergey.romanenko@flextype.org",
-            "homepage": "https://github.com/Awilum"
+            "homepage": "https://awilum.github.io"
         }
     ],
     "require": {
         "php": "^7.4 || ^8.0",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "atomastic/macroable": "^2.0",
         "atomastic/arrays": "^3.0.5",
         "atomastic/strings": "^3.0.2",
         "symfony/console": "^5.3"
