@@ -60,3 +60,8 @@ test('test value and getValue', function (): void {
     expect($value->render())->toBe('RAD'); 
     expect($value->getValue()->toString())->toBe('RAD'); 
 });
+
+test('test properties and getProperties', function (): void {
+    $value = el()->properties(['RAD']);
+    expect($value->getProperties()->toArray())->toBe(['RAD']); 
+});
