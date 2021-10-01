@@ -50,7 +50,7 @@ el('Stay Rad!')
   ->display();
 ```
 
-Using custom renderer globaly:
+Setup custom renderer globaly:
 
 ```php 
 \Clirad\Clirad::setRenderer($renderer);
