@@ -54,3 +54,9 @@ test('test conceal', function (): void {
     $value = el('RAD')->conceal()->render();
     expect($value)->toBe('<options=conceal;>RAD</>'); 
 });
+
+test('test value and getValue', function (): void {
+    $value = el()->value('RAD');
+    expect($value->render())->toBe('RAD'); 
+    expect($value->getValue()->toString())->toBe('RAD'); 
+});
