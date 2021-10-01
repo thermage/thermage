@@ -85,7 +85,7 @@ protected function execute(InputInterface $input, OutputInterface $output): int
 }
 ```
 
-#### Clirad
+#### \Clirad\Clirad
 
 Common Clirad class. 
 
@@ -114,7 +114,7 @@ Common Clirad class.
     </tbody>
 </table>
 
-#### Base Element
+#### \Clirad\Base\BaseElement
 
 Root element for all Clirad Components.
 
@@ -243,9 +243,9 @@ Root element for all Clirad Components.
     </tbody>
 </table>
 
-#### Components 
+#### \Clirad\Components
 
-##### Element
+##### \Clirad\Components\Element
 
 Same methods as for [Base Element](#base-element).
 
