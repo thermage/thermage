@@ -266,8 +266,8 @@ abstract class BaseElement
      */
     public function mx(int $value): self
     {
-        $this->properties->set('margin.left', $value / 2);
-        $this->properties->set('margin.right', $value / 2);
+        $this->properties->set('margin.left', intval($value / 2));
+        $this->properties->set('margin.right', intval($value / 2));
 
         return $this;
     }
@@ -315,8 +315,8 @@ abstract class BaseElement
      */
     public function px(int $value): self
     {
-        $this->properties->set('padding.left', $value / 2);
-        $this->properties->set('padding.right', $value / 2);
+        $this->properties->set('padding.left', intval($value / 2));
+        $this->properties->set('padding.right', intval($value / 2));
 
         return $this;
     }
@@ -466,6 +466,10 @@ abstract class BaseElement
 
         if (strings($method)->startsWith('color')) {
             return $this->color(strings(substr($method, 5))->kebab()->toString());
+        }
+
+        if (strings($method)->startsWith('w')) {
+            return $this->w(strings(substr($method, 1))->toInteger());
         }
 
         if (strings($method)->startsWith('mx')) {
