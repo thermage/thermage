@@ -169,9 +169,9 @@ abstract class BaseElement
     }
 
     /**
-     * Get element.
+     * Render element.
      */
-    public function toString(): string
+    public function render(): string
     {
         $fg      = null;
         $bg      = null;
@@ -194,9 +194,9 @@ abstract class BaseElement
                         $fg .
                         $bg .
                         $options .
-                        '>' . $this->value->toString() . '</>';
+                        '>' . (string) $this->value . '</>';
         } else {
-            $element = $this->value->toString();
+            $element = (string) $this->value;
         }
 
         return $element;
@@ -213,12 +213,12 @@ abstract class BaseElement
                 break;
 
             case 'col':
-                $this->renderer->write($this->toString());
+                $this->renderer->write($this->render());
                 break;
             
             case 'row':
             default:
-                $this->renderer->writeln($this->toString());
+                $this->renderer->writeln($this->render());
                 break;
         }
     }
@@ -230,6 +230,6 @@ abstract class BaseElement
      */
     public function __toString(): string
     {
-        return $this->toString();
+        return $this->render();
     }
 }
