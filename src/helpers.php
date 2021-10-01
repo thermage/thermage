@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 use Clirad\Clirad;
 
-function el($value = '') {
-    return Clirad::element($value);
+function el(string $value = '', array $properties = []) {
+    return Clirad::element($value, $properties);
 }
