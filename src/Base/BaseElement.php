@@ -13,11 +13,11 @@ abstract class BaseElement
     private $value;
     private $renderer;
 
-    final public function __construct($renderer = null, $value = '')
+    final public function __construct($renderer = null, $value = '', $properties = [])
     {
-        $this->properties = arrays([]);
-        $this->value      = strings($value);
         $this->renderer   = $renderer;
+        $this->value      = strings($value);
+        $this->properties = arrays($properties);
     }
 
     public function getValue()
@@ -33,6 +33,20 @@ abstract class BaseElement
     public function getProperties()
     {
         return $this->properties;
+    }
+
+    public function value($value)
+    {
+        $this->value = strings($value);
+
+        return $this;
+    }
+
+    public function properties(array $properties)
+    {
+        $this->properties = arrays($properties);
+
+        return $this;
     }
 
     public function color($color)
