@@ -381,6 +381,22 @@ abstract class BaseElement
 
         return $this;
     }
+    
+    /**
+     * Repeated element value given a multiplier.
+     *
+     * @param int $multiplier The number of times to repeat the string.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function repeat(int $multiplier): self
+    {
+        $this->value->repeat($multiplier);
+
+        return $this;
+    }
 
     /**
      * Convert element value to camel case.
