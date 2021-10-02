@@ -103,15 +103,15 @@ Common Termage class.
     </thead>
     <tbody>
         <tr>
-            <td>static <a href="#methods-setRenderer">renderer</a></td>
+            <td><a href="#methods-renderer">renderer</a></td>
             <td>Set renderer.</td>
         </tr>
         <tr>
-            <td>static <a href="#methods-getRenderer">getRenderer</a></td>
+            <td><a href="#methods-getRenderer">getRenderer</a></td>
             <td>Get renderer.</td>
         </tr>
         <tr>
-            <td>static <a href="#methods-block">block</a></td>
+            <td><a href="#methods-block">block</a></td>
             <td>Create block component.</td>
         </tr>
     </tbody>
