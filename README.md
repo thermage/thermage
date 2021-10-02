@@ -53,20 +53,6 @@ termage()
   ->display();
 ```
 
-Setup custom renderer globaly:
-
-```php 
-termage()
-  ->value('Stay Rad!')
-  ->px20()
-  ->mx10()
-  ->colorBrightGreen()
-  ->bgBrightMagenta()
-  ->underline()
-  ->upper()
-  ->display();
-```
-
 [Symfony Console](https://github.com/symfony/console) integration example:
 
 ```php 
