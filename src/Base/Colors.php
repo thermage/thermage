@@ -73,7 +73,7 @@ abstract class Colors
      * @param  string $color Color name.
      *
      * @return bool Return TRUE color exists in the pallete, FALSE otherwise.
-     *    
+     *
      * @access visible
      */
     public static function has(string $color): bool
@@ -111,7 +111,7 @@ abstract class Colors
 
     /**
      * Get colors pallete.
-     * 
+     *
      * @return array Colors pallete.
      *
      * @access visible

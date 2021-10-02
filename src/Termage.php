@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Termage;
 
-use Termage\Components\Block;
-use Termage\Components\Emoji;
 use Atomastic\Macroable\Macroable;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
+use Termage\Components\Block;
+use Termage\Components\Emoji;
 
 class Termage
 {
     use Macroable;
-    
+
     /**
      * The implementation of the output.
      *
@@ -28,7 +28,7 @@ class Termage
      *
      * @access public
      */
-    public function __construct (?OutputInterface $renderer = null)
+    public function __construct(?OutputInterface $renderer = null)
     {
         $this->renderer = $renderer ??= new ConsoleOutput();
     }

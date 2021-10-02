@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Termage\Base;
 
-use Termage\Termage;
-use Termage\Base\Colors;
 use Atomastic\Arrays\Arrays;
 use Atomastic\Strings\Strings;
 use BadMethodCallException;
@@ -43,8 +41,8 @@ abstract class Element
     /**
      * Create base element.
      *
-     * @param string  $value      Base element value.
-     * @param array   $properties Base element properties.
+     * @param string $value      Base element value.
+     * @param array  $properties Base element properties.
      *
      * @return Element Returns base element component.
      *

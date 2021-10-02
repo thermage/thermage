@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Termage\Components;
 
-use Termage\Base\Element;
 use Spatie\Emoji\Emoji as SpatieEmoji;
+use Termage\Base\Element;
 
+use function defined;
 use function strings;
 
 final class Emoji extends Element
@@ -20,7 +21,7 @@ final class Emoji extends Element
             return $this;
         }
 
-        return parent::__call($method, $parameters);        
+        return parent::__call($method, $parameters);
     }
 
     public function countryFlag(string $countryCode): self
@@ -30,9 +31,9 @@ final class Emoji extends Element
         return $this;
     }
 
-    public function all() 
+    public function all()
     {
-        return SpatieEmoji::all(); 
+        return SpatieEmoji::all();
     }
 
     protected static function convertCharacterNameToConstantName(string $characterName): string

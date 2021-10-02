@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Termage\Termage;
 use Symfony\Component\Console\Output\OutputInterface as RendererInterface;
+use Termage\Termage;
 
 if (! function_exists('termage')) {
     /**
