@@ -40,8 +40,9 @@ el('Stay Rad!')
 Using custom renderer:
 
 ```php 
-el('Stay Rad!')
-  ->render($renderer)
+termage()
+  ->render($output)
+  ->value('Stay Rad!')
   ->px20()
   ->mx10()
   ->colorBrightGreen()
@@ -54,9 +55,8 @@ el('Stay Rad!')
 Setup custom renderer globaly:
 
 ```php 
-\Termage\Termage::setRenderer($renderer);
-
-el('Stay Rad!')
+termage()
+  ->value('Stay Rad!')
   ->px20()
   ->mx10()
   ->colorBrightGreen()
@@ -72,8 +72,9 @@ el('Stay Rad!')
 protected function execute(InputInterface $input, OutputInterface $output): int
 {
     
-    el('Stay Rad!')
+    termage()
       ->renderer($output)
+      ->value('Stay Rad!')
       ->px20()
       ->mx10()
       ->colorBrightGreen()
