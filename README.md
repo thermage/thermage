@@ -281,6 +281,24 @@ Examples: `bgRed()`, `bgBrightWhite()`, ...
 `display` + **Value**  
 Examples: `displayNone()`, `displayRow()`, `displayCol()`
 
+`mx` + **Value**  
+Examples: `mx10()`, `mx20()`, ...
+
+`ml` + **Value**  
+Examples: `ml10()`, `ml20()`, ...
+
+`mr` + **Value**  
+Examples: `mr10()`, `mr20()`, ...
+
+`px` + **Value**  
+Examples: `px10()`, `px20()`, ...
+
+`pl` + **Value**  
+Examples: `pl10()`, `pl20()`, ...
+
+`pr` + **Value**  
+Examples: `pr10()`, `pr20()`, ...
+
 ### Tests
 
 Run tests
