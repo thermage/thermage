@@ -1,5 +1,5 @@
 
-<img src="assets/banner.png" alt="Termage" align="center" title="Totally RAD Terminal styling!">
+<img src="assets/termage.png" alt="Termage" align="center" title="Totally RAD Terminal styling!">
 
 <br>
 
