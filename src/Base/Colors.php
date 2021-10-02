@@ -108,4 +108,16 @@ abstract class Colors
     {
         self::$pallete = $colors;
     }
+
+    /**
+     * Get colors pallete.
+     * 
+     * @return array Colors pallete.
+     *
+     * @access visible
+     */
+    public static function getPallete(): array
+    {
+        return self::$pallete;
+    }
 }

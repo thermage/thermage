@@ -28,3 +28,8 @@ test('test set colors pallete', function (): void {
     Colors::setPallete(['purple' => '#800080']);
     expect(Colors::get('purple'))->toBe('#800080');
 });
+
+test('test get colors pallete', function (): void {
+    $pallete = Colors::getPallete();
+    expect($pallete)->toBeArray();
+});
