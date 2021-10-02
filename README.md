@@ -114,6 +114,23 @@ Common Clirad class.
     </tbody>
 </table>
 
+##### Methods Details
+
+**static <a name="#methods-setRenderer">setRenderer</a>**
+```php
+/**
+ * Set renderer.
+ *
+ * @param RendererInterface $renderer Renderer interface.
+ *
+ * @return void Void.
+ *
+ * @access public
+ */
+public static function setRenderer(?RendererInterface $renderer = null): void
+```
+
+
 #### \Clirad\Base\BaseElement
 
 Root element for all Clirad Components.
