@@ -72,11 +72,11 @@ abstract class Element
     /**
      * Get base element renderer.
      *
-     * @return RendererInterface Returns base element renderer.
+     * @return OutputInterface Returns base element renderer.
      *
      * @access public
      */
-    public function getRenderer(): RendererInterface
+    public function getRenderer(): OutputInterface
     {
         return $this->renderer;
     }
@@ -128,13 +128,13 @@ abstract class Element
     /**
      * Set base element renderer.
      *
-     * @param RendererInterface $renderer Base element renderer interface.
+     * @param OutputInterface $renderer Base element renderer interface.
      *
      * @return self Returns instance of the BaseElement class.
      *
      * @access public
      */
-    public function renderer(?RendererInterface $renderer = null): self
+    public function renderer(OutputInterface $renderer): self
     {
         $this->renderer = $renderer;
 

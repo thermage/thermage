@@ -16,6 +16,9 @@ test('test set and get renderer', function (): void {
 
     $termage = termage(new BufferedOutput());
     $this->assertInstanceOf(BufferedOutput::class, $termage->getRenderer());
+
+    $termage = termage()->renderer(new BufferedOutput());
+    $this->assertInstanceOf(BufferedOutput::class, $termage->getRenderer());
 });
 
 test('test termage block', function (): void {

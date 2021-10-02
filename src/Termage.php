@@ -34,6 +34,22 @@ class Termage
     }
 
     /**
+     * Set renderer.
+     *
+     * @param OutputInterface $renderer Base element renderer interface.
+     *
+     * @return self Returns instance of the BaseElement class.
+     *
+     * @access public
+     */
+    public function renderer(OutputInterface $renderer): self
+    {
+        $this->renderer = $renderer;
+
+        return $this;
+    }
+
+    /**
      * Get renderer.
      *
      * @return OutputInterface Renderer.
