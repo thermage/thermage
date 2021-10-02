@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Clirad\Components\Element;
+use Termage\Termage;
 
-test('test el helper', function (): void {
-    $this->assertInstanceOf(Element::class, el());
+test('test termage helper', function (): void {
+    $this->assertInstanceOf(Termage::class, termage());
 });

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Clirad\Base\Colors;
+use Termage\Base\Colors;
 
 test('test get color', function (): void {
     expect(Colors::get('red'))->toBe('red');

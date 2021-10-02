@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Clirad\Base;
+namespace Termage\Base;
 
 abstract class Colors
 {
