@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Termage\Base;
 
-abstract class Colors
+abstract class Theme
 {
 
 }
