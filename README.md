@@ -114,23 +114,6 @@ Common Clirad class.
     </tbody>
 </table>
 
-##### Methods Details
-
-**static <a name="#methods-setRenderer">setRenderer</a>**
-```php
-/**
- * Set renderer.
- *
- * @param RendererInterface $renderer Renderer interface.
- *
- * @return void Void.
- *
- * @access public
- */
-public static function setRenderer(?RendererInterface $renderer = null): void
-```
-
-
 #### \Clirad\Base\BaseElement
 
 Root element for all Clirad Components.
@@ -284,6 +267,19 @@ Same methods as for [Base Element](#base-element).
         </tr>
     </tbody>
 </table>
+
+#### Magic Methods
+
+There is a fiew built-in magic methods 🧙
+
+`color` + **ColorName**  
+Examples: `colorRed()`, `colorBrightWhite()`, ...
+
+`bg` + **ColorName**  
+Examples: `bgRed()`, `bgBrightWhite()`, ...
+
+`display` + **Value**  
+Examples: `displayNone()`, `displayRow()`, `displayCol()`
 
 ### Tests
 
