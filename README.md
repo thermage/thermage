@@ -100,15 +100,15 @@ Common Clirad class.
     </thead>
     <tbody>
         <tr>
-            <td><a href="#methods-setRenderer">setRenderer</a></td>
+            <td>static <a href="#methods-setRenderer">setRenderer</a></td>
             <td>Set renderer.</td>
         </tr>
         <tr>
-            <td><a href="#methods-getRenderer">getRenderer</a></td>
+            <td>static <a href="#methods-getRenderer">getRenderer</a></td>
             <td>Get renderer.</td>
         </tr>
         <tr>
-            <td><a href="#methods-getRenderer">element</a></td>
+            <td>static <a href="#methods-getRenderer">element</a></td>
             <td>Create element component.</td>
         </tr>
     </tbody>
@@ -210,27 +210,27 @@ Root element for all Clirad Components.
         </tr>
         <tr>
             <td><a href="#methods-lower">lower</a></td>
-            <td>Convert element value to lower-case.</td>
+            <td>Convert base element value to lower-case.</td>
         </tr>
         <tr>
             <td><a href="#methods-upper">upper</a></td>
-            <td>Convert element value to upper-case.</td>
+            <td>Convert base element value to upper-case.</td>
         </tr>
         <tr>
             <td><a href="#methods-camel">camel</a></td>
-            <td>Convert element value to camel case.</td>
+            <td>Convert base element value to camel case.</td>
         </tr>
         <tr>
             <td><a href="#methods-capitalize">capitalize</a></td>
-            <td>Convert element value first character of every word of string to upper case and the others to lower case.</td>
+            <td>Convert base element value first character of every word of string to upper case and the others to lower case.</td>
         </tr>
         <tr>
             <td><a href="#methods-limit">limit</a></td>
-            <td>Limit the number of characters in the element value.</td>
+            <td>Limit the number of characters in the base element value.</td>
         </tr>
         <tr>
             <td><a href="#methods-repeat">repeat</a></td>
-            <td>Repeated element value given a multiplier.</td>
+            <td>Repeated base element value given a multiplier.</td>
         </tr>
         <tr>
             <td><a href="#methods-render">render</a></td>
@@ -267,6 +267,37 @@ Same methods as for [Base Element](#base-element).
         </tr>
     </tbody>
 </table>
+
+#### Magic Methods
+
+There is a few built-in magic methods 🧙
+
+`color` + **ColorName**  
+Examples: `colorRed()`, `colorBrightWhite()`, ...
+
+`bg` + **ColorName**  
+Examples: `bgRed()`, `bgBrightWhite()`, ...
+
+`display` + **Value**  
+Examples: `displayNone()`, `displayRow()`, `displayCol()`
+
+`mx` + **Value**  
+Examples: `mx10()`, `mx20()`, ...
+
+`ml` + **Value**  
+Examples: `ml10()`, `ml20()`, ...
+
+`mr` + **Value**  
+Examples: `mr10()`, `mr20()`, ...
+
+`px` + **Value**  
+Examples: `px10()`, `px20()`, ...
+
+`pl` + **Value**  
+Examples: `pl10()`, `pl20()`, ...
+
+`pr` + **Value**  
+Examples: `pr10()`, `pr20()`, ...
 
 ### Tests
 
