@@ -4,7 +4,8 @@
 <br>
 
 <p align="center">
-<a href="https://github.com/clirad/clirad/releases"><img alt="Version" src="https://img.shields.io/github/release/clirad/clirad.svg?label=version&color=f623a6"></a> <a href="https://github.com/clirad/clirad"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=f623a6" alt="License"></a> <a href="https://github.com/clirad/clirad"><img src="https://img.shields.io/github/downloads/clirad/clirad/total.svg?color=f623a6" alt="Total downloads"></a> <img src="https://github.com/atomastic/strings/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/atomastic/strings/workflows/Tests/badge.svg">
+<a href="https://github.com/clirad/clirad/releases"><img alt="Version" src="https://img.shields.io/github/release/clirad/clirad.svg?label=version&color=f623a6"></a> <a href="https://github.com/clirad/clirad"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=f623a6" alt="License"></a> <a href="https://github.com/clirad/clirad"><img src="http://poser.pugx.org/clirad/clirad/downloads" alt="Total downloads"></a> <img src="https://github.com/clirad/strings/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/clirad/strings/workflows/Tests/badge.svg">
+    <img src="http://poser.pugx.org/clirad/clirad/require/php">
 </p>
 
 <br>
