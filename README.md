@@ -270,7 +270,7 @@ Same methods as for [Base Element](#base-element).
 
 #### Magic Methods
 
-There is a fiew built-in magic methods 🧙
+There is a few built-in magic methods 🧙
 
 `color` + **ColorName**  
 Examples: `colorRed()`, `colorBrightWhite()`, ...
