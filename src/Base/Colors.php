@@ -29,6 +29,13 @@ abstract class Colors
         'bright-magenta' => 'bright-magenta',
         'bright-cyan'    => 'bright-cyan',
         'bright-white'   => 'bright-white',
+
+        'primary'   => 'blue',
+        'secondary' => 'gray',
+        'success'   => 'green',
+        'info'      => 'cyan',
+        'warning'   => 'yellow',
+        'danger'    => 'red',
     ];
 
     /**
