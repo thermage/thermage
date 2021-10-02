@@ -100,15 +100,15 @@ Common Clirad class.
     </thead>
     <tbody>
         <tr>
-            <td><a href="#methods-setRenderer">setRenderer</a></td>
+            <td>static <a href="#methods-setRenderer">setRenderer</a></td>
             <td>Set renderer.</td>
         </tr>
         <tr>
-            <td><a href="#methods-getRenderer">getRenderer</a></td>
+            <td>static <a href="#methods-getRenderer">getRenderer</a></td>
             <td>Get renderer.</td>
         </tr>
         <tr>
-            <td><a href="#methods-getRenderer">element</a></td>
+            <td>static <a href="#methods-getRenderer">element</a></td>
             <td>Create element component.</td>
         </tr>
     </tbody>
