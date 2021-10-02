@@ -1,13 +1,13 @@
 {
-    "name": "clirad/clirad",
-    "description": "Clirad provides a fluent and powerful, object-oriented interface for customizing CLI output text color, background, formatting, and more.",
+    "name": "termage/termage",
+    "description": "Termage provides a fluent and powerful, object-oriented interface for customizing CLI output text color, background, formatting, and more.",
     "license": "MIT",
     "keywords": [
-        "clirad", "console", "cli", "terminal"
+        "Termage", "console", "cli", "terminal"
     ],
     "support": {
-      "source": "https://github.com/clirad/clirad",
-      "issues": "https://github.com/clirad/clirad/issues"
+      "source": "https://github.com/termage/termage",
+      "issues": "https://github.com/termage/termage/issues"
     },
     "authors": [
         {
@@ -22,11 +22,13 @@
         "ext-mbstring": "*",
         "atomastic/arrays": "^3.0.5",
         "atomastic/strings": "^3.0.2",
-        "symfony/console": "^5.3"
+        "atomastic/macroable": "^2.0",
+        "symfony/console": "^5.3",
+        "spatie/emoji": "^3.0"
     },
     "autoload":{
         "psr-4": {
-            "Clirad\\": "src/"
+            "Termage\\": "src/"
         },
         "files": [
             "src/helpers.php"

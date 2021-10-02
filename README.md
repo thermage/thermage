@@ -1,23 +1,23 @@
 
-<img src="assets/banner.png" alt="Clirad" align="center" title="Totally RAD Terminal styling!">
+<img src="assets/banner.png" alt="Termage" align="center" title="Totally RAD Terminal styling!">
 
 <br>
 
 <p align="center">
-<a href="https://github.com/clirad/clirad/releases"><img alt="Version" src="https://img.shields.io/github/release/clirad/clirad.svg?label=version&color=f623a6"></a> <a href="https://github.com/clirad/clirad"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=f623a6" alt="License"></a> <a href="https://github.com/clirad/clirad"><img src="http://poser.pugx.org/clirad/clirad/downloads" alt="Total downloads"></a> <img src="https://github.com/clirad/clirad/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/clirad/clirad/actions/workflows/static.yml/badge.svg?branch=dev">
-    <img src="http://poser.pugx.org/clirad/clirad/require/php">
+<a href="https://github.com/termage/termage/releases"><img alt="Version" src="https://img.shields.io/github/release/termage/termage.svg?label=version&color=f623a6"></a> <a href="https://github.com/termage/termage"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=f623a6" alt="License"></a> <a href="https://github.com/termage/termage"><img src="http://poser.pugx.org/termage/termage/downloads" alt="Total downloads"></a> <img src="https://github.com/termage/termage/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/termage/termage/actions/workflows/static.yml/badge.svg?branch=dev">
+    <img src="http://poser.pugx.org/termage/termage/require/php">
 </p>
 
 <br>
 
-Clirad provides a fluent and powerful, object-oriented interface for customizing CLI output text color, background, formatting, and more.
+Termage provides a fluent and powerful, object-oriented interface for customizing CLI output text color, background, formatting, and more.
 
 ### Installation
 
 #### With [Composer](https://getcomposer.org)
 
 ```
-composer require clirad/clirad
+composer require termage/termage
 ```
 
 ### Documentation
@@ -54,7 +54,7 @@ el('Stay Rad!')
 Setup custom renderer globaly:
 
 ```php 
-\Clirad\Clirad::setRenderer($renderer);
+\Termage\Termage::setRenderer($renderer);
 
 el('Stay Rad!')
   ->px20()
@@ -86,9 +86,9 @@ protected function execute(InputInterface $input, OutputInterface $output): int
 }
 ```
 
-#### \Clirad\Clirad
+#### \Termage\Termage
 
-Common Clirad class. 
+Common Termage class. 
 
 ##### Methods 
 
@@ -115,9 +115,9 @@ Common Clirad class.
     </tbody>
 </table>
 
-#### \Clirad\Base\BaseElement
+#### \Termage\Base\BaseElement
 
-Root element for all Clirad Components.
+Root element for all Termage Components.
 
 ##### Methods 
 
@@ -244,9 +244,9 @@ Root element for all Clirad Components.
     </tbody>
 </table>
 
-#### \Clirad\Components
+#### \Termage\Components
 
-##### \Clirad\Components\Element
+##### \Termage\Components\Element
 
 Same methods as for [Base Element](#base-element).
 
@@ -309,5 +309,5 @@ Run tests
 ```
 
 ### License
-[The MIT License (MIT)](https://github.com/clirad/clirad/blob/master/LICENSE)
+[The MIT License (MIT)](https://github.com/termage/termage/blob/master/LICENSE)
 Copyright (c) 2021 [Sergey Romanenko](https://awilum.github.io)
