@@ -27,7 +27,8 @@ composer require termage/termage
 Simple example of usage with default renderer:
 
 ```php 
-el('Stay Rad!')
+termage()
+  ->value('Stay Rad!')
   ->px20()
   ->mx10()
   ->colorBrightGreen()
@@ -41,7 +42,7 @@ Using custom renderer:
 
 ```php 
 termage()
-  ->render($output)
+  ->rendrer($output)
   ->value('Stay Rad!')
   ->px20()
   ->mx10()
