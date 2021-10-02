@@ -210,27 +210,27 @@ Root element for all Clirad Components.
         </tr>
         <tr>
             <td><a href="#methods-lower">lower</a></td>
-            <td>Convert element value to lower-case.</td>
+            <td>Convert base element value to lower-case.</td>
         </tr>
         <tr>
             <td><a href="#methods-upper">upper</a></td>
-            <td>Convert element value to upper-case.</td>
+            <td>Convert base element value to upper-case.</td>
         </tr>
         <tr>
             <td><a href="#methods-camel">camel</a></td>
-            <td>Convert element value to camel case.</td>
+            <td>Convert base element value to camel case.</td>
         </tr>
         <tr>
             <td><a href="#methods-capitalize">capitalize</a></td>
-            <td>Convert element value first character of every word of string to upper case and the others to lower case.</td>
+            <td>Convert base element value first character of every word of string to upper case and the others to lower case.</td>
         </tr>
         <tr>
             <td><a href="#methods-limit">limit</a></td>
-            <td>Limit the number of characters in the element value.</td>
+            <td>Limit the number of characters in the base element value.</td>
         </tr>
         <tr>
             <td><a href="#methods-repeat">repeat</a></td>
-            <td>Repeated element value given a multiplier.</td>
+            <td>Repeated base element value given a multiplier.</td>
         </tr>
         <tr>
             <td><a href="#methods-render">render</a></td>
