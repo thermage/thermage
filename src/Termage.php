@@ -7,6 +7,7 @@ namespace Termage;
 use Atomastic\Macroable\Macroable;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
+use Termage\Base\Theme;
 use Termage\Components\Block;
 use Termage\Components\Emoji;
 use Termage\Themes\DefaultTheme;
@@ -22,16 +23,22 @@ class Termage
      */
     private OutputInterface $renderer;
 
-    private $theme;
+    /**
+     * The instance of Theme class.
+     *
+     * @access private
+     */
+    private Theme $theme;
 
     /**
      * Create a new Termage instance.
      *
      * @param OutputInterface $renderer Output renderer interface.
+     * @param Theme           $theme    Instance of the Theme class.
      *
      * @access public
      */
-    public function __construct(?OutputInterface $renderer = null, $theme = null)
+    public function __construct(?OutputInterface $renderer = null, ?Theme $theme = null)
     {
         $this->renderer = $renderer ??= new ConsoleOutput();
         $this->theme    = $theme ??= new DefaultTheme();
@@ -66,21 +73,27 @@ class Termage
     }
 
     /**
-     * Get theme.
+     * Get instance of the Theme class.
+     *
+     * @return self Returns instance of the Theme class.
      *
      * @access public
      */
-    public function getTheme()
+    public function getTheme(): Theme
     {
         return $this->theme;
     }
 
     /**
-     * Set theme.
+     * Set a new instance of the Theme class.
+     *
+     * @param Theme $theme Instance of the Theme class.
+     *
+     * @return self Returns instance of the Termage class.
      *
      * @access public
      */
-    public function theme($theme)
+    public function theme(Theme $theme): self
     {
         $this->theme = $theme;
 
