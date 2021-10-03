@@ -15,7 +15,7 @@ class Termage
     use Macroable;
 
     /**
-     * The implementation of the output.
+     * The implementation of output renderer interface.
      *
      * @access private
      */
@@ -24,7 +24,7 @@ class Termage
     /**
      * Create a new Termage instance.
      *
-     * @param OutputInterface $renderer Output interface.
+     * @param OutputInterface $renderer Output renderer interface.
      *
      * @access public
      */
@@ -34,11 +34,11 @@ class Termage
     }
 
     /**
-     * Set renderer.
+     * Set renderer for the output.
      *
-     * @param OutputInterface $renderer Base element renderer interface.
+     * @param OutputInterface $renderer Output renderer interface.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Termage class.
      *
      * @access public
      */
