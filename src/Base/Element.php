@@ -8,6 +8,7 @@ use Atomastic\Arrays\Arrays;
 use Atomastic\Strings\Strings;
 use BadMethodCallException;
 use Symfony\Component\Console\Output\OutputInterface;
+use Termage\Base\Theme;
 
 use function arrays;
 use function intval;
