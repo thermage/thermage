@@ -15,3 +15,7 @@ test('test set and get theme', function (): void {
     $termage = termage()->theme(new DefaultTheme());
     $this->assertInstanceOf(DefaultTheme::class, $termage->getTheme());
 });
+
+test('test get theme variables', function (): void {
+    expect(termage()->getTheme()->getThemeVariables())->toBeArray();
+});
