@@ -101,6 +101,7 @@ class Termage
     {
         return new Block(
             $this->renderer,
+            $this->theme,
             $value,
             $properties
         );
@@ -120,6 +121,7 @@ class Termage
     {
         return new Emoji(
             $this->renderer,
+            $this->theme,
             $value,
             $properties
         );

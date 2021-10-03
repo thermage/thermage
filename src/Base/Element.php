@@ -48,9 +48,10 @@ abstract class Element
      *
      * @access public
      */
-    final public function __construct($renderer, string $value = '', array $properties = [])
+    final public function __construct($renderer, $theme, string $value = '', array $properties = [])
     {
         $this->renderer   = $renderer;
+        $this->theme      = $theme;
         $this->value      = strings($value);
         $this->properties = arrays($properties);
     }
@@ -150,7 +151,7 @@ abstract class Element
      */
     public function color(string $color): self
     {
-        $this->properties->set('color', Colors::get($color));
+        $this->properties->set('color', $this->theme->variables()->get('colors.' . $color, $color));
 
         return $this;
     }

@@ -8,4 +8,8 @@ use Termage\Base\Theme;
 
 final class DefaultTheme extends Theme
 {
+    public function getThemeVariables(): array
+    {
+        return [];
+    }
 }
