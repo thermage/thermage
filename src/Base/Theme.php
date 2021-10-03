@@ -10,19 +10,29 @@ use function arrays;
 
 abstract class Theme
 {
-    private ?Arrays $variables = null;
+    /**
+     * Theme variables.
+     */
+    private Arrays $variables;
 
+    /**
+     * Create a new Theme instance.
+     *
+     * @access public
+     */
     final public function __construct()
     {
         $this->variables = arrays($this->getDefaultVariables())->replace($this->getThemeVariables(), true);
     }
 
-    public function variables()
-    {
-        return $this->variables;
-    }
-
-    public function getDefaultVariables(): array
+    /**
+     * Get Theme default variables.
+     *
+     * @return array Theme default variables.
+     *
+     * @access public
+     */
+    final public function getDefaultVariables(): array
     {
         return [
             'colors' => [
@@ -56,8 +66,27 @@ abstract class Theme
         ];
     }
 
+    /**
+     * Get Theme variables.
+     *
+     * @return array Theme variables.
+     *
+     * @access public
+     */
     public function getThemeVariables(): array
     {
         return [];
+    }
+
+    /**
+     * Get Theme variables.
+     *
+     * @return Arrays Theme variables.
+     *
+     * @access public
+     */
+    public function variables(): Arrays
+    {
+        return $this->variables;
     }
 }
