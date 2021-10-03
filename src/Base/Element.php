@@ -38,19 +38,26 @@ abstract class Element
      */
     private Strings $value;
 
-    private $theme;
+    /**
+     * The instance of Theme class.
+     *
+     * @access private
+     */
+    private Theme $theme;
 
     /**
      * Create a new Element Component instance.
      *
-     * @param string $value      Element value.
-     * @param array  $properties Element properties.
+     * @param OutputInterface $renderer   Output renderer interface.
+     * @param Theme           $theme      Instance of the Theme class.
+     * @param string          $value      Element value.
+     * @param array           $properties Element properties.
      *
      * @return Element Returns element component.
      *
      * @access public
      */
-    final public function __construct(OutputInterface $renderer, $theme, string $value = '', array $properties = [])
+    final public function __construct(OutputInterface $renderer, Theme $theme, string $value = '', array $properties = [])
     {
         $this->renderer   = $renderer;
         $this->theme      = $theme;
