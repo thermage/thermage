@@ -269,7 +269,7 @@ abstract class Element
     /**
      * Set element margin x property.
      *
-     * @param int $value Maring x.
+     * @param int $value Margin x.
      *
      * @return self Returns instance of the Element class.
      *
@@ -286,7 +286,7 @@ abstract class Element
     /**
      * Set element margin left property.
      *
-     * @param int $value Maring left.
+     * @param int $value Margin left.
      *
      * @return self Returns instance of the Element class.
      *
@@ -302,7 +302,7 @@ abstract class Element
     /**
      * Set element margin right property.
      *
-     * @param int $value Maring right.
+     * @param int $value Margin right.
      *
      * @return self Returns instance of the Element class.
      *
