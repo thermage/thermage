@@ -2,20 +2,17 @@
 
 declare(strict_types=1);
 
-use Clirad\Clirad;
-use Clirad\Components\Element;
+use Symfony\Component\Console\Output\OutputInterface as RendererInterface;
+use Termage\Termage;
 
-if (! function_exists('el')) {
+if (! function_exists('termage')) {
     /**
-     * Create element component.
+     * Create a new Termage instance.
      *
-     * @param string $value      Element value.
-     * @param array  $properties Element properties.
-     *
-     * @return Element Returns element component.
+     * @param RendererInterface $renderer Renderer interface.
      */
-    function el(string $value = '', array $properties = []): Element
+    function termage(?RendererInterface $renderer = null): Termage
     {
-        return Clirad::element($value, $properties);
+        return new Termage($renderer);
     }
 }

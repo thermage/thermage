@@ -2,26 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Clirad\Base;
+namespace Termage\Base;
 
 use Atomastic\Arrays\Arrays;
 use Atomastic\Strings\Strings;
 use BadMethodCallException;
-use Symfony\Component\Console\Output\OutputInterface as RendererInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 use function arrays;
+use function intval;
 use function sprintf;
 use function strings;
 use function substr;
 
-abstract class BaseElement
+abstract class Element
 {
     /**
-     * Base element renderer.
+     * The implementation of the output.
      *
      * @access private
      */
-    private RendererInterface $renderer;
+    private OutputInterface $renderer;
 
     /**
      * Base element properties.
@@ -40,15 +41,14 @@ abstract class BaseElement
     /**
      * Create base element.
      *
-     * @param RendererInterface $renderer   Base element renderer interface.
-     * @param string            $value      Base element value.
-     * @param array             $properties Base element properties.
+     * @param string $value      Base element value.
+     * @param array  $properties Base element properties.
      *
-     * @return BaseElement Returns base element component.
+     * @return Element Returns base element component.
      *
      * @access public
      */
-    final public function __construct(?RendererInterface $renderer = null, string $value = '', array $properties = [])
+    final public function __construct($renderer, string $value = '', array $properties = [])
     {
         $this->renderer   = $renderer;
         $this->value      = strings($value);
@@ -70,11 +70,11 @@ abstract class BaseElement
     /**
      * Get base element renderer.
      *
-     * @return RendererInterface Returns base element renderer.
+     * @return OutputInterface Returns base element renderer.
      *
      * @access public
      */
-    public function getRenderer(): RendererInterface
+    public function getRenderer(): OutputInterface
     {
         return $this->renderer;
     }
@@ -126,13 +126,13 @@ abstract class BaseElement
     /**
      * Set base element renderer.
      *
-     * @param RendererInterface $renderer Base element renderer interface.
+     * @param OutputInterface $renderer Base element renderer interface.
      *
      * @return self Returns instance of the BaseElement class.
      *
      * @access public
      */
-    public function renderer(?RendererInterface $renderer = null): self
+    public function renderer(OutputInterface $renderer): self
     {
         $this->renderer = $renderer;
 
@@ -150,7 +150,7 @@ abstract class BaseElement
      */
     public function color(string $color): self
     {
-        $this->properties->set('color', $color);
+        $this->properties->set('color', Colors::get($color));
 
         return $this;
     }
@@ -166,7 +166,7 @@ abstract class BaseElement
      */
     public function bg(string $color): self
     {
-        $this->properties->set('bg', $color);
+        $this->properties->set('bg', Colors::get($color));
 
         return $this;
     }
@@ -266,8 +266,8 @@ abstract class BaseElement
      */
     public function mx(int $value): self
     {
-        $this->properties->set('margin.left', $value / 2);
-        $this->properties->set('margin.right', $value / 2);
+        $this->properties->set('margin.left', intval($value / 2));
+        $this->properties->set('margin.right', intval($value / 2));
 
         return $this;
     }
@@ -315,8 +315,8 @@ abstract class BaseElement
      */
     public function px(int $value): self
     {
-        $this->properties->set('padding.left', $value / 2);
-        $this->properties->set('padding.right', $value / 2);
+        $this->properties->set('padding.left', intval($value / 2));
+        $this->properties->set('padding.right', intval($value / 2));
 
         return $this;
     }

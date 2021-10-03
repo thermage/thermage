@@ -1,31 +1,35 @@
 
-<img src="assets/banner.png" alt="Clirad" align="center" title="Totally RAD Terminal styling!">
+<img src="assets/termage.png" alt="Termage" align="center" title="Totally RAD Terminal styling!">
 
 <br>
 
 <p align="center">
-<a href="https://github.com/clirad/clirad/releases"><img alt="Version" src="https://img.shields.io/github/release/clirad/clirad.svg?label=version&color=f623a6"></a> <a href="https://github.com/clirad/clirad"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=f623a6" alt="License"></a> <a href="https://github.com/clirad/clirad"><img src="https://img.shields.io/github/downloads/clirad/clirad/total.svg?color=f623a6" alt="Total downloads"></a> <img src="https://github.com/atomastic/strings/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/atomastic/strings/workflows/Tests/badge.svg">
+<a href="https://github.com/termage/termage/releases"><img alt="Version" src="https://img.shields.io/github/release/termage/termage.svg?label=version&color=f623a6"></a> <a href="https://github.com/termage/termage"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=f623a6" alt="License"></a> <a href="https://github.com/termage/termage"><img src="http://poser.pugx.org/termage/termage/downloads" alt="Total downloads"></a> <img src="https://github.com/termage/termage/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/termage/termage/actions/workflows/static.yml/badge.svg?branch=dev">
+    <img src="http://poser.pugx.org/termage/termage/require/php">
 </p>
 
 <br>
 
-Clirad provides a fluent and powerful, object-oriented interface for customizing CLI output text color, background, formatting, and more.
+Termage provides a fluent and powerful, object-oriented interface for customizing CLI output text color, background, formatting, and more.
 
 ### Installation
 
 #### With [Composer](https://getcomposer.org)
 
 ```
-composer require clirad/clirad
+composer require termage/termage
 ```
 
 ### Documentation
 
 #### Basic Usage
 
+Simple example of usage with default renderer:
+
 ```php 
-// Display: Stay Rad!
-el('Stay Rad!')
+termage()
+  ->block()
+  ->value('Stay Rad!')
   ->px20()
   ->mx10()
   ->colorBrightGreen()
@@ -35,29 +39,45 @@ el('Stay Rad!')
   ->display();
 ```
 
+Using custom renderer:
+
 ```php 
-// Display: TAKE A CHILL PILL!
-el()
-  ->value("TAKE A CHILL PILL!") 
-  ->properties(['padding' => [
-                    'left' => 10, 
-                    'right' => 10
-                    ], 
-                    'margin' => [
-                        'left' => 5, 
-                        'right' => 5
-                    ],
-                    'color' => 'bright-greeen', 
-                    'bg' => 'bright-magenta'
-                ])
+termage($output)
+  ->block()
+  ->value('Stay Rad!')
+  ->px20()
+  ->mx10()
+  ->colorBrightGreen()
+  ->bgBrightMagenta()
   ->underline()
   ->upper()
   ->display();
 ```
 
-#### Clirad
+[Symfony Console](https://github.com/symfony/console) integration example:
 
-Common Clirad class. 
+```php 
+protected function execute(InputInterface $input, OutputInterface $output): int
+{
+    
+    termage($output)
+      ->block()
+      ->value('Stay Rad!')
+      ->px20()
+      ->mx10()
+      ->colorBrightGreen()
+      ->bgBrightMagenta()
+      ->underline()
+      ->upper()
+      ->display();
+      
+    // ...
+}
+```
+
+#### \Termage\Termage
+
+Common Termage class. 
 
 ##### Methods 
 
@@ -70,7 +90,7 @@ Common Clirad class.
     </thead>
     <tbody>
         <tr>
-            <td><a href="#methods-setRenderer">setRenderer</a></td>
+            <td><a href="#methods-renderer">renderer</a></td>
             <td>Set renderer.</td>
         </tr>
         <tr>
@@ -78,15 +98,15 @@ Common Clirad class.
             <td>Get renderer.</td>
         </tr>
         <tr>
-            <td><a href="#methods-getRenderer">element</a></td>
-            <td>Create element component.</td>
+            <td><a href="#methods-block">block</a></td>
+            <td>Create block component.</td>
         </tr>
     </tbody>
 </table>
 
-#### Base Element
+#### \Termage\Base\BaseElement
 
-Root element for all Clirad Components.
+Root element for all Termage Components.
 
 ##### Methods 
 
@@ -180,27 +200,27 @@ Root element for all Clirad Components.
         </tr>
         <tr>
             <td><a href="#methods-lower">lower</a></td>
-            <td>Convert element value to lower-case.</td>
+            <td>Convert base element value to lower-case.</td>
         </tr>
         <tr>
             <td><a href="#methods-upper">upper</a></td>
-            <td>Convert element value to upper-case.</td>
+            <td>Convert base element value to upper-case.</td>
         </tr>
         <tr>
             <td><a href="#methods-camel">camel</a></td>
-            <td>Convert element value to camel case.</td>
+            <td>Convert base element value to camel case.</td>
         </tr>
         <tr>
             <td><a href="#methods-capitalize">capitalize</a></td>
-            <td>Convert element value first character of every word of string to upper case and the others to lower case.</td>
+            <td>Convert base element value first character of every word of string to upper case and the others to lower case.</td>
         </tr>
         <tr>
             <td><a href="#methods-limit">limit</a></td>
-            <td>Limit the number of characters in the element value.</td>
+            <td>Limit the number of characters in the base element value.</td>
         </tr>
         <tr>
             <td><a href="#methods-repeat">repeat</a></td>
-            <td>Repeated element value given a multiplier.</td>
+            <td>Repeated base element value given a multiplier.</td>
         </tr>
         <tr>
             <td><a href="#methods-render">render</a></td>
@@ -213,9 +233,9 @@ Root element for all Clirad Components.
     </tbody>
 </table>
 
-#### Components 
+#### \Termage\Components
 
-##### Element
+##### \Termage\Components\Element
 
 Same methods as for [Base Element](#base-element).
 
@@ -238,6 +258,37 @@ Same methods as for [Base Element](#base-element).
     </tbody>
 </table>
 
+#### Magic Methods
+
+There is a few built-in magic methods 🧙
+
+`color` + **ColorName**  
+Examples: `colorRed()`, `colorBrightWhite()`, ...
+
+`bg` + **ColorName**  
+Examples: `bgRed()`, `bgBrightWhite()`, ...
+
+`display` + **Value**  
+Examples: `displayNone()`, `displayRow()`, `displayCol()`
+
+`mx` + **Value**  
+Examples: `mx10()`, `mx20()`, ...
+
+`ml` + **Value**  
+Examples: `ml10()`, `ml20()`, ...
+
+`mr` + **Value**  
+Examples: `mr10()`, `mr20()`, ...
+
+`px` + **Value**  
+Examples: `px10()`, `px20()`, ...
+
+`pl` + **Value**  
+Examples: `pl10()`, `pl20()`, ...
+
+`pr` + **Value**  
+Examples: `pr10()`, `pr20()`, ...
+
 ### Tests
 
 Run tests
@@ -247,5 +298,5 @@ Run tests
 ```
 
 ### License
-[The MIT License (MIT)](https://github.com/clirad/clirad/blob/master/LICENSE)
+[The MIT License (MIT)](https://github.com/termage/termage/blob/master/LICENSE)
 Copyright (c) 2021 [Sergey Romanenko](https://awilum.github.io)
