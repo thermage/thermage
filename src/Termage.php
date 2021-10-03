@@ -34,7 +34,7 @@ class Termage
     }
 
     /**
-     * Set renderer for the output interface.
+     * Set output renderer interface.
      *
      * @param OutputInterface $renderer Output renderer interface.
      *
@@ -50,9 +50,9 @@ class Termage
     }
 
     /**
-     * Get renderer output interface.
+     * Get output renderer interface.
      *
-     * @return OutputInterface Returns renderer output interface.
+     * @return OutputInterface Returns output renderer interface.
      *
      * @access public
      */
