@@ -88,12 +88,12 @@ class Termage
     }
 
     /**
-     * Create block component.
+     * Create a new Block Component instance.
      *
      * @param string $value      Block value.
      * @param array  $properties Block properties.
      *
-     * @return Block Returns block component.
+     * @return Block Returns Emoji Component instance.
      *
      * @access public
      */
@@ -108,12 +108,12 @@ class Termage
     }
 
     /**
-     * Create emoji component.
+     * Create a new Emoji Component instance.
      *
      * @param string $value      Emoji value.
      * @param array  $properties Emoji properties.
      *
-     * @return Emoji Returns emoji component.
+     * @return Emoji Returns Emoji Component instance.
      *
      * @access public
      */
