@@ -10,7 +10,7 @@
 
 <br>
 
-Termage provides a fluent and powerful, object-oriented interface for customizing CLI output text color, background, formatting, and more.
+Termage provides a fluent and incredible powerful, object-oriented interface for customizing CLI output text color, background, formatting, and more.
 
 ### Installation
 
