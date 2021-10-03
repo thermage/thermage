@@ -12,7 +12,7 @@ abstract class Theme
 {
     private ?Arrays $variables = null;
 
-    public function __construct()
+    final public function __construct()
     {
         $this->variables = arrays($this->getDefaultVariables())->replace($this->getThemeVariables(), true);
     }
