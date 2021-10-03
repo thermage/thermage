@@ -167,7 +167,7 @@ abstract class Element
      */
     public function bg(string $color): self
     {
-        $this->properties->set('bg', Colors::get($color));
+        $this->properties->set('bg', $this->theme->variables()->get('colors.' . $color, $color));
 
         return $this;
     }
