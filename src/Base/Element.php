@@ -107,7 +107,7 @@ abstract class Element
      *
      * @param string $value Element value.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -123,7 +123,7 @@ abstract class Element
      *
      * @param string $properties Element properties.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -139,7 +139,7 @@ abstract class Element
      *
      * @param OutputInterface $renderer Element renderer interface.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -155,7 +155,7 @@ abstract class Element
      *
      * @param string $color Element color.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -171,7 +171,7 @@ abstract class Element
      *
      * @param string $color Element background color.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -185,7 +185,7 @@ abstract class Element
     /**
      * Set element bold property.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -199,7 +199,7 @@ abstract class Element
     /**
      * Set element underline property, alias to underscore.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -213,7 +213,7 @@ abstract class Element
     /**
      * Set element underscore property.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -227,7 +227,7 @@ abstract class Element
     /**
      * Set element blink property.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -241,7 +241,7 @@ abstract class Element
     /**
      * Set element reverse property.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -255,7 +255,7 @@ abstract class Element
     /**
      * Set element conceal property.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -271,7 +271,7 @@ abstract class Element
      *
      * @param int $value Maring x.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -288,7 +288,7 @@ abstract class Element
      *
      * @param int $value Maring left.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -304,7 +304,7 @@ abstract class Element
      *
      * @param int $value Maring right.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -320,7 +320,7 @@ abstract class Element
      *
      * @param int $value Padding x.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -337,7 +337,7 @@ abstract class Element
      *
      * @param int $value Padding left.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -353,7 +353,7 @@ abstract class Element
      *
      * @param int $value Padding right.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -370,7 +370,7 @@ abstract class Element
      * @param  int    $limit  Limit of characters.
      * @param  string $append Text to append to the string IF it gets truncated.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -384,7 +384,7 @@ abstract class Element
     /**
      * Convert element value to lower-case.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -398,7 +398,7 @@ abstract class Element
     /**
      * Convert element value to upper-case.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -414,7 +414,7 @@ abstract class Element
      *
      * @param int $multiplier The number of times to repeat the string.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -428,7 +428,7 @@ abstract class Element
     /**
      * Convert element value to camel case.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -442,7 +442,7 @@ abstract class Element
     /**
      * Convert element value first character of every word of string to upper case and the others to lower case.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -454,7 +454,7 @@ abstract class Element
     }
 
     /**
-     * Dynamically bind magic methods to the BaseElement class.
+     * Dynamically bind magic methods to the Element class.
      *
      * @param string $method     Method.
      * @param array  $parameters Parameters.
