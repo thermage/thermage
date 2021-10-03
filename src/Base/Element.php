@@ -25,14 +25,14 @@ abstract class Element
     private OutputInterface $renderer;
 
     /**
-     * Base element properties.
+     * Element properties.
      *
      * @access private
      */
     private Arrays $properties;
 
     /**
-     * Base element value.
+     * Element value.
      *
      * @access private
      */
@@ -41,16 +41,16 @@ abstract class Element
     private $theme;
 
     /**
-     * Create base element.
+     * Create a new Element Component instance.
      *
-     * @param string $value      Base element value.
-     * @param array  $properties Base element properties.
+     * @param string $value      Element value.
+     * @param array  $properties Element properties.
      *
-     * @return Element Returns base element component.
+     * @return Element Returns element component.
      *
      * @access public
      */
-    final public function __construct($renderer, $theme, string $value = '', array $properties = [])
+    final public function __construct(OutputInterface $renderer, $theme, string $value = '', array $properties = [])
     {
         $this->renderer   = $renderer;
         $this->theme      = $theme;
@@ -59,9 +59,9 @@ abstract class Element
     }
 
     /**
-     * Get base element value.
+     * Get element value.
      *
-     * @return Strings Returns base element value.
+     * @return Strings Returns element value.
      *
      * @access public
      */
@@ -71,9 +71,9 @@ abstract class Element
     }
 
     /**
-     * Get base element renderer.
+     * Get element renderer.
      *
-     * @return OutputInterface Returns base element renderer.
+     * @return OutputInterface Returns element renderer.
      *
      * @access public
      */
@@ -83,9 +83,9 @@ abstract class Element
     }
 
     /**
-     * Get base element properties.
+     * Get element properties.
      *
-     * @return Arrays Returns base element properties.
+     * @return Arrays Returns element properties.
      *
      * @access public
      */
@@ -95,9 +95,9 @@ abstract class Element
     }
 
     /**
-     * Set base element value.
+     * Set element value.
      *
-     * @param string $value Base element value.
+     * @param string $value Element value.
      *
      * @return self Returns instance of the BaseElement class.
      *
@@ -111,9 +111,9 @@ abstract class Element
     }
 
     /**
-     * Set base element properties.
+     * Set element properties.
      *
-     * @param string $properties Base element properties.
+     * @param string $properties Element properties.
      *
      * @return self Returns instance of the BaseElement class.
      *
@@ -127,9 +127,9 @@ abstract class Element
     }
 
     /**
-     * Set base element renderer.
+     * Set element renderer.
      *
-     * @param OutputInterface $renderer Base element renderer interface.
+     * @param OutputInterface $renderer Element renderer interface.
      *
      * @return self Returns instance of the BaseElement class.
      *
@@ -143,9 +143,9 @@ abstract class Element
     }
 
     /**
-     * Set base element color.
+     * Set element color.
      *
-     * @param string $color Base element color.
+     * @param string $color Element color.
      *
      * @return self Returns instance of the BaseElement class.
      *
@@ -159,9 +159,9 @@ abstract class Element
     }
 
     /**
-     * Set base element background color.
+     * Set element background color.
      *
-     * @param string $color Base element background color.
+     * @param string $color Element background color.
      *
      * @return self Returns instance of the BaseElement class.
      *
@@ -175,7 +175,7 @@ abstract class Element
     }
 
     /**
-     * Set base element bold property.
+     * Set element bold property.
      *
      * @return self Returns instance of the BaseElement class.
      *
@@ -189,7 +189,7 @@ abstract class Element
     }
 
     /**
-     * Set base element underline property, alias to underscore.
+     * Set element underline property, alias to underscore.
      *
      * @return self Returns instance of the BaseElement class.
      *
@@ -203,7 +203,7 @@ abstract class Element
     }
 
     /**
-     * Set base element underscore property.
+     * Set element underscore property.
      *
      * @return self Returns instance of the BaseElement class.
      *
@@ -217,7 +217,7 @@ abstract class Element
     }
 
     /**
-     * Set base element blink property.
+     * Set element blink property.
      *
      * @return self Returns instance of the BaseElement class.
      *
@@ -231,7 +231,7 @@ abstract class Element
     }
 
     /**
-     * Set base element reverse property.
+     * Set element reverse property.
      *
      * @return self Returns instance of the BaseElement class.
      *
@@ -245,7 +245,7 @@ abstract class Element
     }
 
     /**
-     * Set base element conceal property.
+     * Set element conceal property.
      *
      * @return self Returns instance of the BaseElement class.
      *
@@ -259,7 +259,7 @@ abstract class Element
     }
 
     /**
-     * Set base element margin x property.
+     * Set element margin x property.
      *
      * @param int $value Maring x.
      *
@@ -276,7 +276,7 @@ abstract class Element
     }
 
     /**
-     * Set base element margin left property.
+     * Set element margin left property.
      *
      * @param int $value Maring left.
      *
@@ -292,7 +292,7 @@ abstract class Element
     }
 
     /**
-     * Set base element margin right property.
+     * Set element margin right property.
      *
      * @param int $value Maring right.
      *
@@ -308,7 +308,7 @@ abstract class Element
     }
 
     /**
-     * Set base element padding x property.
+     * Set element padding x property.
      *
      * @param int $value Padding x.
      *
@@ -325,7 +325,7 @@ abstract class Element
     }
 
     /**
-     * Set base element padding left property.
+     * Set element padding left property.
      *
      * @param int $value Padding left.
      *
@@ -341,7 +341,7 @@ abstract class Element
     }
 
     /**
-     * Set base element padding right property.
+     * Set element padding right property.
      *
      * @param int $value Padding right.
      *
@@ -503,9 +503,9 @@ abstract class Element
     }
 
     /**
-     * Render base element.
+     * Render element.
      *
-     * @return string Returns rendered base element.
+     * @return string Returns rendered element.
      *
      * @access public
      */
@@ -557,7 +557,7 @@ abstract class Element
     }
 
     /**
-     * Display base element.
+     * Display element.
      *
      * @param string $type Display type.
      *
@@ -584,9 +584,9 @@ abstract class Element
     }
 
     /**
-     * Get base element as string.
+     * Get element as string.
      *
-     * @return string Returns base element string representation.
+     * @return string Returns element string representation.
      */
     public function __toString(): string
     {
