@@ -101,6 +101,10 @@ Common Termage class.
             <td><a href="#methods-block">block</a></td>
             <td>Create block component.</td>
         </tr>
+        <tr>
+            <td><a href="#methods-block">emoji</a></td>
+            <td>Create emoji component.</td>
+        </tr>
     </tbody>
 </table>
 
