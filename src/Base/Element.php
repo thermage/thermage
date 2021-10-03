@@ -38,6 +38,8 @@ abstract class Element
      */
     private Strings $value;
 
+    private $theme;
+
     /**
      * Create base element.
      *
