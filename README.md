@@ -101,6 +101,10 @@ Common Termage class.
             <td><a href="#methods-block">block</a></td>
             <td>Create block component.</td>
         </tr>
+        <tr>
+            <td><a href="#methods-block">termage</a></td>
+            <td>Create termage component.</td>
+        </tr>
     </tbody>
 </table>
 
