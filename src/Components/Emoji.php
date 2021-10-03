@@ -35,9 +35,4 @@ final class Emoji extends Element
     {
         return SpatieEmoji::all();
     }
-
-    protected static function convertCharacterNameToConstantName(string $characterName): string
-    {
-        return 'CHARACTER_' . (string) strings($characterName)->snake()->upper();
-    }
 }
