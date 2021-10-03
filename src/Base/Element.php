@@ -46,14 +46,14 @@ abstract class Element
     private Theme $theme;
 
     /**
-     * Create a new Element Component instance.
+     * Create a new Element instance.
      *
      * @param OutputInterface $renderer   Output renderer interface.
      * @param Theme           $theme      Instance of the Theme class.
      * @param string          $value      Element value.
      * @param array           $properties Element properties.
      *
-     * @return Element Returns element component.
+     * @return Element Returns element.
      *
      * @access public
      */
