@@ -28,8 +28,7 @@ Simple example of usage with default renderer:
 
 ```php 
 termage()
-  ->block()
-  ->value('Stay Rad!')
+  ->block('Stay Rad!')
   ->px20()
   ->mx10()
   ->colorBrightGreen()
@@ -43,8 +42,7 @@ Using custom renderer:
 
 ```php 
 termage($output)
-  ->block()
-  ->value('Stay Rad!')
+  ->block('Stay Rad!')
   ->px20()
   ->mx10()
   ->colorBrightGreen()
@@ -61,8 +59,7 @@ protected function execute(InputInterface $input, OutputInterface $output): int
 {
     
     termage($output)
-      ->block()
-      ->value('Stay Rad!')
+      ->block('Stay Rad!')
       ->px20()
       ->mx10()
       ->colorBrightGreen()
