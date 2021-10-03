@@ -236,7 +236,7 @@ Root element for all Termage Components.
 
 #### \Termage\Components
 
-##### \Termage\Components\Element
+##### \Termage\Components\Block
 
 Same methods as for [Base Element](#base-element).
 
