@@ -9,6 +9,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Termage\Components\Block;
 use Termage\Components\Emoji;
+use Termage\Themes\DefaultTheme;
 
 class Termage
 {
@@ -21,6 +22,8 @@ class Termage
      */
     private OutputInterface $renderer;
 
+    private $theme;
+
     /**
      * Create a new Termage instance.
      *
@@ -28,9 +31,10 @@ class Termage
      *
      * @access public
      */
-    public function __construct(?OutputInterface $renderer = null)
+    public function __construct(?OutputInterface $renderer = null, $theme = null)
     {
         $this->renderer = $renderer ??= new ConsoleOutput();
+        $this->theme    = $theme ??= new DefaultTheme();
     }
 
     /**
@@ -59,6 +63,28 @@ class Termage
     public function getRenderer(): OutputInterface
     {
         return $this->renderer;
+    }
+
+    /**
+     * Get theme.
+     *
+     * @access public
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
+
+    /**
+     * Set theme.
+     *
+     * @access public
+     */
+    public function theme($theme)
+    {
+        $this->theme = $theme;
+
+        return $this;
     }
 
     /**
