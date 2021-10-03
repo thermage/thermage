@@ -17,7 +17,8 @@ abstract class Theme
         $this->variables = arrays($this->getDefaultVariables())->replace($this->getThemeVariables(), true);
     }
 
-    public function variables() {
+    public function variables()
+    {
         return $this->variables;
     }
 
@@ -34,7 +35,7 @@ abstract class Theme
                 'blue'    => 'blue',
                 'magenta' => 'magenta',
                 'cyan'    => 'cyan',
-        
+
                 'bright-red'     => 'bright-red',
                 'bright-green'   => 'bright-green',
                 'bright-yellow'  => 'bright-yellow',
@@ -42,7 +43,7 @@ abstract class Theme
                 'bright-magenta' => 'bright-magenta',
                 'bright-cyan'    => 'bright-cyan',
                 'bright-white'   => 'bright-white',
-        
+
                 'primary'   => 'blue',
                 'secondary' => 'gray',
                 'success'   => 'green',
@@ -51,7 +52,7 @@ abstract class Theme
                 'danger'    => 'red',
             ],
             'padding' => 0,
-            'margin'  => 0
+            'margin'  => 0,
         ];
     }
 
