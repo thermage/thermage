@@ -4,7 +4,7 @@
 <br>
 
 <p align="center">
-<a href="https://github.com/termage/termage/releases"><img alt="Version" src="https://img.shields.io/github/release/termage/termage.svg?label=version&color=f623a6"></a> <a href="https://github.com/termage/termage"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=f623a6" alt="License"></a> <a href="https://github.com/termage/termage"><img src="http://poser.pugx.org/termage/termage/downloads" alt="Total downloads"></a> <img src="https://github.com/termage/termage/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/termage/termage/actions/workflows/static.yml/badge.svg?branch=dev">
+<a href="https://github.com/termage/termage/releases"><img alt="Version" src="https://img.shields.io/github/release/termage/termage.svg?label=version&color=d872b2"></a> <a href="https://github.com/termage/termage"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=d872b2" alt="License"></a> <a href="https://github.com/termage/termage"><img src="http://poser.pugx.org/termage/termage/downloads" alt="Total downloads"></a> <img src="https://github.com/termage/termage/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/termage/termage/actions/workflows/static.yml/badge.svg?branch=dev">
     <img src="http://poser.pugx.org/termage/termage/require/php">
 </p>
 
