@@ -279,8 +279,12 @@ abstract class Element
      */
     public function mx(int $value): self
     {
-        $this->properties->set('margin.left', intval($value / 2));
-        $this->properties->set('margin.right', intval($value / 2));
+        $themeMarginGlobal = $this->theme->variables()->get('margin.global', 1);
+        $themeMarginLeft   = $this->theme->variables()->get('margin.left', 1);
+        $themeMarginRight  = $this->theme->variables()->get('margin.right', 1);
+
+        $this->properties->set('margin.left', intval((($value / 2) * $themeMarginLeft) * $themeMarginGlobal));
+        $this->properties->set('margin.right', intval((($value / 2) * $themeMarginRight) * $themeMarginGlobal));
 
         return $this;
     }
@@ -296,7 +300,10 @@ abstract class Element
      */
     public function ml(int $value): self
     {
-        $this->properties->set('margin.left', $value);
+        $themeMarginGlobal = $this->theme->variables()->get('margin.global', 1);
+        $themeMarginLeft   = $this->theme->variables()->get('margin.left', 1);
+
+        $this->properties->set('margin.left', intval((($value / 2) * $themeMarginLeft) * $themeMarginGlobal));
 
         return $this;
     }
@@ -312,7 +319,10 @@ abstract class Element
      */
     public function mr(int $value): self
     {
-        $this->properties->set('margin.right', $value);
+        $themeMarginGlobal = $this->theme->variables()->get('margin.global', 1);
+        $themeMarginRight   = $this->theme->variables()->get('margin.right', 1);
+
+        $this->properties->set('margin.right', intval((($value / 2) * $themeMarginRight) * $themeMarginGlobal));
 
         return $this;
     }
@@ -328,8 +338,12 @@ abstract class Element
      */
     public function px(int $value): self
     {
-        $this->properties->set('padding.left', intval($value / 2));
-        $this->properties->set('padding.right', intval($value / 2));
+        $themePaddingGlobal = $this->theme->variables()->get('padding.global', 1);
+        $themePaddingLeft   = $this->theme->variables()->get('padding.left', 1);
+        $themePaddingRight  = $this->theme->variables()->get('padding.right', 1);
+
+        $this->properties->set('padding.left', intval((($value / 2) * $themePaddingLeft) * $themePaddingGlobal));
+        $this->properties->set('padding.right', intval((($value / 2) * $themePaddingRight) * $themePaddingGlobal));
 
         return $this;
     }
@@ -345,7 +359,10 @@ abstract class Element
      */
     public function pl(int $value): self
     {
-        $this->properties->set('padding.left', $value);
+        $themePaddingGlobal = $this->theme->variables()->get('padding.global', 1);
+        $themePaddingLeft   = $this->theme->variables()->get('padding.left', 1);
+        
+        $this->properties->set('padding.left', intval((($value / 2) * $themePaddingLeft) * $themePaddingGlobal));
 
         return $this;
     }
@@ -361,7 +378,10 @@ abstract class Element
      */
     public function pr(int $value): self
     {
-        $this->properties->set('padding.right', $value);
+        $themePaddingGlobal = $this->theme->variables()->get('padding.global', 1);
+        $themePaddingRight  = $this->theme->variables()->get('padding.right', 1);
+        
+        $this->properties->set('padding.right', intval((($value / 2) * $themePaddingRight) * $themePaddingGlobal));
 
         return $this;
     }
