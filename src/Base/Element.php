@@ -6,7 +6,9 @@ namespace Termage\Base;
 
 use Atomastic\Arrays\Arrays;
 use Atomastic\Strings\Strings;
+use Termage\Themes\DefaultTheme;
 use BadMethodCallException;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Termage\Base\Theme;
 
@@ -58,10 +60,10 @@ abstract class Element
      *
      * @access public
      */
-    final public function __construct(OutputInterface $renderer, Theme $theme, string $value = '', array $properties = [])
+    final public function __construct(OutputInterface $renderer = null, Theme $theme = null, string $value = '', array $properties = [])
     {
-        $this->renderer   = $renderer;
-        $this->theme      = $theme;
+        $this->renderer   = $renderer ??= new ConsoleOutput();
+        $this->theme      = $theme ??= new DefaultTheme();
         $this->value      = strings($value);
         $this->properties = arrays($properties);
     }
