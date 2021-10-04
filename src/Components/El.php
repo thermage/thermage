@@ -6,6 +6,6 @@ namespace Termage\Components;
 
 use Termage\Base\Element;
 
-final class Block extends Element
+final class El extends Element
 {
 }

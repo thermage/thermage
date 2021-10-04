@@ -8,7 +8,7 @@ use Atomastic\Macroable\Macroable;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Termage\Base\Theme;
-use Termage\Components\Block;
+use Termage\Components\El;
 use Termage\Components\Emoji;
 use Termage\Themes\DefaultTheme;
 
@@ -101,18 +101,18 @@ class Termage
     }
 
     /**
-     * Create a new Block Component instance.
+     * Create a new El Component instance.
      *
-     * @param string $value      Block value.
-     * @param array  $properties Block properties.
+     * @param string $value      Element value.
+     * @param array  $properties Element properties.
      *
-     * @return Block Returns Emoji Component instance.
+     * @return Block Returns El Component instance.
      *
      * @access public
      */
-    public function block(string $value = '', array $properties = []): Block
+    public function el(string $value = '', array $properties = []): El
     {
-        return new Block(
+        return new El(
             $this->renderer,
             $this->theme,
             $value,
