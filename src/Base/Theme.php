@@ -61,8 +61,16 @@ abstract class Theme
                 'warning'   => 'yellow',
                 'danger'    => 'red',
             ],
-            'padding' => 1,
-            'margin'  => 1,
+            'padding' => [
+                'global' => 1,
+                'left'   => 1,
+                'right'  => 1,
+            ],
+            'margin' => [
+                'global' => 1,
+                'left'   => 1,
+                'right'  => 1,
+            ],
         ];
     }
 
