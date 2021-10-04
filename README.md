@@ -4,13 +4,13 @@
 <br>
 
 <p align="center">
-<a href="https://github.com/termage/termage/releases"><img alt="Version" src="https://img.shields.io/github/release/termage/termage.svg?label=version&color=f623a6"></a> <a href="https://github.com/termage/termage"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=f623a6" alt="License"></a> <a href="https://github.com/termage/termage"><img src="http://poser.pugx.org/termage/termage/downloads" alt="Total downloads"></a> <img src="https://github.com/termage/termage/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/termage/termage/actions/workflows/static.yml/badge.svg?branch=dev">
+<a href="https://github.com/termage/termage/releases"><img alt="Version" src="https://img.shields.io/github/release/termage/termage.svg?label=version&color=d872b2"></a> <a href="https://github.com/termage/termage"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=d872b2" alt="License"></a> <a href="https://github.com/termage/termage"><img src="http://poser.pugx.org/termage/termage/downloads" alt="Total downloads"></a> <img src="https://github.com/termage/termage/workflows/Static%20Analysis/badge.svg?branch=dev"> <img src="https://github.com/termage/termage/actions/workflows/static.yml/badge.svg?branch=dev">
     <img src="http://poser.pugx.org/termage/termage/require/php">
 </p>
 
 <br>
 
-Termage provides a fluent and powerful, object-oriented interface for customizing CLI output text color, background, formatting, and more.
+Termage provides a fluent and incredible powerful, object-oriented interface for customizing CLI output text color, background, formatting, theming and more.
 
 ### Installation
 
@@ -28,8 +28,7 @@ Simple example of usage with default renderer:
 
 ```php 
 termage()
-  ->block()
-  ->value('Stay Rad!')
+  ->block('Stay Rad!')
   ->px20()
   ->mx10()
   ->colorBrightGreen()
@@ -43,8 +42,7 @@ Using custom renderer:
 
 ```php 
 termage($output)
-  ->block()
-  ->value('Stay Rad!')
+  ->block('Stay Rad!')
   ->px20()
   ->mx10()
   ->colorBrightGreen()
@@ -61,8 +59,7 @@ protected function execute(InputInterface $input, OutputInterface $output): int
 {
     
     termage($output)
-      ->block()
-      ->value('Stay Rad!')
+      ->block('Stay Rad!')
       ->px20()
       ->mx10()
       ->colorBrightGreen()
@@ -100,6 +97,10 @@ Common Termage class.
         <tr>
             <td><a href="#methods-block">block</a></td>
             <td>Create block component.</td>
+        </tr>
+        <tr>
+            <td><a href="#methods-block">emoji</a></td>
+            <td>Create emoji component.</td>
         </tr>
     </tbody>
 </table>
@@ -235,7 +236,7 @@ Root element for all Termage Components.
 
 #### \Termage\Components
 
-##### \Termage\Components\Element
+##### \Termage\Components\Block
 
 Same methods as for [Base Element](#base-element).
 

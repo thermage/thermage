@@ -6,8 +6,11 @@ namespace Termage\Base;
 
 use Atomastic\Arrays\Arrays;
 use Atomastic\Strings\Strings;
+use Termage\Themes\DefaultTheme;
 use BadMethodCallException;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
+use Termage\Base\Theme;
 
 use function arrays;
 use function intval;
@@ -25,40 +28,50 @@ abstract class Element
     private OutputInterface $renderer;
 
     /**
-     * Base element properties.
+     * Element properties.
      *
      * @access private
      */
     private Arrays $properties;
 
     /**
-     * Base element value.
+     * Element value.
      *
      * @access private
      */
     private Strings $value;
 
     /**
-     * Create base element.
+     * The instance of Theme class.
      *
-     * @param string $value      Base element value.
-     * @param array  $properties Base element properties.
+     * @access private
+     */
+    private Theme $theme;
+
+    /**
+     * Create a new Element instance.
      *
-     * @return Element Returns base element component.
+     * @param OutputInterface $renderer   Output renderer interface.
+     * @param Theme           $theme      Instance of the Theme class.
+     * @param string          $value      Element value.
+     * @param array           $properties Element properties.
+     *
+     * @return Element Returns element.
      *
      * @access public
      */
-    final public function __construct($renderer, string $value = '', array $properties = [])
+    final public function __construct(OutputInterface $renderer = null, Theme $theme = null, string $value = '', array $properties = [])
     {
-        $this->renderer   = $renderer;
+        $this->renderer   = $renderer ??= new ConsoleOutput();
+        $this->theme      = $theme ??= new DefaultTheme();
         $this->value      = strings($value);
         $this->properties = arrays($properties);
     }
 
     /**
-     * Get base element value.
+     * Get element value.
      *
-     * @return Strings Returns base element value.
+     * @return Strings Returns element value.
      *
      * @access public
      */
@@ -68,9 +81,9 @@ abstract class Element
     }
 
     /**
-     * Get base element renderer.
+     * Get element renderer.
      *
-     * @return OutputInterface Returns base element renderer.
+     * @return OutputInterface Returns element renderer.
      *
      * @access public
      */
@@ -80,9 +93,9 @@ abstract class Element
     }
 
     /**
-     * Get base element properties.
+     * Get element properties.
      *
-     * @return Arrays Returns base element properties.
+     * @return Arrays Returns element properties.
      *
      * @access public
      */
@@ -92,11 +105,11 @@ abstract class Element
     }
 
     /**
-     * Set base element value.
+     * Set element value.
      *
-     * @param string $value Base element value.
+     * @param string $value Element value.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -108,11 +121,11 @@ abstract class Element
     }
 
     /**
-     * Set base element properties.
+     * Set element properties.
      *
-     * @param string $properties Base element properties.
+     * @param string $properties Element properties.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -124,11 +137,11 @@ abstract class Element
     }
 
     /**
-     * Set base element renderer.
+     * Set element renderer.
      *
-     * @param OutputInterface $renderer Base element renderer interface.
+     * @param OutputInterface $renderer Element renderer interface.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -140,41 +153,41 @@ abstract class Element
     }
 
     /**
-     * Set base element color.
+     * Set element color.
      *
-     * @param string $color Base element color.
+     * @param string $color Element color.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
     public function color(string $color): self
     {
-        $this->properties->set('color', Colors::get($color));
+        $this->properties->set('color', $this->theme->variables()->get('colors.' . $color, $color));
 
         return $this;
     }
 
     /**
-     * Set base element background color.
+     * Set element background color.
      *
-     * @param string $color Base element background color.
+     * @param string $color Element background color.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
     public function bg(string $color): self
     {
-        $this->properties->set('bg', Colors::get($color));
+        $this->properties->set('bg', $this->theme->variables()->get('colors.' . $color, $color));
 
         return $this;
     }
 
     /**
-     * Set base element bold property.
+     * Set element bold property.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -186,9 +199,9 @@ abstract class Element
     }
 
     /**
-     * Set base element underline property, alias to underscore.
+     * Set element underline property, alias to underscore.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -200,9 +213,9 @@ abstract class Element
     }
 
     /**
-     * Set base element underscore property.
+     * Set element underscore property.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -214,9 +227,9 @@ abstract class Element
     }
 
     /**
-     * Set base element blink property.
+     * Set element blink property.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -228,9 +241,9 @@ abstract class Element
     }
 
     /**
-     * Set base element reverse property.
+     * Set element reverse property.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -242,9 +255,9 @@ abstract class Element
     }
 
     /**
-     * Set base element conceal property.
+     * Set element conceal property.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -256,99 +269,119 @@ abstract class Element
     }
 
     /**
-     * Set base element margin x property.
+     * Set element margin x property.
      *
-     * @param int $value Maring x.
+     * @param int $value Margin x.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
     public function mx(int $value): self
     {
-        $this->properties->set('margin.left', intval($value / 2));
-        $this->properties->set('margin.right', intval($value / 2));
+        $themeMarginGlobal = $this->theme->variables()->get('margin.global', 1);
+        $themeMarginLeft   = $this->theme->variables()->get('margin.left', 1);
+        $themeMarginRight  = $this->theme->variables()->get('margin.right', 1);
+
+        $this->properties->set('margin.left', intval((($value / 2) * $themeMarginLeft) * $themeMarginGlobal));
+        $this->properties->set('margin.right', intval((($value / 2) * $themeMarginRight) * $themeMarginGlobal));
 
         return $this;
     }
 
     /**
-     * Set base element margin left property.
+     * Set element margin left property.
      *
-     * @param int $value Maring left.
+     * @param int $value Margin left.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
     public function ml(int $value): self
     {
-        $this->properties->set('margin.left', $value);
+        $themeMarginGlobal = $this->theme->variables()->get('margin.global', 1);
+        $themeMarginLeft   = $this->theme->variables()->get('margin.left', 1);
+
+        $this->properties->set('margin.left', intval((($value * $themeMarginLeft) * $themeMarginGlobal)));
 
         return $this;
     }
 
     /**
-     * Set base element margin right property.
+     * Set element margin right property.
      *
-     * @param int $value Maring right.
+     * @param int $value Margin right.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
     public function mr(int $value): self
     {
-        $this->properties->set('margin.right', $value);
+        $themeMarginGlobal = $this->theme->variables()->get('margin.global', 1);
+        $themeMarginRight   = $this->theme->variables()->get('margin.right', 1);
+
+        $this->properties->set('margin.right', intval((($value * $themeMarginRight) * $themeMarginGlobal)));
 
         return $this;
     }
 
     /**
-     * Set base element padding x property.
+     * Set element padding x property.
      *
      * @param int $value Padding x.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
     public function px(int $value): self
     {
-        $this->properties->set('padding.left', intval($value / 2));
-        $this->properties->set('padding.right', intval($value / 2));
+        $themePaddingGlobal = $this->theme->variables()->get('padding.global', 1);
+        $themePaddingLeft   = $this->theme->variables()->get('padding.left', 1);
+        $themePaddingRight  = $this->theme->variables()->get('padding.right', 1);
+
+        $this->properties->set('padding.left', intval((($value / 2) * $themePaddingLeft) * $themePaddingGlobal));
+        $this->properties->set('padding.right', intval((($value / 2) * $themePaddingRight) * $themePaddingGlobal));
 
         return $this;
     }
 
     /**
-     * Set base element padding left property.
+     * Set element padding left property.
      *
      * @param int $value Padding left.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
     public function pl(int $value): self
     {
-        $this->properties->set('padding.left', $value);
+        $themePaddingGlobal = $this->theme->variables()->get('padding.global', 1);
+        $themePaddingLeft   = $this->theme->variables()->get('padding.left', 1);
+    
+        $this->properties->set('padding.left', intval((($value * $themePaddingLeft) * $themePaddingGlobal)));
 
         return $this;
     }
 
     /**
-     * Set base element padding right property.
+     * Set element padding right property.
      *
      * @param int $value Padding right.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
     public function pr(int $value): self
     {
-        $this->properties->set('padding.right', $value);
+        $themePaddingGlobal = $this->theme->variables()->get('padding.global', 1);
+        $themePaddingRight  = $this->theme->variables()->get('padding.right', 1);
+        
+        $this->properties->set('padding.right', intval((($value * $themePaddingRight) * $themePaddingGlobal)));
 
         return $this;
     }
@@ -359,7 +392,7 @@ abstract class Element
      * @param  int    $limit  Limit of characters.
      * @param  string $append Text to append to the string IF it gets truncated.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -373,7 +406,7 @@ abstract class Element
     /**
      * Convert element value to lower-case.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -387,7 +420,7 @@ abstract class Element
     /**
      * Convert element value to upper-case.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -403,7 +436,7 @@ abstract class Element
      *
      * @param int $multiplier The number of times to repeat the string.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -417,7 +450,7 @@ abstract class Element
     /**
      * Convert element value to camel case.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -431,7 +464,7 @@ abstract class Element
     /**
      * Convert element value first character of every word of string to upper case and the others to lower case.
      *
-     * @return self Returns instance of the BaseElement class.
+     * @return self Returns instance of the Element class.
      *
      * @access public
      */
@@ -443,7 +476,7 @@ abstract class Element
     }
 
     /**
-     * Dynamically bind magic methods to the BaseElement class.
+     * Dynamically bind magic methods to the Element class.
      *
      * @param string $method     Method.
      * @param array  $parameters Parameters.
@@ -500,9 +533,9 @@ abstract class Element
     }
 
     /**
-     * Render base element.
+     * Render element.
      *
-     * @return string Returns rendered base element.
+     * @return string Returns rendered element.
      *
      * @access public
      */
@@ -554,7 +587,7 @@ abstract class Element
     }
 
     /**
-     * Display base element.
+     * Display element.
      *
      * @param string $type Display type.
      *
@@ -581,9 +614,9 @@ abstract class Element
     }
 
     /**
-     * Get base element as string.
+     * Get element as string.
      *
-     * @return string Returns base element string representation.
+     * @return string Returns element string representation.
      */
     public function __toString(): string
     {
