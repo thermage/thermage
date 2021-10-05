@@ -10,6 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Termage\Base\Theme;
 use Termage\Components\El;
 use Termage\Components\Emoji;
+use Termage\Components\Alert;
 use Termage\Themes\DefaultTheme;
 
 class Termage
@@ -133,6 +134,26 @@ class Termage
     public function emoji(string $value = '', array $properties = []): Emoji
     {
         return new Emoji(
+            $this->renderer,
+            $this->theme,
+            $value,
+            $properties
+        );
+    }
+
+    /**
+     * Create a new Alert Component instance.
+     *
+     * @param string $value      Alert value.
+     * @param array  $properties Alert properties.
+     *
+     * @return Alert Returns Alert Component instance.
+     *
+     * @access public
+     */
+    public function alert(string $value = '', array $properties = []): Alert
+    {
+        return new Alert(
             $this->renderer,
             $this->theme,
             $value,
