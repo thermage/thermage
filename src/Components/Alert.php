@@ -190,6 +190,7 @@ final class Alert extends Element
         $alertType      = $this->alertType;
         $alertTypeColor = $this->alertTypeColor;
         $alertTextAlign = $this->alertTextAlign;
+        $alertPaddingX  = $this->alertPaddingX;
         $alertSize      = $this->alertSize;
         $renderer       = $this->getRenderer();
         $theme          = $this->getTheme();
