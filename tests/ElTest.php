@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Termage\Termage;
+use Termage\Base\Theme;
 use Termage\Components\El;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\ConsoleOutput as Renderer;
@@ -160,6 +161,11 @@ test('test capitalize', function (): void {
 test('test getRenderer', function (): void {
     $value = termage()->el()->getRenderer();
     $this->assertInstanceOf(Renderer::class, $value);
+});
+
+test('test getTheme', function (): void {
+    $value = termage()->el()->getTheme();
+    $this->assertInstanceOf(Theme::class, $value);
 });
 
 test('test renderer', function (): void {
