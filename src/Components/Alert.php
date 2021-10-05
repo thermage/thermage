@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Termage\Components;
 
+use Symfony\Component\Console\Terminal;
 use Termage\Base\Element;
 
 use function strings;
@@ -174,8 +175,8 @@ final class Alert extends Element
     /**
      * Set alert size
      *
-     * @param int $value Alert size. 
-     * 
+     * @param int $value Alert size.
+     *
      * @return self Returns instance of the Alert class.
      *
      * @access public
@@ -223,7 +224,7 @@ final class Alert extends Element
         $px = strings($value)->length();
 
         if ($alertSizeAuto) {
-            $terminal = new \Symfony\Component\Console\Terminal;
+            $terminal  = new Terminal();
             $alertSize = $terminal->getWidth() - $alertPaddingX;
         }
 
