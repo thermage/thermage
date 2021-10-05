@@ -11,6 +11,7 @@ use Termage\Base\Theme;
 use Termage\Components\Alert;
 use Termage\Components\El;
 use Termage\Components\Emoji;
+use Termage\Components\Rule;
 use Termage\Themes\DefaultTheme;
 
 class Termage
@@ -154,6 +155,26 @@ class Termage
     public function alert(string $value = '', array $properties = []): Alert
     {
         return new Alert(
+            $this->renderer,
+            $this->theme,
+            $value,
+            $properties
+        );
+    }
+
+    /**
+     * Create a new Rule Component instance.
+     *
+     * @param string $value      Rule value.
+     * @param array  $properties Rule properties.
+     *
+     * @return Rule Returns Rule Component instance.
+     *
+     * @access public
+     */
+    public function rule(string $value = '', array $properties = []): Rule
+    {
+        return new Rule(
             $this->renderer,
             $this->theme,
             $value,
