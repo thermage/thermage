@@ -93,6 +93,18 @@ abstract class Element
     }
 
     /**
+     * Get element theme.
+     *
+     * @return Theme Returns element theme.
+     *
+     * @access public
+     */
+    public function getTheme(): Theme
+    {
+        return $this->theme;
+    }
+
+    /**
      * Get element properties.
      *
      * @return Arrays Returns element properties.
