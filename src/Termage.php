@@ -8,9 +8,9 @@ use Atomastic\Macroable\Macroable;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Termage\Base\Theme;
+use Termage\Components\Alert;
 use Termage\Components\El;
 use Termage\Components\Emoji;
-use Termage\Components\Alert;
 use Termage\Themes\DefaultTheme;
 
 class Termage
