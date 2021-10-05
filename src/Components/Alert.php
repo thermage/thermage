@@ -32,6 +32,12 @@ final class Alert extends Element
      */
     private string $alertType = 'info';
 
+    /**
+     * Alert type color
+     *
+     * @access private
+     */
+    private string $alertTypeColor = 'white';
 
     /**
      * Alert text align
