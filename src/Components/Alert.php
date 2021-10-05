@@ -12,42 +12,49 @@ use function termage;
 final class Alert extends Element
 {
     /**
-     * Alert size
+     * Alert size.
      *
      * @access private
      */
     private int $alertSize = 50;
 
     /**
-     * Alert padding x
+     * Alert size auto.
+     *
+     * @access private
+     */
+    private bool $alertSizeAuto = false;
+
+    /**
+     * Alert padding x.
      *
      * @access private
      */
     private int $alertPaddingX = 1;
 
     /**
-     * Alert type
+     * Alert type.
      *
      * @access private
      */
     private string $alertType = 'info';
 
     /**
-     * Alert type color
+     * Alert type color.
      *
      * @access private
      */
     private string $alertTypeColor = 'white';
 
     /**
-     * Alert text align
+     * Alert text align.
      *
      * @access private
      */
     private string $alertTextAlign = 'left';
 
     /**
-     * Set alert text align left
+     * Set alert text align left.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -61,7 +68,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert text align right
+     * Set alert text align right.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -75,7 +82,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert type info
+     * Set alert type info.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -90,7 +97,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert type warning
+     * Set alert type warning.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -105,7 +112,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert type danger
+     * Set alert type danger.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -120,7 +127,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert type success
+     * Set alert type success.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -135,7 +142,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert type primary
+     * Set alert type primary.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -150,7 +157,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert type secondary
+     * Set alert type secondary.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -167,6 +174,8 @@ final class Alert extends Element
     /**
      * Set alert size
      *
+     * @param int $value Alert size. 
+     * 
      * @return self Returns instance of the Alert class.
      *
      * @access public
@@ -174,6 +183,20 @@ final class Alert extends Element
     public function size(int $value): self
     {
         $this->alertSize = $value;
+
+        return $this;
+    }
+
+    /**
+     * Set alert size auto.
+     *
+     * @return self Returns instance of the Alert class.
+     *
+     * @access public
+     */
+    public function sizeAuto(): self
+    {
+        $this->alertSizeAuto = true;
 
         return $this;
     }
@@ -191,6 +214,7 @@ final class Alert extends Element
         $alertTypeColor = $this->alertTypeColor;
         $alertTextAlign = $this->alertTextAlign;
         $alertPaddingX  = $this->alertPaddingX;
+        $alertSizeAuto  = $this->alertSizeAuto;
         $alertSize      = $this->alertSize;
         $renderer       = $this->getRenderer();
         $theme          = $this->getTheme();
@@ -198,21 +222,26 @@ final class Alert extends Element
 
         $px = strings($value)->length();
 
-        if ($this->alertTextAlign === 'right') {
-            $pr  = $this->alertPaddingX;
-            $pl  = $this->alertSize - $alertPaddingX;
+        if ($alertSizeAuto) {
+            $terminal = new \Symfony\Component\Console\Terminal;
+            $alertSize = $terminal->getWidth() - $alertPaddingX;
+        }
+
+        if ($alertTextAlign === 'right') {
+            $pr  = $alertPaddingX;
+            $pl  = $alertSize - $alertPaddingX;
             $pl -= $px;
         }
 
-        if ($this->alertTextAlign === 'left') {
-            $pl  = $this->alertPaddingX;
-            $pr  = $this->alertSize - $this->alertPaddingX;
+        if ($alertTextAlign === 'left') {
+            $pl  = $alertPaddingX;
+            $pr  = $alertSize - $alertPaddingX;
             $pr -= $px;
         }
 
-        $header = termage($renderer, $theme)->el()->px($this->alertSize)->bg($this->alertType)->render();
-        $body   = termage($renderer, $theme)->el($value)->pl($pl)->pr($pr)->bg($this->alertType)->color($this->alertTypeColor)->render();
-        $footer = termage($renderer, $theme)->el()->px($this->alertSize)->bg($this->alertType)->render();
+        $header = termage($renderer, $theme)->el()->px($alertSize)->bg($alertType)->render();
+        $body   = termage($renderer, $theme)->el($value)->pl($pl)->pr($pr)->bg($alertType)->color($alertTypeColor)->render();
+        $footer = termage($renderer, $theme)->el()->px($alertSize)->bg($alertType)->render();
 
         $this->value($header . "\n" . $body . "\n" . $footer);
 
