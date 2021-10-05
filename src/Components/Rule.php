@@ -146,7 +146,7 @@ final class Rule extends Element
     }
 
     /**
-     * Render alert component.
+     * Render rule component.
      *
      * @return string Returns rendered alert component.
      *
