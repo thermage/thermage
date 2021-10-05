@@ -6,11 +6,10 @@ namespace Termage\Base;
 
 use Atomastic\Arrays\Arrays;
 use Atomastic\Strings\Strings;
-use Termage\Themes\DefaultTheme;
 use BadMethodCallException;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
-use Termage\Base\Theme;
+use Termage\Themes\DefaultTheme;
 
 use function arrays;
 use function intval;
@@ -60,7 +59,7 @@ abstract class Element
      *
      * @access public
      */
-    final public function __construct(OutputInterface $renderer = null, Theme $theme = null, string $value = '', array $properties = [])
+    final public function __construct(?OutputInterface $renderer = null, ?Theme $theme = null, string $value = '', array $properties = [])
     {
         $this->renderer   = $renderer ??= new ConsoleOutput();
         $this->theme      = $theme ??= new DefaultTheme();
@@ -295,8 +294,8 @@ abstract class Element
         $themeMarginLeft   = $this->theme->variables()->get('margin.left', 1);
         $themeMarginRight  = $this->theme->variables()->get('margin.right', 1);
 
-        $this->properties->set('margin.left', intval((($value / 2) * $themeMarginLeft) * $themeMarginGlobal));
-        $this->properties->set('margin.right', intval((($value / 2) * $themeMarginRight) * $themeMarginGlobal));
+        $this->properties->set('margin.left', intval($value / 2 * $themeMarginLeft * $themeMarginGlobal));
+        $this->properties->set('margin.right', intval($value / 2 * $themeMarginRight * $themeMarginGlobal));
 
         return $this;
     }
@@ -315,7 +314,7 @@ abstract class Element
         $themeMarginGlobal = $this->theme->variables()->get('margin.global', 1);
         $themeMarginLeft   = $this->theme->variables()->get('margin.left', 1);
 
-        $this->properties->set('margin.left', intval((($value * $themeMarginLeft) * $themeMarginGlobal)));
+        $this->properties->set('margin.left', intval($value * $themeMarginLeft * $themeMarginGlobal));
 
         return $this;
     }
@@ -332,9 +331,9 @@ abstract class Element
     public function mr(int $value): self
     {
         $themeMarginGlobal = $this->theme->variables()->get('margin.global', 1);
-        $themeMarginRight   = $this->theme->variables()->get('margin.right', 1);
+        $themeMarginRight  = $this->theme->variables()->get('margin.right', 1);
 
-        $this->properties->set('margin.right', intval((($value * $themeMarginRight) * $themeMarginGlobal)));
+        $this->properties->set('margin.right', intval($value * $themeMarginRight * $themeMarginGlobal));
 
         return $this;
     }
@@ -354,8 +353,8 @@ abstract class Element
         $themePaddingLeft   = $this->theme->variables()->get('padding.left', 1);
         $themePaddingRight  = $this->theme->variables()->get('padding.right', 1);
 
-        $this->properties->set('padding.left', intval((($value / 2) * $themePaddingLeft) * $themePaddingGlobal));
-        $this->properties->set('padding.right', intval((($value / 2) * $themePaddingRight) * $themePaddingGlobal));
+        $this->properties->set('padding.left', intval($value / 2 * $themePaddingLeft * $themePaddingGlobal));
+        $this->properties->set('padding.right', intval($value / 2 * $themePaddingRight * $themePaddingGlobal));
 
         return $this;
     }
@@ -373,8 +372,8 @@ abstract class Element
     {
         $themePaddingGlobal = $this->theme->variables()->get('padding.global', 1);
         $themePaddingLeft   = $this->theme->variables()->get('padding.left', 1);
-    
-        $this->properties->set('padding.left', intval((($value * $themePaddingLeft) * $themePaddingGlobal)));
+
+        $this->properties->set('padding.left', intval($value * $themePaddingLeft * $themePaddingGlobal));
 
         return $this;
     }
@@ -392,8 +391,8 @@ abstract class Element
     {
         $themePaddingGlobal = $this->theme->variables()->get('padding.global', 1);
         $themePaddingRight  = $this->theme->variables()->get('padding.right', 1);
-        
-        $this->properties->set('padding.right', intval((($value * $themePaddingRight) * $themePaddingGlobal)));
+
+        $this->properties->set('padding.right', intval($value * $themePaddingRight * $themePaddingGlobal));
 
         return $this;
     }
