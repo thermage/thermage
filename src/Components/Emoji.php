@@ -12,6 +12,18 @@ use function strings;
 
 final class Emoji extends Element
 {
+    /**
+     * Dynamically bind magic methods to the Emoji class.
+     *
+     * @param string $method     Method.
+     * @param array  $parameters Parameters.
+     *
+     * @return mixed Returns mixed content.
+     *
+     * @throws BadMethodCallException If method not found.
+     *
+     * @access public
+     */
     public function __call(string $method, array $parameters)
     {
         $emojiConstantName = 'CHARACTER_' . (string) strings($method)->snake()->upper();
@@ -24,6 +36,15 @@ final class Emoji extends Element
         return parent::__call($method, $parameters);
     }
 
+    /**
+     * Get country flag.
+     * 
+     * @param string $countryCode Country code.
+     * 
+     * @return array Returns country flag.
+     *
+     * @access public
+     */
     public function countryFlag(string $countryCode): self
     {
         $this->getValue()->append(SpatieEmoji::countryFlag($countryCode));
@@ -31,7 +52,14 @@ final class Emoji extends Element
         return $this;
     }
 
-    public function all()
+    /** 
+     * Get all emoji.
+     * 
+     * @return array Returns emoji array.
+     *
+     * @access public
+     */
+    public function all(): array
     {
         return SpatieEmoji::all();
     }
