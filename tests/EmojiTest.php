@@ -23,3 +23,7 @@ test('test emoji countryFlag method', function (): void {
 test('test emoji magic method', function (): void {
     expect(termage()->emoji()->mage()->render())->toEqual('🧙');
 });
+
+test('test emoji magic parent method', function (): void {
+    expect(termage()->emoji()->countryFlag('us')->blink()->render())->toEqual('<options=blink;>🇺🇸</>');
+});
