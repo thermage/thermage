@@ -54,12 +54,12 @@ abstract class Theme
                 'bright-cyan'    => 'bright-cyan',
                 'bright-white'   => 'bright-white',
 
-                'primary'   => 'blue',
+                'primary'   => 'bright-blue',
                 'secondary' => 'gray',
-                'success'   => 'green',
-                'info'      => 'cyan',
-                'warning'   => 'yellow',
-                'danger'    => 'red',
+                'success'   => 'bright-green',
+                'info'      => 'bright-cyan',
+                'warning'   => 'bright-yellow',
+                'danger'    => 'bright-red',
             ],
             'padding' => [
                 'global' => 1,

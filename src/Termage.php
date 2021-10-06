@@ -8,8 +8,11 @@ use Atomastic\Macroable\Macroable;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Termage\Base\Theme;
+use Termage\Components\Alert;
 use Termage\Components\El;
 use Termage\Components\Emoji;
+use Termage\Components\Link;
+use Termage\Components\Rule;
 use Termage\Themes\DefaultTheme;
 
 class Termage
@@ -133,6 +136,66 @@ class Termage
     public function emoji(string $value = '', array $properties = []): Emoji
     {
         return new Emoji(
+            $this->renderer,
+            $this->theme,
+            $value,
+            $properties
+        );
+    }
+
+    /**
+     * Create a new Alert Component instance.
+     *
+     * @param string $value      Alert value.
+     * @param array  $properties Alert properties.
+     *
+     * @return Alert Returns Alert Component instance.
+     *
+     * @access public
+     */
+    public function alert(string $value = '', array $properties = []): Alert
+    {
+        return new Alert(
+            $this->renderer,
+            $this->theme,
+            $value,
+            $properties
+        );
+    }
+
+    /**
+     * Create a new Rule Component instance.
+     *
+     * @param string $value      Rule value.
+     * @param array  $properties Rule properties.
+     *
+     * @return Rule Returns Rule Component instance.
+     *
+     * @access public
+     */
+    public function rule(string $value = '', array $properties = []): Rule
+    {
+        return new Rule(
+            $this->renderer,
+            $this->theme,
+            $value,
+            $properties
+        );
+    }
+
+    /**
+     * Create a new Link Component instance.
+     *
+     * @param string $value      Link value.
+     * @param array  $properties Link properties.
+     *
+     * @return Rule Returns Link Component instance.
+     *
+     * @access public
+     */
+    public function link(string $value = '', array $properties = []): Link
+    {
+        return new link(
             $this->renderer,
             $this->theme,
             $value,
