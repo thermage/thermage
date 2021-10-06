@@ -38,9 +38,9 @@ final class Emoji extends Element
 
     /**
      * Get country flag.
-     * 
+     *
      * @param string $countryCode Country code.
-     * 
+     *
      * @return array Returns country flag.
      *
      * @access public
@@ -52,9 +52,9 @@ final class Emoji extends Element
         return $this;
     }
 
-    /** 
+    /**
      * Get all emoji.
-     * 
+     *
      * @return array Returns emoji array.
      *
      * @access public
