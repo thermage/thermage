@@ -568,6 +568,10 @@ abstract class Element
             $options = 'options=' . arrays($this->properties->get('options'))->toString(',') . ';';
         }
 
+        if ($this->properties->has('href')) {
+            $options = 'href=' . $this->properties->get('href');
+        }
+
         if ($this->properties->has('padding.left')) {
             $this->value->prepend((string) strings(' ')->repeat($this->properties->get('padding.left')));
         }
