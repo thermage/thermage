@@ -1,3 +1,11 @@
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/termage/termage) (2021-10-06)
+* Updated colors for default theme.
+* Added new method `getTheme` for `Element` Class.
+* Added new `Alert` Component.
+* Added new `Rule` Component.
+* Added new `Link` Component.
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/termage/termage) (2021-10-04)
 * Added Themes (instead of Colors)
