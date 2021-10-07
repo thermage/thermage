@@ -101,18 +101,6 @@ class Termage
     }
 
     /**
-     * Get cursor instance.
-     *
-     * @return Cursor Returns cursor instance.
-     *
-     * @access public
-     */
-    public function getCursor(): Cursor
-    {
-        return $this->cursor;
-    }
-
-    /**
      * Get instance of the Theme class.
      *
      * @return self Returns instance of the Theme class.
