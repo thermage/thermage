@@ -30,6 +30,27 @@ class Termage
     private OutputInterface $output;
 
     /**
+     * The implementation of input interface.
+     *
+     * @access private
+     */
+    private ?InputInterface $input;
+
+    /**
+     * The instance of Terminal class.
+     *
+     * @access private
+     */
+    private Terminal $terminal;
+
+    /**
+     * The instance of Cursor class.
+     *
+     * @access private
+     */
+    private Cursor $cursor;
+
+    /**
      * The instance of Theme class.
      *
      * @access private
@@ -45,7 +66,12 @@ class Termage
      *
      * @access public
      */
-    public function __construct(?OutputInterface $output = null, ?InputInterface $input = null, ?Theme $theme = null, ?Terminal $terminal = null, ?Cursor $cursor = null)
+    public function __construct(
+        ?OutputInterface $output = null, 
+        ?InputInterface $input = null, 
+        ?Theme $theme = null, 
+        ?Terminal $terminal = null, 
+        ?Cursor $cursor = null)
     {
         $this->output   = $output ??= new ConsoleOutput();
         $this->input    = $input ??= null;
