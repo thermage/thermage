@@ -158,8 +158,8 @@ test('test capitalize', function (): void {
     expect($value)->toBe('Rad');
 });
 
-test('test getRenderer', function (): void {
-    $value = termage()->el()->getRenderer();
+test('test getOutput', function (): void {
+    $value = termage()->el()->getOutput();
     $this->assertInstanceOf(Renderer::class, $value);
 });
 
@@ -168,9 +168,9 @@ test('test getTheme', function (): void {
     $this->assertInstanceOf(Theme::class, $value);
 });
 
-test('test renderer', function (): void {
-    $value = termage()->el()->renderer(new BufferedOutput());
-    $this->assertInstanceOf(BufferedOutput::class, $value->getRenderer());
+test('test output', function (): void {
+    $value = termage()->el()->output(new BufferedOutput());
+    $this->assertInstanceOf(BufferedOutput::class, $value->getOutput());
 });
 
 test('magic throw exception BadMethodCallException', function (): void {

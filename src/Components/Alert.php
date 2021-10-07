@@ -217,7 +217,7 @@ final class Alert extends Element
         $alertPaddingX  = $this->alertPaddingX;
         $alertSizeAuto  = $this->alertSizeAuto;
         $alertSize      = $this->alertSize;
-        $renderer       = $this->getRenderer();
+        $output         = $this->getOutput();
         $theme          = $this->getTheme();
         $value          = $this->getValue()->toString();
 
@@ -240,9 +240,9 @@ final class Alert extends Element
             $pr -= $px;
         }
 
-        $header = termage($renderer, $theme)->el()->px($alertSize)->bg($alertType)->render();
-        $body   = termage($renderer, $theme)->el($value)->pl($pl)->pr($pr)->bg($alertType)->color($alertTypeColor)->render();
-        $footer = termage($renderer, $theme)->el()->px($alertSize)->bg($alertType)->render();
+        $header = termage($output, $theme)->el()->px($alertSize)->bg($alertType)->render();
+        $body   = termage($output, $theme)->el($value)->pl($pl)->pr($pr)->bg($alertType)->color($alertTypeColor)->render();
+        $footer = termage($output, $theme)->el()->px($alertSize)->bg($alertType)->render();
 
         $this->value($header . "\n" . $body . "\n" . $footer);
 

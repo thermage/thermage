@@ -7,18 +7,18 @@ use Termage\Components\El;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-test('test set and get renderer', function (): void {
+test('test set and get output', function (): void {
     $termage = termage();
-    $this->assertInstanceOf(ConsoleOutput::class, $termage->getRenderer());
+    $this->assertInstanceOf(ConsoleOutput::class, $termage->getOutput());
 
     $termage = termage(new ConsoleOutput());
-    $this->assertInstanceOf(ConsoleOutput::class, $termage->getRenderer());
+    $this->assertInstanceOf(ConsoleOutput::class, $termage->getOutput());
 
     $termage = termage(new BufferedOutput());
-    $this->assertInstanceOf(BufferedOutput::class, $termage->getRenderer());
+    $this->assertInstanceOf(BufferedOutput::class, $termage->getOutput());
 
-    $termage = termage()->renderer(new BufferedOutput());
-    $this->assertInstanceOf(BufferedOutput::class, $termage->getRenderer());
+    $termage = termage()->output(new BufferedOutput());
+    $this->assertInstanceOf(BufferedOutput::class, $termage->getOutput());
 });
 
 test('test termage el', function (): void {
