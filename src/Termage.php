@@ -30,25 +30,11 @@ class Termage
     private OutputInterface $output;
 
     /**
-     * The implementation of input interface.
-     *
-     * @access private
-     */
-    private ?InputInterface $input;
-
-    /**
      * The instance of Terminal class.
      *
      * @access private
      */
     private Terminal $terminal;
-
-    /**
-     * The instance of Cursor class.
-     *
-     * @access private
-     */
-    private Cursor $cursor;
 
     /**
      * The instance of Theme class.
@@ -67,17 +53,12 @@ class Termage
      * @access public
      */
     public function __construct(
-        ?OutputInterface $output = null, 
-        ?InputInterface $input = null, 
-        ?Theme $theme = null, 
-        ?Terminal $terminal = null, 
-        ?Cursor $cursor = null)
+        ?OutputInterface $output = null,
+        ?Theme $theme = null)
     {
         $this->output   = $output ??= new ConsoleOutput();
-        $this->input    = $input ??= null;
         $this->theme    = $theme ??= new DefaultTheme();
         $this->terminal = new Terminal();
-        $this->cursor   = new Cursor($this->output, $this->input);
     }
 
     /**
@@ -107,35 +88,7 @@ class Termage
     {
         return $this->output;
     }
-
-    /**
-     * Set input interface.
-     *
-     * @param InputInterface $input Input interface.
-     *
-     * @return self Returns instance of the Termage class.
-     *
-     * @access public
-     */
-    public function input(InputInterface $input): self
-    {
-        $this->input = $input;
-
-        return $this;
-    }
-
-    /**
-     * Get input interface.
-     *
-     * @return InputInterface Returns input interface.
-     *
-     * @access public
-     */
-    public function getInput(): InputInterface
-    {
-        return $this->input;
-    }
-
+    
     /**
      * Get terminal instance.
      *
@@ -202,10 +155,7 @@ class Termage
     {
         return new El(
             $this->output,
-            $this->input,
             $this->theme,
-            $this->terminal,
-            $this->cursor,
             $value,
             $properties
         );
@@ -225,10 +175,7 @@ class Termage
     {
         return new Emoji(
             $this->output,
-            $this->input,
             $this->theme,
-            $this->terminal,
-            $this->cursor,
             $value,
             $properties
         );
@@ -248,10 +195,7 @@ class Termage
     {
         return new Alert(
             $this->output,
-            $this->input,
             $this->theme,
-            $this->terminal,
-            $this->cursor,
             $value,
             $properties
         );
@@ -271,10 +215,7 @@ class Termage
     {
         return new Rule(
             $this->output,
-            $this->input,
             $this->theme,
-            $this->terminal,
-            $this->cursor,
             $value,
             $properties
         );
@@ -294,10 +235,7 @@ class Termage
     {
         return new link(
             $this->output,
-            $this->input,
             $this->theme,
-            $this->terminal,
-            $this->cursor,
             $value,
             $properties
         );

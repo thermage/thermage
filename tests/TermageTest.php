@@ -20,7 +20,3 @@ test('test set and get output', function (): void {
     $termage = termage()->output(new BufferedOutput());
     $this->assertInstanceOf(BufferedOutput::class, $termage->getOutput());
 });
-
-test('test termage el', function (): void {
-    $this->assertInstanceOf(El::class, termage()->el());
-});

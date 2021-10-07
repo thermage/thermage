@@ -30,25 +30,11 @@ abstract class Element
     private OutputInterface $output;
 
     /**
-     * The implementation of input interface.
-     *
-     * @access private
-     */
-    private ?InputInterface $input;
-
-    /**
      * The instance of Terminal class.
      *
      * @access private
      */
     private Terminal $terminal;
-
-    /**
-     * The instance of Cursor class.
-     *
-     * @access private
-     */
-    private Cursor $cursor;
 
     /**
      * Element properties.
@@ -86,18 +72,13 @@ abstract class Element
      */
     final public function __construct(
         ?OutputInterface $output = null,
-        ?InputInterface $input = null,
         ?Theme $theme = null,
-        ?Terminal $terminal = null,
-        ?Cursor $cursor = null,
         string $value = '',
         array $properties = []
     ) {
         $this->output     = $output ??= new ConsoleOutput();
-        $this->input      = $input ??= null;
         $this->theme      = $theme ??= new DefaultTheme();
-        $this->terminal   = $terminal ??= new Terminal();
-        $this->cursor     = $cursor ??= new Cursor($this->output, $this->input);
+        $this->terminal   = new Terminal();
         $this->value      = strings($value);
         $this->properties = arrays($properties);
     }
