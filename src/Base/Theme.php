@@ -37,7 +37,7 @@ abstract class Theme
         return [
             // Base.
             'colors' => [
-                'white'    => '#fff',
+                'white'   => '#ffffff',
                 'gray100' => '#f8f9fa',
                 'gray200' => '#e9ecef',
                 'gray300' => '#dee2e6',
@@ -47,7 +47,7 @@ abstract class Theme
                 'gray700' => '#495057',
                 'gray800' => '#343a40',
                 'gray900' => '#212529',
-                'black'    => '#000',
+                'black'   => '#000000',
 
                 'blue'    => '#007bff',
                 'blue100' => '#a8cbfe',
