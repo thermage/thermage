@@ -17,42 +17,79 @@ final class Alert extends Element
      *
      * @access private
      */
-    private int $alertSize = 50;
+    private int $alertSize;
 
     /**
      * Alert size auto.
      *
      * @access private
      */
-    private bool $alertSizeAuto = false;
+    private bool $alertSizeAuto;
 
     /**
      * Alert padding x.
      *
      * @access private
      */
-    private int $alertPaddingX = 1;
+    private int $alertPaddingX;
 
     /**
      * Alert type.
      *
      * @access private
      */
-    private string $alertType = 'info';
-
-    /**
-     * Alert type color.
-     *
-     * @access private
-     */
-    private string $alertTypeColor = 'white';
+    private string $alertType;
 
     /**
      * Alert text align.
      *
      * @access private
      */
-    private string $alertTextAlign = 'left';
+    private string $alertTextAlign;
+
+    /**
+     * Get component properties.
+     *
+     * @return array Component properties.
+     *
+     * @access public
+     */
+    public function getComponentProperties(): array
+    {
+        return [
+            'alert' => [
+                'text-align' => 'left',
+                'size-auto' => false,
+                'size' => 50,
+                'type' => [
+                    'info' => [
+                        'bg' => 'info',
+                        'color' => 'black',
+                    ],
+                    'warning' => [
+                        'bg' => 'warning',
+                        'color' => 'black',
+                    ],
+                    'danger' => [
+                        'bg' => 'danger',
+                        'color' => 'white',
+                    ],
+                    'success' => [
+                        'bg' => 'success',
+                        'color' => 'black',
+                    ],
+                    'primary' => [
+                        'bg' => 'primary',
+                        'color' => 'white',
+                    ],
+                    'secondary' => [
+                        'bg' => 'secondary',
+                        'color' => 'white',
+                    ],
+                ],
+            ],
+        ];
+    }
 
     /**
      * Set alert text align left.
@@ -91,8 +128,7 @@ final class Alert extends Element
      */
     public function info(): self
     {
-        $this->alertType      = 'info';
-        $this->alertTypeColor = 'black';
+        $this->alertType = 'info';
 
         return $this;
     }
@@ -106,8 +142,7 @@ final class Alert extends Element
      */
     public function warning(): self
     {
-        $this->alertType      = 'warning';
-        $this->alertTypeColor = 'black';
+        $this->alertType = 'warning';
 
         return $this;
     }
@@ -121,8 +156,7 @@ final class Alert extends Element
      */
     public function danger(): self
     {
-        $this->alertType      = 'danger';
-        $this->alertTypeColor = 'white';
+        $this->alertType = 'danger';
 
         return $this;
     }
@@ -136,8 +170,7 @@ final class Alert extends Element
      */
     public function success(): self
     {
-        $this->alertType      = 'success';
-        $this->alertTypeColor = 'black';
+        $this->alertType = 'success';
 
         return $this;
     }
@@ -151,8 +184,7 @@ final class Alert extends Element
      */
     public function primary(): self
     {
-        $this->alertType      = 'primary';
-        $this->alertTypeColor = 'white';
+        $this->alertType = 'primary';
 
         return $this;
     }
@@ -166,8 +198,7 @@ final class Alert extends Element
      */
     public function secondary(): self
     {
-        $this->alertType      = 'secondary';
-        $this->alertTypeColor = 'white';
+        $this->alertType = 'secondary';
 
         return $this;
     }
@@ -211,15 +242,17 @@ final class Alert extends Element
      */
     public function render(): string
     {
-        $alertType      = $this->alertType;
-        $alertTypeColor = $this->alertTypeColor;
-        $alertTextAlign = $this->alertTextAlign;
-        $alertPaddingX  = $this->alertPaddingX;
-        $alertSizeAuto  = $this->alertSizeAuto;
-        $alertSize      = $this->alertSize;
-        $output         = $this->getOutput();
-        $theme          = $this->getTheme();
-        $value          = $this->getValue()->toString();
+        $theme               = $this->getTheme();
+        $componentProperties = $this->getComponentProperties();
+        $alertType           = $this->alertType ?? 'info';
+        $alertTextAlign      = $this->alertTextAlign ?? $theme->variables()->get('alert.text-align', $componentProperties['alert']['text-align']);
+        $alertPaddingX       = 2;
+        $alertSizeAuto       = $this->alertSizeAuto ?? $theme->variables()->get('alert.size-auto', $componentProperties['alert']['size-auto']);
+        $alertSize           = $this->alertSize ?? $theme->variables()->get('alert.size', $componentProperties['alert']['size']);
+        $output              = $this->getOutput();
+        $value               = $this->getValue()->toString();
+        $alertBg             = $theme->variables()->get('alert.type.' . $alertType . '.bg', $componentProperties['alert']['type'][$alertType]['bg']);
+        $alertColor          = $theme->variables()->get('alert.type.' . $alertType . '.color', $componentProperties['alert']['type'][$alertType]['color']);
 
         $px = strings($value)->length();
 
@@ -240,9 +273,9 @@ final class Alert extends Element
             $pr -= $px;
         }
 
-        $header = termage($output, $theme)->el()->px($alertSize)->bg($alertType)->render();
-        $body   = termage($output, $theme)->el($value)->pl($pl)->pr($pr)->bg($alertType)->color($alertTypeColor)->render();
-        $footer = termage($output, $theme)->el()->px($alertSize)->bg($alertType)->render();
+        $header = termage($output, $theme)->el()->px($alertSize)->bg($alertBg)->render();
+        $body   = termage($output, $theme)->el($value)->pl($pl)->pr($pr)->bg($alertBg)->color($alertColor)->render();
+        $footer = termage($output, $theme)->el()->px($alertSize)->bg($alertBg)->render();
 
         $this->value($header . "\n" . $body . "\n" . $footer);
 
