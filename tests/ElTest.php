@@ -19,22 +19,22 @@ test('test render', function (): void {
 
 test('test color', function (): void {
     $value = termage()->el()->value('RAD')->color('blue')->render();
-    expect($value)->toBe('<fg=blue;>RAD</>');
+    expect($value)->toBe('<fg=#007bff;>RAD</>');
 });
 
 test('test magic color', function (): void {
     $value = termage()->el()->value('RAD')->colorBlue()->render();
-    expect($value)->toBe('<fg=blue;>RAD</>');
+    expect($value)->toBe('<fg=#007bff;>RAD</>');
 });
 
 test('test bg', function (): void {
     $value = termage()->el()->value('RAD')->bg('blue')->render();
-    expect($value)->toBe('<bg=blue;>RAD</>');
+    expect($value)->toBe('<bg=#007bff;>RAD</>');
 });
 
 test('test magic bg', function (): void {
     $value = termage()->el()->value('RAD')->bgBlue()->render();
-    expect($value)->toBe('<bg=blue;>RAD</>');
+    expect($value)->toBe('<bg=#007bff;>RAD</>');
 });
 
 test('test bold', function (): void {
