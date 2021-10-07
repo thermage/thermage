@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Termage\Base\Theme;
 use Termage\Termage;
