@@ -1,3 +1,7 @@
+<a name="0.5.1"></a>
+# [0.5.1](https://github.com/termage/termage) (2021-10-07)
+* Fixed `termage` helper 
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/termage/termage) (2021-10-07)
 * Added new `getTerminal` method for Termage and Element class.
