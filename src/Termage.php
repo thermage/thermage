@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Termage;
 
 use Atomastic\Macroable\Macroable;
-use Symfony\Component\Console\Cursor;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Terminal;
@@ -53,8 +52,8 @@ class Termage
      */
     public function __construct(
         ?OutputInterface $output = null,
-        ?Theme $theme = null)
-    {
+        ?Theme $theme = null
+    ) {
         $this->output   = $output ??= new ConsoleOutput();
         $this->theme    = $theme ??= new DefaultTheme();
         $this->terminal = new Terminal();
@@ -87,7 +86,7 @@ class Termage
     {
         return $this->output;
     }
-    
+
     /**
      * Get terminal instance.
      *
