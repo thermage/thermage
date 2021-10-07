@@ -6,6 +6,7 @@ use Termage\Termage;
 use Termage\Components\El;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Terminal;
 
 test('test set and get output', function (): void {
     $termage = termage();
@@ -19,4 +20,10 @@ test('test set and get output', function (): void {
 
     $termage = termage()->output(new BufferedOutput());
     $this->assertInstanceOf(BufferedOutput::class, $termage->getOutput());
+});
+
+test('test getTerminal', function (): void {
+    $termage = termage();
+
+    $this->assertInstanceOf(Terminal::class, $termage->getTerminal());
 });
