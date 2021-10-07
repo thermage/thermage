@@ -45,7 +45,7 @@ class Termage
      *
      * @access public
      */
-    public function __construct(?OutputInterface $output = null, ?InputInterface $input = null, ?Theme $theme = null, Terminal $terminal = null, Cursor $cursor = null)
+    public function __construct(?OutputInterface $output = null, ?InputInterface $input = null, ?Theme $theme = null, ?Terminal $terminal = null, ?Cursor $cursor = null)
     {
         $this->output   = $output ??= new ConsoleOutput();
         $this->input    = $input ??= null;

@@ -64,14 +64,14 @@ abstract class Element
      * @access public
      */
     final public function __construct(
-        ?OutputInterface $output = null, 
-        ?InputInterface $input = null, 
-        ?Theme $theme = null, 
-        Terminal $terminal = null, 
-        Cursor $cursor = null, 
-        string $value = '', 
-        array $properties = [])
-    {
+        ?OutputInterface $output = null,
+        ?InputInterface $input = null,
+        ?Theme $theme = null,
+        ?Terminal $terminal = null,
+        ?Cursor $cursor = null,
+        string $value = '',
+        array $properties = []
+    ) {
         $this->output     = $output ??= new ConsoleOutput();
         $this->input      = $input ??= null;
         $this->theme      = $theme ??= new DefaultTheme();
