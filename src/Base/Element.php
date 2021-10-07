@@ -80,7 +80,19 @@ abstract class Element
         $this->theme      = $theme ??= new DefaultTheme();
         $this->terminal   = new Terminal();
         $this->value      = strings($value);
-        $this->properties = arrays($properties);
+        $this->properties = arrays($properties)->replace($this->getComponentProperties(), true);
+    }
+
+    /**
+     * Get component properties.
+     *
+     * @return array Component properties.
+     *
+     * @access public
+     */
+    public function getComponentProperties(): array
+    {
+        return [];
     }
 
     /**

@@ -195,6 +195,11 @@ test('test repeat', function (): void {
     expect($value)->toBe('RADRADRAD');
 });
 
+test('test getComponentProperties', function (): void {
+    $properties = termage()->el()->getComponentProperties();
+    expect($properties)->toBeArray();
+});
+
 test('test display', function (): void {
     $output = new BufferedOutput();
     $value = termage($output)->el()->value('RAD')->display();
