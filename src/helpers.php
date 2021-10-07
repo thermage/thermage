@@ -12,11 +12,10 @@ if (! function_exists('termage')) {
      * Create a new Termage instance.
      *
      * @param OutputInterface $output Output interface.
-     * @param InputInterface  $input  Input interface.
      * @param Theme           $theme  Instance of the Theme class.
      */
-    function termage(?OutputInterface $output = null, ?InputInterface $input = null, ?Theme $theme = null): Termage
+    function termage(?OutputInterface $output = null, ?Theme $theme = null): Termage
     {
-        return new Termage($output, $input, $theme);
+        return new Termage($output, $theme);
     }
 }
