@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Termage;
 
 use Atomastic\Macroable\Macroable;
+use Symfony\Component\Console\Cursor;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Terminal;
 use Termage\Base\Theme;
 use Termage\Components\Alert;
 use Termage\Components\El;
@@ -20,11 +22,18 @@ class Termage
     use Macroable;
 
     /**
-     * The implementation of output renderer interface.
+     * The implementation of output interface.
      *
      * @access private
      */
-    private OutputInterface $renderer;
+    private OutputInterface $output;
+
+    /**
+     * The instance of Terminal class.
+     *
+     * @access private
+     */
+    private Terminal $terminal;
 
     /**
      * The instance of Theme class.
@@ -36,43 +45,59 @@ class Termage
     /**
      * Create a new Termage instance.
      *
-     * @param OutputInterface $renderer Output renderer interface.
-     * @param Theme           $theme    Instance of the Theme class.
+     * @param OutputInterface $output Output interface.
+     * @param InputInterface  $input  Input interface.
+     * @param Theme           $theme  Instance of the Theme class.
      *
      * @access public
      */
-    public function __construct(?OutputInterface $renderer = null, ?Theme $theme = null)
+    public function __construct(
+        ?OutputInterface $output = null,
+        ?Theme $theme = null)
     {
-        $this->renderer = $renderer ??= new ConsoleOutput();
+        $this->output   = $output ??= new ConsoleOutput();
         $this->theme    = $theme ??= new DefaultTheme();
+        $this->terminal = new Terminal();
     }
 
     /**
-     * Set output renderer interface.
+     * Set output interface.
      *
-     * @param OutputInterface $renderer Output renderer interface.
+     * @param OutputInterface $output Output interface.
      *
      * @return self Returns instance of the Termage class.
      *
      * @access public
      */
-    public function renderer(OutputInterface $renderer): self
+    public function output(OutputInterface $output): self
     {
-        $this->renderer = $renderer;
+        $this->output = $output;
 
         return $this;
     }
 
     /**
-     * Get output renderer interface.
+     * Get output interface.
      *
-     * @return OutputInterface Returns output renderer interface.
+     * @return OutputInterface Returns output interface.
      *
      * @access public
      */
-    public function getRenderer(): OutputInterface
+    public function getOutput(): OutputInterface
     {
-        return $this->renderer;
+        return $this->output;
+    }
+    
+    /**
+     * Get terminal instance.
+     *
+     * @return Terminal Returns terminal instance.
+     *
+     * @access public
+     */
+    public function getTerminal(): Terminal
+    {
+        return $this->terminal;
     }
 
     /**
@@ -116,7 +141,7 @@ class Termage
     public function el(string $value = '', array $properties = []): El
     {
         return new El(
-            $this->renderer,
+            $this->output,
             $this->theme,
             $value,
             $properties
@@ -136,7 +161,7 @@ class Termage
     public function emoji(string $value = '', array $properties = []): Emoji
     {
         return new Emoji(
-            $this->renderer,
+            $this->output,
             $this->theme,
             $value,
             $properties
@@ -156,7 +181,7 @@ class Termage
     public function alert(string $value = '', array $properties = []): Alert
     {
         return new Alert(
-            $this->renderer,
+            $this->output,
             $this->theme,
             $value,
             $properties
@@ -176,7 +201,7 @@ class Termage
     public function rule(string $value = '', array $properties = []): Rule
     {
         return new Rule(
-            $this->renderer,
+            $this->output,
             $this->theme,
             $value,
             $properties
@@ -196,7 +221,7 @@ class Termage
     public function link(string $value = '', array $properties = []): Link
     {
         return new link(
-            $this->renderer,
+            $this->output,
             $this->theme,
             $value,
             $properties

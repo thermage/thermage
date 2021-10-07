@@ -7,8 +7,11 @@ namespace Termage\Base;
 use Atomastic\Arrays\Arrays;
 use Atomastic\Strings\Strings;
 use BadMethodCallException;
+use Symfony\Component\Console\Cursor;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Terminal;
 use Termage\Themes\DefaultTheme;
 
 use function arrays;
@@ -24,7 +27,14 @@ abstract class Element
      *
      * @access private
      */
-    private OutputInterface $renderer;
+    private OutputInterface $output;
+
+    /**
+     * The instance of Terminal class.
+     *
+     * @access private
+     */
+    private Terminal $terminal;
 
     /**
      * Element properties.
@@ -50,7 +60,8 @@ abstract class Element
     /**
      * Create a new Element instance.
      *
-     * @param OutputInterface $renderer   Output renderer interface.
+     * @param OutputInterface $output     Output interface.
+     * @param InputInterface  $input      Input interface.
      * @param Theme           $theme      Instance of the Theme class.
      * @param string          $value      Element value.
      * @param array           $properties Element properties.
@@ -59,10 +70,15 @@ abstract class Element
      *
      * @access public
      */
-    final public function __construct(?OutputInterface $renderer = null, ?Theme $theme = null, string $value = '', array $properties = [])
-    {
-        $this->renderer   = $renderer ??= new ConsoleOutput();
+    final public function __construct(
+        ?OutputInterface $output = null,
+        ?Theme $theme = null,
+        string $value = '',
+        array $properties = []
+    ) {
+        $this->output     = $output ??= new ConsoleOutput();
         $this->theme      = $theme ??= new DefaultTheme();
+        $this->terminal   = new Terminal();
         $this->value      = strings($value);
         $this->properties = arrays($properties);
     }
@@ -80,15 +96,15 @@ abstract class Element
     }
 
     /**
-     * Get element renderer.
+     * Get element output.
      *
-     * @return OutputInterface Returns element renderer.
+     * @return OutputInterface Returns element output.
      *
      * @access public
      */
-    public function getRenderer(): OutputInterface
+    public function getOutput(): OutputInterface
     {
-        return $this->renderer;
+        return $this->output;
     }
 
     /**
@@ -148,17 +164,17 @@ abstract class Element
     }
 
     /**
-     * Set element renderer.
+     * Set element output.
      *
-     * @param OutputInterface $renderer Element renderer interface.
+     * @param OutputInterface $output Element output interface.
      *
      * @return self Returns instance of the Element class.
      *
      * @access public
      */
-    public function renderer(OutputInterface $renderer): self
+    public function output(OutputInterface $output): self
     {
-        $this->renderer = $renderer;
+        $this->output = $output;
 
         return $this;
     }
@@ -614,16 +630,16 @@ abstract class Element
     {
         switch ($type) {
             case 'none':
-                $this->renderer->write('');
+                $this->output->write('');
                 break;
 
             case 'col':
-                $this->renderer->write($this->render());
+                $this->output->write($this->render());
                 break;
 
             case 'row':
             default:
-                $this->renderer->writeln($this->render());
+                $this->output->writeln($this->render());
                 break;
         }
     }

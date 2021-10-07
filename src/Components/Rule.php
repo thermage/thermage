@@ -157,7 +157,7 @@ final class Rule extends Element
         $ruleTextAlign = $this->ruleTextAlign;
         $rulePaddingX  = $this->rulePaddingX;
         $ruleColor     = $this->ruleColor;
-        $renderer      = $this->getRenderer();
+        $output        = $this->getOutput();
         $theme         = $this->getTheme();
         $value         = $this->getValue()->toString();
 
@@ -180,9 +180,9 @@ final class Rule extends Element
             $ruleAppend = ' ' . $ruleAppend;
             $value      = ' ' . $value;
 
-            $rule = termage($renderer, $theme)->el($rulePrepend)->color($ruleColor)->render() .
-                    termage($renderer, $theme)->el($value)->color($ruleColor)->render() .
-                    termage($renderer, $theme)->el($ruleAppend)->color($ruleColor)->render();
+            $rule = termage($output, $theme)->el($rulePrepend)->color($ruleColor)->render() .
+                    termage($output, $theme)->el($value)->color($ruleColor)->render() .
+                    termage($output, $theme)->el($ruleAppend)->color($ruleColor)->render();
         }
 
         if ($ruleTextAlign === 'left') {
@@ -201,9 +201,9 @@ final class Rule extends Element
             $rulePrepend .= ' ';
             $value       .= ' ';
 
-            $rule = termage($renderer, $theme)->el($rulePrepend)->color($ruleColor)->render() .
-                    termage($renderer, $theme)->el($value)->color($ruleColor)->render() .
-                    termage($renderer, $theme)->el($ruleAppend)->color($ruleColor)->render();
+            $rule = termage($output, $theme)->el($rulePrepend)->color($ruleColor)->render() .
+                    termage($output, $theme)->el($value)->color($ruleColor)->render() .
+                    termage($output, $theme)->el($ruleAppend)->color($ruleColor)->render();
         }
 
         if ($valueLength === 0) {
@@ -212,7 +212,7 @@ final class Rule extends Element
                 $ruleElement .= '―';
             }
 
-            $rule = termage($renderer, $theme)->el($ruleElement)->color($ruleColor)->render();
+            $rule = termage($output, $theme)->el($ruleElement)->color($ruleColor)->render();
         }
 
         $this->value($rule);
