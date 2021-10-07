@@ -7,7 +7,7 @@ namespace Termage;
 use Atomastic\Macroable\Macroable;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console;
+use Symfony\Component\Console\Terminal;
 use Termage\Base\Theme;
 use Termage\Components\Alert;
 use Termage\Components\El;
@@ -46,6 +46,7 @@ class Termage
     {
         $this->renderer = $renderer ??= new ConsoleOutput();
         $this->theme    = $theme ??= new DefaultTheme();
+        $this->terminal = new Terminal();
     }
 
     /**
@@ -77,27 +78,15 @@ class Termage
     }
 
     /**
-     * Gets the terminal width.
-     * 
-     * @return int Returns terminal width.
+     * Get terminal instance.
+     *
+     * @return int Returns terminal instance.
      *
      * @access public
      */
-    public function getTerminalWidth(): int
+    public function getTerminal(): Terminal
     {
-        return (new Terminal())->getWidth();
-    }
-
-    /**
-     * Gets the terminal height.
-     * 
-     * @return int Returns terminal height.
-     *
-     * @access public
-     */
-    public function getTerminalHeight(): int
-    {
-        return (new Terminal())->getHeight();
+        return $this->terminal;
     }
 
     /**
