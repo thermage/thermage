@@ -35,6 +35,7 @@ abstract class Theme
     final public function getDefaultVariables(): array
     {
         return [
+            // Base.
             'colors' => [
                 'black'   => 'black',
                 'gray'    => 'gray',
@@ -70,6 +71,39 @@ abstract class Theme
                 'global' => 1,
                 'left'   => 1,
                 'right'  => 1,
+            ],
+
+            // Alert Component.
+            'alert' => [
+                'text-align' => 'left',
+                'size-auto' => false,
+                'size' => 50,
+                'alert-type' => [
+                    'info' => [
+                        'bg' => 'info',
+                        'color' => 'black',
+                    ],
+                    'warning' => [
+                        'bg' => 'warning',
+                        'color' => 'black',
+                    ],
+                    'danger' => [
+                        'bg' => 'danger',
+                        'color' => 'white',
+                    ],
+                    'success' => [
+                        'bg' => 'success',
+                        'color' => 'black',
+                    ],
+                    'primary' => [
+                        'bg' => 'primary',
+                        'color' => 'white',
+                    ],
+                    'secondary' => [
+                        'bg' => 'secondary',
+                        'color' => 'white',
+                    ],
+                ],
             ],
         ];
     }
