@@ -12,6 +12,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Terminal;
 use Termage\Themes\DefaultTheme;
+use Termage\Parsers\Shortcodes;
 
 use function arrays;
 use function intval;
@@ -72,12 +73,14 @@ abstract class Element
     final public function __construct(
         ?OutputInterface $output = null,
         ?Theme $theme = null,
+        ?Shortcodes $shortcodes = null,
         string $value = '',
         array $properties = []
     ) {
         $this->output     = $output ??= new ConsoleOutput();
         $this->theme      = $theme ??= new DefaultTheme();
         $this->terminal   = new Terminal();
+        $this->shortcodes = $shortcodes ??= new Shortcodes();
         $this->value      = strings($value);
         $this->properties = arrays($properties);
     }
@@ -633,12 +636,14 @@ abstract class Element
                 break;
 
             case 'col':
-                $this->output->write($this->render());
+                $render = $this->shortcodes->parse($this->render());
+                $this->output->write($render);
                 break;
 
             case 'row':
             default:
-                $this->output->writeln($this->render());
+                $render = $this->shortcodes->parse($this->render());
+                $this->output->writeln($render);
                 break;
         }
     }
