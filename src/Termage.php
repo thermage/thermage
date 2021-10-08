@@ -10,6 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Terminal;
 use Termage\Base\Theme;
 use Termage\Components\Alert;
+use Termage\Components\Chart;
 use Termage\Components\El;
 use Termage\Components\Emoji;
 use Termage\Components\Link;
@@ -213,13 +214,33 @@ class Termage
      * @param string $value      Link value.
      * @param array  $properties Link properties.
      *
-     * @return Rule Returns Link Component instance.
+     * @return Link Returns Link Component instance.
      *
      * @access public
      */
     public function link(string $value = '', array $properties = []): Link
     {
         return new link(
+            $this->output,
+            $this->theme,
+            $value,
+            $properties
+        );
+    }
+
+    /**
+     * Create a new Chart Component instance.
+     *
+     * @param string $value      Chart value.
+     * @param array  $properties Chart properties.
+     *
+     * @return Chart Returns Chart Component instance.
+     *
+     * @access public
+     */
+    public function chart(string $value = '', array $properties = []): Chart
+    {
+        return new Chart(
             $this->output,
             $this->theme,
             $value,
