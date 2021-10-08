@@ -11,8 +11,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Terminal;
-use Termage\Themes\DefaultTheme;
 use Termage\Parsers\Shortcodes;
+use Termage\Themes\DefaultTheme;
 
 use function arrays;
 use function intval;
