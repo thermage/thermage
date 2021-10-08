@@ -185,7 +185,7 @@ final class Rule extends Element
     {
         $componentProperties = $this->getComponentProperties();
         $theme               = $this->getTheme();
-        $ruleType            = $this->ruleType ?? 'info';
+        $ruleColor           = $theme->variables()->get('rule.type.' . $ruleType . '.color', $componentProperties['rule']['type'][$ruleType]['color']);
         $ruleTextAlign       = $this->ruleTextAlign ?? $theme->variables()->get('rule.text-align', $componentProperties['rule']['text-align']);
         $rulePaddingX        = 5;
         $output              = $this->getOutput();
