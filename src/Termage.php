@@ -17,6 +17,7 @@ use Termage\Components\Link;
 use Termage\Components\Rule;
 use Termage\Parsers\Shortcodes;
 use Termage\Themes\DefaultTheme;
+use Thunder\Shortcode\ShortcodeFacade;
 
 class Termage
 {
@@ -88,6 +89,18 @@ class Termage
     public function getOutput(): OutputInterface
     {
         return $this->output;
+    }
+
+    /**
+     * Get Shortcodes instance.
+     *
+     * @return ShortcodeFacade Shortcodes instance.
+     *
+     * @access public
+     */
+    public function getShortcodes(): ShortcodeFacade
+    {
+        return $this->shortcodes;
     }
 
     /**
