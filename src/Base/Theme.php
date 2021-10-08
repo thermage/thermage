@@ -216,24 +216,12 @@ abstract class Theme
             'rule' => [
                 'text-align' => 'left',
                 'type' => [
-                    'info' => [
-                        'color' => 'info',
-                    ],
-                    'warning' => [
-                        'color' => 'warning',
-                    ],
-                    'danger' => [
-                        'color' => 'danger',
-                    ],
-                    'success' => [
-                        'color' => 'success',
-                    ],
-                    'primary' => [
-                        'color' => 'primary',
-                    ],
-                    'secondary' => [
-                        'color' => 'secondary',
-                    ],
+                    'info' => ['color' => 'info'],
+                    'warning' => ['color' => 'warning'],
+                    'danger' => ['color' => 'danger'],
+                    'success' => ['color' => 'success'],
+                    'primary' => ['color' => 'primary'],
+                    'secondary' => ['color' => 'secondary'],
                 ],
             ],
         ];
