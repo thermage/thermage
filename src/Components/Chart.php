@@ -16,9 +16,9 @@ final class Chart extends Element
         return $this;
     }
 
-    public function line()
+    public function inline()
     {
-        $this->chartType = 'line';
+        $this->chartType = 'inline';
 
         return $this;
     }
@@ -30,9 +30,28 @@ final class Chart extends Element
         return $this;
     }
 
+    public function showPercents() 
+    {
+        $this->showPercents = true;
+        
+        return $this;
+    }
+
+    public function showValues() 
+    {
+        $this->showValues = true;
+        
+        return $this;
+    }
+
     public function getData() 
     {
         return $this->data;
+    }
+
+    public function getChartType() 
+    {
+        return $this->chartType;
     }
 
     /**
@@ -44,69 +63,82 @@ final class Chart extends Element
      */
     public function render(): string 
     {
-        $theme  = $this->getTheme();
-        $output = $this->getOutput();
-        $value  = $this->getValue()->toString();
-        $data   = $this->data;
-
+        $theme     = $this->getTheme();
+        $output    = $this->getOutput();
+        $value     = $this->getValue()->toString();
+        $data      = $this->getData();
+        $chartType = $this->getChartType();
 
         // Get total value
         $total = 0;
         foreach ($data as $key => $value) {
             $total += $value['value'];
         } 
-
-        // Get label size
-        foreach ($data as $key => $value) {
-            $labelSizes[] = strings($value['label'])->length();
-        } 
-        $labelSize = max($labelSizes);
       
-
         // Set percentage
         foreach ($data as $key => $value) {
             $data[$key]['percentage'] = intval(round(($value['value'] / $total) * 100));
         } 
         
-        $line = "\n";
-        $line .= $this->buildHortizontalChart($data, $labelSize);
-        $line .= "\n";
-        $line .= $this->buildInlineChart($data, $labelSize);
-        $line .= "\n";
-        
-        return $line;
-    }
-
-    protected function buildHortizontalChart($data, $labelSize) {
-        $line = '';
-        foreach ($data as $key => $value) {
-            $_labelSize = strings($value['label'])->length();
-            $labelPaddingRight = $_labelSize < $labelSize ? $labelSize - $_labelSize + 2 : 2;
-
-            $line .= termage($output, $theme)
-                        ->el((string) $value['label'])
-                        ->pr($labelPaddingRight)
-                        ->color($value['color'])->render() .
-                     termage($output, $theme)->el(' ')->repeat($value['percentage'])->bg($value['color'])->render() .
-                     termage($output, $theme)->el((string) $value['percentage'] . '%')->pl1()->color($value['color'])->render() .
-                     
-                     "\n";
+        switch ($chartType) {
+            case 'inline':
+                $chart = $this->buildInlineChart($data);
+                break;
+            
+            case 'horizontal':
+            default:
+                $chart = $this->buildHortizontalChart($data);
+                break;
         }
-        return $line;
+    
+        return $chart;
     }
 
-    protected function buildInlineChart($data, $labelSize) {
+    protected function buildHortizontalChart($data) 
+    {
+        $theme     = $this->getTheme();
+        $output    = $this->getOutput();
+
         $line = '';
+        $i = 0;
+        $count = count($data);
+        
+        // Get label size
         foreach ($data as $key => $value) {
+            $labelSizes[] = strings($value['label'])->length();
+        } 
+        $labelSize = max($labelSizes);
+
+        $showPercents = $this->showPercents ??= false;
+        $showValues   = $this->showValues ??= false;
+        
+        foreach ($data as $key => $value) {
+            $i++;
             $_labelSize = strings($value['label'])->length();
             $labelPaddingRight = $_labelSize < $labelSize ? $labelSize - $_labelSize + 2 : 2;
 
-            $line .= 
-                     termage($output, $theme)->el(' ')->repeat($value['percentage'])->bg($value['color'])->render();
+            $line .= termage($output, $theme)->el((string) $value['label'])->pr($labelPaddingRight)->color($value['color'])->render() .
+                     termage($output, $theme)->el(' ')->repeat($value['percentage'])->bg($value['color'])->render() .
+                     ($showPercents ? termage($output, $theme)->el((string) $value['percentage'] . '%')->pl1()->color($value['color'])->render() : "") .
+                     ($showValues ? termage($output, $theme)->el('(' . (string) $value['value'] . ')')->pl1()->color($value['color'])->render() : "").
+                     (($i < $count) ? "\n": "");
+        }
+
+        return $line;
+    }
+
+    protected function buildInlineChart($data) 
+    {
+
+        $theme     = $this->getTheme();
+        $output    = $this->getOutput();
+
+        $line = '';
+        foreach ($data as $key => $value) {
+            $line .= termage($output, $theme)->el(' ')->repeat($value['percentage'])->bg($value['color'])->render();
         }
         
         $labels = '';
-
         foreach ($data as $key => $value) {
             $labels .= termage($output, $theme)->el($value['label'] . ' ' . $value['percentage'] . '% ')->color($value['color'])->render(); 
         }
