@@ -63,7 +63,7 @@ final class Rule extends Element
      */
     public function info(): self
     {
-        $this->alertType = 'info';
+        $this->ruleType = 'info';
 
         return $this;
     }
@@ -77,7 +77,7 @@ final class Rule extends Element
      */
     public function warning(): self
     {
-        $this->alertType = 'warning';
+        $this->ruleType = 'warning';
 
         return $this;
     }
@@ -91,7 +91,7 @@ final class Rule extends Element
      */
     public function danger(): self
     {
-        $this->alertType = 'danger';
+        $this->ruleType = 'danger';
 
         return $this;
     }
@@ -105,7 +105,7 @@ final class Rule extends Element
      */
     public function success(): self
     {
-        $this->alertType = 'success';
+        $this->ruleType = 'success';
 
         return $this;
     }
@@ -119,7 +119,7 @@ final class Rule extends Element
      */
     public function primary(): self
     {
-        $this->alertType = 'primary';
+        $this->ruleType = 'primary';
 
         return $this;
     }
@@ -133,7 +133,7 @@ final class Rule extends Element
      */
     public function secondary(): self
     {
-        $this->alertType = 'secondary';
+        $this->ruleType = 'secondary';
 
         return $this;
     }
@@ -186,10 +186,10 @@ final class Rule extends Element
         $componentProperties = $this->getComponentProperties();
         $ruleType            = $this->ruleType ?? 'info';
         $ruleTextAlign       = $this->ruleTextAlign ?? $theme->variables()->get('rule.text-align', $componentProperties['rule']['text-align']);
-        $rulePaddingX  = 5;
-        $output        = $this->getOutput();
-        $theme         = $this->getTheme();
-        $value         = $this->getValue()->toString();
+        $rulePaddingX        = 5;
+        $output              = $this->getOutput();
+        $theme               = $this->getTheme();
+        $value               = $this->getValue()->toString();
 
         $valueLength   = strings($value)->length();
         $terminalWidth = (new Terminal())->getWidth();
