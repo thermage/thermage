@@ -87,6 +87,7 @@ final class Chart extends Element
             $data[$key]['percentage'] = intval(round(($value['value'] / $total) * 100));
         } 
         
+        // Selct chart type 
         switch ($chartType) {
             case 'inline':
                 $chart = $this->buildInlineChart($data);
@@ -98,7 +99,11 @@ final class Chart extends Element
                 break;
         }
     
-        return $chart;
+        // Store chart 
+        $this->value($chart);
+        
+        // Render
+        return parent::render();
     }
 
     protected function buildHortizontalChart($data) 
