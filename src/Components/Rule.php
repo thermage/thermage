@@ -17,21 +17,14 @@ final class Rule extends Element
      *
      * @access private
      */
-    private string $ruleTextAlign = 'left';
+    private string $ruleTextAlign;
 
     /**
-     * Rule padding x.
+     * Rule type.
      *
      * @access private
      */
-    private int $rulePaddingX = 5;
-
-    /**
-     * Rule color.
-     *
-     * @access private
-     */
-    private string $ruleColor = 'info';
+    private string $ruleType;
 
     /**
      * Set rule text align left.
@@ -70,7 +63,7 @@ final class Rule extends Element
      */
     public function info(): self
     {
-        $this->ruleColor = 'info';
+        $this->alertType = 'info';
 
         return $this;
     }
@@ -84,7 +77,7 @@ final class Rule extends Element
      */
     public function warning(): self
     {
-        $this->ruleColor = 'warning';
+        $this->alertType = 'warning';
 
         return $this;
     }
@@ -98,7 +91,7 @@ final class Rule extends Element
      */
     public function danger(): self
     {
-        $this->ruleColor = 'danger';
+        $this->alertType = 'danger';
 
         return $this;
     }
@@ -112,7 +105,7 @@ final class Rule extends Element
      */
     public function success(): self
     {
-        $this->ruleColor = 'success';
+        $this->alertType = 'success';
 
         return $this;
     }
@@ -126,7 +119,7 @@ final class Rule extends Element
      */
     public function primary(): self
     {
-        $this->ruleColor = 'primary';
+        $this->alertType = 'primary';
 
         return $this;
     }
@@ -140,11 +133,47 @@ final class Rule extends Element
      */
     public function secondary(): self
     {
-        $this->ruleColor = 'secondary';
+        $this->alertType = 'secondary';
 
         return $this;
     }
 
+    /**
+     * Get component properties.
+     *
+     * @return array Component properties.
+     *
+     * @access public
+     */
+    public function getComponentProperties(): array
+    {
+        return [
+            'rule' => [
+                'text-align' => 'left',
+                'type' => [
+                    'info' => [
+                        'color' => 'info',
+                    ],
+                    'warning' => [
+                        'color' => 'warning',
+                    ],
+                    'danger' => [
+                        'color' => 'danger',
+                    ],
+                    'success' => [
+                        'color' => 'success',
+                    ],
+                    'primary' => [
+                        'color' => 'primary',
+                    ],
+                    'secondary' => [
+                        'color' => 'secondary',
+                    ],
+                ],
+            ],
+        ];
+    }
+    
     /**
      * Render rule component.
      *
@@ -154,9 +183,10 @@ final class Rule extends Element
      */
     public function render(): string
     {
-        $ruleTextAlign = $this->ruleTextAlign;
-        $rulePaddingX  = $this->rulePaddingX;
-        $ruleColor     = $this->ruleColor;
+        $componentProperties = $this->getComponentProperties();
+        $ruleType            = $this->ruleType ?? 'info';
+        $ruleTextAlign       = $this->ruleTextAlign ?? $theme->variables()->get('rule.text-align', $componentProperties['rule']['text-align']);
+        $rulePaddingX  = 5;
         $output        = $this->getOutput();
         $theme         = $this->getTheme();
         $value         = $this->getValue()->toString();
