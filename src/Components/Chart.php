@@ -30,6 +30,13 @@ final class Chart extends Element
         return $this;
     }
 
+    public function valuesSufix($value)
+    {
+        $this->valuesSufix = $value;
+
+        return $this;
+    }
+
     public function showPercents() 
     {
         $this->showPercents = true;
@@ -111,7 +118,8 @@ final class Chart extends Element
 
         $showPercents = $this->showPercents ??= false;
         $showValues   = $this->showValues ??= false;
-        
+        $valuesSufix  = $this->valuesSufix ??= '';
+
         foreach ($data as $key => $value) {
             $i++;
             $_labelSize = strings($value['label'])->length();
@@ -120,7 +128,7 @@ final class Chart extends Element
             $line .= termage($output, $theme)->el((string) $value['label'])->pr($labelPaddingRight)->color($value['color'])->render() .
                      termage($output, $theme)->el(' ')->repeat($value['percentage'])->bg($value['color'])->render() .
                      ($showPercents ? termage($output, $theme)->el((string) $value['percentage'] . '%')->pl1()->color($value['color'])->render() : "") .
-                     ($showValues ? termage($output, $theme)->el('(' . (string) $value['value'] . ')')->pl1()->color($value['color'])->render() : "").
+                     ($showValues ? termage($output, $theme)->el('(' . (string) $value['value'] .  $valuesSufix . ')')->pl1()->color($value['color'])->render() : "").
                      (($i < $count) ? "\n": "");
         }
 
@@ -129,9 +137,12 @@ final class Chart extends Element
 
     protected function buildInlineChart($data) 
     {
-
         $theme     = $this->getTheme();
         $output    = $this->getOutput();
+
+        $showPercents = $this->showPercents ??= false;
+        $showValues   = $this->showValues ??= false;
+        $valuesSufix  = $this->valuesSufix ??= '';
 
         $line = '';
         foreach ($data as $key => $value) {
@@ -139,8 +150,11 @@ final class Chart extends Element
         }
         
         $labels = '';
+        $suffix = '';
         foreach ($data as $key => $value) {
-            $labels .= termage($output, $theme)->el($value['label'] . ' ' . $value['percentage'] . '% ')->color($value['color'])->render(); 
+            $suffix = ($showPercents ? termage($output, $theme)->el((string) $value['percentage'] . '%')->pr1()->color($value['color'])->render() : "") .
+                      ($showValues ? termage($output, $theme)->el('(' . (string) $value['value'] .  $valuesSufix . ')')->pr1()->color($value['color'])->render() : "");
+                      $labels .= termage($output, $theme)->el($value['label'] . (empty($suffix) ? ' ' : ' ' . $suffix))->color($value['color'])->render(); 
         }
 
         $line = $line . "\n\n" . $labels;
