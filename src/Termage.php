@@ -9,13 +9,13 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Terminal;
 use Termage\Base\Theme;
-use Termage\Parsers\Shortcodes;
 use Termage\Components\Alert;
 use Termage\Components\Chart;
 use Termage\Components\El;
 use Termage\Components\Emoji;
 use Termage\Components\Link;
 use Termage\Components\Rule;
+use Termage\Parsers\Shortcodes;
 use Termage\Themes\DefaultTheme;
 
 class Termage
