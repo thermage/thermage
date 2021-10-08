@@ -27,6 +27,10 @@ class Shortcodes
 
     /**
      * Get Shortcodes instance.
+     *
+     * @return ShortcodeFacade Shortcodes instance.
+     *
+     * @access public
      */
     public function getShortcodes(): ShortcodeFacade
     {
