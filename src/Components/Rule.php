@@ -29,7 +29,7 @@ final class Rule extends Element
     /**
      * Set rule text align left.
      *
-     * @return self Returns instance of the Alert class.
+     * @return self Returns instance of the Rule class.
      *
      * @access public
      */
@@ -57,7 +57,7 @@ final class Rule extends Element
     /**
      * Set rule color info.
      *
-     * @return self Returns instance of the Alert class.
+     * @return self Returns instance of the Rule class.
      *
      * @access public
      */
@@ -71,7 +71,7 @@ final class Rule extends Element
     /**
      * Set rule color warning.
      *
-     * @return self Returns instance of the Alert class.
+     * @return self Returns instance of the Rule class.
      *
      * @access public
      */
@@ -85,7 +85,7 @@ final class Rule extends Element
     /**
      * Set rule color danger.
      *
-     * @return self Returns instance of the Alert class.
+     * @return self Returns instance of the Rule class.
      *
      * @access public
      */
@@ -99,7 +99,7 @@ final class Rule extends Element
     /**
      * Set rule color success.
      *
-     * @return self Returns instance of the Alert class.
+     * @return self Returns instance of the Rule class.
      *
      * @access public
      */
@@ -113,7 +113,7 @@ final class Rule extends Element
     /**
      * Set rule color primary.
      *
-     * @return self Returns instance of the Alert class.
+     * @return self Returns instance of the Rule class.
      *
      * @access public
      */
@@ -127,7 +127,7 @@ final class Rule extends Element
     /**
      * Set rule color secondary.
      *
-     * @return self Returns instance of the Alert class.
+     * @return self Returns instance of the Rule class.
      *
      * @access public
      */
@@ -151,29 +151,17 @@ final class Rule extends Element
             'rule' => [
                 'text-align' => 'left',
                 'type' => [
-                    'info' => [
-                        'color' => 'info',
-                    ],
-                    'warning' => [
-                        'color' => 'warning',
-                    ],
-                    'danger' => [
-                        'color' => 'danger',
-                    ],
-                    'success' => [
-                        'color' => 'success',
-                    ],
-                    'primary' => [
-                        'color' => 'primary',
-                    ],
-                    'secondary' => [
-                        'color' => 'secondary',
-                    ],
+                    'info' => ['color' => 'info'],
+                    'warning' => ['color' => 'warning'],
+                    'danger' => ['color' => 'danger'],
+                    'success' => ['color' => 'success'],
+                    'primary' => ['color' => 'primary'],
+                    'secondary' => ['color' => 'secondary'],
                 ],
             ],
         ];
     }
-    
+
     /**
      * Render rule component.
      *
