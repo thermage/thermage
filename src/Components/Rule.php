@@ -184,11 +184,11 @@ final class Rule extends Element
     public function render(): string
     {
         $componentProperties = $this->getComponentProperties();
+        $theme               = $this->getTheme();
         $ruleType            = $this->ruleType ?? 'info';
         $ruleTextAlign       = $this->ruleTextAlign ?? $theme->variables()->get('rule.text-align', $componentProperties['rule']['text-align']);
         $rulePaddingX        = 5;
         $output              = $this->getOutput();
-        $theme               = $this->getTheme();
         $value               = $this->getValue()->toString();
 
         $valueLength   = strings($value)->length();
