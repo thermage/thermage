@@ -9,6 +9,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Terminal;
 use Termage\Base\Theme;
+use Termage\Parsers\Shortcodes;
 use Termage\Components\Alert;
 use Termage\Components\Chart;
 use Termage\Components\El;
@@ -55,9 +56,10 @@ class Termage
         ?OutputInterface $output = null,
         ?Theme $theme = null
     ) {
-        $this->output   = $output ??= new ConsoleOutput();
-        $this->theme    = $theme ??= new DefaultTheme();
-        $this->terminal = new Terminal();
+        $this->output     = $output ??= new ConsoleOutput();
+        $this->theme      = $theme ??= new DefaultTheme();
+        $this->terminal   = new Terminal();
+        $this->shortcodes = new Shortcodes();
     }
 
     /**
@@ -143,6 +145,7 @@ class Termage
         return new El(
             $this->output,
             $this->theme,
+            $this->shortcodes,
             $value,
             $properties
         );
