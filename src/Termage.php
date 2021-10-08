@@ -166,6 +166,7 @@ class Termage
         return new Emoji(
             $this->output,
             $this->theme,
+            $this->shortcodes,
             $value,
             $properties
         );
@@ -186,6 +187,7 @@ class Termage
         return new Alert(
             $this->output,
             $this->theme,
+            $this->shortcodes,
             $value,
             $properties
         );
@@ -206,6 +208,7 @@ class Termage
         return new Rule(
             $this->output,
             $this->theme,
+            $this->shortcodes,
             $value,
             $properties
         );
@@ -226,6 +229,7 @@ class Termage
         return new link(
             $this->output,
             $this->theme,
+            $this->shortcodes,
             $value,
             $properties
         );
@@ -246,6 +250,7 @@ class Termage
         return new Chart(
             $this->output,
             $this->theme,
+            $this->shortcodes,
             $value,
             $properties
         );
