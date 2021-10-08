@@ -211,7 +211,8 @@ abstract class Theme
                     ],
                 ],
             ],
-            
+
+            // Rule Component.
             'rule' => [
                 'text-align' => 'left',
                 'type' => [
