@@ -1,3 +1,8 @@
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/termage/termage) (2021-10-08)
+* Added theme support for components: Alert, Rule.
+* Added new extended color scheme.
+
 <a name="0.5.1"></a>
 # [0.5.1](https://github.com/termage/termage) (2021-10-07)
 * Fixed `termage` helper 
