@@ -10,6 +10,11 @@ use Thunder\Shortcode\ShortcodeFacade;
 class Shortcodes
 {
     /**
+     * Shortcodes facade.
+     */
+    private ShortcodeFacade $shortcodes;
+
+    /**
      * Create a new Shortcodes instance.
      *
      * @access public
@@ -57,7 +62,7 @@ class Shortcodes
     /**
      * Parses text into shortcodes.
      *
-     * @param string $input A text containing SHORTCODE
+     * @param string $input A text containing SHORTCODES
      *
      * @access public
      */
@@ -69,7 +74,7 @@ class Shortcodes
     /**
      * Parse and processes text to replaces shortcodes.
      *
-     * @param string $input A text containing SHORTCODE
+     * @param string $input A text containing SHORTCODES
      *
      * @access public
      */
@@ -79,7 +84,7 @@ class Shortcodes
     }
 
     /**
-     * Add default shortcodes
+     * Add default shortcodes.
      *
      * @access protected
      */
@@ -113,6 +118,9 @@ class Shortcodes
 
         // shortcode: [invisible]Invisible[/invisible]
         $this->shortcodes->addHandler('invisible', fn (ShortcodeInterface $s) => $this->invisibleShortcode($s));
+
+        // shortcode: [link href=]Termage[/link]
+        $this->shortcodes->addHandler('link', fn (ShortcodeInterface $s) => $this->linkShortcode($s));
     }
 
     /**
@@ -120,7 +128,7 @@ class Shortcodes
      *
      * @param ShortcodeInterface $s ShortcodeInterface
      *
-     * @return string Bold shortcode
+     * @return string Bold shortcode.
      *
      * @access protected
      */
@@ -134,7 +142,7 @@ class Shortcodes
      *
      * @param ShortcodeInterface $s ShortcodeInterface
      *
-     * @return string Italic shortcode
+     * @return string Italic shortcode.
      *
      * @access protected
      */
@@ -148,7 +156,7 @@ class Shortcodes
      *
      * @param ShortcodeInterface $s ShortcodeInterface
      *
-     * @return string Underline shortcode
+     * @return string Underline shortcode.
      *
      * @access protected
      */
@@ -162,7 +170,7 @@ class Shortcodes
      *
      * @param ShortcodeInterface $s ShortcodeInterface
      *
-     * @return string Strikethrough shortcode
+     * @return string Strikethrough shortcode.
      *
      * @access protected
      */
@@ -176,7 +184,7 @@ class Shortcodes
      *
      * @param ShortcodeInterface $s ShortcodeInterface
      *
-     * @return string Dim shortcode
+     * @return string Dim shortcode.
      *
      * @access protected
      */
@@ -190,7 +198,7 @@ class Shortcodes
      *
      * @param ShortcodeInterface $s ShortcodeInterface
      *
-     * @return string Blink shortcode
+     * @return string Blink shortcode.
      *
      * @access protected
      */
@@ -204,7 +212,7 @@ class Shortcodes
      *
      * @param ShortcodeInterface $s ShortcodeInterface
      *
-     * @return string Reverse shortcode
+     * @return string Reverse shortcode.
      *
      * @access protected
      */
@@ -218,12 +226,26 @@ class Shortcodes
      *
      * @param ShortcodeInterface $s ShortcodeInterface
      *
-     * @return string Invisible shortcode
+     * @return string Invisible shortcode.
      *
      * @access protected
      */
     protected function invisibleShortcode(ShortcodeInterface $s): string
     {
         return "\e[8m" . $s->getContent() . "\e[0m";
+    }
+
+    /**
+     * Link shortcode.
+     *
+     * @param ShortcodeInterface $s ShortcodeInterface
+     *
+     * @return string Link shortcode.
+     *
+     * @access protected
+     */
+    protected function linkShortcode(ShortcodeInterface $s): string
+    {
+        return "\e]8;;http://" . $s->getParameter('href') . "\e\\" . $s->getContent() . "\e]8;;\e\\";
     }
 }
