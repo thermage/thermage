@@ -26,9 +26,9 @@ class Shortcodes
     }
 
     /**
-     * Shortcode facade.
+     * Get Shortcodes instance.
      */
-    public function facade(): ShortcodeFacade
+    public function getShortcodes(): ShortcodeFacade
     {
         return $this->shortcodes;
     }
@@ -43,7 +43,7 @@ class Shortcodes
      */
     public function addHandler(string $name, callable $handler)
     {
-        return $this->facade()->addHandler($name, $handler);
+        return $this->shortcodes->addHandler($name, $handler);
     }
 
     /**
@@ -56,7 +56,7 @@ class Shortcodes
      */
     public function addEventHandler(string $name, callable $handler)
     {
-        return $this->facade()->addEventHandler($name, $handler);
+        return $this->shortcodes->addEventHandler($name, $handler);
     }
 
     /**
@@ -68,7 +68,7 @@ class Shortcodes
      */
     public function parseText(string $input)
     {
-        return $this->facade()->parse($input);
+        return $this->shortcodes->parse($input);
     }
 
     /**
@@ -80,7 +80,7 @@ class Shortcodes
      */
     public function parse(string $input)
     {
-        return $this->facade()->process($input);
+        return $this->shortcodes->process($input);
     }
 
     /**
