@@ -222,7 +222,21 @@ abstract class Element
      */
     public function bold(): self
     {
-        $this->properties->set('options.bold', 'bold');
+        $this->value = strings('[b]' . $this->value . '[/b]');
+
+        return $this;
+    }
+
+    /**
+     * Set element italic property.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function italic(): self
+    {
+        $this->value = strings('[i]' . $this->value . '[/i]');
 
         return $this;
     }
@@ -236,7 +250,7 @@ abstract class Element
      */
     public function underline(): self
     {
-        $this->properties->set('options.underscore', 'underscore');
+        $this->value = strings('[u]' . $this->value . '[/u]');
 
         return $this;
     }
@@ -250,7 +264,7 @@ abstract class Element
      */
     public function underscore(): self
     {
-        $this->properties->set('options.underscore', 'underscore');
+        $this->value = strings('[u]' . $this->value . '[/u]');
 
         return $this;
     }
@@ -264,7 +278,7 @@ abstract class Element
      */
     public function blink(): self
     {
-        $this->properties->set('options.blink', 'blink');
+        $this->value = strings('[blink]' . $this->value . '[/blink]');
 
         return $this;
     }
@@ -278,21 +292,21 @@ abstract class Element
      */
     public function reverse(): self
     {
-        $this->properties->set('options.reverse', 'reverse');
+        $this->value = strings('[reverse]' . $this->value . '[/reverse]');
 
         return $this;
     }
 
     /**
-     * Set element conceal property.
+     * Set element invisible property.
      *
      * @return self Returns instance of the Element class.
      *
      * @access public
      */
-    public function conceal(): self
+    public function invisible(): self
     {
-        $this->properties->set('options.conceal', 'conceal');
+        $this->value = strings('[invisible]' . $this->value . '[/invisible]');
 
         return $this;
     }
@@ -582,10 +596,6 @@ abstract class Element
             $bg = 'bg=' . $this->properties->get('bg') . ';';
         }
 
-        if ($this->properties->has('options')) {
-            $options = 'options=' . arrays($this->properties->get('options'))->toString(',') . ';';
-        }
-
         if ($this->properties->has('href')) {
             $options = 'href=' . $this->properties->get('href');
         }
@@ -602,7 +612,6 @@ abstract class Element
             $element = '<' .
                         $fg .
                         $bg .
-                        $options .
                         '>' . (string) $this->value . '</>';
         } else {
             $element = (string) $this->value;
