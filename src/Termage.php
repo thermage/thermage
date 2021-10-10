@@ -60,7 +60,7 @@ class Termage
         $this->output     = $output ??= new ConsoleOutput();
         $this->theme      = $theme ??= new DefaultTheme();
         $this->terminal   = new Terminal();
-        $this->shortcodes = new Shortcodes();
+        $this->shortcodes = new Shortcodes($this->theme);
     }
 
     /**
