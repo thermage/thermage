@@ -87,6 +87,32 @@ final class Color
     }
 
     /**
+     * Get random hex color.
+     * 
+     * @return string Returns random hex color.
+     */
+    public function getRandomHexColor(): string
+    {
+        return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
+    }
+
+    /**
+     * Get random rgb color.
+     * 
+     * @return array Returns random rgb color.
+     */
+    public function getRandomRgbColor(): array
+    {
+        $rgbColor = [];
+
+        foreach(['r', 'g', 'b'] as $color) {
+            $rgbColor[$color] = mt_rand(0, 255);
+        }
+
+        return $rgbColor;
+    }
+
+    /**
      * Apply color for value.
      *
      * @param string $value Value.
