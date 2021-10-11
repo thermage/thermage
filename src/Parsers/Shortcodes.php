@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace Termage\Parsers;
 
+use Termage\Base\Color;
 use Thunder\Shortcode\Shortcode\ShortcodeInterface;
 use Thunder\Shortcode\ShortcodeFacade;
-use Termage\Base\Color; 
+
+use function intval;
+use function str_replace;
+use function strings;
+use function strip_tags;
 
 class Shortcodes
 {
@@ -22,7 +27,7 @@ class Shortcodes
      */
     public function __construct($theme)
     {
-        $this->theme = $theme;
+        $this->theme      = $theme;
         $this->shortcodes = new ShortcodeFacade();
         $this->addDefaultShortcodes();
     }
@@ -98,31 +103,31 @@ class Shortcodes
     {
         // shortcode: [bold]Bold[/bold]
         $this->shortcodes->addHandler('bold', fn (ShortcodeInterface $s) => $this->boldShortcode($s));
-        
+
         // shortcode: [b]Bold[/b]
         $this->shortcodes->addHandler('b', fn (ShortcodeInterface $s) => $this->boldShortcode($s));
 
         // shortcode: [italic]Italic[/italic]
         $this->shortcodes->addHandler('italic', fn (ShortcodeInterface $s) => $this->italicShortcode($s));
-        
+
         // shortcode:  [i]Italic[/i]
         $this->shortcodes->addHandler('i', fn (ShortcodeInterface $s) => $this->italicShortcode($s));
 
         // shortcode: [underline]Underline[/underline]
         $this->shortcodes->addHandler('underline', fn (ShortcodeInterface $s) => $this->underlineShortcode($s));
-        
+
         // shortcode: [u]Underline[/u]
         $this->shortcodes->addHandler('u', fn (ShortcodeInterface $s) => $this->underlineShortcode($s));
 
         // shortcode: [strikethrough]Strikethrough[/strikethrough] [s]Strikethrough[/s]
         $this->shortcodes->addHandler('strikethrough', fn (ShortcodeInterface $s) => $this->strikethroughShortcode($s));
-        
+
         // shortcode: [s]Strikethrough[/s]
         $this->shortcodes->addHandler('s', fn (ShortcodeInterface $s) => $this->strikethroughShortcode($s));
 
         // shortcode: [dim]Dim[/dim]
         $this->shortcodes->addHandler('dim', fn (ShortcodeInterface $s) => $this->dimShortcode($s));
-        
+
         // shortcode: [d]Dim/d]
         $this->shortcodes->addHandler('d', fn (ShortcodeInterface $s) => $this->dimShortcode($s));
 
@@ -140,25 +145,25 @@ class Shortcodes
 
         // shortcode: [m l= r=]Margin left and right[/m]
         $this->shortcodes->addHandler('m', fn (ShortcodeInterface $s) => $this->marginShortcode($s));
-        
+
         // shortcode: [mx=]Margin left and right[/p]
         $this->shortcodes->addHandler('mx', fn (ShortcodeInterface $s) => $this->marginBothShortcode($s));
 
         // shortcode: [ml=]Margin left[/p]
         $this->shortcodes->addHandler('ml', fn (ShortcodeInterface $s) => $this->marginLeftShortcode($s));
-        
+
         // shortcode: [mr=]Margin right[/p]
         $this->shortcodes->addHandler('mr', fn (ShortcodeInterface $s) => $this->marginRightShortcode($s));
 
         // shortcode: [p l= r=]Padding left and right[/p]
         $this->shortcodes->addHandler('p', fn (ShortcodeInterface $s) => $this->paddingShortcode($s));
-    
+
         // shortcode: [px=]Padding left and right[/p]
         $this->shortcodes->addHandler('px', fn (ShortcodeInterface $s) => $this->paddingBothShortcode($s));
-    
+
         // shortcode: [pl=]Padding left[/p]
         $this->shortcodes->addHandler('pl', fn (ShortcodeInterface $s) => $this->paddingLeftShortcode($s));
-        
+
         // shortcode: [pr=]Padding right[/p]
         $this->shortcodes->addHandler('pr', fn (ShortcodeInterface $s) => $this->paddingRightShortcode($s));
 
@@ -180,7 +185,7 @@ class Shortcodes
      */
     public function stripShortcodes(string $value): string
     {
-        return strip_tags(str_replace(array('[',']'), array('<','>'), $value));
+        return strip_tags(str_replace(['[', ']'], ['<', '>'], $value));
     }
 
     /**
@@ -341,7 +346,7 @@ class Shortcodes
         if ($s->getBbCode()) {
             return (new Color('', $this->theme->variables()->get('colors.' . $s->getBbCode())))->apply($s->getContent());
         }
-    
+
         return $s->getContent();
     }
 
@@ -376,7 +381,7 @@ class Shortcodes
         $themePaddingGlobal = $this->theme->variables()->get('padding.global', 1);
         $themePaddingLeft   = $this->theme->variables()->get('padding.left', 1);
         $themePaddingRight  = $this->theme->variables()->get('padding.right', 1);
-        
+
         if ($s->getBbCode()) {
             $p['l'] = intval($s->getBbCode() / 2 * $themePaddingLeft * $themePaddingGlobal);
             $p['r'] = intval($s->getBbCode() / 2 * $themePaddingLeft * $themePaddingGlobal);
@@ -444,7 +449,7 @@ class Shortcodes
         $themeMarginGlobal = $this->theme->variables()->get('margin.global', 1);
         $themeMarginLeft   = $this->theme->variables()->get('margin.left', 1);
         $themeMargingRight = $this->theme->variables()->get('margin.right', 1);
-        
+
         if ($s->getBbCode()) {
             $m['l'] = intval($s->getBbCode() / 2 * $themeMarginLeft * $themeMarginGlobal);
             $m['r'] = intval($s->getBbCode() / 2 * $themeMarginLeft * $themeMarginGlobal);
