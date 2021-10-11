@@ -98,18 +98,6 @@ abstract class Element
     }
 
     /**
-     * Get element raw value without shortcodes.
-     *
-     * @return string Returns element raw value without shortcodes.
-     *
-     * @access public
-     */
-    public function getRawValue(): string
-    {
-        return strip_tags(str_replace(array('[',']'), array('<','>'), (string) $this->value));
-    }
-
-    /**
      * Get element output.
      *
      * @return OutputInterface Returns element output.
