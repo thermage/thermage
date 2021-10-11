@@ -16,6 +16,41 @@ use function termage;
 final class Chart extends Element
 {
     /**
+     * Chart type.
+     *
+     * @access private
+     */
+    private string $chartType;
+
+    /**
+     * Chart data.
+     *
+     * @access private
+     */
+    private array $chartData;
+
+    /**
+     * Chart value sufix.
+     *
+     * @access private
+     */
+    private string $valuesSufix;
+
+    /**
+     * Show percents.
+     *
+     * @access private
+     */
+    private bool $showPercents;
+
+    /**
+     * Show values.
+     *
+     * @access private
+     */
+    private bool $showValues;
+
+    /**
      * Set chart type = horizontal.
      *
      * @return self Returns instance of the Chart class.
@@ -110,7 +145,7 @@ final class Chart extends Element
      */
     public function getData(): array
     {
-        return $this->data;
+        return $this->chartData;
     }
 
     /**
