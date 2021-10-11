@@ -6,7 +6,7 @@ use Termage\Termage;
 use Termage\Base\Theme;
 use Termage\Components\Alert;
 
-test('test termage link method', function (): void {
+test('test termage alert method', function (): void {
     $this->assertInstanceOf(Alert::class, termage()->alert());
 });
 
@@ -49,5 +49,11 @@ test('test alert secondary', function (): void {
 test('test alert with text align right', function (): void {
     $value = termage()->alert('Stay RAD!')->textAlignRight()->render();
     $alert = "[m l=0 r=0][p l=0 r=0][m l=0 r=0][bg=info][p l=25 r=25][/p][/bg][/m][m l=0 r=0][bg=info][color=black][p l=39 r=2]Stay RAD![/p][/color][/bg][/m][m l=0 r=0][bg=info][p l=25 r=25][/p][/bg][/m][/p][/m]";
+    expect(str_replace(["\r\n", "\r", "\n"], "", strings($value)->trim()->toString()))->toEqual($alert);
+});
+
+test('test alert with text align left', function (): void {
+    $value = termage()->alert('Stay RAD!')->textAlignLeft()->render();
+    $alert = "[m l=0 r=0][p l=0 r=0][m l=0 r=0][bg=info][p l=25 r=25][/p][/bg][/m][m l=0 r=0][bg=info][color=black][p l=2 r=39]Stay RAD![/p][/color][/bg][/m][m l=0 r=0][bg=info][p l=25 r=25][/p][/bg][/m][/p][/m]";
     expect(str_replace(["\r\n", "\r", "\n"], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
