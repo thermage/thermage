@@ -17,13 +17,13 @@ test('test emoji all method', function (): void {
 });
 
 test('test emoji countryFlag method', function (): void {
-    expect(termage()->emoji()->countryFlag('us')->render())->toEqual('🇺🇸');
+    expect(termage()->emoji()->countryFlag('us')->render())->toEqual('[m l=0 r=0][p l=0 r=0]🇺🇸[/p][/m]');
 });
 
 test('test emoji magic method', function (): void {
-    expect(termage()->emoji()->mage()->render())->toEqual('🧙');
+    expect(termage()->emoji()->mage()->render())->toEqual('[m l=0 r=0][p l=0 r=0]🧙[/p][/m]');
 });
 
 test('test emoji magic parent method', function (): void {
-    expect(termage()->emoji()->countryFlag('us')->blink()->render())->toEqual('<options=blink;>🇺🇸</>');
+    expect(termage()->emoji()->countryFlag('us')->blink()->render())->toEqual('[m l=0 r=0][p l=0 r=0][blink]🇺🇸[/blink][/p][/m]');
 });
