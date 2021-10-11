@@ -99,11 +99,11 @@ class Termage
     /**
      * Get Shortcodes instance.
      *
-     * @return ShortcodeFacade Shortcodes instance.
+     * @return Shortcodes Shortcodes instance.
      *
      * @access public
      */
-    public function getShortcodes(): ShortcodeFacade
+    public function getShortcodes(): Shortcodes
     {
         return $this->shortcodes;
     }
