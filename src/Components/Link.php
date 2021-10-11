@@ -19,7 +19,7 @@ final class Link extends Element
      */
     public function href(string $value): self
     {
-        $this->getProperties()->set('href', $value);
+        $this->value = strings('[link href=' . $this->value . ']' . $value . '[/link]');
 
         return $this;
     }
