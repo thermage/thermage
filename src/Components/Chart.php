@@ -190,7 +190,7 @@ final class Chart extends Element
 
         // Get label size
         foreach ($data as $key => $value) {
-            $labelSizes[] = strings($value['label'])->length();
+            $labelSizes[] = strings($this->shortcodes->replaceShortcodes($value['label']))->length();
         }
 
         $labelSize = max($labelSizes);
@@ -198,10 +198,10 @@ final class Chart extends Element
         $showPercents = $this->showPercents ??= false;
         $showValues   = $this->showValues ??= false;
         $valuesSufix  = $this->valuesSufix ??= '';
-
+        
         foreach ($data as $key => $value) {
             $i++;
-            $_labelSize        = strings($value['label'])->length();
+            $_labelSize        = strings($this->shortcodes->replaceShortcodes($value['label']))->length();
             $labelPaddingRight = $_labelSize < $labelSize ? $labelSize - $_labelSize + 2 : 2;
 
             $line .= termage($output, $theme)->el((string) $value['label'])->pr($labelPaddingRight)->color($value['color'])->render() .
