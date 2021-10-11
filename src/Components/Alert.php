@@ -254,7 +254,7 @@ final class Alert extends Element
         $alertBg             = $theme->variables()->get('alert.type.' . $alertType . '.bg', $componentProperties['alert']['type'][$alertType]['bg']);
         $alertColor          = $theme->variables()->get('alert.type.' . $alertType . '.color', $componentProperties['alert']['type'][$alertType]['color']);
 
-        $px = strings($this->shortcodes->stripShortcodes($value))->length();
+        $px = strings($this->getShortcodes()->stripShortcodes($value))->length();
 
         if ($alertSizeAuto) {
             $terminal  = new Terminal();
