@@ -108,13 +108,11 @@ final class Color
      */
     public function getRandomRgbColor(): array
     {
-        $rgbColor = [];
-
-        foreach (['r', 'g', 'b'] as $color) {
-            $rgbColor[$color] = mt_rand(0, 255);
-        }
-
-        return $rgbColor;
+        return [
+            'r' => mt_rand(0, 255),
+            'g' => mt_rand(0, 255),
+            'b' => mt_rand(0, 255),
+       ];
     }
 
     /**
