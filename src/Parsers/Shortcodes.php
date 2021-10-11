@@ -102,7 +102,7 @@ class Shortcodes
     }
 
     /**
-     * Add default facade.
+     * Add default shortcode.
      *
      * @access protected
      */
@@ -381,6 +381,15 @@ class Shortcodes
         return $p['l'] . $s->getContent() . $p['r'];
     }
 
+    /**
+     * Padding both shortcode.
+     *
+     * @param ShortcodeInterface $s ShortcodeInterface
+     *
+     * @return string Padding both shortcode result.
+     *
+     * @access protected
+     */
     protected function paddingBothShortcode(ShortcodeInterface $s): string
     {
         $p = ['l' => '', 'r' => ''];
@@ -397,6 +406,15 @@ class Shortcodes
         return $p['l'] . $s->getContent() . $p['r'];
     }
 
+    /**
+     * Padding left shortcode.
+     *
+     * @param ShortcodeInterface $s ShortcodeInterface
+     *
+     * @return string Padding left shortcode result.
+     *
+     * @access protected
+     */
     protected function paddingLeftShortcode(ShortcodeInterface $s): string
     {
         $p = ['l' => ''];
@@ -411,6 +429,15 @@ class Shortcodes
         return $p['l'] . $s->getContent();
     }
 
+    /**
+     * Padding right shortcode.
+     *
+     * @param ShortcodeInterface $s ShortcodeInterface
+     *
+     * @return string Padding right shortcode result.
+     *
+     * @access protected
+     */
     protected function paddingRightShortcode(ShortcodeInterface $s): string
     {
         $p = ['r' => ''];
@@ -449,6 +476,15 @@ class Shortcodes
         return $m['l'] . $s->getContent() . $m['r'];
     }
 
+    /**
+     * Margin both shortcode.
+     *
+     * @param ShortcodeInterface $s ShortcodeInterface
+     *
+     * @return string Margin both shortcode result.
+     *
+     * @access protected
+     */
     protected function marginBothShortcode(ShortcodeInterface $s): string
     {
         $m = ['l' => '', 'r' => ''];
@@ -465,6 +501,15 @@ class Shortcodes
         return $m['l'] . $s->getContent() . $m['r'];
     }
 
+    /**
+     * Margin left shortcode.
+     *
+     * @param ShortcodeInterface $s ShortcodeInterface
+     *
+     * @return string Margin left shortcode result.
+     *
+     * @access protected
+     */
     protected function marginLeftShortcode(ShortcodeInterface $s): string
     {
         $m = ['l' => ''];
@@ -479,6 +524,15 @@ class Shortcodes
         return $m['l'] . $s->getContent();
     }
 
+    /**
+     * Margin right shortcode.
+     *
+     * @param ShortcodeInterface $s ShortcodeInterface
+     *
+     * @return string Margin right shortcode result.
+     *
+     * @access protected
+     */
     protected function marginRightShortcode(ShortcodeInterface $s): string
     {
         $m = ['r' => ''];
