@@ -90,6 +90,8 @@ final class Color
      * Get random hex color.
      * 
      * @return string Returns random hex color.
+     * 
+     * @access public
      */
     public function getRandomHexColor(): string
     {
@@ -100,6 +102,8 @@ final class Color
      * Get random rgb color.
      * 
      * @return array Returns random rgb color.
+     * 
+     * @access public
      */
     public function getRandomRgbColor(): array
     {
