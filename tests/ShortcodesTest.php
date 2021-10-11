@@ -45,3 +45,27 @@ test('test stripShortcodes method', function (): void {
     // @todo: find a way to process these cases:
     // expect($shortcodes->stripShortcodes('[foo]F[oo[/foo]'))->toEqual('F[oo');
 });
+
+test('test [bold] and [b] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[bold]bold[/bold]'))->toEqual("\e[1mbold\e[22m");
+    expect($shortcodes->parse('[b]bold[/b]'))->toEqual("\e[1mbold\e[22m");
+});
+
+test('test [italic] and [i] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[italic]italic[/italic]'))->toEqual("\e[3mitalic\e[23m");
+    expect($shortcodes->parse('[i]italic[/i]'))->toEqual("\e[3mitalic\e[23m");
+});
+
+test('test [underline] and [u] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[underline]underline[/underline]'))->toEqual("\e[4munderline\e[24m");
+    expect($shortcodes->parse('[u]underline[/u]'))->toEqual("\e[4munderline\e[24m");
+});
+
+test('test [strikethrough] and [s] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[strikethrough]strikethrough[/strikethrough]'))->toEqual("\e[9mstrikethrough\e[29m");
+    expect($shortcodes->parse('[s]strikethrough[/s]'))->toEqual("\e[9mstrikethrough\e[29m");
+});
