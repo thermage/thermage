@@ -18,7 +18,7 @@ class Shortcodes
     /**
      * Shortcodes facade.
      */
-    private ShortcodeFacade $shortcodes;
+    private ShortcodeFacade $facade;
 
     /**
      * Theme class object.
@@ -34,21 +34,21 @@ class Shortcodes
      */
     public function __construct($theme)
     {
-        $this->theme      = $theme;
-        $this->shortcodes = new ShortcodeFacade();
+        $this->theme  = $theme;
+        $this->facade = new ShortcodeFacade();
         $this->addDefaultShortcodes();
     }
 
     /**
-     * Get Shortcodes instance.
+     * Get Shortcodes Facade.
      *
      * @return ShortcodeFacade Shortcodes instance.
      *
      * @access public
      */
-    public function getShortcodes(): ShortcodeFacade
+    public function getFacade(): ShortcodeFacade
     {
-        return $this->shortcodes;
+        return $this->facade;
     }
 
     /**
@@ -61,7 +61,7 @@ class Shortcodes
      */
     public function addHandler(string $name, callable $handler)
     {
-        return $this->shortcodes->addHandler($name, $handler);
+        return $this->facade->addHandler($name, $handler);
     }
 
     /**
@@ -74,11 +74,11 @@ class Shortcodes
      */
     public function addEventHandler(string $name, callable $handler)
     {
-        return $this->shortcodes->addEventHandler($name, $handler);
+        return $this->facade->addEventHandler($name, $handler);
     }
 
     /**
-     * Parses text into shortcodes.
+     * Parses text into facade.
      *
      * @param string $input A text containing SHORTCODES
      *
@@ -86,11 +86,11 @@ class Shortcodes
      */
     public function parseText(string $input)
     {
-        return $this->shortcodes->parse($input);
+        return $this->facade->parse($input);
     }
 
     /**
-     * Parse and processes text to replaces shortcodes.
+     * Parse and processes text to replaces facade.
      *
      * @param string $input A text containing SHORTCODES
      *
@@ -98,95 +98,95 @@ class Shortcodes
      */
     public function parse(string $input)
     {
-        return $this->shortcodes->process($input);
+        return $this->facade->process($input);
     }
 
     /**
-     * Add default shortcodes.
+     * Add default facade.
      *
      * @access protected
      */
     protected function addDefaultShortcodes(): void
     {
         // shortcode: [bold]Bold[/bold]
-        $this->shortcodes->addHandler('bold', fn (ShortcodeInterface $s) => $this->boldShortcode($s));
+        $this->facade->addHandler('bold', fn (ShortcodeInterface $s) => $this->boldShortcode($s));
 
         // shortcode: [b]Bold[/b]
-        $this->shortcodes->addHandler('b', fn (ShortcodeInterface $s) => $this->boldShortcode($s));
+        $this->facade->addHandler('b', fn (ShortcodeInterface $s) => $this->boldShortcode($s));
 
         // shortcode: [italic]Italic[/italic]
-        $this->shortcodes->addHandler('italic', fn (ShortcodeInterface $s) => $this->italicShortcode($s));
+        $this->facade->addHandler('italic', fn (ShortcodeInterface $s) => $this->italicShortcode($s));
 
         // shortcode:  [i]Italic[/i]
-        $this->shortcodes->addHandler('i', fn (ShortcodeInterface $s) => $this->italicShortcode($s));
+        $this->facade->addHandler('i', fn (ShortcodeInterface $s) => $this->italicShortcode($s));
 
         // shortcode: [underline]Underline[/underline]
-        $this->shortcodes->addHandler('underline', fn (ShortcodeInterface $s) => $this->underlineShortcode($s));
+        $this->facade->addHandler('underline', fn (ShortcodeInterface $s) => $this->underlineShortcode($s));
 
         // shortcode: [u]Underline[/u]
-        $this->shortcodes->addHandler('u', fn (ShortcodeInterface $s) => $this->underlineShortcode($s));
+        $this->facade->addHandler('u', fn (ShortcodeInterface $s) => $this->underlineShortcode($s));
 
         // shortcode: [strikethrough]Strikethrough[/strikethrough] [s]Strikethrough[/s]
-        $this->shortcodes->addHandler('strikethrough', fn (ShortcodeInterface $s) => $this->strikethroughShortcode($s));
+        $this->facade->addHandler('strikethrough', fn (ShortcodeInterface $s) => $this->strikethroughShortcode($s));
 
         // shortcode: [s]Strikethrough[/s]
-        $this->shortcodes->addHandler('s', fn (ShortcodeInterface $s) => $this->strikethroughShortcode($s));
+        $this->facade->addHandler('s', fn (ShortcodeInterface $s) => $this->strikethroughShortcode($s));
 
         // shortcode: [dim]Dim[/dim]
-        $this->shortcodes->addHandler('dim', fn (ShortcodeInterface $s) => $this->dimShortcode($s));
+        $this->facade->addHandler('dim', fn (ShortcodeInterface $s) => $this->dimShortcode($s));
 
         // shortcode: [d]Dim/d]
-        $this->shortcodes->addHandler('d', fn (ShortcodeInterface $s) => $this->dimShortcode($s));
+        $this->facade->addHandler('d', fn (ShortcodeInterface $s) => $this->dimShortcode($s));
 
         // shortcode: [blink]Blink[/blink]
-        $this->shortcodes->addHandler('blink', fn (ShortcodeInterface $s) => $this->blinkShortcode($s));
+        $this->facade->addHandler('blink', fn (ShortcodeInterface $s) => $this->blinkShortcode($s));
 
         // shortcode: [reverse]Reverse[/reverse]
-        $this->shortcodes->addHandler('reverse', fn (ShortcodeInterface $s) => $this->reverseShortcode($s));
+        $this->facade->addHandler('reverse', fn (ShortcodeInterface $s) => $this->reverseShortcode($s));
 
         // shortcode: [invisible]Invisible[/invisible]
-        $this->shortcodes->addHandler('invisible', fn (ShortcodeInterface $s) => $this->invisibleShortcode($s));
+        $this->facade->addHandler('invisible', fn (ShortcodeInterface $s) => $this->invisibleShortcode($s));
 
         // shortcode: [link href=]Link[/link]
-        $this->shortcodes->addHandler('link', fn (ShortcodeInterface $s) => $this->linkShortcode($s));
+        $this->facade->addHandler('link', fn (ShortcodeInterface $s) => $this->linkShortcode($s));
 
         // shortcode: [m l= r=]Margin left and right[/m]
-        $this->shortcodes->addHandler('m', fn (ShortcodeInterface $s) => $this->marginShortcode($s));
+        $this->facade->addHandler('m', fn (ShortcodeInterface $s) => $this->marginShortcode($s));
 
         // shortcode: [mx=]Margin left and right[/p]
-        $this->shortcodes->addHandler('mx', fn (ShortcodeInterface $s) => $this->marginBothShortcode($s));
+        $this->facade->addHandler('mx', fn (ShortcodeInterface $s) => $this->marginBothShortcode($s));
 
         // shortcode: [ml=]Margin left[/p]
-        $this->shortcodes->addHandler('ml', fn (ShortcodeInterface $s) => $this->marginLeftShortcode($s));
+        $this->facade->addHandler('ml', fn (ShortcodeInterface $s) => $this->marginLeftShortcode($s));
 
         // shortcode: [mr=]Margin right[/p]
-        $this->shortcodes->addHandler('mr', fn (ShortcodeInterface $s) => $this->marginRightShortcode($s));
+        $this->facade->addHandler('mr', fn (ShortcodeInterface $s) => $this->marginRightShortcode($s));
 
         // shortcode: [p l= r=]Padding left and right[/p]
-        $this->shortcodes->addHandler('p', fn (ShortcodeInterface $s) => $this->paddingShortcode($s));
+        $this->facade->addHandler('p', fn (ShortcodeInterface $s) => $this->paddingShortcode($s));
 
         // shortcode: [px=]Padding left and right[/p]
-        $this->shortcodes->addHandler('px', fn (ShortcodeInterface $s) => $this->paddingBothShortcode($s));
+        $this->facade->addHandler('px', fn (ShortcodeInterface $s) => $this->paddingBothShortcode($s));
 
         // shortcode: [pl=]Padding left[/p]
-        $this->shortcodes->addHandler('pl', fn (ShortcodeInterface $s) => $this->paddingLeftShortcode($s));
+        $this->facade->addHandler('pl', fn (ShortcodeInterface $s) => $this->paddingLeftShortcode($s));
 
         // shortcode: [pr=]Padding right[/p]
-        $this->shortcodes->addHandler('pr', fn (ShortcodeInterface $s) => $this->paddingRightShortcode($s));
+        $this->facade->addHandler('pr', fn (ShortcodeInterface $s) => $this->paddingRightShortcode($s));
 
         // shortcode: [color=]Color[/color]
-        $this->shortcodes->addHandler('color', fn (ShortcodeInterface $s) => $this->colorShortcode($s));
+        $this->facade->addHandler('color', fn (ShortcodeInterface $s) => $this->colorShortcode($s));
 
         // shortcode: [bg=]Background Color[/color]
-        $this->shortcodes->addHandler('bg', fn (ShortcodeInterface $s) => $this->bgShortcode($s));
+        $this->facade->addHandler('bg', fn (ShortcodeInterface $s) => $this->bgShortcode($s));
     }
 
     /**
-     * Strip shortcodes.
+     * Strip facade.
      *
-     * @param string $value Value with shortcodes.
+     * @param string $value Value with facade.
      *
-     * @return string Value without shortcodes.
+     * @return string Value without facade.
      *
      * @access public
      */
