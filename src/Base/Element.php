@@ -58,6 +58,11 @@ abstract class Element
     private Theme $theme;
 
     /**
+     * Shortcodes facade.
+     */
+    private ShortcodeFacade $shortcodes;
+    
+    /**
      * Create a new Element instance.
      *
      * @param OutputInterface $output     Output interface.
