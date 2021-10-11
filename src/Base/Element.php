@@ -242,6 +242,21 @@ abstract class Element
     }
 
     /**
+     * Set element strikethrough property.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function strikethrough(): self
+    {
+        $this->value = strings('[s]' . $this->value . '[/s]');
+
+        return $this;
+    }
+
+
+    /**
      * Set element dim property.
      *
      * @return self Returns instance of the Element class.
