@@ -27,7 +27,7 @@ final class Chart extends Element
      *
      * @access private
      */
-    private array $chartData;
+    private array $сhartData;
 
     /**
      * Chart value sufix.
@@ -89,7 +89,7 @@ final class Chart extends Element
      */
     public function data(array $data): self
     {
-        $this->chartData = $data;
+        $this->сhartData = $data;
 
         return $this;
     }
@@ -145,7 +145,7 @@ final class Chart extends Element
      */
     public function getData(): array
     {
-        return $this->chartData;
+        return $this->сhartData;
     }
 
     /**
@@ -172,29 +172,29 @@ final class Chart extends Element
         $theme     = $this->getTheme();
         $output    = $this->getOutput();
         $value     = $this->getValue()->toString();
-        $data      = $this->getData();
-        $chartType = $this->getType();
+        $chartData = $this->сhartData;
+        $chartType = $this->chartType;
 
         // Get total value
         $total = 0;
-        foreach ($data as $key => $value) {
+        foreach ($chartData as $key => $value) {
             $total += $value['value'];
         }
 
         // Set percentage
-        foreach ($data as $key => $value) {
-            $data[$key]['percentage'] = intval(round($value['value'] / $total * 100));
+        foreach ($chartData as $key => $value) {
+            $chartData[$key]['percentage'] = intval(round($value['value'] / $total * 100));
         }
 
         // Selct chart type
         switch ($chartType) {
             case 'inline':
-                $chart = $this->buildInlineChart($data);
+                $chart = $this->buildInlineChart($chartData);
                 break;
 
             case 'horizontal':
             default:
-                $chart = $this->buildHortizontalChart($data);
+                $chart = $this->buildHortizontalChart($chartData);
                 break;
         }
 
