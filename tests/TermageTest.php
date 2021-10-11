@@ -11,8 +11,9 @@ use Termage\Components\El;
 use Termage\Components\Emoji;
 use Termage\Components\Link;
 use Termage\Components\Rule;
+use Termage\Components\Chart;
 use Termage\Base\Theme;
-use Termage\Base\Shortcodes;
+use Termage\Parsers\Shortcodes;
 
 test('test set and get output', function (): void {
     $termage = termage();
