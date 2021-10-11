@@ -225,7 +225,7 @@ final class Chart extends Element
 
         // Get label size
         foreach ($data as $key => $value) {
-            $labelSizes[] = strings($this->getShortcodes()->replaceShortcodes($value['label']))->length();
+            $labelSizes[] = strings($this->getShortcodes()->stripShortcodes($value['label']))->length();
         }
 
         $labelSize = max($labelSizes);
@@ -236,11 +236,11 @@ final class Chart extends Element
         
         foreach ($data as $key => $value) {
             $i++;
-            $_labelSize        = strings($this->getShortcodes()->replaceShortcodes($value['label']))->length();
+            $_labelSize        = strings($this->getShortcodes()->stripShortcodes($value['label']))->length();
             $labelPaddingRight = $_labelSize < $labelSize ? $labelSize - $_labelSize + 2 : 2;
 
             $line .= termage($output, $theme)->el((string) $value['label'])->pr($labelPaddingRight)->color($value['color'])->render() .
-                     termage($output, $theme)->el(' ')->repeat($value['percentage'])->bg($value['color'])->render() .
+                     termage($output, $theme)->el(strings(' ')->repeat($value['percentage'])->toString())->bg($value['color'])->render() .
                      ($showPercents ? termage($output, $theme)->el((string) $value['percentage'] . '%')->pl1()->color($value['color'])->render() : '') .
                      ($showValues ? termage($output, $theme)->el('(' . (string) $value['value'] . $valuesSufix . ')')->pl1()->color($value['color'])->render() : '') .
                      ($i < $count ? "\n" : '');
@@ -269,7 +269,7 @@ final class Chart extends Element
 
         $line = '';
         foreach ($data as $key => $value) {
-            $line .= termage($output, $theme)->el(' ')->repeat($value['percentage'])->bg($value['color'])->render();
+            $line .= termage($output, $theme)->el(strings(' ')->repeat($value['percentage'])->toString())->bg($value['color'])->render();
         }
 
         $labels = '';
