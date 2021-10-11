@@ -1,3 +1,17 @@
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/termage/termage) (2021-xx-xx)
+* Added new rendering markup based logic instead of symfony based. 
+* Added new shortcodes functionality with a lot of predefined shortcodes.
+* Added new method `dim` for `Element`
+* Added new method `strikethrough` for `Element`
+* Added new method `italic` for `Element`
+* Added new method `invisible` for `Element`
+* Added new component `Chart`
+
+### BREAKING CHANGES
+
+* Removed all strings manipulations methods `lower`, `upper`, `limit`, `repeat`, `camel`, `capitalize` from `Element` due new markup based logic.
+
 <a name="0.6.0"></a>
 # [0.6.0](https://github.com/termage/termage) (2021-10-08)
 * Added theme support for components: Alert, Rule.
