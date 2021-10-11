@@ -78,7 +78,7 @@ class Shortcodes
     }
 
     /**
-     * Parses text into facade.
+     * Parses text into shortcodes.
      *
      * @param string $input A text containing SHORTCODES
      *
@@ -90,7 +90,7 @@ class Shortcodes
     }
 
     /**
-     * Parse and processes text to replaces facade.
+     * Parse and processes text to replaces shortcodes.
      *
      * @param string $input A text containing SHORTCODES
      *
