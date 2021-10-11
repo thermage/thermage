@@ -21,7 +21,7 @@ class Shortcodes
     private ShortcodeFacade $shortcodes;
 
     /**
-     * The instance of Theme class.
+     * Theme class object.
      *
      * @access private
      */
