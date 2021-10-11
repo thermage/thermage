@@ -180,7 +180,7 @@ final class Rule extends Element
         $output              = $this->getOutput();
         $value               = $this->getValue()->toString();
 
-        $valueLength   = strings($value)->length();
+        $valueLength   = strings($this->getShortcodes()->stripShortcodes($value))->length();
         $terminalWidth = (new Terminal())->getWidth();
 
         if ($ruleTextAlign === 'right') {
