@@ -139,6 +139,18 @@ abstract class Element
     }
 
     /**
+     * Get element shortcodes.
+     *
+     * @return Shortcodes Returns element shortcodes.
+     *
+     * @access public
+     */
+    public function getShortcodes(): Shortcodes
+    {
+        return $this->shortcodes;
+    }
+
+    /**
      * Set element value.
      *
      * @param string $value Element value.
