@@ -318,7 +318,7 @@ class Shortcodes
      */
     protected function linkShortcode(ShortcodeInterface $s): string
     {
-        return "\e]8;;http://" . $s->getParameter('href') . "\e\\" . $s->getContent() . "\e]8;;\e\\";
+        return "\e]8;;" . $s->getParameter('href') . "\e\\" . $s->getContent() . "\e]8;;\e\\";
     }
 
     /**
