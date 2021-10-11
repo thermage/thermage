@@ -172,8 +172,8 @@ final class Chart extends Element
         $theme     = $this->getTheme();
         $output    = $this->getOutput();
         $value     = $this->getValue()->toString();
-        $chartData = $this->сhartData;
-        $chartType = $this->chartType;
+        $chartData = $this->сhartData ?? [];
+        $chartType = $this->chartType ?? 'horizontal';
 
         // Get total value
         $total = 0;
