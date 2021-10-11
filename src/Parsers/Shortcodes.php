@@ -170,6 +170,20 @@ class Shortcodes
     }
 
     /**
+     * Strip shortcodes.
+     *
+     * @param string $value Value with shortcodes.
+     *
+     * @return string Value without shortcodes.
+     *
+     * @access public
+     */
+    public function stripShortcodes(string $value): string
+    {
+        return strip_tags(str_replace(array('[',']'), array('<','>'), $value));
+    }
+
+    /**
      * Bold shortcode.
      *
      * @param ShortcodeInterface $s ShortcodeInterface
