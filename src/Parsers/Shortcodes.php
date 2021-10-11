@@ -25,7 +25,7 @@ class Shortcodes
      *
      * @access private
      */
-    private Theme $theme;
+    private $theme;
 
     /**
      * Create a new Shortcodes instance.
