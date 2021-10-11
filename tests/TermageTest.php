@@ -12,6 +12,7 @@ use Termage\Components\Emoji;
 use Termage\Components\Link;
 use Termage\Components\Rule;
 use Termage\Base\Theme;
+use Termage\Base\Shortcodes;
 
 test('test set and get output', function (): void {
     $termage = termage();
@@ -67,4 +68,16 @@ test('test link', function (): void {
     $termage = termage();
 
     $this->assertInstanceOf(Link::class, $termage->link());
+});
+
+test('test chart', function (): void {
+    $termage = termage();
+
+    $this->assertInstanceOf(Chart::class, $termage->chart());
+});
+
+test('test getShortcodes', function (): void {
+    $termage = termage();
+
+    $this->assertInstanceOf(Shortcodes::class, $termage->getShortcodes());
 });
