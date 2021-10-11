@@ -55,12 +55,12 @@ abstract class Element
      *
      * @access private
      */
-    private Theme $theme;
+    private $theme;
 
     /**
      * Shortcodes facade.
      */
-    private ShortcodeFacade $shortcodes;
+    private Shortcodes $shortcodes;
     
     /**
      * Create a new Element instance.
