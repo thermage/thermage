@@ -89,7 +89,7 @@ final class Chart extends Element
      */
     public function data(array $data): self
     {
-        $this->data = $data;
+        $this->chartData = $data;
 
         return $this;
     }
