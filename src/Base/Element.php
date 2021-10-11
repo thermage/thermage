@@ -242,6 +242,20 @@ abstract class Element
     }
 
     /**
+     * Set element dim property.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function dim(): self
+    {
+        $this->value = strings('[dim]' . $this->value . '[/dim]');
+
+        return $this;
+    }
+
+    /**
      * Set element underline property, alias to underscore.
      *
      * @return self Returns instance of the Element class.
