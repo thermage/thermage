@@ -57,6 +57,16 @@ test('test blink', function (): void {
     expect($value)->toBe('[m l=0 r=0][p l=0 r=0][blink]RAD[/blink][/p][/m]');
 });
 
+test('test italic', function (): void {
+    $value = termage()->el()->value('RAD')->italic()->render();
+    expect($value)->toBe('[m l=0 r=0][p l=0 r=0][i]RAD[/i][/p][/m]');
+});
+
+test('test strikethrough', function (): void {
+    $value = termage()->el()->value('RAD')->strikethrough()->render();
+    expect($value)->toBe('[m l=0 r=0][p l=0 r=0][s]RAD[/s][/p][/m]');
+});
+
 test('test reverse', function (): void {
     $value = termage()->el()->value('RAD')->reverse()->render();
     expect($value)->toBe('[m l=0 r=0][p l=0 r=0][reverse]RAD[/reverse][/p][/m]');
