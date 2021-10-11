@@ -227,7 +227,7 @@ abstract class Element
      */
     public function bold(): self
     {
-        $this->value = strings('[b]' . $this->value . '[/b]');
+        $this->value = strings('[b]' . (string) $this->value . '[/b]');
 
         return $this;
     }
@@ -241,7 +241,7 @@ abstract class Element
      */
     public function italic(): self
     {
-        $this->value = strings('[i]' . $this->value . '[/i]');
+        $this->value = strings('[i]' . (string) $this->value . '[/i]');
 
         return $this;
     }
@@ -255,7 +255,7 @@ abstract class Element
      */
     public function strikethrough(): self
     {
-        $this->value = strings('[s]' . $this->value . '[/s]');
+        $this->value = strings('[s]' . (string) $this->value . '[/s]');
 
         return $this;
     }
@@ -269,7 +269,7 @@ abstract class Element
      */
     public function dim(): self
     {
-        $this->value = strings('[dim]' . $this->value . '[/dim]');
+        $this->value = strings('[dim]' . (string) $this->value . '[/dim]');
 
         return $this;
     }
@@ -283,7 +283,7 @@ abstract class Element
      */
     public function underline(): self
     {
-        $this->value = strings('[u]' . $this->value . '[/u]');
+        $this->value = strings('[u]' . (string) $this->value . '[/u]');
 
         return $this;
     }
@@ -297,7 +297,7 @@ abstract class Element
      */
     public function underscore(): self
     {
-        $this->value = strings('[u]' . $this->value . '[/u]');
+        $this->value = strings('[u]' . (string) $this->value . '[/u]');
 
         return $this;
     }
@@ -311,7 +311,7 @@ abstract class Element
      */
     public function blink(): self
     {
-        $this->value = strings('[blink]' . $this->value . '[/blink]');
+        $this->value = strings('[blink]' . (string) $this->value . '[/blink]');
 
         return $this;
     }
@@ -325,7 +325,7 @@ abstract class Element
      */
     public function reverse(): self
     {
-        $this->value = strings('[reverse]' . $this->value . '[/reverse]');
+        $this->value = strings('[reverse]' . (string) $this->value . '[/reverse]');
 
         return $this;
     }
@@ -339,7 +339,7 @@ abstract class Element
      */
     public function invisible(): self
     {
-        $this->value = strings('[invisible]' . $this->value . '[/invisible]');
+        $this->value = strings('[invisible]' . (string) $this->value . '[/invisible]');
 
         return $this;
     }
