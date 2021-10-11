@@ -80,7 +80,7 @@ abstract class Element
         $this->output     = $output ??= new ConsoleOutput();
         $this->theme      = $theme ??= new DefaultTheme();
         $this->terminal   = new Terminal();
-        $this->shortcodes = $shortcodes ??= new Shortcodes();
+        $this->shortcodes = $shortcodes ??= new Shortcodes($this->theme);
         $this->value      = strings($value);
         $this->properties = arrays($properties);
     }
@@ -95,6 +95,18 @@ abstract class Element
     public function getValue(): Strings
     {
         return $this->value;
+    }
+
+    /**
+     * Get element raw value without shortcodes.
+     *
+     * @return string Returns element raw value without shortcodes.
+     *
+     * @access public
+     */
+    public function getRawValue(): string
+    {
+        return strip_tags(str_replace(array('[',']'), array('<','>'), (string) $this->value));
     }
 
     /**
@@ -192,7 +204,7 @@ abstract class Element
      */
     public function color(string $color): self
     {
-        $this->properties->set('color', $this->theme->variables()->get('colors.' . $color, $color));
+        $this->value = strings('[color=' . $color . ']' . $this->value . '[/color]');
 
         return $this;
     }
@@ -208,7 +220,7 @@ abstract class Element
      */
     public function bg(string $color): self
     {
-        $this->properties->set('bg', $this->theme->variables()->get('colors.' . $color, $color));
+        $this->value = strings('[bg=' . $color . ']' . $this->value . '[/bg]');
 
         return $this;
     }
@@ -584,48 +596,21 @@ abstract class Element
      */
     public function render(): string
     {
-        $fg      = null;
-        $bg      = null;
-        $options = null;
+        $properties = [
+            'pl'    => $this->properties->get('padding.left') ?? 0,
+            'pr'    => $this->properties->get('padding.right') ?? 0,
+            'ml'    => $this->properties->get('margin.left') ?? 0,
+            'mr'    => $this->properties->get('margin.right') ?? 0,
+            'color' => $this->properties->get('color') ?? null,
+            'bg'    => $this->properties->get('bg') ?? null,
+        ];
+        
+        $padding = fn($value) => "[p l={$properties['pl']} r={$properties['pr']}]{$value}[/p]";
+        $margin  = fn($value) => "[m l={$properties['ml']} r={$properties['mr']}]{$value}[/m]";
+        $color   = fn($value) => $properties['color'] ? "[color={$properties['color']}]{$value}[/color]" : $value;
+        $bg      = fn($value) => $properties['bg'] ? "[bg={$properties['bg']}]{$value}[/bg]" : $value;
 
-        if ($this->properties->has('color')) {
-            $fg = 'fg=' . $this->properties->get('color') . ';';
-        }
-
-        if ($this->properties->has('bg')) {
-            $bg = 'bg=' . $this->properties->get('bg') . ';';
-        }
-
-        if ($this->properties->has('href')) {
-            $options = 'href=' . $this->properties->get('href');
-        }
-
-        if ($this->properties->has('padding.left')) {
-            $this->value->prepend((string) strings(' ')->repeat($this->properties->get('padding.left')));
-        }
-
-        if ($this->properties->has('padding.right')) {
-            $this->value->append((string) strings(' ')->repeat($this->properties->get('padding.right')));
-        }
-
-        if ($fg || $bg || $options) {
-            $element = '<' .
-                        $fg .
-                        $bg .
-                        '>' . (string) $this->value . '</>';
-        } else {
-            $element = (string) $this->value;
-        }
-
-        if ($this->properties->has('margin.left')) {
-            $element = (string) strings($element)->prepend((string) strings(' ')->repeat($this->properties->get('margin.left')));
-        }
-
-        if ($this->properties->has('margin.right')) {
-            $element = (string) strings($element)->append((string) strings(' ')->repeat($this->properties->get('margin.right')));
-        }
-
-        return $element;
+        return $margin($bg($color($padding((string) $this->value))));
     }
 
     /**
