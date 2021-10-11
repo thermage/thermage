@@ -243,7 +243,7 @@ class Termage
      */
     public function link(string $value = '', array $properties = []): Link
     {
-        return new link(
+        return new Link(
             $this->output,
             $this->theme,
             $this->shortcodes,
