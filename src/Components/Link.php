@@ -18,9 +18,9 @@ final class Link extends Element
      * @access public
      */
     public function href(string $value): self
-    { 
+    {
         $this->value('[link href=' . $value . ']' . (string) $this->getValue() . '[/link]');
-        
+
         return $this;
     }
 }
