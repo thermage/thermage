@@ -592,11 +592,11 @@ abstract class Element
             'color' => $this->properties->get('color') ?? null,
             'bg'    => $this->properties->get('bg') ?? null,
         ];
-        
-        $padding = fn($value) => "[p l={$properties['pl']} r={$properties['pr']}]{$value}[/p]";
-        $margin  = fn($value) => "[m l={$properties['ml']} r={$properties['mr']}]{$value}[/m]";
-        $color   = fn($value) => $properties['color'] ? "[color={$properties['color']}]{$value}[/color]" : $value;
-        $bg      = fn($value) => $properties['bg'] ? "[bg={$properties['bg']}]{$value}[/bg]" : $value;
+
+        $padding = static fn ($value) => "[p l={$properties['pl']} r={$properties['pr']}]{$value}[/p]";
+        $margin  = static fn ($value) => "[m l={$properties['ml']} r={$properties['mr']}]{$value}[/m]";
+        $color   = static fn ($value) => $properties['color'] ? "[color={$properties['color']}]{$value}[/color]" : $value;
+        $bg      = static fn ($value) => $properties['bg'] ? "[bg={$properties['bg']}]{$value}[/bg]" : $value;
 
         return $margin($bg($color($padding((string) $this->value))));
     }
