@@ -458,95 +458,6 @@ abstract class Element
     }
 
     /**
-     * Limit the number of characters in the element value.
-     *
-     * @param  int    $limit  Limit of characters.
-     * @param  string $append Text to append to the string IF it gets truncated.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function limit(int $limit = 100, string $append = '...'): self
-    {
-        $this->value->limit($limit, $append);
-
-        return $this;
-    }
-
-    /**
-     * Convert element value to lower-case.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function lower(): self
-    {
-        $this->value->lower();
-
-        return $this;
-    }
-
-    /**
-     * Convert element value to upper-case.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function upper(): self
-    {
-        $this->value->upper();
-
-        return $this;
-    }
-
-    /**
-     * Repeated element value given a multiplier.
-     *
-     * @param int $multiplier The number of times to repeat the string.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function repeat(int $multiplier): self
-    {
-        $this->value->repeat($multiplier);
-
-        return $this;
-    }
-
-    /**
-     * Convert element value to camel case.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function camel(): self
-    {
-        $this->value->camel();
-
-        return $this;
-    }
-
-    /**
-     * Convert element value first character of every word of string to upper case and the others to lower case.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function capitalize(): self
-    {
-        $this->value->capitalize();
-
-        return $this;
-    }
-
-    /**
      * Dynamically bind magic methods to the Element class.
      *
      * @param string $method     Method.
@@ -620,7 +531,7 @@ abstract class Element
             'color' => $this->properties->get('color') ?? null,
             'bg'    => $this->properties->get('bg') ?? null,
         ];
-
+    
         $padding = static fn ($value) => "[p l={$properties['pl']} r={$properties['pr']}]{$value}[/p]";
         $margin  = static fn ($value) => "[m l={$properties['ml']} r={$properties['mr']}]{$value}[/m]";
         $color   = static fn ($value) => $properties['color'] ? "[color={$properties['color']}]{$value}[/color]" : $value;
