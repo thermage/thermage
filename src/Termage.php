@@ -17,7 +17,6 @@ use Termage\Components\Link;
 use Termage\Components\Rule;
 use Termage\Parsers\Shortcodes;
 use Termage\Themes\DefaultTheme;
-use Thunder\Shortcode\ShortcodeFacade;
 
 class Termage
 {
