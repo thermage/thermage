@@ -14,6 +14,7 @@ use function hexdec;
 use function implode;
 use function max;
 use function min;
+use function mt_rand;
 use function round;
 use function sprintf;
 use function strlen;
@@ -88,9 +89,9 @@ final class Color
 
     /**
      * Get random hex color.
-     * 
+     *
      * @return string Returns random hex color.
-     * 
+     *
      * @access public
      */
     public function getRandomHexColor(): string
@@ -100,16 +101,16 @@ final class Color
 
     /**
      * Get random rgb color.
-     * 
+     *
      * @return array Returns random rgb color.
-     * 
+     *
      * @access public
      */
     public function getRandomRgbColor(): array
     {
         $rgbColor = [];
 
-        foreach(['r', 'g', 'b'] as $color) {
+        foreach (['r', 'g', 'b'] as $color) {
             $rgbColor[$color] = mt_rand(0, 255);
         }
 
