@@ -20,6 +20,14 @@ class Shortcodes
      */
     private ShortcodeFacade $shortcodes;
 
+
+    /**
+     * The instance of Theme class.
+     *
+     * @access private
+     */
+    private Theme $theme;
+
     /**
      * Create a new Shortcodes instance.
      *
