@@ -192,7 +192,7 @@ abstract class Element
      */
     public function color(string $color): self
     {
-        $this->value = strings('[color=' . $color . ']' . $this->value . '[/color]');
+        $this->properties->set('color', $color);
 
         return $this;
     }
@@ -208,7 +208,7 @@ abstract class Element
      */
     public function bg(string $color): self
     {
-        $this->value = strings('[bg=' . $color . ']' . $this->value . '[/bg]');
+        $this->properties->set('bg', $color);
 
         return $this;
     }
@@ -254,7 +254,6 @@ abstract class Element
 
         return $this;
     }
-
 
     /**
      * Set element dim property.
