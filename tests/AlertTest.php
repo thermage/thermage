@@ -57,3 +57,9 @@ test('test alert with text align left', function (): void {
     $alert = "[m l=0 r=0][p l=0 r=0][m l=0 r=0][bg=info][p l=25 r=25][/p][/bg][/m][m l=0 r=0][bg=info][color=black][p l=2 r=39]Stay RAD![/p][/color][/bg][/m][m l=0 r=0][bg=info][p l=25 r=25][/p][/bg][/m][/p][/m]";
     expect(str_replace(["\r\n", "\r", "\n"], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
+
+test('test alert size', function (): void {
+    $value = termage()->alert('Stay RAD!')->size(200)->render();
+    $alert = "[m l=0 r=0][p l=0 r=0][m l=0 r=0][bg=info][p l=100 r=100][/p][/bg][/m][m l=0 r=0][bg=info][color=black][p l=2 r=189]Stay RAD![/p][/color][/bg][/m][m l=0 r=0][bg=info][p l=100 r=100][/p][/bg][/m][/p][/m]";
+    expect(str_replace(["\r\n", "\r", "\n"], "", strings($value)->trim()->toString()))->toEqual($alert);
+});
