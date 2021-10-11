@@ -12,5 +12,5 @@ test('test termage link method', function (): void {
 
 test('test link href', function (): void {
     $value = termage()->link('Termage')->href('https://digital.flextype.org/termage/')->render();
-    expect($value)->toEqual("<href=https://digital.flextype.org/termage/>Termage</>");
+    expect($value)->toEqual("[m l=0 r=0][p l=0 r=0][link href=https://digital.flextype.org/termage/]Termage[/link][/p][/m]");
 });
