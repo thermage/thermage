@@ -38,11 +38,16 @@ class Termage
     private Terminal $terminal;
 
     /**
-     * The instance of Theme class.
+     * Theme class object.
      *
      * @access private
      */
-    private Theme $theme;
+    private $theme;
+
+    /**
+     * The instance of Shortcodes clas.
+     */
+    private Shortcodes $shortcodes;
 
     /**
      * Create a new Termage instance.
