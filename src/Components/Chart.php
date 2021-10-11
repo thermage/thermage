@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Termage\Components;
 
-use Termage\Base\Element;
 use Termage\Base\Color;
+use Termage\Base\Element;
 
 use function count;
 use function intval;
@@ -234,14 +234,14 @@ final class Chart extends Element
         $showPercents = $this->showPercents ??= false;
         $showValues   = $this->showValues ??= false;
         $valuesSufix  = $this->valuesSufix ??= '';
-        
+
         foreach ($data as $key => $value) {
             $i++;
             $_labelSize        = strings($this->getShortcodes()->stripShortcodes($value['label']))->length();
             $labelPaddingRight = $_labelSize < $labelSize ? $labelSize - $_labelSize + 2 : 2;
 
-            $color = isset($value['color']) ? $value['color'] : (new Color())->getRandomHexColor();
-      
+            $color = $value['color'] ?? (new Color())->getRandomHexColor();
+
             $line .= termage($output, $theme)->el((string) $value['label'])->pr($labelPaddingRight)->color($color)->render() .
                      termage($output, $theme)->el(strings(' ')->repeat($value['percentage'])->toString())->bg($color)->render() .
                      ($showPercents ? termage($output, $theme)->el((string) $value['percentage'] . '%')->pl1()->color($color)->render() : '') .
@@ -272,9 +272,9 @@ final class Chart extends Element
 
         // Set random color if color isnt defined.
         foreach ($data as $key => $value) {
-            $data[$key]['color'] = isset($value['color']) ? $value['color'] : (new Color())->getRandomHexColor();
+            $data[$key]['color'] = $value['color'] ?? (new Color())->getRandomHexColor();
         }
-       
+
         $line = '';
         foreach ($data as $key => $value) {
             $line .= termage($output, $theme)->el(strings(' ')->repeat($value['percentage'])->toString())->bg($value['color'])->render();
@@ -283,7 +283,7 @@ final class Chart extends Element
         $labels = '';
         $suffix = '';
         foreach ($data as $key => $value) {
-            $suffix = ($showPercents ? termage($output, $theme)->el((string) $value['percentage'] . '%')->pr1()->color($value['color'])->render() : '') .
+            $suffix            = ($showPercents ? termage($output, $theme)->el((string) $value['percentage'] . '%')->pr1()->color($value['color'])->render() : '') .
                       ($showValues ? termage($output, $theme)->el('(' . (string) $value['value'] . $valuesSufix . ')')->pr1()->color($value['color'])->render() : '');
                       $labels .= termage($output, $theme)->el($value['label'] . (empty($suffix) ? ' ' : ' ' . $suffix))->color($value['color'])->render();
         }
