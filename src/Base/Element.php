@@ -51,14 +51,14 @@ abstract class Element
     private Strings $value;
 
     /**
-     * The instance of Theme class.
+     * Theme class object.
      *
      * @access private
      */
     private $theme;
 
     /**
-     * Shortcodes facade.
+     * The instance of Shortcodes class.
      */
     private Shortcodes $shortcodes;
     
