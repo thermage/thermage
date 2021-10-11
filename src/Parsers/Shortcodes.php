@@ -20,7 +20,6 @@ class Shortcodes
      */
     private ShortcodeFacade $shortcodes;
 
-
     /**
      * The instance of Theme class.
      *
