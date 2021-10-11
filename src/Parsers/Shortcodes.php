@@ -182,11 +182,11 @@ class Shortcodes
     }
 
     /**
-     * Strip facade.
+     * Strip shortcodes.
      *
-     * @param string $value Value with facade.
+     * @param string $value Value with shortcodes.
      *
-     * @return string Value without facade.
+     * @return string Value without shortcodes.
      *
      * @access public
      */
