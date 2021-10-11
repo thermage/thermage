@@ -126,7 +126,7 @@ class Shortcodes
         // shortcode: [u]Underline[/u]
         $this->facade->addHandler('u', fn (ShortcodeInterface $s) => $this->underlineShortcode($s));
 
-        // shortcode: [strikethrough]Strikethrough[/strikethrough] [s]Strikethrough[/s]
+        // shortcode: [strikethrough]Strikethrough[/strikethrough]
         $this->facade->addHandler('strikethrough', fn (ShortcodeInterface $s) => $this->strikethroughShortcode($s));
 
         // shortcode: [s]Strikethrough[/s]
