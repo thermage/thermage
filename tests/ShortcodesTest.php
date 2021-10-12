@@ -101,7 +101,17 @@ test('test [m l= r=] shortcodes', function (): void {
     expect($shortcodes->parse('[m l=2 r=2]Margin left and right[/m]'))->toEqual("  Margin left and right  ");
 });
 
-test('test [mx=2] shortcodes', function (): void {
+test('test [mx=] shortcodes', function (): void {
     $shortcodes = termage()->getShortcodes();
     expect($shortcodes->parse('[mx=4]Margin left and right[/mx]'))->toEqual("  Margin left and right  ");
+});
+
+test('test [ml=] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[ml=2]Margin left[/ml]'))->toEqual("  Margin left");
+});
+
+test('test [mr=] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[mr=2]Margin right[/mr]'))->toEqual("Margin right  ");
 });
