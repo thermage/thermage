@@ -115,3 +115,23 @@ test('test [mr=] shortcodes', function (): void {
     $shortcodes = termage()->getShortcodes();
     expect($shortcodes->parse('[mr=2]Margin right[/mr]'))->toEqual("Margin right  ");
 });
+
+test('test [p l= r=] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[p l=2 r=2]Padding left and right[/p]'))->toEqual("  Padding left and right  ");
+});
+
+test('test [px=] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[px=4]Padding left and right[/px]'))->toEqual("  Padding left and right  ");
+});
+
+test('test [pl=] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[pl=2]Padding left[/pl]'))->toEqual("  Padding left");
+});
+
+test('test [pr=] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[pr=2]Padding right[/pr]'))->toEqual("Padding right  ");
+});
