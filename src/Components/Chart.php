@@ -288,6 +288,6 @@ final class Chart extends Element
                       $labels .= termage($output, $theme)->el($value['label'] . (empty($suffix) ? ' ' : ' ' . $suffix))->color($value['color'])->render();
         }
 
-        return $line . "\n\n" . $labels;
+        return $line . PHP_EOL . PHP_EOL . $labels;
     }
 }
