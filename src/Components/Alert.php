@@ -277,7 +277,7 @@ final class Alert extends Element
         $body   = termage($output, $theme)->el($value)->pl($pl)->pr($pr)->bg($alertBg)->color($alertColor)->render();
         $footer = termage($output, $theme)->el()->px($alertSize)->bg($alertBg)->render();
 
-        $this->value($header . "\n" . $body . "\n" . $footer);
+        $this->value($header . PHP_EOL . $body . PHP_EOL . $footer);
 
         return parent::render();
     }
