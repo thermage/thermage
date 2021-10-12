@@ -88,9 +88,9 @@ final class Color
     }
 
     /**
-     * Get random hex color.
+     * Get random HEX color.
      *
-     * @return string Returns random hex color.
+     * @return string Returns random HEX color.
      *
      * @access public
      */
@@ -100,9 +100,9 @@ final class Color
     }
 
     /**
-     * Get random rgb color.
+     * Get random RGB color.
      *
-     * @return array Returns random rgb color.
+     * @return array Returns random RGB color.
      *
      * @access public
      */
