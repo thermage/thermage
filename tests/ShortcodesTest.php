@@ -69,3 +69,39 @@ test('test [strikethrough] and [s] shortcodes', function (): void {
     expect($shortcodes->parse('[strikethrough]strikethrough[/strikethrough]'))->toEqual("\e[9mstrikethrough\e[29m");
     expect($shortcodes->parse('[s]strikethrough[/s]'))->toEqual("\e[9mstrikethrough\e[29m");
 });
+
+test('test [dim] and [d] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[dim]dim[/dim]'))->toEqual("\e[2mdim\e[22m");
+    expect($shortcodes->parse('[d]dim[/d]'))->toEqual("\e[2mdim\e[22m");
+});
+
+test('test [blink] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[blink]blink[/blink]'))->toEqual("\e[5mblink\e[25m");
+});
+
+test('test [reverse] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[reverse]reverse[/reverse]'))->toEqual("\e[7mreverse\e[27m");
+});
+
+test('test [invisible] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[invisible]invisible[/invisible]'))->toEqual("\e[8minvisible\e[28m");
+});
+
+test('test [link] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[link href="https://github.com/termage/termage"]Termage[/link]'))->toEqual("\e]8;;https://github.com/termage/termage\e\\Termage\e]8;;\e\\");
+});
+
+test('test [m l= r=] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[m l=2 r=2]Margin left and right[/m]'))->toEqual("  Margin left and right  ");
+});
+
+test('test [mx=2] shortcodes', function (): void {
+    $shortcodes = termage()->getShortcodes();
+    expect($shortcodes->parse('[mx=4]Margin left and right[/mx]'))->toEqual("  Margin left and right  ");
+});
