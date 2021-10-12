@@ -402,8 +402,8 @@ class Shortcodes
         $pr = intval($s->getBbCode() / 2 * $themePaddingRight * $themePaddingGlobal);
 
         if ($s->getBbCode()) {
-            $p['l'] = (string) strings(' ')->repeat((int) $pl);
-            $p['r'] = (string) strings(' ')->repeat((int) $pr); 
+            $p['l'] = (string) strings(' ')->repeat($pl);
+            $p['r'] = (string) strings(' ')->repeat($pr); 
         }
 
         return $p['l'] . $s->getContent() . $p['r'];
@@ -425,8 +425,10 @@ class Shortcodes
         $themePaddingGlobal = $this->theme->variables()->get('padding.global', 1);
         $themePaddingLeft   = $this->theme->variables()->get('padding.left', 1);
 
+        $pl = intval($s->getBbCode() * $themePaddingLeft * $themePaddingGlobal);
+
         if ($s->getBbCode()) {
-            $p['l'] = intval($s->getBbCode() * $themePaddingLeft * $themePaddingGlobal);
+            $p['l'] = (string) strings(' ')->repeat($pl);
         }
 
         return $p['l'] . $s->getContent();
@@ -448,8 +450,10 @@ class Shortcodes
         $themePaddingGlobal = $this->theme->variables()->get('padding.global', 1);
         $themePaddingRight  = $this->theme->variables()->get('padding.right', 1);
 
+        $pr = intval($s->getBbCode() * $themePaddingRight * $themePaddingGlobal);
+
         if ($s->getBbCode()) {
-            $p['r'] = intval($s->getBbCode() * $themePaddingRight * $themePaddingGlobal);
+            $p['r'] = (string) strings(' ')->repeat($pr);
         }
 
         return $s->getContent() . $p['r'];
@@ -500,8 +504,8 @@ class Shortcodes
         $mr = intval($s->getBbCode() / 2 * $themeMarginRight * $themeMarginGlobal);
 
         if ($s->getBbCode()) {
-            $m['l'] = (string) strings(' ')->repeat((int) $ml);
-            $m['r'] = (string) strings(' ')->repeat((int) $mr); 
+            $m['l'] = (string) strings(' ')->repeat($ml);
+            $m['r'] = (string) strings(' ')->repeat($mr); 
         }
 
         return $m['l'] . $s->getContent() . $m['r'];
@@ -523,8 +527,10 @@ class Shortcodes
         $themeMarginGlobal = $this->theme->variables()->get('margin.global', 1);
         $themeMarginLeft   = $this->theme->variables()->get('margin.left', 1);
 
+        $ml = intval($s->getBbCode() * $themeMarginLeft * $themeMarginGlobal);
+
         if ($s->getBbCode()) {
-            $m['l'] = intval($s->getBbCode() * $themeMarginLeft * $themeMarginGlobal);
+            $m['l'] = (string) strings(' ')->repeat($ml);
         }
 
         return $m['l'] . $s->getContent();
@@ -546,8 +552,10 @@ class Shortcodes
         $themeMarginGlobal = $this->theme->variables()->get('margin.global', 1);
         $themeMarginRight  = $this->theme->variables()->get('margin.right', 1);
 
+        $mr = intval($s->getBbCode() * $themeMarginRight * $themeMarginGlobal);
+        
         if ($s->getBbCode()) {
-            $m['r'] = intval($s->getBbCode() * $themeMarginRight * $themeMarginGlobal);
+            $m['r'] = (string) strings(' ')->repeat($mr);
         }
 
         return $s->getContent() . $m['r'];
