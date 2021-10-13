@@ -8,7 +8,7 @@ use Atomastic\Arrays\Arrays;
 
 use function arrays;
 
-abstract class Theme
+class Theme implements ThemeInterface
 {
     /**
      * Theme variables.
