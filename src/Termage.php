@@ -21,11 +21,11 @@ class Termage
     use Macroable;
 
     /**
-     * Theme class object.
+     * The implementation of Theme interface.
      *
      * @access private
      */
-    private $theme;
+    private ThemeInterface $theme;
 
     /**
      * The instance of Shortcodes clas.
