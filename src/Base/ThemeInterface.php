@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Termage\Base;
 
-use Atomastic\Arrays\Arrays;
-
-use function arrays;
-
 interface ThemeInterface
 {
     /**
