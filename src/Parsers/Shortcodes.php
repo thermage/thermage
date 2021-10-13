@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Termage\Parsers;
 
-use Termage\Base\Color;
+use Termage\Utils\Color;
 use Thunder\Shortcode\Shortcode\ShortcodeInterface;
 use Thunder\Shortcode\ShortcodeFacade;
 
