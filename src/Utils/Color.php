@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Termage\Base;
+namespace Termage\Utils;
 
 use InvalidArgumentException;
 
