@@ -76,6 +76,22 @@ abstract class Element
     }
 
     /**
+     * Set element value.
+     *
+     * @param string $value Element value.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function setValue(string $value = ''): self
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+    
+    /**
      * Get Shortcodes instance.
      *
      * @return Shortcodes Shortcodes instance.
@@ -125,22 +141,6 @@ abstract class Element
     public static function setTheme(ThemeInterface $theme): self
     {
         self::$theme = $theme;
-    }
-
-    /**
-     * Set element value.
-     *
-     * @param string $value Element value.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function setValue(string $value = ''): self
-    {
-        $this->value = $value;
-
-        return $this;
     }
 
     /**
