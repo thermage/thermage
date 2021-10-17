@@ -2,9 +2,23 @@
 
 declare(strict_types=1);
 
+/**
+ * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
+ * Copyright (c) Sergey Romanenko (https://awilum.github.io)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
+ * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
+ * @link      https://digital.flextype.org/termage/ Termage
+ * @license   https://opensource.org/licenses/mit-license.php MIT License
+ */
+
 namespace Termage\Components;
 
-use Termage\Base\Color;
+use Termage\Utils\Color;
 use Termage\Base\Element;
 
 use function count;
@@ -171,23 +185,19 @@ final class Chart extends Element
     public function render(): string
     {
         $theme     = $this->getTheme();
-        $output    = $this->getOutput();
         $value     = $this->getValue()->toString();
         $chartData = $this->сhartData ?? [];
         $chartType = $this->chartType ?? 'horizontal';
 
         // Get total value
-        $total = 0;
-        foreach ($chartData as $key => $value) {
-            $total += $value['value'];
-        }
+        $total = array_sum(array_column($chartData, 'value'));
 
-        // Set percentage
+        // Set percentage for each chart value
         foreach ($chartData as $key => $value) {
             $chartData[$key]['percentage'] = intval(round($value['value'] / $total * 100));
         }
 
-        // Selct chart type
+        // Select chart type
         switch ($chartType) {
             case 'inline':
                 $chart = $this->buildInlineChart($chartData);
@@ -199,11 +209,7 @@ final class Chart extends Element
                 break;
         }
 
-        // Store chart
-        $this->value($chart);
-
-        // Render
-        return parent::render();
+        return $chart . PHP_EOL;
     }
 
     /**
@@ -218,7 +224,6 @@ final class Chart extends Element
     private function buildHortizontalChart(array $data): string
     {
         $theme  = $this->getTheme();
-        $output = $this->getOutput();
 
         $line  = '';
         $i     = 0;
@@ -242,11 +247,11 @@ final class Chart extends Element
 
             $color = $value['color'] ?? (new Color())->getRandomHexColor();
 
-            $line .= termage($output, $theme)->el((string) $value['label'])->pr($labelPaddingRight)->color($color)->render() .
-                     termage($output, $theme)->el(strings(' ')->repeat($value['percentage'])->toString())->bg($color)->render() .
-                     ($showPercents ? termage($output, $theme)->el((string) $value['percentage'] . '%')->pl1()->color($color)->render() : '') .
-                     ($showValues ? termage($output, $theme)->el('(' . (string) $value['value'] . $valuesSufix . ')')->pl1()->color($color)->render() : '') .
-                     ($i < $count ? "\n" : '');
+            $line .= termage($theme)->el((string) $value['label'])->pr($labelPaddingRight)->color($color)->render() .
+                     termage($theme)->el(strings(' ')->repeat($value['percentage'])->toString())->bg($color)->render() .
+                     ($showPercents ? termage($theme)->el((string) $value['percentage'] . '%')->pl1()->color($color)->render() : '') .
+                     ($showValues ? termage($theme)->el('(' . (string) $value['value'] . $valuesSufix . ')')->pl1()->color($color)->render() : '') .
+                     ($i < $count ? PHP_EOL : '');
         }
 
         return $line;
@@ -264,7 +269,6 @@ final class Chart extends Element
     private function buildInlineChart(array $data): string
     {
         $theme  = $this->getTheme();
-        $output = $this->getOutput();
 
         $showPercents = $this->showPercents ??= false;
         $showValues   = $this->showValues ??= false;
@@ -277,15 +281,15 @@ final class Chart extends Element
 
         $line = '';
         foreach ($data as $key => $value) {
-            $line .= termage($output, $theme)->el(strings(' ')->repeat($value['percentage'])->toString())->bg($value['color'])->render();
+            $line .= termage($theme)->el(strings(' ')->repeat($value['percentage'])->toString())->bg($value['color'])->render();
         }
 
         $labels = '';
         $suffix = '';
         foreach ($data as $key => $value) {
-            $suffix            = ($showPercents ? termage($output, $theme)->el((string) $value['percentage'] . '%')->pr1()->color($value['color'])->render() : '') .
-                      ($showValues ? termage($output, $theme)->el('(' . (string) $value['value'] . $valuesSufix . ')')->pr1()->color($value['color'])->render() : '');
-                      $labels .= termage($output, $theme)->el($value['label'] . (empty($suffix) ? ' ' : ' ' . $suffix))->color($value['color'])->render();
+            $suffix            = ($showPercents ? termage($theme)->el((string) $value['percentage'] . '%')->pr1()->color($value['color'])->render() : '') .
+                      ($showValues ? termage($theme)->el('(' . (string) $value['value'] . $valuesSufix . ')')->pr1()->color($value['color'])->render() : '');
+                      $labels .= termage($theme)->el($value['label'] . (empty($suffix) ? ' ' : ' ' . $suffix))->color($value['color'])->render();
         }
 
         return $line . PHP_EOL . PHP_EOL . $labels;
