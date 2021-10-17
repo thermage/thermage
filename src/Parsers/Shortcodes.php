@@ -62,7 +62,7 @@ class Shortcodes
      *
      * @access public
      */
-    public static function setTheme(ThemeInterface $theme): self
+    public static function setTheme(ThemeInterface $theme)
     {
         self::$theme = $theme;
     }
