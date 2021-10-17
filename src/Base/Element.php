@@ -7,12 +7,10 @@ namespace Termage\Base;
 use Atomastic\Arrays\Arrays;
 use Atomastic\Strings\Strings;
 use BadMethodCallException;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\ConsoleOutput;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Terminal;
+use Termage\Themes\ThemeInterface;
+use Termage\Themes\Theme;
+use Termage\Utils\Color;
 use Termage\Parsers\Shortcodes;
-use Termage\Themes\DefaultTheme;
 
 use function arrays;
 use function intval;
@@ -23,50 +21,27 @@ use function substr;
 abstract class Element
 {
     /**
-     * The implementation of the output.
-     *
-     * @access private
-     */
-    private OutputInterface $output;
-
-    /**
-     * The instance of Terminal class.
-     *
-     * @access private
-     */
-    private Terminal $terminal;
-
-    /**
-     * Element properties.
-     *
-     * @access private
-     */
-    private Arrays $properties;
-
-    /**
      * Element value.
      *
      * @access private
      */
-    private Strings $value;
+    private string $value;
 
     /**
-     * Theme class object.
+     * The implementation of Theme interface.
      *
      * @access private
      */
-    private $theme;
+    private static $theme = null;
 
     /**
      * The instance of Shortcodes class.
      */
-    private Shortcodes $shortcodes;
+    private static $shortcodes = null;
     
     /**
      * Create a new Element instance.
      *
-     * @param OutputInterface $output     Output interface.
-     * @param InputInterface  $input      Input interface.
      * @param Theme           $theme      Instance of the Theme class.
      * @param string          $value      Element value.
      * @param array           $properties Element properties.
@@ -76,18 +51,16 @@ abstract class Element
      * @access public
      */
     final public function __construct(
-        ?OutputInterface $output = null,
-        ?Theme $theme = null,
-        ?Shortcodes $shortcodes = null,
+        $theme = null,
+        $shortcodes = null,
         string $value = '',
-        array $properties = []
+        string $class = ''
     ) {
-        $this->output     = $output ??= new ConsoleOutput();
-        $this->theme      = $theme ??= new DefaultTheme();
-        $this->terminal   = new Terminal();
-        $this->shortcodes = $shortcodes ??= new Shortcodes($this->theme);
-        $this->value      = strings($value);
-        $this->properties = arrays($properties);
+        self::$theme      = $theme ?? new Theme();
+        self::$shortcodes = $shortcodes ?? new Shortcodes(self::getTheme());
+        $this->value      = $value;
+        $this->class      = strings($class)->trim();
+        $this->properties = arrays();
     }
 
     /**
@@ -97,57 +70,61 @@ abstract class Element
      *
      * @access public
      */
-    public function getValue(): Strings
+    public function getValue(): string
     {
         return $this->value;
     }
 
     /**
-     * Get element output.
+     * Get Shortcodes instance.
      *
-     * @return OutputInterface Returns element output.
+     * @return Shortcodes Shortcodes instance.
      *
      * @access public
      */
-    public function getOutput(): OutputInterface
+    public static function getShortcodes(): Shortcodes
     {
-        return $this->output;
+        return self::$shortcodes ?? new Shortcodes(self::getTheme());
     }
 
     /**
-     * Get element theme.
+     * Set a new instance of the theme that implements Themes interface.
      *
-     * @return Theme Returns element theme.
+     * @param ThemeInterface $theme Theme interface.
+     *
+     * @return self Returns instance of the Termage class.
      *
      * @access public
      */
-    public function getTheme(): Theme
+    public static function setShortcodes($shortcodes)
     {
-        return $this->theme;
+        self::$shortcodes = $shortcodes;
     }
 
     /**
-     * Get element properties.
+     * Get instance of the theme that implements Themes interface.
      *
-     * @return Arrays Returns element properties.
+     * @return ThemeInterface Returns instance of the theme that implements Themes interface.
      *
      * @access public
      */
-    public function getProperties(): Arrays
+    public static function getTheme(): ThemeInterface
     {
-        return $this->properties;
+        return self::$theme ?? new Theme();
     }
 
     /**
-     * Get element shortcodes.
+     * Set a new instance of the theme that implements Themes interface.
      *
-     * @return Shortcodes Returns element shortcodes.
+     * @param ThemeInterface $theme Theme interface.
+     *
+     * @return self Returns instance of the Termage class.
      *
      * @access public
      */
-    public function getShortcodes(): Shortcodes
+    public static function setTheme(ThemeInterface $theme): self
     {
-        return $this->shortcodes;
+        self::$theme = $theme;
     }
 
     /**
@@ -159,41 +136,121 @@ abstract class Element
      *
      * @access public
      */
-    public function value(string $value = ''): self
+    public function setValue(string $value = ''): self
     {
-        $this->value = strings($value);
+        $this->value = $value;
 
         return $this;
     }
 
     /**
-     * Set element properties.
-     *
-     * @param string $properties Element properties.
+     * Set element bold property.
      *
      * @return self Returns instance of the Element class.
      *
      * @access public
      */
-    public function properties(array $properties = []): self
+    public function bold(): self
     {
-        $this->properties = arrays($properties);
+        $this->properties->set('bold', true);
 
         return $this;
     }
 
     /**
-     * Set element output.
-     *
-     * @param OutputInterface $output Element output interface.
+     * Set element italic property.
      *
      * @return self Returns instance of the Element class.
      *
      * @access public
      */
-    public function output(OutputInterface $output): self
+    public function italic(): self
     {
-        $this->output = $output;
+        $this->properties->set('italic', true);
+
+        return $this;
+    }
+
+    /**
+     * Set element strikethrough property.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function strikethrough(): self
+    {
+        $this->properties->set('strikethrough', true);
+
+        return $this;
+    }
+
+    /**
+     * Set element dim property.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function dim(): self
+    {
+        $this->properties->set('dim', true);
+
+        return $this;
+    }
+
+    /**
+     * Set element underline property, alias to underscore.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function underline(): self
+    {
+        $this->properties->set('underline', true);
+
+        return $this;
+    }
+
+    /**
+     * Set element blink property.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function blink(): self
+    {
+        $this->properties->set('blink', true);
+
+        return $this;
+    }
+
+    /**
+     * Set element reverse property.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function reverse(): self
+    {
+        $this->properties->set('reverse', true);
+
+        return $this;
+    }
+
+    /**
+     * Set element invisible property.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function invisible(): self
+    {
+        $this->properties->set('invisible', true);
 
         return $this;
     }
@@ -229,133 +286,7 @@ abstract class Element
 
         return $this;
     }
-
-    /**
-     * Set element bold property.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function bold(): self
-    {
-        $this->value = strings('[b]' . (string) $this->value . '[/b]');
-
-        return $this;
-    }
-
-    /**
-     * Set element italic property.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function italic(): self
-    {
-        $this->value = strings('[i]' . (string) $this->value . '[/i]');
-
-        return $this;
-    }
-
-    /**
-     * Set element strikethrough property.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function strikethrough(): self
-    {
-        $this->value = strings('[s]' . (string) $this->value . '[/s]');
-
-        return $this;
-    }
-
-    /**
-     * Set element dim property.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function dim(): self
-    {
-        $this->value = strings('[dim]' . (string) $this->value . '[/dim]');
-
-        return $this;
-    }
-
-    /**
-     * Set element underline property, alias to underscore.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function underline(): self
-    {
-        $this->value = strings('[u]' . (string) $this->value . '[/u]');
-
-        return $this;
-    }
-
-    /**
-     * Set element underscore property.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function underscore(): self
-    {
-        $this->value = strings('[u]' . (string) $this->value . '[/u]');
-
-        return $this;
-    }
-
-    /**
-     * Set element blink property.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function blink(): self
-    {
-        $this->value = strings('[blink]' . (string) $this->value . '[/blink]');
-
-        return $this;
-    }
-
-    /**
-     * Set element reverse property.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function reverse(): self
-    {
-        $this->value = strings('[reverse]' . (string) $this->value . '[/reverse]');
-
-        return $this;
-    }
-
-    /**
-     * Set element invisible property.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function invisible(): self
-    {
-        $this->value = strings('[invisible]' . (string) $this->value . '[/invisible]');
-
-        return $this;
-    }
-
+  
     /**
      * Set element margin x property.
      *
@@ -367,9 +298,9 @@ abstract class Element
      */
     public function mx(int $value): self
     {
-        $themeMarginGlobal = $this->theme->variables()->get('margin.global', 1);
-        $themeMarginLeft   = $this->theme->variables()->get('margin.left', 1);
-        $themeMarginRight  = $this->theme->variables()->get('margin.right', 1);
+        $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
+        $themeMarginLeft   = self::$theme->variables()->get('margin.left', 1);
+        $themeMarginRight  = self::$theme->variables()->get('margin.right', 1);
 
         $this->properties->set('margin.left', intval($value / 2 * $themeMarginLeft * $themeMarginGlobal));
         $this->properties->set('margin.right', intval($value / 2 * $themeMarginRight * $themeMarginGlobal));
@@ -388,8 +319,8 @@ abstract class Element
      */
     public function ml(int $value): self
     {
-        $themeMarginGlobal = $this->theme->variables()->get('margin.global', 1);
-        $themeMarginLeft   = $this->theme->variables()->get('margin.left', 1);
+        $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
+        $themeMarginLeft   = self::$theme->variables()->get('margin.left', 1);
 
         $this->properties->set('margin.left', intval($value * $themeMarginLeft * $themeMarginGlobal));
 
@@ -407,8 +338,8 @@ abstract class Element
      */
     public function mr(int $value): self
     {
-        $themeMarginGlobal = $this->theme->variables()->get('margin.global', 1);
-        $themeMarginRight  = $this->theme->variables()->get('margin.right', 1);
+        $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
+        $themeMarginRight  = self::$theme->variables()->get('margin.right', 1);
 
         $this->properties->set('margin.right', intval($value * $themeMarginRight * $themeMarginGlobal));
 
@@ -426,9 +357,9 @@ abstract class Element
      */
     public function px(int $value): self
     {
-        $themePaddingGlobal = $this->theme->variables()->get('padding.global', 1);
-        $themePaddingLeft   = $this->theme->variables()->get('padding.left', 1);
-        $themePaddingRight  = $this->theme->variables()->get('padding.right', 1);
+        $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
+        $themePaddingLeft   = self::$theme->variables()->get('padding.left', 1);
+        $themePaddingRight  = self::$theme->variables()->get('padding.right', 1);
 
         $this->properties->set('padding.left', intval($value / 2 * $themePaddingLeft * $themePaddingGlobal));
         $this->properties->set('padding.right', intval($value / 2 * $themePaddingRight * $themePaddingGlobal));
@@ -447,8 +378,8 @@ abstract class Element
      */
     public function pl(int $value): self
     {
-        $themePaddingGlobal = $this->theme->variables()->get('padding.global', 1);
-        $themePaddingLeft   = $this->theme->variables()->get('padding.left', 1);
+        $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
+        $themePaddingLeft   = self::$theme->variables()->get('padding.left', 1);
 
         $this->properties->set('padding.left', intval($value * $themePaddingLeft * $themePaddingGlobal));
 
@@ -466,8 +397,8 @@ abstract class Element
      */
     public function pr(int $value): self
     {
-        $themePaddingGlobal = $this->theme->variables()->get('padding.global', 1);
-        $themePaddingRight  = $this->theme->variables()->get('padding.right', 1);
+        $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
+        $themePaddingRight  = self::$theme->variables()->get('padding.right', 1);
 
         $this->properties->set('padding.right', intval($value * $themePaddingRight * $themePaddingGlobal));
 
@@ -532,64 +463,64 @@ abstract class Element
     }
 
     /**
-     * Render element.
+     * Get rendered element.
      *
      * @return string Returns rendered element.
-     *
+     * 
      * @access public
      */
     public function render(): string
     {
-        $properties = [
-            'pl'    => $this->properties->get('padding.left') ?? 0,
-            'pr'    => $this->properties->get('padding.right') ?? 0,
-            'ml'    => $this->properties->get('margin.left') ?? 0,
-            'mr'    => $this->properties->get('margin.right') ?? 0,
-            'color' => $this->properties->get('color') ?? null,
-            'bg'    => $this->properties->get('bg') ?? null,
-        ];
-    
-        $padding = static fn ($value) => "[p l={$properties['pl']} r={$properties['pr']}]{$value}[/p]";
-        $margin  = static fn ($value) => "[m l={$properties['ml']} r={$properties['mr']}]{$value}[/m]";
-        $color   = static fn ($value) => $properties['color'] ? "[color={$properties['color']}]{$value}[/color]" : $value;
-        $bg      = static fn ($value) => $properties['bg'] ? "[bg={$properties['bg']}]{$value}[/bg]" : $value;
-
-        return $margin($bg($color($padding((string) $this->value))));
-    }
-
-    /**
-     * Display element.
-     *
-     * @param string $type Display type.
-     *
-     * @throws BadMethodCallException If method not found.
-     *
-     * @access public
-     */
-    public function display(string $type = 'row')
-    {
-        switch ($type) {
-            case 'none':
-                $this->output->write('');
-                break;
-
-            case 'col':
-                $render = $this->shortcodes->parse($this->render());
-                $this->output->write($render);
-                break;
-
-            case 'row':
-            default:
-                $render = $this->shortcodes->parse($this->render());
-                $this->output->writeln($render);
-                break;
+        // Apply classes
+        if ($this->class->length() > 0) {
+            foreach ($this->class->segments() as $class) {
+                $this->{trim($class)}();
+            }
         }
+
+        $propertiesHierarchy = ['invisible', 'reverse', 'blink', 'dim', 'bold', 'italic', 'underline', 'strikethrough', 'padding', 'bg', 'color', 'margin'];
+
+        $properties = [
+            'padding'       => ['l' => $this->properties->get('padding.left') ?? 0, 'r' => $this->properties->get('padding.right') ?? 0],
+            'margin'        => ['l' => $this->properties->get('margin.left') ?? 0, 'r' => $this->properties->get('margin.right') ?? 0],
+            'color'         => $this->properties->get('color') ? self::$theme->variables()->get('colors.' . $this->properties->get('color'), $this->properties->get('color')) : false,
+            'bg'            => $this->properties->get('bg') ? self::$theme->variables()->get('bg.' . $this->properties->get('bg'), $this->properties->get('bg')) : false,
+            'bold'          => $this->properties->get('bold') ?? false,
+            'italic'        => $this->properties->get('italic') ?? false,
+            'underline'     => $this->properties->get('underline') ?? false,
+            'strikethrough' => $this->properties->get('strikethrough') ?? false,
+            'dim'           => $this->properties->get('dim') ?? false,
+            'blink'         => $this->properties->get('blink') ?? false,
+            'reverse'       => $this->properties->get('reverse') ?? false,
+            'invisible'     => $this->properties->get('invisible') ?? false,
+        ];
+
+        $padding       = static fn ($value) => strings(' ')->repeat($properties['padding']['l']) . $value . strings(' ')->repeat($properties['padding']['r']);
+        $margin        = static fn ($value) => strings(' ')->repeat($properties['margin']['l']) . $value . strings(' ')->repeat($properties['margin']['r']);
+        $color         = static fn ($value) => $properties['color'] ? (new Color($properties['color'], ''))->apply($value) : $value;
+        $bg            = static fn ($value) => $properties['bg'] ? (new Color('', $properties['bg']))->apply($value) : $value;
+        $bold          = static fn ($value) => $properties['bold'] ? "\e[1m" . $value . "\e[22m" : $value;
+        $italic        = static fn ($value) => $properties['italic'] ? "\e[3m" . $value . "\e[23m" : $value;
+        $underline     = static fn ($value) => $properties['underline'] ? "\e[4m" . $value . "\e[24m" : $value;
+        $strikethrough = static fn ($value) => $properties['strikethrough'] ? "\e[9m" . $value . "\e[29m" : $value;
+        $dim           = static fn ($value) => $properties['dim'] ? "\e[2m" . $value . "\e[22m" : $value;
+        $blink         = static fn ($value) => $properties['blink'] ? "\e[5m" . $value . "\e[25m" : $value;
+        $reverse       = static fn ($value) => $properties['reverse'] ? "\e[7m" . $value . "\e[27m" : $value;
+        $invisible     = static fn ($value) => $properties['invisible'] ? "\e[8m" . $value . "\e[28m" : $value;
+
+        foreach($propertiesHierarchy as $propertyName) {
+            $this->value = ${$propertyName}($this->value);
+        }
+        
+        return self::$shortcodes->parse($this->value);
     }
 
     /**
-     * Get element as string.
+     * Get rendered element as string representation.
      *
-     * @return string Returns element string representation.
+     * @return string Returns rendered element as string representation.
+     * 
+     * @access public
      */
     public function __toString(): string
     {
