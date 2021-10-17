@@ -62,7 +62,7 @@ final class Color
      *
      * @access private
      */
-    private string $foreground;
+    private string $foreground = '';
 
     /**
      * Background color.
@@ -71,21 +71,35 @@ final class Color
      *
      * @access private
      */
-    private string $background;
+    private string $background = '';
 
     /**
-     * Create color instance.
+     * Set text color.
      *
-     * @param string $foreground Foreground color.
-     * @param string $background Background color.
+     * @return self Returns instance of the Color class.
      *
      * @access public
      */
-    public function __construct(string $foreground = '', string $background = '')
+    public function textColor($color): self
     {
-        $this->foreground = $this->parseColor($foreground);
-        $this->background = $this->parseColor($background, true);
-    }
+        $this->foreground = $this->parseColor($color);
+
+        return $this;
+    } 
+
+    /**
+     * Set bg color.
+     *
+     * @return self Returns instance of the Color class.
+     *
+     * @access public
+     */
+    public function bgColor($color): self 
+    {
+        $this->background = $this->parseColor($color, true);
+
+        return $this;
+    } 
 
     /**
      * Get random HEX color.
