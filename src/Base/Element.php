@@ -497,8 +497,8 @@ abstract class Element
 
         $padding       = static fn ($value) => strings(' ')->repeat($properties['padding']['l']) . $value . strings(' ')->repeat($properties['padding']['r']);
         $margin        = static fn ($value) => strings(' ')->repeat($properties['margin']['l']) . $value . strings(' ')->repeat($properties['margin']['r']);
-        $color         = static fn ($value) => $properties['color'] ? (new Color($properties['color'], ''))->apply($value) : $value;
-        $bg            = static fn ($value) => $properties['bg'] ? (new Color('', $properties['bg']))->apply($value) : $value;
+        $color         = static fn ($value) => $properties['color'] ? (new Color())->textColor($properties['color'])->apply($value) : $value;
+        $bg            = static fn ($value) => $properties['bg'] ? (new Color())->bgColor($properties['bg'])->apply($value) : $value;
         $bold          = static fn ($value) => $properties['bold'] ? "\e[1m" . $value . "\e[22m" : $value;
         $italic        = static fn ($value) => $properties['italic'] ? "\e[3m" . $value . "\e[23m" : $value;
         $underline     = static fn ($value) => $properties['underline'] ? "\e[4m" . $value . "\e[24m" : $value;
