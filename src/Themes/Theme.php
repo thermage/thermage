@@ -193,7 +193,7 @@ class Theme implements ThemeInterface
                 'right'  => 1,
             ],
 
-            // Alert Component.
+            // Alert element.
             'alert' => [
                 'text-align' => 'left',
                 'size-auto' => false,
@@ -226,8 +226,8 @@ class Theme implements ThemeInterface
                 ],
             ],
 
-            // Rule Component.
-            'rule' => [
+            // Hr element.
+            'hr' => [
                 'text-align' => 'left',
                 'type' => [
                     'info' => ['color' => 'info'],
