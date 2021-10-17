@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace Termage\Components;
 
-use Symfony\Component\Console\Terminal;
+use Termage\Utils\Terminal;
 use Termage\Base\Element;
 
 use function strings;
