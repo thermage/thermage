@@ -24,7 +24,6 @@
         "atomastic/strings": "^3.0.2",
         "atomastic/macroable": "^2.0",
         "thunderer/shortcode": "^0.7.4",
-        "symfony/console": "^5.3",
         "spatie/emoji": "^3.0"
     },
     "autoload":{
