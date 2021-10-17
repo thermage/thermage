@@ -474,7 +474,7 @@ abstract class Element
         // Apply classes
         if ($this->class->length() > 0) {
             foreach ($this->class->segments() as $class) {
-                $this->{trim($class)}();
+                $this->{(string) strings($class)->camel()->trim()}();
             }
         }
 
@@ -507,7 +507,7 @@ abstract class Element
         $blink         = static fn ($value) => $properties['blink'] ? "\e[5m" . $value . "\e[25m" : $value;
         $reverse       = static fn ($value) => $properties['reverse'] ? "\e[7m" . $value . "\e[27m" : $value;
         $invisible     = static fn ($value) => $properties['invisible'] ? "\e[8m" . $value . "\e[28m" : $value;
-
+    
         foreach($propertiesHierarchy as $propertyName) {
             $this->value = ${$propertyName}($this->value);
         }
