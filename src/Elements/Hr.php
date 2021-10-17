@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Termage\Components;
+namespace Termage\Elements;
 
 use Symfony\Component\Console\Terminal;
 use Termage\Base\Element;
+use function Termage\span;
 
 use function strings;
 use function termage;
 
-final class Rule extends Element
+final class Hr extends Element
 {
     /**
      * Rule text align.
@@ -27,7 +28,7 @@ final class Rule extends Element
     private string $ruleType;
 
     /**
-     * Set rule text align left.
+     * Set hr text align left.
      *
      * @return self Returns instance of the Rule class.
      *
@@ -41,7 +42,7 @@ final class Rule extends Element
     }
 
     /**
-     * Set rule text align right.
+     * Set hr text align right.
      *
      * @return self Returns instance of the Rule class.
      *
@@ -55,7 +56,7 @@ final class Rule extends Element
     }
 
     /**
-     * Set rule color info.
+     * Set hr color info.
      *
      * @return self Returns instance of the Rule class.
      *
@@ -69,7 +70,7 @@ final class Rule extends Element
     }
 
     /**
-     * Set rule color warning.
+     * Set hr color warning.
      *
      * @return self Returns instance of the Rule class.
      *
@@ -83,7 +84,7 @@ final class Rule extends Element
     }
 
     /**
-     * Set rule color danger.
+     * Set hr color danger.
      *
      * @return self Returns instance of the Rule class.
      *
@@ -97,7 +98,7 @@ final class Rule extends Element
     }
 
     /**
-     * Set rule color success.
+     * Set hr color success.
      *
      * @return self Returns instance of the Rule class.
      *
@@ -111,7 +112,7 @@ final class Rule extends Element
     }
 
     /**
-     * Set rule color primary.
+     * Set hr color primary.
      *
      * @return self Returns instance of the Rule class.
      *
@@ -125,7 +126,7 @@ final class Rule extends Element
     }
 
     /**
-     * Set rule color secondary.
+     * Set hr color secondary.
      *
      * @return self Returns instance of the Rule class.
      *
@@ -148,7 +149,7 @@ final class Rule extends Element
     public function getComponentProperties(): array
     {
         return [
-            'rule' => [
+            'hr' => [
                 'text-align' => 'left',
                 'type' => [
                     'info' => ['color' => 'info'],
@@ -163,7 +164,7 @@ final class Rule extends Element
     }
 
     /**
-     * Render rule component.
+     * Render hr component.
      *
      * @return string Returns rendered alert component.
      *
@@ -172,15 +173,14 @@ final class Rule extends Element
     public function render(): string
     {
         $componentProperties = $this->getComponentProperties();
-        $theme               = $this->getTheme();
+        $theme               = self::getTheme();
         $ruleType            = $this->ruleType ?? 'info';
-        $ruleColor           = $theme->variables()->get('rule.type.' . $ruleType . '.color', $componentProperties['rule']['type'][$ruleType]['color']);
-        $ruleTextAlign       = $this->ruleTextAlign ?? $theme->variables()->get('rule.text-align', $componentProperties['rule']['text-align']);
+        $ruleColor           = $theme->variables()->get('hr.type.' . $ruleType . '.color', $componentProperties['hr']['type'][$ruleType]['color']);
+        $ruleTextAlign       = $this->ruleTextAlign ?? $theme->variables()->get('hr.text-align', $componentProperties['hr']['text-align']);
         $rulePaddingX        = 5;
-        $output              = $this->getOutput();
-        $value               = $this->getValue()->toString();
+        $value               = $this->getValue();
 
-        $valueLength   = strings($this->getShortcodes()->stripShortcodes($value))->length();
+        $valueLength   = strings(self::getShortcodes()->stripShortcodes($value))->length();
         $terminalWidth = (new Terminal())->getWidth();
 
         if ($ruleTextAlign === 'right') {
@@ -199,9 +199,9 @@ final class Rule extends Element
             $ruleAppend = ' ' . $ruleAppend;
             $value      = ' ' . $value;
 
-            $rule = termage($output, $theme)->el($rulePrepend)->color($ruleColor)->render() .
-                    termage($output, $theme)->el($value)->color($ruleColor)->render() .
-                    termage($output, $theme)->el($ruleAppend)->color($ruleColor)->render();
+            $hr = span($rulePrepend)->color($ruleColor) .
+                    span($value)->color($ruleColor) .
+                    span($ruleAppend)->color($ruleColor);
         }
 
         if ($ruleTextAlign === 'left') {
@@ -220,9 +220,9 @@ final class Rule extends Element
             $rulePrepend .= ' ';
             $value       .= ' ';
 
-            $rule = termage($output, $theme)->el($rulePrepend)->color($ruleColor)->render() .
-                    termage($output, $theme)->el($value)->color($ruleColor)->render() .
-                    termage($output, $theme)->el($ruleAppend)->color($ruleColor)->render();
+            $hr = span($rulePrepend)->color($ruleColor) .
+                    span($value)->color($ruleColor) .
+                    span($ruleAppend)->color($ruleColor);
         }
 
         if ($valueLength === 0) {
@@ -231,10 +231,10 @@ final class Rule extends Element
                 $ruleElement .= '―';
             }
 
-            $rule = termage($output, $theme)->el($ruleElement)->color($ruleColor)->render();
+            $hr = span($ruleElement)->color($ruleColor)->render();
         }
 
-        $this->value($rule);
+        $this->setValue($hr);
 
         return parent::render();
     }
