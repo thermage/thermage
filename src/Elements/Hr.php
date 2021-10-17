@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace Termage\Elements;
 
-use Symfony\Component\Console\Terminal;
+use Termage\Utils\Terminal;
 use Termage\Base\Element;
 use function Termage\span;
 
@@ -214,8 +214,8 @@ final class Hr extends Element
             $value      = ' ' . $value;
 
             $hr = span($rulePrepend)->color($ruleColor) .
-                    span($value)->color($ruleColor) .
-                    span($ruleAppend)->color($ruleColor);
+                span($value)->color($ruleColor) .
+                span($ruleAppend)->color($ruleColor);
         }
 
         if ($ruleTextAlign === 'left') {
@@ -235,8 +235,8 @@ final class Hr extends Element
             $value       .= ' ';
 
             $hr = span($rulePrepend)->color($ruleColor) .
-                    span($value)->color($ruleColor) .
-                    span($ruleAppend)->color($ruleColor);
+                span($value)->color($ruleColor) .
+                span($ruleAppend)->color($ruleColor);
         }
 
         if ($valueLength === 0) {
