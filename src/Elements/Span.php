@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Termage\Components;
+namespace Termage\Elements;
 
 use Termage\Base\Element;
 
-final class El extends Element
+final class Span extends Element
 {
+
 }
