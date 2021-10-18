@@ -32,6 +32,7 @@ use Termage\Elements\Blink;
 use Termage\Elements\Anchor;
 use Termage\Elements\Hr;
 use Termage\Elements\Chart;
+use Termage\Elements\Alert;
 
 function setShortcodes($shortcodes)
 {
@@ -156,4 +157,9 @@ function br(string $value = '', string $class = ''): Breakline
 function chart(string $value = '', string $class = ''): Chart
 {
     return Termage::chart($value, $class);
+}
+
+function alert(string $value = '', string $class = ''): Alert
+{
+    return Termage::alert($value, $class);
 }
