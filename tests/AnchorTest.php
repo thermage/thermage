@@ -6,6 +6,6 @@ use Termage\Termage;
 use Termage\Elements\Anchor;
 
 test('test anchor href', function (): void {
-    $value = Termage::link('Termage')->href('https://digital.flextype.org/termage/');
-    expect($value)->toEqual("[link href=https://digital.flextype.org/termage/]Termage[/link][/p][/m]");
+    $value = Termage::anchor('Termage')->href('https://digital.flextype.org/termage/');
+    expect($value)->toEqual("\e]8;;" . "https://digital.flextype.org/termage/" . "\e\\" . "Termage" . "\e]8;;\e\\");
 });
