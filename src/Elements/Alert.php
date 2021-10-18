@@ -268,6 +268,8 @@ final class Alert extends Element
         $alertBg             = $theme->variables()->get('alert.type.' . $alertType . '.bg', $componentProperties['alert']['type'][$alertType]['bg']);
         $alertColor          = $theme->variables()->get('alert.type.' . $alertType . '.color', $componentProperties['alert']['type'][$alertType]['color']);
 
+        $pl = 0;
+        $pr = 0;
         $px = strings($this->stripDecorations($value))->length();
 
         if ($alertSizeAuto) {
