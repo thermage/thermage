@@ -9,52 +9,47 @@ use function Termage\div;
 
 test('test color', function (): void {
     $value = div('RAD')->color('blue')->render();
-    expect($value)->toBe('[m l=0 r=0][color=blue][p l=0 r=0]RAD[/p][/color][/m]');
+    expect($value)->toBe("\e[38;2;0;123;255mRAD\e[39m\n");
 });
 
 test('test magic color', function (): void {
     $value = div()->setValue('RAD')->colorBlue()->render();
-    expect($value)->toBe('[m l=0 r=0][color=blue][p l=0 r=0]RAD[/p][/color][/m]');
+    expect($value)->toBe("\e[38;2;0;123;255mRAD\e[39m\n");
 });
 
 test('test bg', function (): void {
     $value = div()->setValue('RAD')->bg('blue')->render();
-    expect($value)->toBe('[m l=0 r=0][bg=blue][p l=0 r=0]RAD[/p][/bg][/m]');
+    expect($value)->toBe("\e[44mRAD\e[49m\n");
 });
 
 test('test magic bg', function (): void {
     $value = div()->setValue('RAD')->bgBlue()->render();
-    expect($value)->toBe('[m l=0 r=0][bg=blue][p l=0 r=0]RAD[/p][/bg][/m]');
+    expect($value)->toBe("\e[44mRAD\e[49m\n");
 });
 
 test('test bold', function (): void {
     $value = div()->setValue('RAD')->bold()->render();
-    expect($value)->toBe('[m l=0 r=0][p l=0 r=0][b]RAD[/b][/p][/m]');
-});
-
-test('test underscore', function (): void {
-    $value = div()->setValue('RAD')->underscore()->render();
-    expect($value)->toBe('[m l=0 r=0][p l=0 r=0][u]RAD[/u][/p][/m]');
+    expect($value)->toBe("\e[1mRAD\e[22m\n");
 });
 
 test('test underline', function (): void {
     $value = div()->setValue('RAD')->underline()->render();
-    expect($value)->toBe('[m l=0 r=0][p l=0 r=0][u]RAD[/u][/p][/m]');
+    expect($value)->toBe("\e[4mRAD\e[24m\n");
 });
 
 test('test blink', function (): void {
     $value = div()->setValue('RAD')->blink()->render();
-    expect($value)->toBe('[m l=0 r=0][p l=0 r=0][blink]RAD[/blink][/p][/m]');
+    expect($value)->toBe("\e[5mRAD\e[25m\n");
 });
 
 test('test italic', function (): void {
     $value = div()->setValue('RAD')->italic()->render();
-    expect($value)->toBe('[m l=0 r=0][p l=0 r=0][i]RAD[/i][/p][/m]');
+    expect($value)->toBe("\e[3mRAD\e[23m\n");
 });
 
 test('test strikethrough', function (): void {
     $value = div()->setValue('RAD')->strikethrough()->render();
-    expect($value)->toBe('[m l=0 r=0][p l=0 r=0][s]RAD[/s][/p][/m]');
+    expect($value)->toBe("\e[9mRAD\e[29m\n");
 });
 
 test('test reverse', function (): void {
@@ -71,11 +66,6 @@ test('test value and getValue', function (): void {
     $value = div()->setValue('RAD');
     expect($value->render())->toBe('RAD' . PHP_EOL);
     expect($value->getValue())->toBe('RAD');
-});
-
-test('test properties and getProperties', function (): void {
-    $value = div()->setProperties(['RAD']);
-    expect($value->getProperties()->toArray())->toBe(['RAD']);
 });
 
 test('test mx', function (): void {
