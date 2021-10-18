@@ -104,200 +104,200 @@ class Termage
     /**
      * Create a new Div element instance.
      *
-     * @param string $value Div value.
-     * @param string $class Div classes.
+     * @param string $value   Div element value.
+     * @param string $classes Div element classes.
      *
      * @return Div Returns Div element instance.
      *
      * @access public
      */
-    public static function div(string $value = '', string $class = ''): Div
+    public static function div(string $value = '', string $classes = ''): Div
     {
         return new Div(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $class
+            $classes
         );
     }
 
     /**
      * Create a new Span element instance.
      *
-     * @param string $value Span value.
-     * @param string $class Span classes.
+     * @param string $value   Span element value.
+     * @param string $classes Span element classes.
      *
      * @return Span Returns Span element instance.
      *
      * @access public
      */
-    public static function span(string $value = '', string $class = ''): Span
+    public static function span(string $value = '', string $classes = ''): Span
     {
         return new Span(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $class
+            $classes
         );
     }
 
     /**
      * Create a new Paragraph element instance.
      *
-     * @param string $value Paragraph value.
-     * @param string $class Paragraph classes.
+     * @param string $value   Paragraph element value.
+     * @param string $classes Paragraph element classes.
      *
      * @return Paragraph Returns Paragraph element instance.
      *
      * @access public
      */
-    public static function paragraph(string $value = '', string $class = ''): Paragraph
+    public static function paragraph(string $value = '', string $classes = ''): Paragraph
     {
         return new Paragraph(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $class
+            $classes
         );
     }
 
     /**
      * Create a new Hr element instance.
      *
-     * @param string $value Hr value.
-     * @param string $class Hr classes.
+     * @param string $value   Hr element value.
+     * @param string $classes Hr element classes.
      *
      * @return Hr Returns Hr element instance.
      *
      * @access public
      */
-    public static function hr(string $value = '', string $class = ''): Hr
+    public static function hr(string $value = '', string $classes = ''): Hr
     {
         return new Hr(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $class
+            $classes
         );
     }
 
     /**
      * Create a new Bold element instance.
      *
-     * @param string $value Bold value.
-     * @param string $class Bold classes.
+     * @param string $value   Bold element value.
+     * @param string $classes Bold element classes.
      *
      * @return Bold Returns Bold element instance.
      *
      * @access public
      */
-    public function bold(string $value = '', string $class = ''): Bold
+    public function bold(string $value = '', string $classes = ''): Bold
     {
         return new Bold(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $class
+            $classes
         );
     }
 
     /**
      * Create a new Blink element instance.
      *
-     * @param string $value Blink value.
-     * @param string $class Blink classes.
+     * @param string $value   Blink element value.
+     * @param string $classes Blink element classes.
      *
      * @return Blink Returns Blink element instance.
      *
      * @access public
      */
-    public function blink(string $value = '', string $class = ''): Blink
+    public function blink(string $value = '', string $classes = ''): Blink
     {
         return new Blink(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $class
+            $classes
         );
     }
 
     /**
      * Create a new Invisible element instance.
      *
-     * @param string $value Invisible value.
-     * @param string $class Invisible classes.
+     * @param string $value   Invisible element value.
+     * @param string $classes Invisible element classes.
      *
      * @return Invisible Returns Invisible element instance.
      *
      * @access public
      */
-    public function invisible(string $value = '', string $class = ''): Invisible
+    public function invisible(string $value = '', string $classes = ''): Invisible
     {
         return new Invisible(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $class
+            $classes
         );
     }
 
     /**
      * Create a new Anchor element instance.
      *
-     * @param string $value Anchor value.
-     * @param string $class Anchor classes.
+     * @param string $value   Anchor element value.
+     * @param string $classes Anchor element classes.
      *
      * @return Anchor Returns Anchor element instance.
      *
      * @access public
      */
-    public function anchor(string $value = '', string $class = ''): Anchor
+    public function anchor(string $value = '', string $classes = ''): Anchor
     {
         return new Anchor(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $class
+            $classes
         );
     }
 
     /**
      * Create a new Alert element instance.
      *
-     * @param string $value Alert value.
-     * @param string $class Alert classes.
+     * @param string $value   Alert element value.
+     * @param string $classes Alert element classes.
      *
      * @return Alert Returns Alert element instance.
      *
      * @access public
      */
-    public static function alert(string $value = '', string $class = ''): Alert
+    public static function alert(string $value = '', string $classes = ''): Alert
     {
         return new Alert(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $class
+            $classes
         );
     }
 
     /**
      * Create a new Chart element instance.
      *
-     * @param string $value Chart value.
-     * @param string $class Chart classes.
+     * @param string $value   Chart element value.
+     * @param string $classes Chart element classes.
      *
      * @return Chart Returns Chart element instance.
      *
      * @access public
      */
-    public static function chart(string $value = '', string $class = ''): Chart
+    public static function chart(string $value = '', string $classes = ''): Chart
     {
         return new Chart(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $class
+            $classes
         );
     }
 }
