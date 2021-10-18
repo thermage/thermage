@@ -19,13 +19,12 @@ declare(strict_types=1);
 namespace Termage\Elements;
 
 use Termage\Base\Element;
-
-use const PHP_EOL;
+use function Termage\br;
 
 final class Div extends Element
 {
     public function render(): string
     {
-        return parent::render() . PHP_EOL;
+        return parent::render() . br();
     }
 }
