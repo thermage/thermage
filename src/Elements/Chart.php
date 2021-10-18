@@ -18,16 +18,19 @@ declare(strict_types=1);
 
 namespace Termage\Elements;
 
-use Termage\Utils\Color;
 use Termage\Base\Element;
-use function Termage\span;
+use Termage\Utils\Color;
 
+use function array_column;
+use function array_sum;
 use function count;
 use function intval;
 use function max;
 use function round;
 use function strings;
-use function termage;
+use function Termage\span;
+
+use const PHP_EOL;
 
 final class Chart extends Element
 {
@@ -224,7 +227,7 @@ final class Chart extends Element
      */
     private function buildHortizontalChart(array $data): string
     {
-        $theme  = $this->getTheme();
+        $theme = $this->getTheme();
 
         $line  = '';
         $i     = 0;
@@ -269,7 +272,7 @@ final class Chart extends Element
      */
     private function buildInlineChart(array $data): string
     {
-        $theme  = $this->getTheme();
+        $theme = $this->getTheme();
 
         $showPercents = $this->showPercents ??= false;
         $showValues   = $this->showValues ??= false;

@@ -10,21 +10,17 @@ declare(strict_types=1);
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
- * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
  * @link      https://digital.flextype.org/termage/ Termage
- * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace Termage\Base;
 
-use Atomastic\Arrays\Arrays;
 use Atomastic\Strings\Strings;
 use BadMethodCallException;
-use Termage\Themes\ThemeInterface;
-use Termage\Themes\Theme;
-use Termage\Utils\Color;
 use Termage\Parsers\Shortcodes;
+use Termage\Themes\Theme;
+use Termage\Themes\ThemeInterface;
+use Termage\Utils\Color;
 
 use function arrays;
 use function intval;
@@ -52,20 +48,20 @@ abstract class Element
      * The instance of Shortcodes class.
      */
     private static $shortcodes = null;
-    
+
     /**
      * Create a new Element instance.
      *
-     * @param Theme           $theme      Instance of the Theme class.
-     * @param string          $value      Element value.
-     * @param array           $properties Element properties.
+     * @param Theme  $theme      Instance of the Theme class.
+     * @param string $value      Element value.
+     * @param array  $properties Element properties.
      *
      * @return Element Returns element.
      *
      * @access public
      */
     final public function __construct(
-        $theme = null,
+        ?Theme $theme = null,
         $shortcodes = null,
         string $value = '',
         string $class = ''
@@ -104,7 +100,7 @@ abstract class Element
 
         return $this;
     }
-    
+
     /**
      * Get Shortcodes instance.
      *
@@ -122,11 +118,11 @@ abstract class Element
      *
      * @param ThemeInterface $theme Theme interface.
      *
-     * @return self Returns instance of the Termage class.
+     * @return void
      *
      * @access public
      */
-    public static function setShortcodes($shortcodes)
+    public static function setShortcodes($shortcodes): void
     {
         self::$shortcodes = $shortcodes;
     }
@@ -148,11 +144,11 @@ abstract class Element
      *
      * @param ThemeInterface $theme Theme interface.
      *
-     * @return self Returns instance of the Termage class.
+     * @return void
      *
      * @access public
      */
-    public static function setTheme(ThemeInterface $theme)
+    public static function setTheme(ThemeInterface $theme): void
     {
         self::$theme = $theme;
     }
@@ -300,7 +296,7 @@ abstract class Element
 
         return $this;
     }
-  
+
     /**
      * Set element margin x property.
      *
@@ -480,7 +476,7 @@ abstract class Element
      * Get rendered element.
      *
      * @return string Returns rendered element.
-     * 
+     *
      * @access public
      */
     public function render(): string
@@ -521,11 +517,11 @@ abstract class Element
         $blink         = static fn ($value) => $properties['blink'] ? "\e[5m" . $value . "\e[25m" : $value;
         $reverse       = static fn ($value) => $properties['reverse'] ? "\e[7m" . $value . "\e[27m" : $value;
         $invisible     = static fn ($value) => $properties['invisible'] ? "\e[8m" . $value . "\e[28m" : $value;
-    
-        foreach($propertiesHierarchy as $propertyName) {
+
+        foreach ($propertiesHierarchy as $propertyName) {
             $this->value = ${$propertyName}($this->value);
         }
-        
+
         return self::$shortcodes->parse($this->value);
     }
 
@@ -533,7 +529,7 @@ abstract class Element
      * Get rendered element as string representation.
      *
      * @return string Returns rendered element as string representation.
-     * 
+     *
      * @access public
      */
     public function __toString(): string

@@ -20,6 +20,8 @@ namespace Termage\Elements;
 
 use Termage\Base\Element;
 
+use const PHP_EOL;
+
 final class Div extends Element
 {
     public function render(): string

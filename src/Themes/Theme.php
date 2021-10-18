@@ -220,7 +220,7 @@ class Theme implements ThemeInterface
                         'color' => '#ffffff',
                     ],
                     'secondary' => [
-                        'bg' => 'secondary',
+                        'bg' => '#6c757d',
                         'color' => '#6c757d',
                     ],
                 ],
@@ -230,12 +230,12 @@ class Theme implements ThemeInterface
             'hr' => [
                 'text-align' => 'left',
                 'type' => [
-                    'info' => ['color' => 'info'],
-                    'warning' => ['color' => 'warning'],
-                    'danger' => ['color' => 'danger'],
-                    'success' => ['color' => 'success'],
-                    'primary' => ['color' => 'primary'],
-                    'secondary' => ['color' => 'secondary'],
+                    'info' => ['color' => '#17a2b8'],
+                    'warning' => ['color' => '#ffc107'],
+                    'danger' => ['color' => '#dc3545'],
+                    'success' => ['color' => '#28a745'],
+                    'primary' => ['color' => '#007bff'],
+                    'secondary' => ['color' => '#6c757d'],
                 ],
             ],
         ];

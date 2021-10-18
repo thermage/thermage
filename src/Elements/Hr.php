@@ -10,20 +10,16 @@ declare(strict_types=1);
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
- * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
  * @link      https://digital.flextype.org/termage/ Termage
- * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace Termage\Elements;
 
-use Termage\Utils\Terminal;
 use Termage\Base\Element;
-use function Termage\span;
+use Termage\Utils\Terminal;
 
 use function strings;
-use function termage;
+use function Termage\span;
 
 final class Hr extends Element
 {

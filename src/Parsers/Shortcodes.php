@@ -18,11 +18,11 @@ declare(strict_types=1);
 
 namespace Termage\Parsers;
 
+use Termage\Themes\Theme;
+use Termage\Themes\ThemeInterface;
 use Termage\Utils\Color;
 use Thunder\Shortcode\Shortcode\ShortcodeInterface;
 use Thunder\Shortcode\ShortcodeFacade;
-use Termage\Themes\ThemeInterface;
-use Termage\Themes\Theme;
 
 use function intval;
 use function str_replace;
@@ -72,11 +72,11 @@ class Shortcodes
      *
      * @param ThemeInterface $theme Theme interface.
      *
-     * @return self Returns instance of the Termage class.
+     * @return void 
      *
      * @access public
      */
-    public static function setTheme(ThemeInterface $theme)
+    public static function setTheme(ThemeInterface $theme): void
     {
         self::$theme = $theme;
     }
@@ -194,7 +194,7 @@ class Shortcodes
 
         // shortcode: [a href=]Anchor[/a]
         $this->facade->addHandler('a', fn (ShortcodeInterface $s) => $this->anchorShortcode($s));
-        
+
         // shortcode: [m l= r=]Margin left and right[/m]
         $this->facade->addHandler('m', fn (ShortcodeInterface $s) => $this->marginShortcode($s));
 
@@ -448,7 +448,7 @@ class Shortcodes
 
         if ($s->getBbCode()) {
             $p['l'] = (string) strings(' ')->repeat($pl);
-            $p['r'] = (string) strings(' ')->repeat($pr); 
+            $p['r'] = (string) strings(' ')->repeat($pr);
         }
 
         return $p['l'] . $s->getContent() . $p['r'];
@@ -550,7 +550,7 @@ class Shortcodes
 
         if ($s->getBbCode()) {
             $m['l'] = (string) strings(' ')->repeat($ml);
-            $m['r'] = (string) strings(' ')->repeat($mr); 
+            $m['r'] = (string) strings(' ')->repeat($mr);
         }
 
         return $m['l'] . $s->getContent() . $m['r'];
@@ -598,7 +598,7 @@ class Shortcodes
         $themeMarginRight  = self::$theme->variables()->get('margin.right', 1);
 
         $mr = intval($s->getBbCode() * $themeMarginRight * $themeMarginGlobal);
-        
+
         if ($s->getBbCode()) {
             $m['r'] = (string) strings(' ')->repeat($mr);
         }

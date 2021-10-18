@@ -22,5 +22,4 @@ use Termage\Base\Element;
 
 final class Span extends Element
 {
-
 }

@@ -19,25 +19,19 @@ declare(strict_types=1);
 namespace Termage;
 
 use Atomastic\Macroable\Macroable;
-use Termage\Themes\ThemeInterface;
-use Termage\Themes\Theme;
 use Termage\Elements\Alert;
+use Termage\Elements\Anchor;
+use Termage\Elements\Blink;
+use Termage\Elements\Bold;
 use Termage\Elements\Chart;
 use Termage\Elements\Div;
-use Termage\Elements\Paragraph;
-use Termage\Elements\Bold;
-use Termage\Elements\Italic;
-use Termage\Elements\Underline;
-use Termage\Elements\Dim;
-use Termage\Elements\Invisible;
-use Termage\Elements\Span;
-use Termage\Elements\Strikethrough;
-use Termage\Elements\Anchor;
-use Termage\Elements\Reverse;
-use Termage\Elements\Blink;
 use Termage\Elements\Hr;
-use Termage\Components\Emoji;
+use Termage\Elements\Invisible;
+use Termage\Elements\Paragraph;
+use Termage\Elements\Span;
 use Termage\Parsers\Shortcodes;
+use Termage\Themes\Theme;
+use Termage\Themes\ThemeInterface;
 
 class Termage
 {
@@ -72,11 +66,11 @@ class Termage
      *
      * @param ThemeInterface $theme Theme interface.
      *
-     * @return self Returns instance of the Termage class.
+     * @return void
      *
      * @access public
      */
-    public static function setShortcodes($shortcodes)
+    public static function setShortcodes($shortcodes): void
     {
         self::$shortcodes = $shortcodes;
     }
@@ -98,11 +92,11 @@ class Termage
      *
      * @param ThemeInterface $theme Theme interface.
      *
-     * @return self Returns instance of the Termage class.
+     * @return void
      *
      * @access public
      */
-    public static function setTheme(ThemeInterface $theme)
+    public static function setTheme(ThemeInterface $theme): void
     {
         self::$theme = $theme;
     }
@@ -277,7 +271,7 @@ class Termage
      *
      * @access public
      */
-    public static function alert(string $value = '', $class = ''): Alert
+    public static function alert(string $value = '', string $class = ''): Alert
     {
         return new Alert(
             self::getTheme(),
@@ -297,7 +291,7 @@ class Termage
      *
      * @access public
      */
-    public static function chart(string $value = '', $class = ''): Chart
+    public static function chart(string $value = '', string $class = ''): Chart
     {
         return new Chart(
             self::getTheme(),

@@ -10,46 +10,43 @@ declare(strict_types=1);
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
- * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
  * @link      https://digital.flextype.org/termage/ Termage
- * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace Termage;
 
-use Termage\Elements\Div;
-use Termage\Elements\Span;
-use Termage\Elements\Paragraph;
-use Termage\Elements\Strikethrough;
-use Termage\Elements\Reverse;
-use Termage\Elements\Underline;
-use Termage\Elements\Italic;
-use Termage\Elements\Invisible;
-use Termage\Elements\Breakline;
-use Termage\Elements\Bold;
-use Termage\Elements\Blink;
-use Termage\Elements\Anchor;
-use Termage\Elements\Hr;
-use Termage\Elements\Chart;
 use Termage\Elements\Alert;
+use Termage\Elements\Anchor;
+use Termage\Elements\Blink;
+use Termage\Elements\Bold;
+use Termage\Elements\Breakline;
+use Termage\Elements\Chart;
+use Termage\Elements\Div;
+use Termage\Elements\Hr;
+use Termage\Elements\Invisible;
+use Termage\Elements\Italic;
+use Termage\Elements\Paragraph;
+use Termage\Elements\Reverse;
+use Termage\Elements\Span;
+use Termage\Elements\Strikethrough;
+use Termage\Elements\Underline;
 
-function setShortcodes($shortcodes)
+function setShortcodes($shortcodes): void
 {
     Termage::setShortcodes($theme);
 }
 
-function getShortcodes()
+function getShortcodes(): void
 {
     Termage::getShortcodes();
 }
 
-function setTheme($theme)
+function setTheme($theme): void
 {
     Termage::setTheme($theme);
 }
 
-function getTheme()
+function getTheme(): void
 {
     Termage::getTheme();
 }

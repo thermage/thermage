@@ -18,12 +18,13 @@ declare(strict_types=1);
 
 namespace Termage\Elements;
 
-use Termage\Utils\Terminal;
 use Termage\Base\Element;
-use function Termage\span;
+use Termage\Utils\Terminal;
 
 use function strings;
-use function termage;
+use function Termage\span;
+
+use const PHP_EOL;
 
 final class Alert extends Element
 {

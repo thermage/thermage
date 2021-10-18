@@ -10,7 +10,6 @@ declare(strict_types=1);
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
  *
- * @author    Fabien Potencier <fabien@symfony.com>
  * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
  * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
  * @link      https://digital.flextype.org/termage/ Termage
@@ -100,7 +99,7 @@ final class Color
         $this->foreground = $this->parseColor($color);
 
         return $this;
-    } 
+    }
 
     /**
      * Set bg color.
@@ -109,12 +108,12 @@ final class Color
      *
      * @access public
      */
-    public function bgColor($color): self 
+    public function bgColor($color): self
     {
         $this->background = $this->parseColor($color, true);
 
         return $this;
-    } 
+    }
 
     /**
      * Get random HEX color.
@@ -141,7 +140,7 @@ final class Color
             'r' => mt_rand(0, 255),
             'g' => mt_rand(0, 255),
             'b' => mt_rand(0, 255),
-       ];
+        ];
     }
 
     /**
