@@ -63,7 +63,7 @@ class Termage
      */
     public static function getShortcodes(): Shortcodes
     {
-        return self::$shortcodes ?? new Shortcodes(self::getTheme());
+        return self::$shortcodes ??= new Shortcodes(self::getTheme());
     }
 
     /**
@@ -89,7 +89,7 @@ class Termage
      */
     public static function getTheme(): ThemeInterface
     {
-        return self::$theme ?? new Theme();
+        return self::$theme ??= new Theme();
     }
 
     /**

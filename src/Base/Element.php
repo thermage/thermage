@@ -82,8 +82,8 @@ abstract class Element
         string $value = '',
         string $classes = ''
     ) {
-        self::$theme      = $theme ?? new Theme();
-        self::$shortcodes = $shortcodes ?? new Shortcodes(self::getTheme());
+        self::$theme      = $theme ??= new Theme();
+        self::$shortcodes = $shortcodes ??= new Shortcodes(self::getTheme());
         $this->value      = $value;
         $this->classes    = strings($classes)->trim();
         $this->styles     = arrays();
@@ -126,7 +126,7 @@ abstract class Element
      */
     public static function getShortcodes(): Shortcodes
     {
-        return self::$shortcodes ?? new Shortcodes(self::getTheme());
+        return self::$shortcodes ??= new Shortcodes(self::getTheme());
     }
 
     /**
@@ -152,7 +152,7 @@ abstract class Element
      */
     public static function getTheme(): ThemeInterface
     {
-        return self::$theme ?? new Theme();
+        return self::$theme ??= new Theme();
     }
 
     /**

@@ -50,7 +50,7 @@ class Shortcodes
      */
     public function __construct($theme = null)
     {
-        self::$theme  = $theme ?? new Theme();
+        self::$theme  = $theme ??= new Theme();
         $this->facade = new ShortcodeFacade();
         $this->addDefaultShortcodes();
     }
@@ -64,7 +64,7 @@ class Shortcodes
      */
     public static function getTheme(): ThemeInterface
     {
-        return self::$theme ?? new Theme();
+        return self::$theme ??= new Theme();
     }
 
     /**
