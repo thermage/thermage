@@ -3,8 +3,9 @@
 declare(strict_types=1);
 
 use Termage\Termage;
-use Termage\Base\Theme;
-use Termage\Components\Chart;
+use Termage\Themes\Theme;
+use Termage\Elements\Chart;
+use function Termage\chart;
 
 beforeEach(function() {
    $this->data = [
@@ -19,25 +20,21 @@ beforeEach(function() {
             'color' => 'orange',
         ],
         'lime' => [
-            'label' => 'Apple',
+            'label' => 'Lime',
             'value' => 220,
             'color' => 'green',
         ],
     ];
 });
 
-test('test termage chart method', function (): void {
-    $this->assertInstanceOf(Chart::class, termage()->chart());
-});
-
 test('test chart horizontal', function (): void {
-    $value = termage()->chart()->data($this->data)->horizontal()->render();
-    $chart = "[m l=0 r=0][p l=0 r=0][m l=0 r=0][color=red][p l=0 r=3]Apple[/p][/color][/m][m l=0 r=0][bg=red][p l=0 r=0]                 [/p][/bg][/m][m l=0 r=0][color=orange][p l=0 r=2]Orange[/p][/color][/m][m l=0 r=0][bg=orange][p l=0 r=0]                                              [/p][/bg][/m][m l=0 r=0][color=green][p l=0 r=3]Apple[/p][/color][/m][m l=0 r=0][bg=green][p l=0 r=0]                                     [/p][/bg][/m][/p][/m]";
-    expect(str_replace(["\r\n", "\r", "\n"], "", strings($value)->trim()->toString()))->toEqual($chart);
+    $value = chart()->setData($this->data)->horizontal()->render();
+    $chart = "\e[38;2;220;53;69mApple\e[39m\e[48;2;220;53;69m\e[49m\e[38;2;253;126;20mOrange\e[39m\e[48;2;253;126;20m\e[49m\e[38;2;40;167;69mLime\e[39m\e[48;2;40;167;69m\e[49m";
+    expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($chart);
 });
 
 test('test chart inline', function (): void {
-    $value = termage()->chart()->data($this->data)->inline()->render();
-    $chart = "[m l=0 r=0][p l=0 r=0][m l=0 r=0][bg=red][p l=0 r=0]                 [/p][/bg][/m][m l=0 r=0][bg=orange][p l=0 r=0]                                              [/p][/bg][/m][m l=0 r=0][bg=green][p l=0 r=0]                                     [/p][/bg][/m][m l=0 r=0][color=red][p l=0 r=0]Apple [/p][/color][/m][m l=0 r=0][color=orange][p l=0 r=0]Orange [/p][/color][/m][m l=0 r=0][color=green][p l=0 r=0]Apple [/p][/color][/m][/p][/m]";
-    expect(str_replace(["\r\n", "\r", "\n"], "", strings($value)->trim()->toString()))->toEqual($chart);
+    $value = chart()->setData($this->data)->horizontal()->render();
+    $chart = "\e[38;2;220;53;69mApple\e[39m\e[48;2;220;53;69m\e[49m\e[38;2;253;126;20mOrange\e[39m\e[48;2;253;126;20m\e[49m\e[38;2;40;167;69mLime\e[39m\e[48;2;40;167;69m\e[49m";
+    expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($chart);
 });
