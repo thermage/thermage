@@ -105,7 +105,7 @@ final class Chart extends Element
      *
      * @access public
      */
-    public function data(array $data): self
+    public function setData(array $data): self
     {
         $this->сhartData = $data;
 
@@ -188,7 +188,6 @@ final class Chart extends Element
     public function render(): string
     {       
         $value     = parent::render();
-        $theme     = $this->getTheme();
         $chartData = $this->сhartData ?? [];
         $chartType = $this->chartType ?? 'horizontal';
       
@@ -226,26 +225,24 @@ final class Chart extends Element
      */
     private function buildHortizontalChart(array $data): string
     {
-        $theme = $this->getTheme();
-
         $line  = '';
         $i     = 0;
         $count = count($data);
 
         // Get label size
         foreach ($data as $key => $value) {
-            $labelSizes[] = strings($this->getShortcodes()->stripShortcodes($value['label']))->length();
+            $labelSizes[] = strings($this->stripDecorations($value['label']))->length();
         }
 
         $labelSize = max($labelSizes);
 
-        $showPercents = $this->showPercents ??= false;
-        $showValues   = $this->showValues ??= false;
-        $valuesSufix  = $this->valuesSufix ??= '';
+        $showPercents = $this->showPercents ?? false;
+        $showValues   = $this->showValues ?? false;
+        $valuesSufix  = $this->valuesSufix ?? '';
 
         foreach ($data as $key => $value) {
             $i++;
-            $_labelSize        = strings($this->getShortcodes()->stripShortcodes($value['label']))->length();
+            $_labelSize        = strings($this->stripDecorations($value['label']))->length();
             $labelPaddingRight = $_labelSize < $labelSize ? $labelSize - $_labelSize + 2 : 2;
 
             $color = $value['color'] ?? (new Color())->getRandomHexColor();
@@ -271,11 +268,9 @@ final class Chart extends Element
      */
     private function buildInlineChart(array $data): string
     {
-        $theme = $this->getTheme();
-
-        $showPercents = $this->showPercents ??= false;
-        $showValues   = $this->showValues ??= false;
-        $valuesSufix  = $this->valuesSufix ??= '';
+        $showPercents = $this->showPercents ?? false;
+        $showValues   = $this->showValues ?? false;
+        $valuesSufix  = $this->valuesSufix ?? '';
 
         // Set random color if color isnt defined.
         foreach ($data as $key => $value) {
@@ -290,7 +285,7 @@ final class Chart extends Element
         $labels = '';
         $suffix = '';
         foreach ($data as $key => $value) {
-            $suffix            = ($showPercents ? span((string) $value['percentage'] . '%')->pr1()->color($value['color'])->render() : '') .
+            $suffix = ($showPercents ? span((string) $value['percentage'] . '%')->pr1()->color($value['color'])->render() : '') .
                       ($showValues ? span('(' . (string) $value['value'] . $valuesSufix . ')')->pr1()->color($value['color'])->render() : '');
                       $labels .= span($value['label'] . (empty($suffix) ? ' ' : ' ' . $suffix))->color($value['color'])->render();
         }
