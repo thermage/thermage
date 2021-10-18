@@ -18,13 +18,11 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0",
-        "ext-json": "*",
         "ext-mbstring": "*",
         "atomastic/arrays": "^3.0.5",
         "atomastic/strings": "^3.0.2",
         "atomastic/macroable": "^2.0",
-        "thunderer/shortcode": "^0.7.4",
-        "spatie/emoji": "^3.0"
+        "thunderer/shortcode": "^0.7.4"
     },
     "autoload":{
         "psr-4": {
