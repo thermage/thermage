@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 use Termage\Termage;
 use Termage\Themes\Theme;
+use Termage\Themes\ThemeInterface;
 use Termage\Elements\Alert;
 use function Termage\alert;
+use function Termage\setTheme;
 
-test('test termage alert method', function (): void {
-    $this->assertInstanceOf(Alert::class, alert());
+beforeEach(function() {
+    setTheme(new AlertTestTheme());
 });
 
 test('test alert info', function (): void {
     $value = alert('Stay RAD!')->info()->render();
-    $alert = "\e[48;2;23;162;184m\e[49m\e[38;2;0;0;0m\e[48;2;23;162;184mStayRAD!\e[49m\e[39m\e[48;2;23;162;184m\e[49m";
+    $alert = "\e[48;2;0;123;255m\e[49m\e[38;2;0;0;0m\e[48;2;0;123;255mStayRAD!\e[49m\e[39m\e[48;2;0;123;255m\e[49m";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
@@ -43,24 +45,65 @@ test('test alert primary', function (): void {
 
 test('test alert secondary', function (): void {
     $value = alert('Stay RAD!')->secondary()->render();
-    $alert = "\e[48;2;108;117;125m\e[49m\e[38;2;108;117;125m\e[48;2;108;117;125mStayRAD!\e[49m\e[39m\e[48;2;108;117;125m\e[49m";
+    $alert = "\e[100m\e[49m\e[38;2;0;0;0m\e[100mStayRAD!\e[49m\e[39m\e[100m\e[49m";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert with text align right', function (): void {
     $value = alert('Stay RAD!')->textAlignRight()->render();
-    $alert = "\e[48;2;23;162;184m\e[49m\e[38;2;0;0;0m\e[48;2;23;162;184mStayRAD!\e[49m\e[39m\e[48;2;23;162;184m\e[49m";
+    $alert = "\e[48;2;0;123;255m\e[49m\e[38;2;0;0;0m\e[48;2;0;123;255mStayRAD!\e[49m\e[39m\e[48;2;0;123;255m\e[49m";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert with text align left', function (): void {
     $value = alert('Stay RAD!')->textAlignLeft()->render();
-    $alert = "\e[48;2;23;162;184m\e[49m\e[38;2;0;0;0m\e[48;2;23;162;184mStayRAD!\e[49m\e[39m\e[48;2;23;162;184m\e[49m";
+    $alert = "\e[48;2;0;123;255m\e[49m\e[38;2;0;0;0m\e[48;2;0;123;255mStayRAD!\e[49m\e[39m\e[48;2;0;123;255m\e[49m";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert size', function (): void {
     $value = alert('Stay RAD!')->size(200)->render();
-    $alert = "\e[48;2;23;162;184m\e[49m\e[38;2;0;0;0m\e[48;2;23;162;184mStayRAD!\e[49m\e[39m\e[48;2;23;162;184m\e[49m";
+    $alert = "\e[48;2;0;123;255m\e[49m\e[38;2;0;0;0m\e[48;2;0;123;255mStayRAD!\e[49m\e[39m\e[48;2;0;123;255m\e[49m";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
+
+
+class AlertTestTheme extends Theme implements ThemeInterface
+{
+    public function getThemeVariables(): array
+    {
+        return [
+            'alert' => [
+                'text-align' => 'left',
+                'size-auto' => false,
+                'size' => 50,
+                'type' => [
+                    'info' => [
+                        'bg' => 'blue',
+                        'color' => 'black',
+                    ],
+                    'warning' => [
+                        'bg' => 'yellow',
+                        'color' => 'black',
+                    ],
+                    'danger' => [
+                        'bg' => 'red',
+                        'color' => 'white',
+                    ],
+                    'success' => [
+                        'bg' => 'success',
+                        'color' => 'black',
+                    ],
+                    'primary' => [
+                        'bg' => 'blue',
+                        'color' => 'white',
+                    ],
+                    'secondary' => [
+                        'bg' => 'gray',
+                        'color' => 'black',
+                    ],
+                ],
+            ],
+        ];
+    }
+}

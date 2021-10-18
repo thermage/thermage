@@ -10,7 +10,7 @@ use function Termage\div;
 use function Termage\setTheme;
 
 beforeEach(function() {
-    setTheme(new TestTheme());
+    setTheme(new DivTestTheme());
 });
 
 test('test color', function (): void {
@@ -148,7 +148,7 @@ test('test magic __toString', function (): void {
     expect((string) $value)->toBe('RAD' . PHP_EOL);
 });
 
-class TestTheme extends Theme implements ThemeInterface
+class DivTestTheme extends Theme implements ThemeInterface
 {
     public function getThemeVariables(): array
     {
