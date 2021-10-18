@@ -29,8 +29,7 @@ use function max;
 use function round;
 use function strings;
 use function Termage\span;
-
-use const PHP_EOL;
+use function Termage\br;
 
 final class Chart extends Element
 {
@@ -187,12 +186,12 @@ final class Chart extends Element
      * @access public
      */
     public function render(): string
-    {
+    {       
+        $value     = parent::render();
         $theme     = $this->getTheme();
-        $value     = $this->getValue();
         $chartData = $this->сhartData ?? [];
         $chartType = $this->chartType ?? 'horizontal';
-
+      
         // Get total value
         $total = array_sum(array_column($chartData, 'value'));
 
@@ -213,7 +212,7 @@ final class Chart extends Element
                 break;
         }
 
-        return $chart . PHP_EOL;
+        return $chart . br();
     }
 
     /**
@@ -255,7 +254,7 @@ final class Chart extends Element
                      span(strings(' ')->repeat($value['percentage'])->toString())->bg($color)->render() .
                      ($showPercents ? span((string) $value['percentage'] . '%')->pl1()->color($color)->render() : '') .
                      ($showValues ? span('(' . (string) $value['value'] . $valuesSufix . ')')->pl1()->color($color)->render() : '') .
-                     ($i < $count ? PHP_EOL : '');
+                     ($i < $count ? br() : '');
         }
 
         return $line;
@@ -296,6 +295,6 @@ final class Chart extends Element
                       $labels .= span($value['label'] . (empty($suffix) ? ' ' : ' ' . $suffix))->color($value['color'])->render();
         }
 
-        return $line . PHP_EOL . PHP_EOL . $labels;
+        return $line . br() . br() . $labels;
     }
 }
