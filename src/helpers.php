@@ -36,7 +36,7 @@ use Termage\Elements\Underline;
 
 function setShortcodes($shortcodes): void
 {
-    Termage::setShortcodes($theme);
+    Termage::setShortcodes($shortcodes);
 }
 
 function getShortcodes()
