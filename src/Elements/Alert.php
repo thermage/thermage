@@ -23,8 +23,7 @@ use Termage\Utils\Terminal;
 
 use function strings;
 use function Termage\span;
-
-use const PHP_EOL;
+use function Termage\br;
 
 final class Alert extends Element
 {
@@ -79,28 +78,28 @@ final class Alert extends Element
                 'size' => 50,
                 'type' => [
                     'info' => [
-                        'bg' => 'info',
-                        'color' => 'black',
+                        'bg' => '#17a2b8',
+                        'color' => '#000000',
                     ],
                     'warning' => [
-                        'bg' => 'warning',
-                        'color' => 'black',
+                        'bg' => '#ffc107',
+                        'color' => '#000000',
                     ],
                     'danger' => [
-                        'bg' => 'danger',
-                        'color' => 'white',
+                        'bg' => '#dc3545',
+                        'color' => '#ffffff',
                     ],
                     'success' => [
-                        'bg' => 'success',
-                        'color' => 'black',
+                        'bg' => '#28a745',
+                        'color' => '#000000',
                     ],
                     'primary' => [
-                        'bg' => 'primary',
-                        'color' => 'white',
+                        'bg' => '#007bff',
+                        'color' => '#ffffff',
                     ],
                     'secondary' => [
-                        'bg' => 'secondary',
-                        'color' => 'white',
+                        'bg' => '#6c757d',
+                        'color' => '#6c757d',
                     ],
                 ],
             ],
@@ -258,6 +257,7 @@ final class Alert extends Element
      */
     public function render(): string
     {
+        $value               = parent::render();
         $theme               = $this->getTheme();
         $componentProperties = $this->getComponentProperties();
         $alertType           = $this->alertType ?? 'info';
@@ -265,11 +265,10 @@ final class Alert extends Element
         $alertPaddingX       = 2;
         $alertSizeAuto       = $this->alertSizeAuto ?? $theme->variables()->get('alert.size-auto', $componentProperties['alert']['size-auto']);
         $alertSize           = $this->alertSize ?? $theme->variables()->get('alert.size', $componentProperties['alert']['size']);
-        $value               = $this->getValue();
         $alertBg             = $theme->variables()->get('alert.type.' . $alertType . '.bg', $componentProperties['alert']['type'][$alertType]['bg']);
         $alertColor          = $theme->variables()->get('alert.type.' . $alertType . '.color', $componentProperties['alert']['type'][$alertType]['color']);
 
-        $px = strings($this->getShortcodes()->stripShortcodes($value))->length();
+        $px = strings($this->stripDecorations($value))->length();
 
         if ($alertSizeAuto) {
             $terminal  = new Terminal();
@@ -292,8 +291,6 @@ final class Alert extends Element
         $body   = span($value)->pl($pl)->pr($pr)->bg($alertBg)->color($alertColor);
         $footer = span()->px($alertSize)->bg($alertBg);
 
-        $this->setValue($header . PHP_EOL . $body . PHP_EOL . $footer . PHP_EOL);
-
-        return parent::render();
+        return $header . br() . $body . br() . $footer . br();
     }
 }
