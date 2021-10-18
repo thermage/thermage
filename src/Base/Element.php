@@ -429,10 +429,6 @@ abstract class Element
      */
     public function __call(string $method, array $parameters)
     {
-        if (strings($method)->startsWith('display')) {
-            return $this->display(strings(substr($method, 7))->lower()->toString());
-        }
-
         if (strings($method)->startsWith('bg')) {
             return $this->bg(strings(substr($method, 2))->kebab()->toString());
         }
