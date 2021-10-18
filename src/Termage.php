@@ -25,6 +25,10 @@ use Termage\Elements\Anchor;
 use Termage\Elements\Blink;
 use Termage\Elements\Bold;
 use Termage\Elements\Chart;
+use Termage\Elements\Underline;
+use Termage\Elements\Italic;
+use Termage\Elements\Strikethrough;
+use Termage\Elements\Reverse;
 use Termage\Elements\Div;
 use Termage\Elements\Hr;
 use Termage\Elements\Invisible;
@@ -192,7 +196,7 @@ class Termage
      *
      * @access public
      */
-    public function bold(string $value = '', string $classes = ''): Bold
+    public static function bold(string $value = '', string $classes = ''): Bold
     {
         return new Bold(
             self::getTheme(),
@@ -212,7 +216,7 @@ class Termage
      *
      * @access public
      */
-    public function blink(string $value = '', string $classes = ''): Blink
+    public static function blink(string $value = '', string $classes = ''): Blink
     {
         return new Blink(
             self::getTheme(),
@@ -232,7 +236,7 @@ class Termage
      *
      * @access public
      */
-    public function invisible(string $value = '', string $classes = ''): Invisible
+    public static function invisible(string $value = '', string $classes = ''): Invisible
     {
         return new Invisible(
             self::getTheme(),
@@ -252,7 +256,7 @@ class Termage
      *
      * @access public
      */
-    public function anchor(string $value = '', string $classes = ''): Anchor
+    public static function anchor(string $value = '', string $classes = ''): Anchor
     {
         return new Anchor(
             self::getTheme(),
@@ -275,6 +279,26 @@ class Termage
     public static function alert(string $value = '', string $classes = ''): Alert
     {
         return new Alert(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Reverse element instance.
+     *
+     * @param string $value   Reverse element value.
+     * @param string $classes Reverse element classes.
+     *
+     * @return Reverse Returns Reverse element instance.
+     *
+     * @access public
+     */
+    public static function reverse(string $value = '', string $classes = ''): Reverse
+    {
+        return new Reverse(
             self::getTheme(),
             self::getShortcodes(),
             $value,
@@ -315,6 +339,66 @@ class Termage
     public static function breakline(string $value = '', string $classes = ''): Breakline
     {
         return new Breakline(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Strikethrough element instance.
+     *
+     * @param string $value   Strikethrough element value.
+     * @param string $classes Strikethrough element classes.
+     *
+     * @return Strikethrough Returns Strikethrough element instance.
+     *
+     * @access public
+     */
+    public static function strikethrough(string $value = '', string $classes = ''): Strikethrough
+    {
+        return new Strikethrough(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Italic element instance.
+     *
+     * @param string $value   Italic element value.
+     * @param string $classes Italic element classes.
+     *
+     * @return Italic Returns Italic element instance.
+     *
+     * @access public
+     */
+    public static function italic(string $value = '', string $classes = ''): Italic
+    {
+        return new Italic(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Underline element instance.
+     *
+     * @param string $value   Underline element value.
+     * @param string $classes Underline element classes.
+     *
+     * @return Underline Returns Underline element instance.
+     *
+     * @access public
+     */
+    public static function underline(string $value = '', string $classes = ''): Underline
+    {
+        return new Underline(
             self::getTheme(),
             self::getShortcodes(),
             $value,
