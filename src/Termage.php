@@ -20,20 +20,20 @@ namespace Termage;
 
 use Atomastic\Macroable\Macroable;
 use Termage\Elements\Alert;
-use Termage\Elements\Breakline;
 use Termage\Elements\Anchor;
 use Termage\Elements\Blink;
 use Termage\Elements\Bold;
+use Termage\Elements\Breakline;
 use Termage\Elements\Chart;
-use Termage\Elements\Underline;
-use Termage\Elements\Italic;
-use Termage\Elements\Strikethrough;
-use Termage\Elements\Reverse;
 use Termage\Elements\Div;
 use Termage\Elements\Hr;
 use Termage\Elements\Invisible;
+use Termage\Elements\Italic;
 use Termage\Elements\Paragraph;
+use Termage\Elements\Reverse;
 use Termage\Elements\Span;
+use Termage\Elements\Strikethrough;
+use Termage\Elements\Underline;
 use Termage\Parsers\Shortcodes;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
@@ -71,8 +71,6 @@ class Termage
      *
      * @param ThemeInterface $theme Theme interface.
      *
-     * @return void
-     *
      * @access public
      */
     public static function setShortcodes($shortcodes): void
@@ -96,8 +94,6 @@ class Termage
      * Set a new instance of the theme that implements Themes interface.
      *
      * @param ThemeInterface $theme Theme interface.
-     *
-     * @return void
      *
      * @access public
      */
