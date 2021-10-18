@@ -16,10 +16,11 @@ declare(strict_types=1);
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Termage\Components;
+namespace Termage\Elements;
 
 use Termage\Utils\Terminal;
 use Termage\Base\Element;
+use function Termage\span;
 
 use function strings;
 use function termage;
@@ -263,8 +264,7 @@ final class Alert extends Element
         $alertPaddingX       = 2;
         $alertSizeAuto       = $this->alertSizeAuto ?? $theme->variables()->get('alert.size-auto', $componentProperties['alert']['size-auto']);
         $alertSize           = $this->alertSize ?? $theme->variables()->get('alert.size', $componentProperties['alert']['size']);
-        $output              = $this->getOutput();
-        $value               = $this->getValue()->toString();
+        $value               = $this->getValue();
         $alertBg             = $theme->variables()->get('alert.type.' . $alertType . '.bg', $componentProperties['alert']['type'][$alertType]['bg']);
         $alertColor          = $theme->variables()->get('alert.type.' . $alertType . '.color', $componentProperties['alert']['type'][$alertType]['color']);
 
@@ -287,11 +287,11 @@ final class Alert extends Element
             $pr -= $px;
         }
 
-        $header = termage($output, $theme)->el()->px($alertSize)->bg($alertBg)->render();
-        $body   = termage($output, $theme)->el($value)->pl($pl)->pr($pr)->bg($alertBg)->color($alertColor)->render();
-        $footer = termage($output, $theme)->el()->px($alertSize)->bg($alertBg)->render();
+        $header = span()->px($alertSize)->bg($alertBg);
+        $body   = span($value)->pl($pl)->pr($pr)->bg($alertBg)->color($alertColor);
+        $footer = span()->px($alertSize)->bg($alertBg);
 
-        $this->value($header . PHP_EOL . $body . PHP_EOL . $footer);
+        $this->setValue($header . PHP_EOL . $body . PHP_EOL . $footer . PHP_EOL);
 
         return parent::render();
     }
