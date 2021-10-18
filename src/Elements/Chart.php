@@ -230,6 +230,7 @@ final class Chart extends Element
         $count = count($data);
 
         // Get label size
+        $labelSizes = [];
         foreach ($data as $key => $value) {
             $labelSizes[] = strings($this->stripDecorations($value['label']))->length();
         }
