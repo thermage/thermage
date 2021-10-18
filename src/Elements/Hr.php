@@ -177,14 +177,18 @@ final class Hr extends Element
     }
 
     /**
-     * Render hr component.
+     * Render hr element.
      *
-     * @return string Returns rendered alert component.
+     * @return string Returns rendered hr element.
      *
      * @access public
      */
     public function render(): string
     {
+        $this->processClasses();
+        $this->processStyles();
+        $this->processShortcodes();
+        
         $componentProperties = $this->getComponentProperties();
         $theme               = self::getTheme();
         $ruleType            = $this->ruleType ?? 'info';
@@ -192,9 +196,8 @@ final class Hr extends Element
         $ruleTextAlign       = $this->ruleTextAlign ?? $theme->variables()->get('hr.text-align', $componentProperties['hr']['text-align']);
         $rulePaddingX        = 5;
         $value               = $this->getValue();
-
-        $valueLength   = strings(self::getShortcodes()->stripShortcodes($value))->length();
-        $terminalWidth = (new Terminal())->getWidth();
+        $valueLength         = strings($this->stripDecorations($value))->length();
+        $terminalWidth       = (new Terminal())->getWidth();
 
         if ($ruleTextAlign === 'right') {
             $ruleSize = $terminalWidth - $valueLength - $rulePaddingX;
@@ -212,9 +215,7 @@ final class Hr extends Element
             $ruleAppend = ' ' . $ruleAppend;
             $value      = ' ' . $value;
 
-            $hr = span($rulePrepend)->color($ruleColor) .
-                span($value)->color($ruleColor) .
-                span($ruleAppend)->color($ruleColor);
+            $hr = span($rulePrepend)->color($ruleColor) . span($value)->color($ruleColor) . span($ruleAppend)->color($ruleColor);
         }
 
         if ($ruleTextAlign === 'left') {
@@ -233,9 +234,7 @@ final class Hr extends Element
             $rulePrepend .= ' ';
             $value       .= ' ';
 
-            $hr = span($rulePrepend)->color($ruleColor) .
-                span($value)->color($ruleColor) .
-                span($ruleAppend)->color($ruleColor);
+            $hr = span($rulePrepend)->color($ruleColor) . span($value)->color($ruleColor) . span($ruleAppend)->color($ruleColor);
         }
 
         if ($valueLength === 0) {
@@ -244,11 +243,9 @@ final class Hr extends Element
                 $ruleElement .= '―';
             }
 
-            $hr = span($ruleElement)->color($ruleColor)->render();
+            $hr = span($ruleElement)->color($ruleColor);
         }
 
-        $this->setValue($hr);
-
-        return parent::render();
+        return $hr;
     }
 }
