@@ -491,7 +491,7 @@ abstract class Element
      * 
      * @return void
      */
-    public function processClasses()
+    public function processClasses(): void
     {
         if ($this->classes->length() > 0) {
             foreach ($this->classes->segments() as $class) {
@@ -507,7 +507,7 @@ abstract class Element
      * 
      * @return void
      */
-    public function processStyles()
+    public function processStyles(): void
     {
         $stylesHierarchy = ['invisible', 'reverse', 'blink', 'dim', 'bold', 'italic', 'underline', 'strikethrough', 'padding', 'bg', 'color', 'margin'];
 
@@ -515,7 +515,7 @@ abstract class Element
             'padding'       => ['l' => $this->styles->get('padding.left') ?? 0, 'r' => $this->styles->get('padding.right') ?? 0],
             'margin'        => ['l' => $this->styles->get('margin.left') ?? 0, 'r' => $this->styles->get('margin.right') ?? 0],
             'color'         => $this->styles->get('color') ? self::$theme->variables()->get('colors.' . $this->styles->get('color'), $this->styles->get('color')) : false,
-            'bg'            => $this->styles->get('bg') ? self::$theme->variables()->get('bg.' . $this->styles->get('bg'), $this->styles->get('bg')) : false,
+            'bg'            => $this->styles->get('bg') ? self::$theme->variables()->get('colors.' . $this->styles->get('bg'), $this->styles->get('bg')) : false,
             'bold'          => $this->styles->get('bold') ?? false,
             'italic'        => $this->styles->get('italic') ?? false,
             'underline'     => $this->styles->get('underline') ?? false,
