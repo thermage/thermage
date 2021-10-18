@@ -18,7 +18,7 @@ use Termage\Elements\Reverse;
 use Termage\Elements\Span;
 use Termage\Elements\Strikethrough;
 use Termage\Elements\Underline;
-use Termage\Base\Theme;
+use Termage\Themes\Theme;
 use Termage\Parsers\Shortcodes;
 
 test('test getTheme', function (): void {
