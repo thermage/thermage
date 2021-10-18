@@ -16,10 +16,11 @@ declare(strict_types=1);
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Termage\Components;
+namespace Termage\Elements;
 
 use Termage\Utils\Color;
 use Termage\Base\Element;
+use function Termage\span;
 
 use function count;
 use function intval;
@@ -185,7 +186,7 @@ final class Chart extends Element
     public function render(): string
     {
         $theme     = $this->getTheme();
-        $value     = $this->getValue()->toString();
+        $value     = $this->getValue();
         $chartData = $this->сhartData ?? [];
         $chartType = $this->chartType ?? 'horizontal';
 
@@ -247,10 +248,10 @@ final class Chart extends Element
 
             $color = $value['color'] ?? (new Color())->getRandomHexColor();
 
-            $line .= termage($theme)->el((string) $value['label'])->pr($labelPaddingRight)->color($color)->render() .
-                     termage($theme)->el(strings(' ')->repeat($value['percentage'])->toString())->bg($color)->render() .
-                     ($showPercents ? termage($theme)->el((string) $value['percentage'] . '%')->pl1()->color($color)->render() : '') .
-                     ($showValues ? termage($theme)->el('(' . (string) $value['value'] . $valuesSufix . ')')->pl1()->color($color)->render() : '') .
+            $line .= span((string) $value['label'])->pr($labelPaddingRight)->color($color)->render() .
+                     span(strings(' ')->repeat($value['percentage'])->toString())->bg($color)->render() .
+                     ($showPercents ? span((string) $value['percentage'] . '%')->pl1()->color($color)->render() : '') .
+                     ($showValues ? span('(' . (string) $value['value'] . $valuesSufix . ')')->pl1()->color($color)->render() : '') .
                      ($i < $count ? PHP_EOL : '');
         }
 
@@ -281,15 +282,15 @@ final class Chart extends Element
 
         $line = '';
         foreach ($data as $key => $value) {
-            $line .= termage($theme)->el(strings(' ')->repeat($value['percentage'])->toString())->bg($value['color'])->render();
+            $line .= span(strings(' ')->repeat($value['percentage'])->toString())->bg($value['color'])->render();
         }
 
         $labels = '';
         $suffix = '';
         foreach ($data as $key => $value) {
-            $suffix            = ($showPercents ? termage($theme)->el((string) $value['percentage'] . '%')->pr1()->color($value['color'])->render() : '') .
-                      ($showValues ? termage($theme)->el('(' . (string) $value['value'] . $valuesSufix . ')')->pr1()->color($value['color'])->render() : '');
-                      $labels .= termage($theme)->el($value['label'] . (empty($suffix) ? ' ' : ' ' . $suffix))->color($value['color'])->render();
+            $suffix            = ($showPercents ? span((string) $value['percentage'] . '%')->pr1()->color($value['color'])->render() : '') .
+                      ($showValues ? span('(' . (string) $value['value'] . $valuesSufix . ')')->pr1()->color($value['color'])->render() : '');
+                      $labels .= span($value['label'] . (empty($suffix) ? ' ' : ' ' . $suffix))->color($value['color'])->render();
         }
 
         return $line . PHP_EOL . PHP_EOL . $labels;
