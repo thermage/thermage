@@ -3,19 +3,23 @@
 declare(strict_types=1);
 
 use Termage\Termage;
-use Termage\Base\Theme;
-use Termage\Themes\DefaultTheme;
-use Symfony\Component\Console\Output\BufferedOutput;
-use Symfony\Component\Console\Output\ConsoleOutput;
+use Termage\Themes\Theme;
+use Termage\Themes\ThemeInterface;
 
 test('test set and get theme', function (): void {
-    $termage = termage();
-    $this->assertInstanceOf(DefaultTheme::class, $termage->getTheme());
+    $this->assertInstanceOf(Theme::class, Termage::getTheme());
 
-    $termage = termage()->theme(new DefaultTheme());
-    $this->assertInstanceOf(DefaultTheme::class, $termage->getTheme());
+    Termage::setTheme(new FooTheme());
+    $this->assertInstanceOf(FooTheme::class, Termage::getTheme());
 });
 
 test('test get theme variables', function (): void {
-    expect(termage()->getTheme()->getThemeVariables())->toBeArray();
+    expect(Termage::getTheme()->getThemeVariables())->toBeArray();
 });
+
+class FooTheme extends Theme implements ThemeInterface {
+    public function getThemeVariables(): array
+    {
+        return [];
+    }
+}
