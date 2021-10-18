@@ -111,7 +111,7 @@ function i(string $value = '', string $class = ''): Italic
 
 function underline(string $value = '', string $class = ''): Underline
 {
-    return Termage::italic($value, $class);
+    return Termage::underline($value, $class);
 }
 
 function u(string $value = '', string $class = ''): Underline
