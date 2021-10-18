@@ -20,6 +20,7 @@ namespace Termage;
 
 use Atomastic\Macroable\Macroable;
 use Termage\Elements\Alert;
+use Termage\Elements\Breakline;
 use Termage\Elements\Anchor;
 use Termage\Elements\Blink;
 use Termage\Elements\Bold;
@@ -294,6 +295,26 @@ class Termage
     public static function chart(string $value = '', string $classes = ''): Chart
     {
         return new Chart(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Breakline element instance.
+     *
+     * @param string $value   Breakline element value.
+     * @param string $classes Breakline element classes.
+     *
+     * @return Breakline Returns Breakline element instance.
+     *
+     * @access public
+     */
+    public static function breakline(string $value = '', string $classes = ''): Breakline
+    {
+        return new Breakline(
             self::getTheme(),
             self::getShortcodes(),
             $value,
