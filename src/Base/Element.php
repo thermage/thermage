@@ -43,7 +43,7 @@ abstract class Element
      *
      * @access private
      */
-    private Strings $classes;
+    private string $classes;
 
     /**
      * Element styles.
@@ -85,7 +85,7 @@ abstract class Element
         self::$theme      = $theme ??= new Theme();
         self::$shortcodes = $shortcodes ??= new Shortcodes(self::getTheme());
         $this->value      = $value;
-        $this->classes    = strings($classes)->trim();
+        $this->classes    = trim($classes);
         $this->styles     = arrays();
     }
 
@@ -493,8 +493,9 @@ abstract class Element
      */
     public function processClasses(): void
     {
-        if ($this->classes->length() > 0) {
-            foreach ($this->classes->segments() as $class) {
+        $classes = strings($this->classes);
+        if ($classes->length() > 0) {
+            foreach ($classes->segments() as $class) {
                 $this->{(string) strings($class)->camel()->trim()}();
             }
         }
