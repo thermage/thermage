@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace Termage\Base;
 
 use Atomastic\Strings\Strings;
+use Atomastic\Arrays\Arrays;
 use BadMethodCallException;
 use Termage\Parsers\Shortcodes;
 use Termage\Themes\Theme;
@@ -38,6 +39,20 @@ abstract class Element
     private string $value;
 
     /**
+     * Element classes.
+     *
+     * @access private
+     */
+    private Strings $classes;
+
+    /**
+     * Element styles.
+     *
+     * @access private
+     */
+    private Arrays $styles;
+
+    /**
      * The implementation of Theme interface.
      *
      * @access private
@@ -52,25 +67,26 @@ abstract class Element
     /**
      * Create a new Element instance.
      *
-     * @param Theme  $theme      Instance of the Theme class.
-     * @param string $value      Element value.
-     * @param array  $properties Element properties.
+     * @param        $theme 
+     * @param        $shortcodes 
+     * @param string $value   Element value.
+     * @param string $classes Element classes.
      *
      * @return Element Returns element.
      *
      * @access public
      */
     final public function __construct(
-        ?Theme $theme = null,
+        $theme = null,
         $shortcodes = null,
         string $value = '',
-        string $class = ''
+        string $classes = ''
     ) {
         self::$theme      = $theme ?? new Theme();
         self::$shortcodes = $shortcodes ?? new Shortcodes(self::getTheme());
         $this->value      = $value;
-        $this->class      = strings($class)->trim();
-        $this->properties = arrays();
+        $this->classes    = strings($classes)->trim();
+        $this->styles     = arrays();
     }
 
     /**
@@ -162,7 +178,7 @@ abstract class Element
      */
     public function bold(): self
     {
-        $this->properties->set('bold', true);
+        $this->styles->set('bold', true);
 
         return $this;
     }
@@ -176,7 +192,7 @@ abstract class Element
      */
     public function italic(): self
     {
-        $this->properties->set('italic', true);
+        $this->styles->set('italic', true);
 
         return $this;
     }
@@ -190,7 +206,7 @@ abstract class Element
      */
     public function strikethrough(): self
     {
-        $this->properties->set('strikethrough', true);
+        $this->styles->set('strikethrough', true);
 
         return $this;
     }
@@ -204,7 +220,7 @@ abstract class Element
      */
     public function dim(): self
     {
-        $this->properties->set('dim', true);
+        $this->styles->set('dim', true);
 
         return $this;
     }
@@ -218,7 +234,7 @@ abstract class Element
      */
     public function underline(): self
     {
-        $this->properties->set('underline', true);
+        $this->styles->set('underline', true);
 
         return $this;
     }
@@ -232,7 +248,7 @@ abstract class Element
      */
     public function blink(): self
     {
-        $this->properties->set('blink', true);
+        $this->styles->set('blink', true);
 
         return $this;
     }
@@ -246,7 +262,7 @@ abstract class Element
      */
     public function reverse(): self
     {
-        $this->properties->set('reverse', true);
+        $this->styles->set('reverse', true);
 
         return $this;
     }
@@ -260,7 +276,7 @@ abstract class Element
      */
     public function invisible(): self
     {
-        $this->properties->set('invisible', true);
+        $this->styles->set('invisible', true);
 
         return $this;
     }
@@ -276,7 +292,7 @@ abstract class Element
      */
     public function color(string $color): self
     {
-        $this->properties->set('color', $color);
+        $this->styles->set('color', $color);
 
         return $this;
     }
@@ -292,7 +308,7 @@ abstract class Element
      */
     public function bg(string $color): self
     {
-        $this->properties->set('bg', $color);
+        $this->styles->set('bg', $color);
 
         return $this;
     }
@@ -312,8 +328,8 @@ abstract class Element
         $themeMarginLeft   = self::$theme->variables()->get('margin.left', 1);
         $themeMarginRight  = self::$theme->variables()->get('margin.right', 1);
 
-        $this->properties->set('margin.left', intval($value / 2 * $themeMarginLeft * $themeMarginGlobal));
-        $this->properties->set('margin.right', intval($value / 2 * $themeMarginRight * $themeMarginGlobal));
+        $this->styles->set('margin.left', intval($value / 2 * $themeMarginLeft * $themeMarginGlobal));
+        $this->styles->set('margin.right', intval($value / 2 * $themeMarginRight * $themeMarginGlobal));
 
         return $this;
     }
@@ -332,7 +348,7 @@ abstract class Element
         $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
         $themeMarginLeft   = self::$theme->variables()->get('margin.left', 1);
 
-        $this->properties->set('margin.left', intval($value * $themeMarginLeft * $themeMarginGlobal));
+        $this->styles->set('margin.left', intval($value * $themeMarginLeft * $themeMarginGlobal));
 
         return $this;
     }
@@ -351,7 +367,7 @@ abstract class Element
         $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
         $themeMarginRight  = self::$theme->variables()->get('margin.right', 1);
 
-        $this->properties->set('margin.right', intval($value * $themeMarginRight * $themeMarginGlobal));
+        $this->styles->set('margin.right', intval($value * $themeMarginRight * $themeMarginGlobal));
 
         return $this;
     }
@@ -371,8 +387,8 @@ abstract class Element
         $themePaddingLeft   = self::$theme->variables()->get('padding.left', 1);
         $themePaddingRight  = self::$theme->variables()->get('padding.right', 1);
 
-        $this->properties->set('padding.left', intval($value / 2 * $themePaddingLeft * $themePaddingGlobal));
-        $this->properties->set('padding.right', intval($value / 2 * $themePaddingRight * $themePaddingGlobal));
+        $this->styles->set('padding.left', intval($value / 2 * $themePaddingLeft * $themePaddingGlobal));
+        $this->styles->set('padding.right', intval($value / 2 * $themePaddingRight * $themePaddingGlobal));
 
         return $this;
     }
@@ -391,7 +407,7 @@ abstract class Element
         $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
         $themePaddingLeft   = self::$theme->variables()->get('padding.left', 1);
 
-        $this->properties->set('padding.left', intval($value * $themePaddingLeft * $themePaddingGlobal));
+        $this->styles->set('padding.left', intval($value * $themePaddingLeft * $themePaddingGlobal));
 
         return $this;
     }
@@ -410,7 +426,7 @@ abstract class Element
         $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
         $themePaddingRight  = self::$theme->variables()->get('padding.right', 1);
 
-        $this->properties->set('padding.right', intval($value * $themePaddingRight * $themePaddingGlobal));
+        $this->styles->set('padding.right', intval($value * $themePaddingRight * $themePaddingGlobal));
 
         return $this;
     }
@@ -468,6 +484,106 @@ abstract class Element
         ));
     }
 
+    /** 
+     * Process classes.
+     * 
+     * @access public
+     * 
+     * @return void
+     */
+    public function processClasses()
+    {
+        if ($this->classes->length() > 0) {
+            foreach ($this->classes->segments() as $class) {
+                $this->{(string) strings($class)->camel()->trim()}();
+            }
+        }
+    }
+
+    /** 
+     * Process styles for element value.
+     * 
+     * @access public
+     * 
+     * @return void
+     */
+    public function processStyles()
+    {
+        $stylesHierarchy = ['invisible', 'reverse', 'blink', 'dim', 'bold', 'italic', 'underline', 'strikethrough', 'padding', 'bg', 'color', 'margin'];
+
+        $styles = [
+            'padding'       => ['l' => $this->styles->get('padding.left') ?? 0, 'r' => $this->styles->get('padding.right') ?? 0],
+            'margin'        => ['l' => $this->styles->get('margin.left') ?? 0, 'r' => $this->styles->get('margin.right') ?? 0],
+            'color'         => $this->styles->get('color') ? self::$theme->variables()->get('colors.' . $this->styles->get('color'), $this->styles->get('color')) : false,
+            'bg'            => $this->styles->get('bg') ? self::$theme->variables()->get('bg.' . $this->styles->get('bg'), $this->styles->get('bg')) : false,
+            'bold'          => $this->styles->get('bold') ?? false,
+            'italic'        => $this->styles->get('italic') ?? false,
+            'underline'     => $this->styles->get('underline') ?? false,
+            'strikethrough' => $this->styles->get('strikethrough') ?? false,
+            'dim'           => $this->styles->get('dim') ?? false,
+            'blink'         => $this->styles->get('blink') ?? false,
+            'reverse'       => $this->styles->get('reverse') ?? false,
+            'invisible'     => $this->styles->get('invisible') ?? false,
+        ];
+
+        $padding       = static fn ($value) => strings(' ')->repeat($styles['padding']['l']) . $value . strings(' ')->repeat($styles['padding']['r']);
+        $margin        = static fn ($value) => strings(' ')->repeat($styles['margin']['l']) . $value . strings(' ')->repeat($styles['margin']['r']);
+        $color         = static fn ($value) => $styles['color'] ? (new Color())->textColor($styles['color'])->apply($value) : $value;
+        $bg            = static fn ($value) => $styles['bg'] ? (new Color())->bgColor($styles['bg'])->apply($value) : $value;
+        $bold          = static fn ($value) => $styles['bold'] ? "\e[1m" . $value . "\e[22m" : $value;
+        $italic        = static fn ($value) => $styles['italic'] ? "\e[3m" . $value . "\e[23m" : $value;
+        $underline     = static fn ($value) => $styles['underline'] ? "\e[4m" . $value . "\e[24m" : $value;
+        $strikethrough = static fn ($value) => $styles['strikethrough'] ? "\e[9m" . $value . "\e[29m" : $value;
+        $dim           = static fn ($value) => $styles['dim'] ? "\e[2m" . $value . "\e[22m" : $value;
+        $blink         = static fn ($value) => $styles['blink'] ? "\e[5m" . $value . "\e[25m" : $value;
+        $reverse       = static fn ($value) => $styles['reverse'] ? "\e[7m" . $value . "\e[27m" : $value;
+        $invisible     = static fn ($value) => $styles['invisible'] ? "\e[8m" . $value . "\e[28m" : $value;
+
+        foreach ($stylesHierarchy as $propertyName) {
+            $this->value = ${$propertyName}($this->value);
+        }
+    }
+
+    /** 
+     * Process shortcodes for element value.
+     * 
+     * @access public
+     * 
+     * @return void
+     */
+    public function processShortcodes(): void
+    {
+        $this->value = self::$shortcodes->parse($this->value);
+    }
+
+    /** 
+     * Strip styles.
+     * 
+     * @param string $value Value with styles.
+     * 
+     * @access public
+     * 
+     * @return string Value without styles.
+     */
+    public function stripStyles(string $value): string
+    {
+        return preg_replace("/\e\[[^m]*m/", '', $value ?? '');
+    }
+
+    /** 
+     * Strip all decorations.
+     * 
+     * @param string $value Value with decorations.
+     * 
+     * @access public
+     * 
+     * @return string Value without decorations.
+     */
+    public function stripDecorations($value): string
+    {
+        return self::getShortcodes()->stripShortcodes($this->stripStyles($value));
+    }
+
     /**
      * Get rendered element.
      *
@@ -477,48 +593,11 @@ abstract class Element
      */
     public function render(): string
     {
-        // Apply classes
-        if ($this->class->length() > 0) {
-            foreach ($this->class->segments() as $class) {
-                $this->{(string) strings($class)->camel()->trim()}();
-            }
-        }
-
-        $propertiesHierarchy = ['invisible', 'reverse', 'blink', 'dim', 'bold', 'italic', 'underline', 'strikethrough', 'padding', 'bg', 'color', 'margin'];
-
-        $properties = [
-            'padding'       => ['l' => $this->properties->get('padding.left') ?? 0, 'r' => $this->properties->get('padding.right') ?? 0],
-            'margin'        => ['l' => $this->properties->get('margin.left') ?? 0, 'r' => $this->properties->get('margin.right') ?? 0],
-            'color'         => $this->properties->get('color') ? self::$theme->variables()->get('colors.' . $this->properties->get('color'), $this->properties->get('color')) : false,
-            'bg'            => $this->properties->get('bg') ? self::$theme->variables()->get('bg.' . $this->properties->get('bg'), $this->properties->get('bg')) : false,
-            'bold'          => $this->properties->get('bold') ?? false,
-            'italic'        => $this->properties->get('italic') ?? false,
-            'underline'     => $this->properties->get('underline') ?? false,
-            'strikethrough' => $this->properties->get('strikethrough') ?? false,
-            'dim'           => $this->properties->get('dim') ?? false,
-            'blink'         => $this->properties->get('blink') ?? false,
-            'reverse'       => $this->properties->get('reverse') ?? false,
-            'invisible'     => $this->properties->get('invisible') ?? false,
-        ];
-
-        $padding       = static fn ($value) => strings(' ')->repeat($properties['padding']['l']) . $value . strings(' ')->repeat($properties['padding']['r']);
-        $margin        = static fn ($value) => strings(' ')->repeat($properties['margin']['l']) . $value . strings(' ')->repeat($properties['margin']['r']);
-        $color         = static fn ($value) => $properties['color'] ? (new Color())->textColor($properties['color'])->apply($value) : $value;
-        $bg            = static fn ($value) => $properties['bg'] ? (new Color())->bgColor($properties['bg'])->apply($value) : $value;
-        $bold          = static fn ($value) => $properties['bold'] ? "\e[1m" . $value . "\e[22m" : $value;
-        $italic        = static fn ($value) => $properties['italic'] ? "\e[3m" . $value . "\e[23m" : $value;
-        $underline     = static fn ($value) => $properties['underline'] ? "\e[4m" . $value . "\e[24m" : $value;
-        $strikethrough = static fn ($value) => $properties['strikethrough'] ? "\e[9m" . $value . "\e[29m" : $value;
-        $dim           = static fn ($value) => $properties['dim'] ? "\e[2m" . $value . "\e[22m" : $value;
-        $blink         = static fn ($value) => $properties['blink'] ? "\e[5m" . $value . "\e[25m" : $value;
-        $reverse       = static fn ($value) => $properties['reverse'] ? "\e[7m" . $value . "\e[27m" : $value;
-        $invisible     = static fn ($value) => $properties['invisible'] ? "\e[8m" . $value . "\e[28m" : $value;
-
-        foreach ($propertiesHierarchy as $propertyName) {
-            $this->value = ${$propertyName}($this->value);
-        }
-
-        return self::$shortcodes->parse($this->value);
+        $this->processClasses();
+        $this->processStyles();
+        $this->processShortcodes();
+ 
+        return $this->value;
     }
 
     /**
