@@ -4,27 +4,33 @@ declare(strict_types=1);
 
 use Termage\Termage;
 use Termage\Themes\Theme;
+use Termage\Themes\ThemeInterface;
 use Termage\Elements\Div;
 use function Termage\div;
+use function Termage\setTheme;
+
+beforeEach(function() {
+    setTheme(new TestTheme());
+});
 
 test('test color', function (): void {
     $value = div('RAD')->color('blue')->render();
-    expect($value)->toBe("\e[38;2;0;123;255mRAD\e[39m\n");
+    expect($value)->toBe("\e[34mRAD\e[39m\n");
 });
 
 test('test magic color', function (): void {
     $value = div()->setValue('RAD')->colorBlue()->render();
-    expect($value)->toBe("\e[38;2;0;123;255mRAD\e[39m\n");
+    expect($value)->toBe("\e[34mRAD\e[39m\n");
 });
 
 test('test bg', function (): void {
     $value = div()->setValue('RAD')->bg('blue')->render();
-    expect($value)->toBe("\e[48;2;0;123;255mRAD\e[49m\n");
+    expect($value)->toBe("\e[44mRAD\e[49m\n");
 });
 
 test('test magic bg', function (): void {
     $value = div()->setValue('RAD')->bgBlue()->render();
-    expect($value)->toBe("\e[48;2;0;123;255mRAD\e[49m\n");
+    expect($value)->toBe("\e[44mRAD\e[49m\n");
 });
 
 test('test bold', function (): void {
@@ -141,3 +147,11 @@ test('test magic __toString', function (): void {
     $value = div()->setValue('RAD');
     expect((string) $value)->toBe('RAD' . PHP_EOL);
 });
+
+class TestTheme extends Theme implements ThemeInterface
+{
+    public function getThemeVariables(): array
+    {
+        return ['colors' => ['blue' => 'blue']];
+    }
+}
