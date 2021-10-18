@@ -193,8 +193,8 @@ final class Hr extends Element
         $ruleColor           = $theme->variables()->get('hr.type.' . $ruleType . '.color', $componentProperties['hr']['type'][$ruleType]['color']);
         $ruleTextAlign       = $this->ruleTextAlign ?? $theme->variables()->get('hr.text-align', $componentProperties['hr']['text-align']);
         $rulePaddingX        = 5;
-        
         $terminalWidth       = (new Terminal())->getWidth();
+        $hr                  = '';
 
         if ($ruleTextAlign === 'right') {
             $ruleSize = $terminalWidth - $valueLength - $rulePaddingX;
