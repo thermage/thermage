@@ -19,12 +19,12 @@ test('test magic color', function (): void {
 
 test('test bg', function (): void {
     $value = div()->setValue('RAD')->bg('blue')->render();
-    expect($value)->toBe("\e[44mRAD\e[49m\n");
+    expect($value)->toBe("\e[48;2;0;123;255mRAD\e[49m\n");
 });
 
 test('test magic bg', function (): void {
     $value = div()->setValue('RAD')->bgBlue()->render();
-    expect($value)->toBe("\e[44mRAD\e[49m\n");
+    expect($value)->toBe("\e[48;2;0;123;255mRAD\e[49m\n");
 });
 
 test('test bold', function (): void {
