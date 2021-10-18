@@ -185,18 +185,15 @@ final class Hr extends Element
      */
     public function render(): string
     {
-        $this->processClasses();
-        $this->processStyles();
-        $this->processShortcodes();
-        
+        $value               = parent::render();
+        $valueLength         = strings($this->stripDecorations($value))->length();
         $componentProperties = $this->getComponentProperties();
         $theme               = self::getTheme();
         $ruleType            = $this->ruleType ?? 'info';
         $ruleColor           = $theme->variables()->get('hr.type.' . $ruleType . '.color', $componentProperties['hr']['type'][$ruleType]['color']);
         $ruleTextAlign       = $this->ruleTextAlign ?? $theme->variables()->get('hr.text-align', $componentProperties['hr']['text-align']);
         $rulePaddingX        = 5;
-        $value               = $this->getValue();
-        $valueLength         = strings($this->stripDecorations($value))->length();
+        
         $terminalWidth       = (new Terminal())->getWidth();
 
         if ($ruleTextAlign === 'right') {
