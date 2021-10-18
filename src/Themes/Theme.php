@@ -198,30 +198,30 @@ class Theme implements ThemeInterface
                 'text-align' => 'left',
                 'size-auto' => false,
                 'size' => 50,
-                'alert-type' => [
+                'type' => [
                     'info' => [
-                        'bg' => 'info',
-                        'color' => 'black',
+                        'bg' => '#17a2b8',
+                        'color' => '#000000',
                     ],
                     'warning' => [
-                        'bg' => 'warning',
-                        'color' => 'black',
+                        'bg' => '#ffc107',
+                        'color' => '#000000',
                     ],
                     'danger' => [
-                        'bg' => 'danger',
-                        'color' => 'white',
+                        'bg' => '#dc3545',
+                        'color' => '#ffffff',
                     ],
                     'success' => [
-                        'bg' => 'success',
-                        'color' => 'black',
+                        'bg' => '#28a745',
+                        'color' => '#000000',
                     ],
                     'primary' => [
-                        'bg' => 'primary',
-                        'color' => 'white',
+                        'bg' => '#007bff',
+                        'color' => '#ffffff',
                     ],
                     'secondary' => [
                         'bg' => 'secondary',
-                        'color' => 'white',
+                        'color' => '#6c757d',
                     ],
                 ],
             ],
