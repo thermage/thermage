@@ -227,7 +227,7 @@ final class Color
             $color = '#' . $this->convertRgbColorToHex($color);
         }
 
-        if ($color[0] === '#') {
+        if (strings($color)->startsWith('#')) {
             $color = substr($color, 1);
 
             if (strlen($color) === 3) {
