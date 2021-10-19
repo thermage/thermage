@@ -21,8 +21,8 @@ use BadMethodCallException;
 use Termage\Parsers\Shortcodes;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
-use Termage\Utils\Color;
 
+use function Termage\color;
 use function arrays;
 use function intval;
 use function sprintf;
@@ -170,7 +170,7 @@ abstract class Element
     }
 
     /**
-     * Set element bold property.
+     * Set element bold style.
      *
      * @return self Returns instance of the Element class.
      *
@@ -184,7 +184,7 @@ abstract class Element
     }
 
     /**
-     * Set element italic property.
+     * Set element italic style.
      *
      * @return self Returns instance of the Element class.
      *
@@ -198,7 +198,7 @@ abstract class Element
     }
 
     /**
-     * Set element strikethrough property.
+     * Set element strikethrough style.
      *
      * @return self Returns instance of the Element class.
      *
@@ -212,7 +212,7 @@ abstract class Element
     }
 
     /**
-     * Set element dim property.
+     * Set element dim style.
      *
      * @return self Returns instance of the Element class.
      *
@@ -226,7 +226,7 @@ abstract class Element
     }
 
     /**
-     * Set element underline property, alias to underscore.
+     * Set element underline style.
      *
      * @return self Returns instance of the Element class.
      *
@@ -240,7 +240,7 @@ abstract class Element
     }
 
     /**
-     * Set element blink property.
+     * Set element blink style.
      *
      * @return self Returns instance of the Element class.
      *
@@ -254,7 +254,7 @@ abstract class Element
     }
 
     /**
-     * Set element reverse property.
+     * Set element reverse style.
      *
      * @return self Returns instance of the Element class.
      *
@@ -268,7 +268,7 @@ abstract class Element
     }
 
     /**
-     * Set element invisible property.
+     * Set element invisible style.
      *
      * @return self Returns instance of the Element class.
      *
@@ -282,9 +282,9 @@ abstract class Element
     }
 
     /**
-     * Set element color.
+     * Set element color style.
      *
-     * @param string $color Element color.
+     * @param string $color Element color style.
      *
      * @return self Returns instance of the Element class.
      *
@@ -298,9 +298,9 @@ abstract class Element
     }
 
     /**
-     * Set element background color.
+     * Set element background color style.
      *
-     * @param string $color Element background color.
+     * @param string $color Element background color style.
      *
      * @return self Returns instance of the Element class.
      *
@@ -314,7 +314,7 @@ abstract class Element
     }
 
     /**
-     * Set element margin x property.
+     * Set element margin x style.
      *
      * @param int $value Margin x.
      *
@@ -335,7 +335,7 @@ abstract class Element
     }
 
     /**
-     * Set element margin left property.
+     * Set element margin left style.
      *
      * @param int $value Margin left.
      *
@@ -354,7 +354,7 @@ abstract class Element
     }
 
     /**
-     * Set element margin right property.
+     * Set element margin right style.
      *
      * @param int $value Margin right.
      *
@@ -373,7 +373,7 @@ abstract class Element
     }
 
     /**
-     * Set element padding x property.
+     * Set element padding x style.
      *
      * @param int $value Padding x.
      *
@@ -394,7 +394,7 @@ abstract class Element
     }
 
     /**
-     * Set element padding left property.
+     * Set element padding left style.
      *
      * @param int $value Padding left.
      *
@@ -413,7 +413,7 @@ abstract class Element
     }
 
     /**
-     * Set element padding right property.
+     * Set element padding right style.
      *
      * @param int $value Padding right.
      *
@@ -529,8 +529,8 @@ abstract class Element
 
         $padding       = static fn ($value) => strings(' ')->repeat($styles['padding']['l']) . $value . strings(' ')->repeat($styles['padding']['r']);
         $margin        = static fn ($value) => strings(' ')->repeat($styles['margin']['l']) . $value . strings(' ')->repeat($styles['margin']['r']);
-        $color         = static fn ($value) => $styles['color'] ? (new Color())->textColor($styles['color'])->apply($value) : $value;
-        $bg            = static fn ($value) => $styles['bg'] ? (new Color())->bgColor($styles['bg'])->apply($value) : $value;
+        $color         = static fn ($value) => $styles['color'] ? color()->textColor($styles['color'])->apply($value) : $value;
+        $bg            = static fn ($value) => $styles['bg'] ? color()->bgColor($styles['bg'])->apply($value) : $value;
         $bold          = static fn ($value) => $styles['bold'] ? "\e[1m" . $value . "\e[22m" : $value;
         $italic        = static fn ($value) => $styles['italic'] ? "\e[3m" . $value . "\e[23m" : $value;
         $underline     = static fn ($value) => $styles['underline'] ? "\e[4m" . $value . "\e[24m" : $value;

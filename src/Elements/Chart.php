@@ -19,8 +19,8 @@ declare(strict_types=1);
 namespace Termage\Elements;
 
 use Termage\Base\Element;
-use Termage\Utils\Color;
 
+use function Termage\color;
 use function array_column;
 use function array_sum;
 use function count;
@@ -246,7 +246,7 @@ final class Chart extends Element
             $_labelSize        = strings($this->stripDecorations($value['label']))->length();
             $labelPaddingRight = $_labelSize < $labelSize ? $labelSize - $_labelSize + 2 : 2;
 
-            $color = $value['color'] ?? (new Color())->getRandomHexColor();
+            $color = $value['color'] ?? color()->getRandomHexColor();
 
             $line .= span((string) $value['label'])->pr($labelPaddingRight)->color($color)->render() .
                      span(strings(' ')->repeat($value['percentage'])->toString())->bg($color)->render() .
@@ -275,7 +275,7 @@ final class Chart extends Element
 
         // Set random color if color isnt defined.
         foreach ($data as $key => $value) {
-            $data[$key]['color'] = $value['color'] ?? (new Color())->getRandomHexColor();
+            $data[$key]['color'] = $value['color'] ?? color()->getRandomHexColor();
         }
 
         $line = '';

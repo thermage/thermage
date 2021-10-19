@@ -19,10 +19,10 @@ declare(strict_types=1);
 namespace Termage\Elements;
 
 use Termage\Base\Element;
-use Termage\Utils\Terminal;
 
 use function strings;
 use function Termage\span;
+use function Termage\terminal;
 
 final class Hr extends Element
 {
@@ -193,7 +193,7 @@ final class Hr extends Element
         $ruleColor           = $theme->variables()->get('hr.type.' . $ruleType . '.color', $componentProperties['hr']['type'][$ruleType]['color']);
         $ruleTextAlign       = $this->ruleTextAlign ?? $theme->variables()->get('hr.text-align', $componentProperties['hr']['text-align']);
         $rulePaddingX        = 5;
-        $terminalWidth       = (new Terminal())->getWidth();
+        $terminalWidth       = terminal()->getWidth();
         $hr                  = '';
 
         if ($ruleTextAlign === 'right') {

@@ -19,8 +19,8 @@ declare(strict_types=1);
 namespace Termage\Elements;
 
 use Termage\Base\Element;
-use Termage\Utils\Terminal;
 
+use function Termage\terminal;
 use function strings;
 use function Termage\span;
 use function Termage\br;
@@ -273,8 +273,7 @@ final class Alert extends Element
         $px = strings($this->stripDecorations($value))->length();
 
         if ($alertSizeAuto) {
-            $terminal  = new Terminal();
-            $alertSize = $terminal->getWidth() - $alertPaddingX;
+            $alertSize = terminal()->getWidth() - $alertPaddingX;
         }
 
         if ($alertTextAlign === 'right') {
