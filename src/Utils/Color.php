@@ -112,7 +112,6 @@ final class Color
     public function bgColor($color): self
     {
         $this->background = $this->parseColor($color, true);
-        dump($color);
         return $this;
     }
 
