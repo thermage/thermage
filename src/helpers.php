@@ -33,6 +33,8 @@ use Termage\Elements\Reverse;
 use Termage\Elements\Span;
 use Termage\Elements\Strikethrough;
 use Termage\Elements\Underline;
+use Termage\Utils\Color;
+use Termage\Utils\Terminal;
 
 function setShortcodes($shortcodes): void
 {
@@ -162,4 +164,14 @@ function chart(string $value = '', string $class = ''): Chart
 function alert(string $value = '', string $class = ''): Alert
 {
     return Termage::alert($value, $class);
+}
+
+function color(): Color 
+{
+    return new Color();
+}
+
+function terminal(): Terminal 
+{
+    return new Terminal();
 }
