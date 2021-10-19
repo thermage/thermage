@@ -67,12 +67,20 @@ test('test alert size', function (): void {
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
-
 class AlertTestTheme extends Theme implements ThemeInterface
 {
     public function getThemeVariables(): array
     {
         return [
+            'colors' => [
+                'blue' => 'blue',
+                'yellow' => 'yellow',
+                'black' => 'black',
+                'white' => 'white',
+                'red' => 'red',
+                'green' => 'green',
+                'gray' => 'gray',
+            ],
             'alert' => [
                 'text-align' => 'left',
                 'size-auto' => false,
@@ -91,7 +99,7 @@ class AlertTestTheme extends Theme implements ThemeInterface
                         'color' => 'white',
                     ],
                     'success' => [
-                        'bg' => 'success',
+                        'bg' => 'green',
                         'color' => 'black',
                     ],
                     'primary' => [

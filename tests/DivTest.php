@@ -152,6 +152,16 @@ class DivTestTheme extends Theme implements ThemeInterface
 {
     public function getThemeVariables(): array
     {
-        return ['colors' => ['blue' => 'blue']];
+        return [
+            'colors' => [
+                'blue' => 'blue',
+                'yellow' => 'yellow',
+                'black' => 'black',
+                'white' => 'white',
+                'red' => 'red',
+                'green' => 'green',
+                'gray' => 'gray',
+            ],
+        ];
     }
 }
