@@ -223,6 +223,10 @@ final class Color
             return '';
         }
 
+        if (strings($color)->startsWith('rgb(') && strings($color)->endsWith(')')) {
+            $color = '#' . $this->convertRgbColorToHex($color);
+        }
+
         if ($color[0] === '#') {
             $color = substr($color, 1);
 
@@ -246,6 +250,24 @@ final class Color
         }
 
         throw new InvalidArgumentException(sprintf('Invalid "%s" color; expected one of (%s).', $color, implode(', ', array_merge(array_keys(self::COLORS), array_keys(self::BRIGHT_COLORS)))));
+    }
+
+    /**
+     * Convert RGB Color to HEX.
+     *
+     * @param string $color Color.
+     *
+     * @return string Color.
+     *
+     * @access private
+     */
+    public function convertRgbColorToHex(string $color): string
+    {
+        if (preg_match("/(\d{1,3})\,?\s?(\d{1,3})\,?\s?(\d{1,3})/", $color, $matches)) {
+            $color = sprintf("%02x%02x%02x", $matches[1], $matches[2], $matches[3]);
+        }
+    
+        return $color;
     }
 
     /**
