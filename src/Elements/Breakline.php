@@ -26,7 +26,7 @@ final class Breakline extends Element
 {
     public function render(): string
     {
-        $this->setValue($this->getValue() . PHP_EOL);
+        $this->value($this->getValue() . PHP_EOL);
 
         return $this->getValue();
     }

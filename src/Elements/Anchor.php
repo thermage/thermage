@@ -33,7 +33,7 @@ final class Anchor extends Element
      */
     public function href(string $value): self
     {
-        $this->setValue("\e]8;;" . $value . "\e\\" . $this->getValue() . "\e]8;;\e\\");
+        $this->value("\e]8;;" . $value . "\e\\" . $this->getValue() . "\e]8;;\e\\");
 
         return $this;
     }

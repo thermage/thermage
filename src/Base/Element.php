@@ -110,7 +110,7 @@ abstract class Element
      *
      * @access public
      */
-    public function setValue(string $value = ''): self
+    public function value(string $value = ''): self
     {
         $this->value = $value;
 
