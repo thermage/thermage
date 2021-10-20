@@ -22,7 +22,7 @@ use Termage\Base\Element;
 
 use function Termage\terminal;
 use function strings;
-use function Termage\span;
+use function Termage\div;
 use function Termage\br;
 
 final class Alert extends Element
@@ -62,14 +62,26 @@ final class Alert extends Element
      */
     private string $alertTextAlign;
 
-    /**
-     * Get component properties.
-     *
-     * @return array Component properties.
+    /** 
+     * Get element classes.
+     * 
+     * @return array Array of element classes.
      *
      * @access public
      */
-    public function getComponentProperties(): array
+    public function getElementClasses(): array
+    {
+        return ['danger', 'info', 'warning', 'success', 'success', 'primary', 'secondary', 'size', 'size-auto', 'text-align-left', 'text-align-right'];
+    }
+
+    /**
+     * Get element variables.
+     *
+     * @return array Element variables.
+     *
+     * @access public
+     */
+    public function getElementVariables(): array
     {
         return [
             'alert' => [
@@ -249,9 +261,30 @@ final class Alert extends Element
     }
 
     /**
-     * Render alert component.
+     * Dynamically bind magic methods to the Element class.
      *
-     * @return string Returns rendered alert component.
+     * @param string $method     Method.
+     * @param array  $parameters Parameters.
+     *
+     * @return mixed Returns mixed content.
+     *
+     * @throws BadMethodCallException If method not found.
+     *
+     * @access public
+     */
+    public function __call(string $method, array $parameters)
+    {
+        if (strings($method)->startsWith('size') && $method !== 'sizeAuto') {
+            return $this->size(strings(substr($method, 4))->kebab()->toInteger());
+        }
+
+        return parent::__call($method, $parameters);
+    }
+
+    /**
+     * Render alert element.
+     *
+     * @return string Returns rendered alert element.
      *
      * @access public
      */
@@ -259,39 +292,44 @@ final class Alert extends Element
     {
         $value               = parent::render();
         $theme               = $this->getTheme();
-        $componentProperties = $this->getComponentProperties();
+        $elementVariables    = $this->getElementVariables();
         $alertType           = $this->alertType ?? 'info';
-        $alertTextAlign      = $this->alertTextAlign ?? $theme->variables()->get('alert.text-align', $componentProperties['alert']['text-align']);
+        $alertTextAlign      = $this->alertTextAlign ?? $theme->variables()->get('alert.text-align', $elementVariables['alert']['text-align']);
         $alertPaddingX       = 2;
-        $alertSizeAuto       = $this->alertSizeAuto ?? $theme->variables()->get('alert.size-auto', $componentProperties['alert']['size-auto']);
-        $alertSize           = $this->alertSize ?? $theme->variables()->get('alert.size', $componentProperties['alert']['size']);
-        $alertBg             = $theme->variables()->get('alert.type.' . $alertType . '.bg', $componentProperties['alert']['type'][$alertType]['bg']);
-        $alertColor          = $theme->variables()->get('alert.type.' . $alertType . '.color', $componentProperties['alert']['type'][$alertType]['color']);
+        $alertSizeAuto       = $this->alertSizeAuto ?? $theme->variables()->get('alert.size-auto', $elementVariables['alert']['size-auto']);
+        $alertSize           = $this->alertSize ?? $theme->variables()->get('alert.size', $elementVariables['alert']['size']);
+        $alertBg             = $theme->variables()->get('alert.type.' . $alertType . '.bg', $elementVariables['alert']['type'][$alertType]['bg']);
+        $alertColor          = $theme->variables()->get('alert.type.' . $alertType . '.color', $elementVariables['alert']['type'][$alertType]['color']);
 
         $pl = 0;
         $pr = 0;
-        $px = strings($this->stripDecorations($value))->length();
+        $valueLength = strings($this->stripDecorations($value))->length();
+        $terminalWidth = terminal()->getWidth();
 
         if ($alertSizeAuto) {
-            $alertSize = terminal()->getWidth() - $alertPaddingX;
+            $alertSize = $terminalWidth;
+        }
+
+        if ($alertSize > $terminalWidth) {
+            $alertSize = $terminalWidth;
         }
 
         if ($alertTextAlign === 'right') {
             $pr  = $alertPaddingX;
             $pl  = $alertSize - $alertPaddingX;
-            $pl -= $px;
+            $pl -= $valueLength;
         }
 
         if ($alertTextAlign === 'left') {
             $pl  = $alertPaddingX;
             $pr  = $alertSize - $alertPaddingX;
-            $pr -= $px;
+            $pr -= $valueLength;
         }
 
-        $header = span()->px($alertSize)->bg($alertBg);
-        $body   = span($value)->pl($pl)->pr($pr)->bg($alertBg)->color($alertColor);
-        $footer = span()->px($alertSize)->bg($alertBg);
+        $header = div()->pl($alertSize)->bg($alertBg);
+        $body   = div($value)->pl($pl)->pr($pr)->bg($alertBg)->color($alertColor);
+        $footer = div()->pl($alertSize)->bg($alertBg);
 
-        return $header . br() . $body . br() . $footer . br();
+        return $header . $body . $footer;
     }
 }
