@@ -23,7 +23,7 @@ use Termage\Base\Element;
 final class Anchor extends Element
 {
     /**
-     * Set link href property.
+     * Set anchor href.
      *
      * @param string $value Href value.
      *
