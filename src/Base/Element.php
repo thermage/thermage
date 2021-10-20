@@ -282,9 +282,9 @@ abstract class Element
     }
 
     /**
-     * Set element color style.
+     * Set element text color style.
      *
-     * @param string $color Element color style.
+     * @param string $color Element text color style.
      *
      * @return self Returns instance of the Element class.
      *
