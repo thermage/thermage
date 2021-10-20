@@ -43,7 +43,7 @@ abstract class Element
      *
      * @access private
      */
-    private string $classes;
+    private Strings $classes;
 
     /**
      * Element styles.
@@ -64,6 +64,11 @@ abstract class Element
      */
     private static $shortcodes = null;
 
+    /** 
+     * Registered element classes.
+     */
+    private Arrays $registeredClasses;
+
     /**
      * Create a new Element instance.
      *
@@ -82,11 +87,12 @@ abstract class Element
         string $value = '',
         string $classes = ''
     ) {
-        self::$theme      = $theme ??= new Theme();
-        self::$shortcodes = $shortcodes ??= new Shortcodes(self::getTheme());
-        $this->value      = $value;
-        $this->classes    = trim($classes);
-        $this->styles     = arrays();
+        self::$theme             = $theme ??= new Theme();
+        self::$shortcodes        = $shortcodes ??= new Shortcodes(self::getTheme());
+        $this->value             = $value;
+        $this->classes           = strings($classes)->trim();
+        $this->registeredClasses = arrays($this->getDefaultClasses())->merge($this->getElementClasses(), true);
+        $this->styles            = arrays();
     }
 
     /**
@@ -167,6 +173,30 @@ abstract class Element
     public static function setTheme(ThemeInterface $theme): void
     {
         self::$theme = $theme;
+    }
+
+    /** 
+     * Get default element classes.
+     * 
+     * @return array Array of default classes.
+     *
+     * @access public
+     */
+    final public function getDefaultClasses(): array 
+    {
+        return ['bold', 'italic', 'bg', 'color', 'pl', 'pr', 'px', 'ml', 'mr', 'mx', 'dim', 'invisible', 'underline', 'reverse', 'blink'];
+    }
+
+    /** 
+     * Get element classes.
+     * 
+     * @return array Array of element classes.
+     *
+     * @access public
+     */
+    public function getElementClasses(): array
+    {
+        return [];
     }
 
     /**
@@ -493,10 +523,15 @@ abstract class Element
      */
     public function processClasses(): void
     {
-        $classes = strings($this->classes);
-        if ($classes->length() > 0) {
-            foreach ($classes->segments() as $class) {
-                $this->{(string) strings($class)->camel()->trim()}();
+        if ($this->classes->length() > 0) {
+            foreach ($this->classes->segments() as $class) {
+                $methodName = (string) strings($class)->camel()->trim();
+                foreach($this->registeredClasses->toArray() as $registeredClass) {
+                    $registeredClassName = (string) strings($registeredClass)->camel()->trim();
+                    if (strings($methodName)->startsWith($registeredClassName)) {
+                        $this->{$methodName}();
+                    }
+                }
             }
         }
     }
