@@ -200,28 +200,28 @@ class Theme implements ThemeInterface
                 'size' => 50,
                 'type' => [
                     'info' => [
-                        'bg' => '#17a2b8',
-                        'color' => '#000000',
+                        'bg' => 'info',
+                        'color' => 'black',
                     ],
                     'warning' => [
-                        'bg' => '#ffc107',
-                        'color' => '#000000',
+                        'bg' => 'warning',
+                        'color' => 'black',
                     ],
                     'danger' => [
-                        'bg' => '#dc3545',
-                        'color' => '#ffffff',
+                        'bg' => 'danger',
+                        'color' => 'white',
                     ],
                     'success' => [
-                        'bg' => '#28a745',
-                        'color' => '#000000',
+                        'bg' => 'success',
+                        'color' => 'black',
                     ],
                     'primary' => [
-                        'bg' => '#007bff',
-                        'color' => '#ffffff',
+                        'bg' => 'primary',
+                        'color' => 'white',
                     ],
                     'secondary' => [
-                        'bg' => '#6c757d',
-                        'color' => '#6c757d',
+                        'bg' => 'secondary',
+                        'color' => 'white',
                     ],
                 ],
             ],
