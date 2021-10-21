@@ -1,9 +1,9 @@
 {
     "name": "termage/termage",
-    "description": "Termage provides a fluent and powerful, object-oriented interface for customizing CLI output text color, background, formatting, and more.",
+    "description": "Termage provides a fluent and incredibly powerful object-oriented interface for customizing CLI output text color, background, formatting, theming and more.",
     "license": "MIT",
     "keywords": [
-        "Termage", "console", "cli", "terminal"
+        "Termage", "console", "cli", "terminal", "console-colors"
     ],
     "support": {
       "source": "https://github.com/termage/termage",
@@ -18,13 +18,11 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0",
-        "ext-json": "*",
         "ext-mbstring": "*",
         "atomastic/arrays": "^3.0.5",
         "atomastic/strings": "^3.0.2",
         "atomastic/macroable": "^2.0",
-        "symfony/console": "^5.3",
-        "spatie/emoji": "^3.0"
+        "thunderer/shortcode": "^0.7.4"
     },
     "autoload":{
         "psr-4": {

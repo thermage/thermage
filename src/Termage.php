@@ -2,229 +2,403 @@
 
 declare(strict_types=1);
 
+/**
+ * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
+ * Copyright (c) Sergey Romanenko (https://awilum.github.io)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
+ * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
+ * @link      https://digital.flextype.org/termage/ Termage
+ * @license   https://opensource.org/licenses/mit-license.php MIT License
+ */
+
 namespace Termage;
 
 use Atomastic\Macroable\Macroable;
-use Symfony\Component\Console\Cursor;
-use Symfony\Component\Console\Output\ConsoleOutput;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Terminal;
-use Termage\Base\Theme;
-use Termage\Components\Alert;
-use Termage\Components\El;
-use Termage\Components\Emoji;
-use Termage\Components\Link;
-use Termage\Components\Rule;
-use Termage\Themes\DefaultTheme;
+use Termage\Elements\Alert;
+use Termage\Elements\Anchor;
+use Termage\Elements\Blink;
+use Termage\Elements\Bold;
+use Termage\Elements\Breakline;
+use Termage\Elements\Chart;
+use Termage\Elements\Div;
+use Termage\Elements\Hr;
+use Termage\Elements\Invisible;
+use Termage\Elements\Italic;
+use Termage\Elements\Paragraph;
+use Termage\Elements\Reverse;
+use Termage\Elements\Span;
+use Termage\Elements\Strikethrough;
+use Termage\Elements\Underline;
+use Termage\Parsers\Shortcodes;
+use Termage\Themes\Theme;
+use Termage\Themes\ThemeInterface;
 
 class Termage
 {
     use Macroable;
 
     /**
-     * The implementation of output interface.
+     * The implementation of Theme interface.
      *
      * @access private
      */
-    private OutputInterface $output;
+    private static ThemeInterface $theme;
 
     /**
-     * The instance of Terminal class.
-     *
-     * @access private
+     * The instance of Shortcodes class.
      */
-    private Terminal $terminal;
+    private static Shortcodes $shortcodes;
 
     /**
-     * The instance of Theme class.
+     * Get Shortcodes instance.
      *
-     * @access private
-     */
-    private Theme $theme;
-
-    /**
-     * Create a new Termage instance.
-     *
-     * @param OutputInterface $output Output interface.
-     * @param InputInterface  $input  Input interface.
-     * @param Theme           $theme  Instance of the Theme class.
+     * @return Shortcodes Shortcodes instance.
      *
      * @access public
      */
-    public function __construct(
-        ?OutputInterface $output = null,
-        ?Theme $theme = null)
+    public static function getShortcodes(): Shortcodes
     {
-        $this->output   = $output ??= new ConsoleOutput();
-        $this->theme    = $theme ??= new DefaultTheme();
-        $this->terminal = new Terminal();
+        return self::$shortcodes ??= new Shortcodes(self::getTheme());
     }
 
     /**
-     * Set output interface.
+     * Set a new instance of the shortcodes.
      *
-     * @param OutputInterface $output Output interface.
-     *
-     * @return self Returns instance of the Termage class.
+     * @param Shortcodes $shortcodes Shortcodes instance.
      *
      * @access public
      */
-    public function output(OutputInterface $output): self
+    public static function setShortcodes(Shortcodes $shortcodes): void
     {
-        $this->output = $output;
-
-        return $this;
+        self::$shortcodes = $shortcodes;
     }
 
     /**
-     * Get output interface.
+     * Get instance of the theme that implements Themes interface.
      *
-     * @return OutputInterface Returns output interface.
-     *
-     * @access public
-     */
-    public function getOutput(): OutputInterface
-    {
-        return $this->output;
-    }
-    
-    /**
-     * Get terminal instance.
-     *
-     * @return Terminal Returns terminal instance.
+     * @return ThemeInterface Returns instance of the theme that implements Themes interface.
      *
      * @access public
      */
-    public function getTerminal(): Terminal
+    public static function getTheme(): ThemeInterface
     {
-        return $this->terminal;
+        return self::$theme ??= new Theme();
     }
 
     /**
-     * Get instance of the Theme class.
+     * Set a new instance of the theme that implements Themes interface.
      *
-     * @return self Returns instance of the Theme class.
+     * @param ThemeInterface $theme Theme interface.
      *
      * @access public
      */
-    public function getTheme(): Theme
+    public static function setTheme(ThemeInterface $theme): void
     {
-        return $this->theme;
+        self::$theme = $theme;
     }
 
     /**
-     * Set a new instance of the Theme class.
+     * Create a new Div element instance.
      *
-     * @param Theme $theme Instance of the Theme class.
+     * @param string $value   Div element value.
+     * @param string $classes Div element classes.
      *
-     * @return self Returns instance of the Termage class.
-     *
-     * @access public
-     */
-    public function theme(Theme $theme): self
-    {
-        $this->theme = $theme;
-
-        return $this;
-    }
-
-    /**
-     * Create a new El Component instance.
-     *
-     * @param string $value      Element value.
-     * @param array  $properties Element properties.
-     *
-     * @return Block Returns El Component instance.
+     * @return Div Returns Div element instance.
      *
      * @access public
      */
-    public function el(string $value = '', array $properties = []): El
+    public static function div(string $value = '', string $classes = ''): Div
     {
-        return new El(
-            $this->output,
-            $this->theme,
+        return new Div(
+            self::getTheme(),
+            self::getShortcodes(),
             $value,
-            $properties
+            $classes
         );
     }
 
     /**
-     * Create a new Emoji Component instance.
+     * Create a new Span element instance.
      *
-     * @param string $value      Emoji value.
-     * @param array  $properties Emoji properties.
+     * @param string $value   Span element value.
+     * @param string $classes Span element classes.
      *
-     * @return Emoji Returns Emoji Component instance.
+     * @return Span Returns Span element instance.
      *
      * @access public
      */
-    public function emoji(string $value = '', array $properties = []): Emoji
+    public static function span(string $value = '', string $classes = ''): Span
     {
-        return new Emoji(
-            $this->output,
-            $this->theme,
+        return new Span(
+            self::getTheme(),
+            self::getShortcodes(),
             $value,
-            $properties
+            $classes
         );
     }
 
     /**
-     * Create a new Alert Component instance.
+     * Create a new Paragraph element instance.
      *
-     * @param string $value      Alert value.
-     * @param array  $properties Alert properties.
+     * @param string $value   Paragraph element value.
+     * @param string $classes Paragraph element classes.
      *
-     * @return Alert Returns Alert Component instance.
+     * @return Paragraph Returns Paragraph element instance.
      *
      * @access public
      */
-    public function alert(string $value = '', array $properties = []): Alert
+    public static function paragraph(string $value = '', string $classes = ''): Paragraph
+    {
+        return new Paragraph(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Hr element instance.
+     *
+     * @param string $value   Hr element value.
+     * @param string $classes Hr element classes.
+     *
+     * @return Hr Returns Hr element instance.
+     *
+     * @access public
+     */
+    public static function hr(string $value = '', string $classes = ''): Hr
+    {
+        return new Hr(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Bold element instance.
+     *
+     * @param string $value   Bold element value.
+     * @param string $classes Bold element classes.
+     *
+     * @return Bold Returns Bold element instance.
+     *
+     * @access public
+     */
+    public static function bold(string $value = '', string $classes = ''): Bold
+    {
+        return new Bold(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Blink element instance.
+     *
+     * @param string $value   Blink element value.
+     * @param string $classes Blink element classes.
+     *
+     * @return Blink Returns Blink element instance.
+     *
+     * @access public
+     */
+    public static function blink(string $value = '', string $classes = ''): Blink
+    {
+        return new Blink(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Invisible element instance.
+     *
+     * @param string $value   Invisible element value.
+     * @param string $classes Invisible element classes.
+     *
+     * @return Invisible Returns Invisible element instance.
+     *
+     * @access public
+     */
+    public static function invisible(string $value = '', string $classes = ''): Invisible
+    {
+        return new Invisible(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Anchor element instance.
+     *
+     * @param string $value   Anchor element value.
+     * @param string $classes Anchor element classes.
+     *
+     * @return Anchor Returns Anchor element instance.
+     *
+     * @access public
+     */
+    public static function anchor(string $value = '', string $classes = ''): Anchor
+    {
+        return new Anchor(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Alert element instance.
+     *
+     * @param string $value   Alert element value.
+     * @param string $classes Alert element classes.
+     *
+     * @return Alert Returns Alert element instance.
+     *
+     * @access public
+     */
+    public static function alert(string $value = '', string $classes = ''): Alert
     {
         return new Alert(
-            $this->output,
-            $this->theme,
+            self::getTheme(),
+            self::getShortcodes(),
             $value,
-            $properties
+            $classes
         );
     }
 
     /**
-     * Create a new Rule Component instance.
+     * Create a new Reverse element instance.
      *
-     * @param string $value      Rule value.
-     * @param array  $properties Rule properties.
+     * @param string $value   Reverse element value.
+     * @param string $classes Reverse element classes.
      *
-     * @return Rule Returns Rule Component instance.
+     * @return Reverse Returns Reverse element instance.
      *
      * @access public
      */
-    public function rule(string $value = '', array $properties = []): Rule
+    public static function reverse(string $value = '', string $classes = ''): Reverse
     {
-        return new Rule(
-            $this->output,
-            $this->theme,
+        return new Reverse(
+            self::getTheme(),
+            self::getShortcodes(),
             $value,
-            $properties
+            $classes
         );
     }
 
     /**
-     * Create a new Link Component instance.
+     * Create a new Chart element instance.
      *
-     * @param string $value      Link value.
-     * @param array  $properties Link properties.
+     * @param string $value   Chart element value.
+     * @param string $classes Chart element classes.
      *
-     * @return Rule Returns Link Component instance.
+     * @return Chart Returns Chart element instance.
      *
      * @access public
      */
-    public function link(string $value = '', array $properties = []): Link
+    public static function chart(string $value = '', string $classes = ''): Chart
     {
-        return new link(
-            $this->output,
-            $this->theme,
+        return new Chart(
+            self::getTheme(),
+            self::getShortcodes(),
             $value,
-            $properties
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Breakline element instance.
+     *
+     * @param string $value   Breakline element value.
+     * @param string $classes Breakline element classes.
+     *
+     * @return Breakline Returns Breakline element instance.
+     *
+     * @access public
+     */
+    public static function breakline(string $value = '', string $classes = ''): Breakline
+    {
+        return new Breakline(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Strikethrough element instance.
+     *
+     * @param string $value   Strikethrough element value.
+     * @param string $classes Strikethrough element classes.
+     *
+     * @return Strikethrough Returns Strikethrough element instance.
+     *
+     * @access public
+     */
+    public static function strikethrough(string $value = '', string $classes = ''): Strikethrough
+    {
+        return new Strikethrough(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Italic element instance.
+     *
+     * @param string $value   Italic element value.
+     * @param string $classes Italic element classes.
+     *
+     * @return Italic Returns Italic element instance.
+     *
+     * @access public
+     */
+    public static function italic(string $value = '', string $classes = ''): Italic
+    {
+        return new Italic(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Underline element instance.
+     *
+     * @param string $value   Underline element value.
+     * @param string $classes Underline element classes.
+     *
+     * @return Underline Returns Underline element instance.
+     *
+     * @access public
+     */
+    public static function underline(string $value = '', string $classes = ''): Underline
+    {
+        return new Underline(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
         );
     }
 }

@@ -1,3 +1,48 @@
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/termage/termage) (2021-01-21)
+* Added new **rendering framework agnostic** logic instead of **old symfony** based. 
+* Added new powerful Shortcodes API with a lot of predefined shortcodes.
+* Added RGB Colors support.
+* Added magic classes pipeline for `Element`.
+* Added new method `dim` for `Element`.
+* Added new method `strikethrough` for `Element`.
+* Added new method `italic` for `Element`.
+* Added new method `invisible` for `Element`.
+* Added new element `Chart`.
+* Added new element `Bold`.
+* Added new element `Italic`.
+* Added new element `Reverse`.
+* Added new element `Paragraph`.
+* Added new element `Anchor`.
+* Added new element `Strikethrough`.
+* Added new element `Underline`.
+* Added new element `Div`.
+* Added new element `Span`.
+* Added new element `Hr`.
+* Added new element `Breakline`.
+* Added new element `Blink`.
+* Added a lot of new new helpers.
+* Fixes and improvements for Theming.
+* Fixes and improvements for all Elements.
+* Tests improvements. 
+
+### BREAKING CHANGES
+
+* Removed all strings manipulations methods `lower`, `upper`, `limit`, `repeat`, `camel`, `capitalize` from `Element` due new markup based logic.
+* New rendering and elements access logic with help of namespaced helpers.
+* Use new element `Hr` instead of `Rule`
+* Use new element `Span` instead of `El`
+* Emojies removed.
+
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/termage/termage) (2021-10-08)
+* Added theme support for components: Alert, Rule.
+* Added new extended color scheme.
+
+<a name="0.5.1"></a>
+# [0.5.1](https://github.com/termage/termage) (2021-10-07)
+* Fixed `termage` helper 
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/termage/termage) (2021-10-07)
 * Added new `getTerminal` method for Termage and Element class.
