@@ -268,8 +268,6 @@ final class Alert extends Element
      *
      * @return mixed Returns mixed content.
      *
-     * @throws BadMethodCallException If method not found.
-     *
      * @access public
      */
     public function __call(string $method, array $parameters)
