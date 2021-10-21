@@ -32,14 +32,14 @@ final class Alert extends Element
      *
      * @access private
      */
-    private int $alertSize;
+    private int $alertWidth;
 
     /**
      * Alert size auto.
      *
      * @access private
      */
-    private bool $alertSizeAuto;
+    private bool $alertWidthFull;
 
     /**
      * Alert padding x.
@@ -71,7 +71,7 @@ final class Alert extends Element
      */
     public function getElementClasses(): array
     {
-        return ['danger', 'info', 'warning', 'success', 'success', 'primary', 'secondary', 'size', 'size-auto', 'text-align-left', 'text-align-right'];
+        return ['danger', 'info', 'warning', 'success', 'success', 'primary', 'secondary', 'w', 'w-full', 'text-align-left', 'text-align-right'];
     }
 
     /**
@@ -86,8 +86,8 @@ final class Alert extends Element
         return [
             'alert' => [
                 'text-align' => 'left',
-                'size-auto' => false,
-                'size' => 50,
+                'width-full' => false,
+                'width' => 50,
                 'type' => [
                     'info' => [
                         'bg' => 'info',
@@ -231,31 +231,31 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert size
+     * Set alert width
      *
-     * @param int $value Alert size.
+     * @param int $value Alert width.
      *
      * @return self Returns instance of the Alert class.
      *
      * @access public
      */
-    public function size(int $value): self
+    public function w(int $value): self
     {
-        $this->alertSize = $value;
+        $this->alertWidth = $value;
 
         return $this;
     }
 
     /**
-     * Set alert size auto.
+     * Set alert width full.
      *
      * @return self Returns instance of the Alert class.
      *
      * @access public
      */
-    public function sizeAuto(): self
+    public function wFull(): self
     {
-        $this->alertSizeAuto = true;
+        $this->alertWidthFull = true;
 
         return $this;
     }
@@ -274,8 +274,12 @@ final class Alert extends Element
      */
     public function __call(string $method, array $parameters)
     {
-        if (strings($method)->startsWith('size') && $method !== 'sizeAuto') {
-            return $this->size(strings(substr($method, 4))->kebab()->toInteger());
+        if ($method == 'wFull') {
+            return $this->wFull();
+        }
+
+        if (strings($method)->startsWith('w')) {
+            return $this->w(strings(substr($method, 1))->kebab()->toInteger());
         }
 
         return parent::__call($method, $parameters);
@@ -296,8 +300,8 @@ final class Alert extends Element
         $alertType           = $this->alertType ?? 'info';
         $alertTextAlign      = $this->alertTextAlign ?? $theme->variables()->get('alert.text-align', $elementVariables['alert']['text-align']);
         $alertPaddingX       = 2;
-        $alertSizeAuto       = $this->alertSizeAuto ?? $theme->variables()->get('alert.size-auto', $elementVariables['alert']['size-auto']);
-        $alertSize           = $this->alertSize ?? $theme->variables()->get('alert.size', $elementVariables['alert']['size']);
+        $alertWidthFull      = $this->alertWidthFull ?? $theme->variables()->get('alert.size-auto', $elementVariables['alert']['size-auto']);
+        $alertWidth          = $this->alertWidth ?? $theme->variables()->get('alert.size', $elementVariables['alert']['size']);
         $alertBg             = $theme->variables()->get('alert.type.' . $alertType . '.bg', $elementVariables['alert']['type'][$alertType]['bg']);
         $alertColor          = $theme->variables()->get('alert.type.' . $alertType . '.color', $elementVariables['alert']['type'][$alertType]['color']);
 
@@ -306,29 +310,29 @@ final class Alert extends Element
         $valueLength = strings($this->stripDecorations($value))->length();
         $terminalWidth = terminal()->getWidth();
 
-        if ($alertSizeAuto) {
-            $alertSize = $terminalWidth;
+        if ($alertWidthFull) {
+            $alertWidth = $terminalWidth;
         }
 
-        if ($alertSize > $terminalWidth) {
-            $alertSize = $terminalWidth;
+        if ($alertWidth > $terminalWidth) {
+            $alertWidth = $terminalWidth;
         }
 
         if ($alertTextAlign === 'right') {
             $pr  = $alertPaddingX;
-            $pl  = $alertSize - $alertPaddingX;
+            $pl  = $alertWidth - $alertPaddingX;
             $pl -= $valueLength;
         }
 
         if ($alertTextAlign === 'left') {
             $pl  = $alertPaddingX;
-            $pr  = $alertSize - $alertPaddingX;
+            $pr  = $alertWidth - $alertPaddingX;
             $pr -= $valueLength;
         }
 
-        $header = div()->pl($alertSize)->bg($alertBg);
+        $header = div()->pl($alertWidth)->bg($alertBg);
         $body   = div($value)->pl($pl)->pr($pr)->bg($alertBg)->color($alertColor);
-        $footer = div()->pl($alertSize)->bg($alertBg);
+        $footer = div()->pl($alertWidth)->bg($alertBg);
 
         return $header . $body . $footer;
     }
