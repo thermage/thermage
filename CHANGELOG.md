@@ -1,5 +1,5 @@
 <a name="0.7.0"></a>
-# [0.7.0](https://github.com/termage/termage) (2021-01-21)
+# [0.7.0](https://github.com/termage/termage) (2021-10-21)
 * Added new **rendering framework agnostic** logic instead of **old symfony** based. 
 * Added new powerful Shortcodes API with a lot of predefined shortcodes.
 * Added RGB Colors support.
