@@ -196,8 +196,8 @@ class Theme implements ThemeInterface
             // Alert element.
             'alert' => [
                 'text-align' => 'left',
-                'size-auto' => false,
-                'size' => 50,
+                'width-full' => false,
+                'width' => 50,
                 'type' => [
                     'info' => [
                         'bg' => 'info',
