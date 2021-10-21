@@ -29,7 +29,7 @@ use function max;
 use function round;
 use function strings;
 use function Termage\span;
-use function Termage\br;
+use function Termage\breakline as br;
 
 final class Chart extends Element
 {

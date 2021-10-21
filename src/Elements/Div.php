@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace Termage\Elements;
 
 use Termage\Base\Element;
-use function Termage\br;
+use function Termage\breakline as br;
 
 final class Div extends Element
 {

@@ -23,7 +23,7 @@ use Termage\Base\Element;
 use function Termage\terminal;
 use function strings;
 use function Termage\div;
-use function Termage\br;
+use function Termage\breakline as br;
 
 final class Alert extends Element
 {
