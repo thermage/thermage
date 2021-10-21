@@ -21,6 +21,7 @@ namespace Termage\Elements;
 use Termage\Base\Element;
 
 use function strings;
+use function Termage\div;
 use function Termage\span;
 use function Termage\terminal;
 
@@ -159,7 +160,7 @@ final class Hr extends Element
      *
      * @access public
      */
-    public function getComponentProperties(): array
+    public function getElementStyles(): array
     {
         return [
             'hr' => [
@@ -176,6 +177,18 @@ final class Hr extends Element
         ];
     }
 
+    /** 
+     * Get element classes.
+     * 
+     * @return array Array of element classes.
+     *
+     * @access public
+     */
+    public function getElementClasses(): array
+    {
+        return ['danger', 'info', 'warning', 'success', 'success', 'primary', 'secondary', 'text-align-left', 'text-align-right'];
+    }
+
     /**
      * Render hr element.
      *
@@ -187,11 +200,11 @@ final class Hr extends Element
     {
         $value               = parent::render();
         $valueLength         = strings($this->stripDecorations($value))->length();
-        $componentProperties = $this->getComponentProperties();
+        $elementStyles       = $this->getElementStyles();
         $theme               = self::getTheme();
         $ruleType            = $this->ruleType ?? 'info';
-        $ruleColor           = $theme->variables()->get('hr.type.' . $ruleType . '.color', $componentProperties['hr']['type'][$ruleType]['color']);
-        $ruleTextAlign       = $this->ruleTextAlign ?? $theme->variables()->get('hr.text-align', $componentProperties['hr']['text-align']);
+        $ruleColor           = $theme->variables()->get('hr.type.' . $ruleType . '.color', $elementStyles['hr']['type'][$ruleType]['color']);
+        $ruleTextAlign       = $this->ruleTextAlign ?? $theme->variables()->get('hr.text-align', $elementStyles['hr']['text-align']);
         $rulePaddingX        = 5;
         $terminalWidth       = terminal()->getWidth();
         $hr                  = '';
@@ -243,6 +256,6 @@ final class Hr extends Element
             $hr = span($ruleElement)->color($ruleColor);
         }
 
-        return $hr;
+        return (string) div((string) $hr);
     }
 }
