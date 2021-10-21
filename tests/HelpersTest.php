@@ -22,7 +22,7 @@ use function Termage\alert;
 use function Termage\anchor;
 use function Termage\blink;
 use function Termage\bold;
-use function Termage\br;
+use function Termage\breakline as br;
 use function Termage\chart;
 use function Termage\div;
 use function Termage\span;
