@@ -61,11 +61,6 @@ function div(string $value = '', string $class = ''): Div
     return Termage::div($value, $class);
 }
 
-function p(string $value = '', string $class = ''): Paragraph
-{
-    return Termage::paragraph($value, $class);
-}
-
 function paragraph(string $value = '', string $class = ''): Paragraph
 {
     return Termage::paragraph($value, $class);
@@ -81,11 +76,6 @@ function hr(string $value = '', string $class = ''): Hr
     return Termage::hr($value, $class);
 }
 
-function a(string $value = '', string $class = ''): Anchor
-{
-    return Termage::anchor($value, $class);
-}
-
 function anchor(string $value = '', string $class = ''): Anchor
 {
     return Termage::anchor($value, $class);
@@ -96,17 +86,7 @@ function bold(string $value = '', string $class = ''): Bold
     return Termage::bold($value, $class);
 }
 
-function b(string $value = '', string $class = ''): Bold
-{
-    return Termage::bold($value, $class);
-}
-
 function italic(string $value = '', string $class = ''): Italic
-{
-    return Termage::italic($value, $class);
-}
-
-function i(string $value = '', string $class = ''): Italic
 {
     return Termage::italic($value, $class);
 }
@@ -116,17 +96,7 @@ function underline(string $value = '', string $class = ''): Underline
     return Termage::underline($value, $class);
 }
 
-function u(string $value = '', string $class = ''): Underline
-{
-    return Termage::italic($value, $class);
-}
-
 function strikethrough(string $value = '', string $class = ''): Strikethrough
-{
-    return Termage::strikethrough($value, $class);
-}
-
-function s(string $value = '', string $class = ''): Strikethrough
 {
     return Termage::strikethrough($value, $class);
 }
@@ -147,11 +117,6 @@ function invisible(string $value = '', string $class = ''): Invisible
 }
 
 function breakline(string $value = '', string $class = ''): Breakline
-{
-    return Termage::breakline($value, $class);
-}
-
-function br(string $value = '', string $class = ''): Breakline
 {
     return Termage::breakline($value, $class);
 }
