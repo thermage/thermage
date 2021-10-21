@@ -23,6 +23,7 @@ use Termage\Themes\ThemeInterface;
 use Termage\Utils\Color;
 use Thunder\Shortcode\Shortcode\ShortcodeInterface;
 use Thunder\Shortcode\ShortcodeFacade;
+use Thunder\Shortcode\Shortcode\ParsedShortcode;
 
 use function intval;
 use function str_replace;
@@ -96,37 +97,45 @@ class Shortcodes
     /**
      * Add shortcode handler.
      *
-     * @param string   $name    Shortcode.
-     * @param callable $handler Handler.
+     * @param string   $name    Shortcode name.
+     * @param callable $handler Shortcode handler.
      *
      * @access public
      */
-    public function add(string $name, callable $handler)
+    public function add(string $name, callable $handler): self
     {
-        return $this->facade->addHandler($name, $handler);
+        $this->facade->addHandler($name, $handler);
+
+        return $this;
     }
 
     /**
      * Add event handler.
      *
-     * @param string   $name    Event.
-     * @param callable $handler Handler.
+     * @param string   $name    Shortcode event name.
+     * @param callable $handler Shortcode handler name.
+     *
+     * @return self Returns instance of the Shortcodes class.
      *
      * @access public
      */
-    public function addEvent(string $name, callable $handler)
+    public function addEvent(string $name, callable $handler): self
     {
-        return $this->facade->addEventHandler($name, $handler);
+        $this->facade->addEventHandler($name, $handler);
+
+        return $this;
     }
 
     /**
      * Parses text into shortcodes.
      *
-     * @param string $input A text containing SHORTCODES
+     * @param string $input A text containing Shortcodes
+     *
+     * @return array Returns array of parsed shortcodes.
      *
      * @access public
      */
-    public function parseText(string $input)
+    public function parseText(string $input): array
     {
         return $this->facade->parse($input);
     }
@@ -134,11 +143,13 @@ class Shortcodes
     /**
      * Parse and processes text to replaces shortcodes.
      *
-     * @param string $input A text containing SHORTCODES
+     * @param string $input A text containing Shortcodes
+     *
+     * @return string Returns parses and processed text.
      *
      * @access public
      */
-    public function parse(string $input)
+    public function parse(string $input): string
     {
         return $this->facade->process($input);
     }
