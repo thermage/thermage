@@ -28,14 +28,14 @@ use function Termage\br;
 final class Alert extends Element
 {
     /**
-     * Alert size.
+     * Alert width.
      *
      * @access private
      */
     private int $alertWidth;
 
     /**
-     * Alert size auto.
+     * Alert width full.
      *
      * @access private
      */
@@ -300,8 +300,8 @@ final class Alert extends Element
         $alertType           = $this->alertType ?? 'info';
         $alertTextAlign      = $this->alertTextAlign ?? $theme->variables()->get('alert.text-align', $elementVariables['alert']['text-align']);
         $alertPaddingX       = 2;
-        $alertWidthFull      = $this->alertWidthFull ?? $theme->variables()->get('alert.size-auto', $elementVariables['alert']['size-auto']);
-        $alertWidth          = $this->alertWidth ?? $theme->variables()->get('alert.size', $elementVariables['alert']['size']);
+        $alertWidthFull      = $this->alertWidthFull ?? $theme->variables()->get('alert.width-full', $elementVariables['alert']['width-full']);
+        $alertWidth          = $this->alertWidth ?? $theme->variables()->get('alert.width', $elementVariables['alert']['width']);
         $alertBg             = $theme->variables()->get('alert.type.' . $alertType . '.bg', $elementVariables['alert']['type'][$alertType]['bg']);
         $alertColor          = $theme->variables()->get('alert.type.' . $alertType . '.color', $elementVariables['alert']['type'][$alertType]['color']);
 
