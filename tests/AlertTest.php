@@ -61,8 +61,14 @@ test('test alert with text align left', function (): void {
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
-test('test alert size', function (): void {
-    $value = alert('Stay RAD!')->size(200)->render();
+test('test alert w', function (): void {
+    $value = alert('Stay RAD!')->w(200)->render();
+    $alert = "\e[44m\e[49m\e[30m\e[44mStayRAD!\e[49m\e[39m\e[44m\e[49m";
+    expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($alert);
+});
+
+test('test alert w magic', function (): void {
+    $value = alert('Stay RAD!')->w200()->render();
     $alert = "\e[44m\e[49m\e[30m\e[44mStayRAD!\e[49m\e[39m\e[44m\e[49m";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
