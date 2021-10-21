@@ -105,7 +105,7 @@ final class Chart extends Element
      *
      * @access public
      */
-    public function setData(array $data): self
+    public function data(array $data): self
     {
         $this->сhartData = $data;
 
@@ -176,6 +176,18 @@ final class Chart extends Element
     public function getType(): string
     {
         return $this->chartType;
+    }
+
+    /** 
+     * Get element classes.
+     * 
+     * @return array Array of element classes.
+     *
+     * @access public
+     */
+    public function getElementClasses(): array
+    {
+        return ['show-values', 'show-percents', 'inline', 'horizontal'];
     }
 
     /**
