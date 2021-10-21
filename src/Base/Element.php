@@ -57,12 +57,12 @@ abstract class Element
      *
      * @access private
      */
-    private static $theme = null;
+    private static ThemeInterface $theme;
 
     /**
      * The instance of Shortcodes class.
      */
-    private static $shortcodes = null;
+    private static Shortcodes $shortcodes;
 
     /** 
      * Registered element classes.
@@ -136,15 +136,13 @@ abstract class Element
     }
 
     /**
-     * Set a new instance of the theme that implements Themes interface.
+     * Set a new instance of the shortcodes.
      *
-     * @param ThemeInterface $theme Theme interface.
-     *
-     * @return void
+     * @param Shortcodes $shortcodes Shortcodes instance.
      *
      * @access public
      */
-    public static function setShortcodes($shortcodes): void
+    public static function setShortcodes(Shortcodes $shortcodes): void
     {
         self::$shortcodes = $shortcodes;
     }
