@@ -254,9 +254,9 @@ class Theme implements ThemeInterface
     }
 
     /**
-     * Get Theme variables.
+     * Get all registered theme variables.
      *
-     * @return Arrays Theme variables.
+     * @return Arrays Registered theme variables.
      *
      * @access public
      */
