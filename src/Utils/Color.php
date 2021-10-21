@@ -275,7 +275,7 @@ final class Color
      *
      * @param int $color Color.
      *
-     * @return int Color.
+     * @return string Color.
      *
      * @access private
      */
