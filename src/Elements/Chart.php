@@ -38,35 +38,35 @@ final class Chart extends Element
      *
      * @access private
      */
-    private string $chartType;
+    private string $chartType = 'horizontal';
 
     /**
      * Chart data.
      *
      * @access private
      */
-    private array $сhartData;
+    private array $сhartData = [];
 
     /**
      * Chart value sufix.
      *
      * @access private
      */
-    private string $valuesSufix;
+    private string $valuesSufix = '';
 
     /**
      * Show percents.
      *
      * @access private
      */
-    private bool $showPercents;
+    private bool $showPercents = false;
 
     /**
      * Show values.
      *
      * @access private
      */
-    private bool $showValues;
+    private bool $showValues = false;
 
     /**
      * Set chart type = horizontal.
@@ -200,8 +200,8 @@ final class Chart extends Element
     public function render(): string
     {       
         $value     = parent::render();
-        $chartData = $this->сhartData ?? [];
-        $chartType = $this->chartType ?? 'horizontal';
+        $chartData = $this->сhartData;
+        $chartType = $this->chartType;
       
         // Get total value
         $total = array_sum(array_column($chartData, 'value'));
