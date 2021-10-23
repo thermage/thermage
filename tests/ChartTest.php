@@ -61,6 +61,16 @@ test('test valuesSufix', function (): void {
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($chart);
 });
 
+test('test getData', function (): void {
+    $value = chart()->data($this->data)->getData();
+    expect(serialize($value))->toEqual(serialize($this->data));
+});
+
+test('test getType', function (): void {
+    $value = chart()->data($this->data)->getType();
+    expect($value)->toEqual('horizontal');
+});
+
 class ChartTestTheme extends Theme implements ThemeInterface
 {
     public function getThemeVariables(): array
