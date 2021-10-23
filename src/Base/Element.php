@@ -127,6 +127,18 @@ abstract class Element
     }
 
     /**
+     * Get element classes.
+     *
+     * @return string Returns Element classes.
+     *
+     * @access public
+     */
+    public function getClasses(): string
+    {
+        return $this->classes;
+    }
+
+    /**
      * Set element classes.
      *
      * @param string $classes Element classes.
