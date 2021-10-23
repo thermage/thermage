@@ -65,3 +65,8 @@ test('test underline', function (): void {
 test('test getShortcodes', function (): void {
     $this->assertInstanceOf(Shortcodes::class, Termage::getShortcodes());
 });
+
+test('test setShortcodes', function (): void {
+    Termage::setShortcodes(Termage::getShortcodes());
+    $this->assertInstanceOf(Shortcodes::class, Termage::getShortcodes());
+});
