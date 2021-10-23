@@ -16,6 +16,7 @@ use Termage\Elements\Paragraph;
 use Termage\Elements\Strikethrough;
 use Termage\Elements\Underline;
 use Termage\Parsers\Shortcodes;
+use Termage\Themes\Theme;
 use function Termage\alert;
 use function Termage\anchor;
 use function Termage\bold;
@@ -30,6 +31,8 @@ use function Termage\strikethrough;
 use function Termage\underline;
 use function Termage\setShortcodes;
 use function Termage\getShortcodes;
+use function Termage\setTheme;
+use function Termage\getTheme;
 
 test('test alert helper', function (): void {
     $this->assertInstanceOf(Alert::class, alert());
@@ -86,4 +89,13 @@ test('test getShortcodes', function (): void {
 test('test setShortcodes', function (): void {
     setShortcodes(getShortcodes());
     $this->assertInstanceOf(Shortcodes::class, getShortcodes());
+});
+
+test('test getTheme', function (): void {
+    $this->assertInstanceOf(Theme::class, getTheme());
+});
+
+test('test setTheme', function (): void {
+    setTheme(getTheme());
+    $this->assertInstanceOf(Theme::class, getTheme());
 });
