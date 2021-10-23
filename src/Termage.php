@@ -21,16 +21,13 @@ namespace Termage;
 use Atomastic\Macroable\Macroable;
 use Termage\Elements\Alert;
 use Termage\Elements\Anchor;
-use Termage\Elements\Blink;
 use Termage\Elements\Bold;
 use Termage\Elements\Breakline;
 use Termage\Elements\Chart;
 use Termage\Elements\Div;
 use Termage\Elements\Hr;
-use Termage\Elements\Invisible;
 use Termage\Elements\Italic;
 use Termage\Elements\Paragraph;
-use Termage\Elements\Reverse;
 use Termage\Elements\Span;
 use Termage\Elements\Strikethrough;
 use Termage\Elements\Underline;
@@ -203,46 +200,6 @@ class Termage
     }
 
     /**
-     * Create a new Blink element instance.
-     *
-     * @param string $value   Blink element value.
-     * @param string $classes Blink element classes.
-     *
-     * @return Blink Returns Blink element instance.
-     *
-     * @access public
-     */
-    public static function blink(string $value = '', string $classes = ''): Blink
-    {
-        return new Blink(
-            self::getTheme(),
-            self::getShortcodes(),
-            $value,
-            $classes
-        );
-    }
-
-    /**
-     * Create a new Invisible element instance.
-     *
-     * @param string $value   Invisible element value.
-     * @param string $classes Invisible element classes.
-     *
-     * @return Invisible Returns Invisible element instance.
-     *
-     * @access public
-     */
-    public static function invisible(string $value = '', string $classes = ''): Invisible
-    {
-        return new Invisible(
-            self::getTheme(),
-            self::getShortcodes(),
-            $value,
-            $classes
-        );
-    }
-
-    /**
      * Create a new Anchor element instance.
      *
      * @param string $value   Anchor element value.
@@ -275,26 +232,6 @@ class Termage
     public static function alert(string $value = '', string $classes = ''): Alert
     {
         return new Alert(
-            self::getTheme(),
-            self::getShortcodes(),
-            $value,
-            $classes
-        );
-    }
-
-    /**
-     * Create a new Reverse element instance.
-     *
-     * @param string $value   Reverse element value.
-     * @param string $classes Reverse element classes.
-     *
-     * @return Reverse Returns Reverse element instance.
-     *
-     * @access public
-     */
-    public static function reverse(string $value = '', string $classes = ''): Reverse
-    {
-        return new Reverse(
             self::getTheme(),
             self::getShortcodes(),
             $value,
