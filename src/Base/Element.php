@@ -46,7 +46,7 @@ abstract class Element
      *
      * @access private
      */
-    private Strings $classes;
+    private string $classes;
 
     /**
      * Element styles.
@@ -93,7 +93,7 @@ abstract class Element
         self::$theme             = $theme ??= new Theme();
         self::$shortcodes        = $shortcodes ??= new Shortcodes(self::getTheme());
         $this->value             = $value;
-        $this->classes           = strings($classes)->trim();
+        $this->classes           = $classes;
         $this->registeredClasses = arrays($this->getDefaultClasses())->merge($this->getElementClasses(), true);
         $this->styles            = arrays();
     }
@@ -122,6 +122,22 @@ abstract class Element
     public function value(string $value = ''): self
     {
         $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * Set element classes.
+     *
+     * @param string $classes Element classes.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function classes(string $classes = ''): self
+    {
+        $this->classes = $classes;
 
         return $this;
     }
@@ -516,7 +532,7 @@ abstract class Element
     }
 
     /** 
-     * Process classes.
+     * Process element classes.
      * 
      * @access public
      * 
@@ -524,8 +540,9 @@ abstract class Element
      */
     public function processClasses(): void
     {
-        if ($this->classes->length() > 0) {
-            foreach ($this->classes->segments() as $class) {
+        $classes = strings($this->classes)->trim();
+        if ($classes->length() > 0) {
+            foreach ($classes->segments() as $class) {
                 $methodName = (string) strings($class)->camel()->trim();
                 foreach($this->registeredClasses->toArray() as $registeredClass) {
                     $registeredClassName = (string) strings($registeredClass)->camel()->trim();
