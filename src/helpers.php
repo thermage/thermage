@@ -101,21 +101,6 @@ function strikethrough(string $value = '', string $class = ''): Strikethrough
     return Termage::strikethrough($value, $class);
 }
 
-function blink(string $value = '', string $class = ''): Blink
-{
-    return Termage::blink($value, $class);
-}
-
-function reverse(string $value = '', string $class = ''): Reverse
-{
-    return Termage::reverse($value, $class);
-}
-
-function invisible(string $value = '', string $class = ''): Invisible
-{
-    return Termage::invisible($value, $class);
-}
-
 function breakline(string $value = '', string $class = ''): Breakline
 {
     return Termage::breakline($value, $class);
