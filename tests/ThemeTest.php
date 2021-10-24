@@ -17,6 +17,10 @@ test('test get theme variables', function (): void {
     expect(Termage::getTheme()->getThemeVariables())->toBeArray();
 });
 
+test('test get theme variables objec', function (): void {
+    expect(Termage::getTheme()->variables()->toArray())->toBeArray();
+});
+
 class FooTheme extends Theme implements ThemeInterface {
     public function getThemeVariables(): array
     {
