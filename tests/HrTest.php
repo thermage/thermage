@@ -3,12 +3,19 @@
 declare(strict_types=1);
 
 use Termage\Termage;
+use Termage\Themes\Theme;
+use Termage\Themes\ThemeInterface;
+use function Termage\setTheme;
 use function Termage\hr;
 
+beforeEach(function() {
+    setTheme(new HrTestTheme());
+});
 
 test('test hr', function (): void {
     putenv('COLUMNS=20');
     $value = hr('Stay RAD!')->render();
+    dd(str_replace(["\r\n", "\r", "\n", " "], "", $value));
     $hr = "\e[38;2;23;162;184m―――\e[39m\e[38;2;23;162;184mStayRAD!\e[39m\e[38;2;23;162;184m――――――\e[39m";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($hr);
 });
@@ -68,3 +75,33 @@ test('test secondary info', function (): void {
     $hr = "\e[38;2;108;117;125m―――\e[39m\e[38;2;108;117;125mStayRAD!\e[39m\e[38;2;108;117;125m――――――\e[39m";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($hr);
 });
+
+
+class HrTestTheme extends Theme implements ThemeInterface
+{
+    public function getThemeVariables(): array
+    {
+        return [
+            'colors' => [
+                'blue' => 'blue',
+                'yellow' => 'yellow',
+                'black' => 'black',
+                'white' => 'white',
+                'red' => 'red',
+                'green' => 'green',
+                'gray' => 'gray',
+            ],
+            'hr' => [
+                'text-align' => 'left',
+                'type' => [
+                    'info' => ['color' => 'info'],
+                    'warning' => ['color' => 'warning'],
+                    'danger' => ['color' => 'danger'],
+                    'success' => ['color' => 'success'],
+                    'primary' => ['color' => 'primary'],
+                    'secondary' => ['color' => 'secondary'],
+                ],
+            ],
+        ];
+    }
+}
