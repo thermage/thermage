@@ -15,10 +15,10 @@ beforeEach(function() {
 });
 
 test('test set and get theme', function (): void {
-    $this->assertInstanceOf(Theme::class, Termage::getTheme());
-    
-    Termage::setTheme(new DivTestTheme());
-    $this->assertInstanceOf(DivTestTheme::class, Termage::getTheme());
+    $this->assertInstanceOf(Theme::class, div()::getTheme());
+
+    div()::setTheme(new DivTestTheme());
+    $this->assertInstanceOf(DivTestTheme::class, div()::getTheme());
 });
 
 test('test color', function (): void {
