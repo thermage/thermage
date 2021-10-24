@@ -139,10 +139,12 @@ test('test [pr=] shortcode', function (): void {
 
 test('test [bg=] shortcode', function (): void {
     expect(Termage::getShortcodes()->parse('[bg=red]BG[/bg]'))->toEqual("\e[41mBG\e[49m");
+    expect(Termage::getShortcodes()->parse('[bg]BG[/bg]'))->toEqual("BG");
 });
 
 test('test [color=] shortcode', function (): void {
     expect(Termage::getShortcodes()->parse('[color=red]COLOR[/color]'))->toEqual("\e[31mCOLOR\e[39m");
+    expect(Termage::getShortcodes()->parse('[color]COLOR[/color]'))->toEqual("COLOR");
 });
 
 class ShortcodeTestTheme extends Theme implements ThemeInterface
