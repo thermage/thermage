@@ -8,9 +8,17 @@ use Termage\Themes\ThemeInterface;
 use Termage\Elements\Div;
 use function Termage\div;
 use function Termage\setTheme;
+use Termage\Parsers\Shortcodes;
 
 beforeEach(function() {
     setTheme(new DivTestTheme());
+});
+
+test('test set and get theme', function (): void {
+    $this->assertInstanceOf(Theme::class, Termage::getTheme());
+    
+    Termage::setTheme(new DivTestTheme());
+    $this->assertInstanceOf(DivTestTheme::class, Termage::getTheme());
 });
 
 test('test color', function (): void {
@@ -72,6 +80,11 @@ test('test value and getValue', function (): void {
     $value = div()->value('RAD');
     expect($value->render())->toBe('RAD' . PHP_EOL);
     expect($value->getValue())->toBe('RAD');
+});
+
+test('test classes and getClasses', function (): void {
+    $value = div()->classes('RAD');;
+    expect($value->getClasses())->toBe('RAD');
 });
 
 test('test mx', function (): void {
@@ -146,6 +159,15 @@ test('magic throw exception BadMethodCallException', function (): void {
 test('test magic __toString', function (): void {
     $value = div()->value('RAD');
     expect((string) $value)->toBe('RAD' . PHP_EOL);
+});
+
+test('test getShortcodes', function (): void {
+    $this->assertInstanceOf(Shortcodes::class, div()::getShortcodes());
+});
+
+test('test setShortcodes', function (): void {
+    div()::setShortcodes(div()::getShortcodes());
+    $this->assertInstanceOf(Shortcodes::class, div()::getShortcodes());
 });
 
 class DivTestTheme extends Theme implements ThemeInterface
