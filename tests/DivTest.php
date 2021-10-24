@@ -61,6 +61,11 @@ test('test italic', function (): void {
     expect($value)->toBe("\e[3mRAD\e[23m\n");
 });
 
+test('test dim', function (): void {
+    $value = div()->value('RAD')->dim()->render();
+    expect($value)->toBe("\e[2mRAD\e[22m\n");
+});
+
 test('test strikethrough', function (): void {
     $value = div()->value('RAD')->strikethrough()->render();
     expect($value)->toBe("\e[9mRAD\e[29m\n");
