@@ -19,6 +19,13 @@ test('test hr', function (): void {
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($hr);
 });
 
+test('test hr without value', function (): void {
+    putenv('COLUMNS=20');
+    $value = hr()->render();
+    $hr = "\e[34m――――――――――――――――――――\e[39m";
+    expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($hr);
+});
+
 test('test hr with text align left', function (): void {
     putenv('COLUMNS=20');
     $value = hr('Stay RAD!')->textAlignLeft()->render();
