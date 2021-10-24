@@ -13,6 +13,13 @@ beforeEach(function() {
     setTheme(new AlertTestTheme());
 });
 
+
+test('test alert w full', function (): void {
+    $value = alert('Stay RAD!')->wFull()->render();
+    $alert = "\e[44m\e[49m\e[30m\e[44mStayRAD!\e[49m\e[39m\e[44m\e[49m";
+    expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($alert);
+});
+
 test('test alert info', function (): void {
     $value = alert('Stay RAD!')->info()->render();
     $alert = "\e[44m\e[49m\e[30m\e[44mStayRAD!\e[49m\e[39m\e[44m\e[49m";
