@@ -5,9 +5,18 @@ declare(strict_types=1);
 use Termage\Termage;
 use Termage\Parsers\Shortcodes;
 use Thunder\Shortcode\ShortcodeFacade;
+use Termage\Themes\Theme;
+use Termage\Themes\ThemeInterface;
 
 test('test termage getShortcodes method', function (): void {
     $this->assertInstanceOf(Shortcodes::class, Termage::getShortcodes());
+});
+
+test('test set and get theme', function (): void {
+    $this->assertInstanceOf(Theme::class, Termage::getShortcodes()::getTheme());
+
+    Termage::getShortcodes()::setTheme(new ShortcodeTestTheme());
+    $this->assertInstanceOf(ShortcodeTestTheme::class, Termage::getShortcodes()::getTheme());
 });
 
 test('test getFacade method', function (): void {
@@ -130,3 +139,21 @@ test('test [pl=] shortcodes', function (): void {
 test('test [pr=] shortcodes', function (): void {
     expect(Termage::getShortcodes()->parse('[pr=2]Padding right[/pr]'))->toEqual("Padding right  ");
 });
+
+class ShortcodeTestTheme extends Theme implements ThemeInterface
+{
+    public function getThemeVariables(): array
+    {
+        return [
+            'colors' => [
+                'blue' => 'blue',
+                'yellow' => 'yellow',
+                'black' => 'black',
+                'white' => 'white',
+                'red' => 'red',
+                'green' => 'green',
+                'gray' => 'gray',
+            ],
+        ];
+    }
+}
