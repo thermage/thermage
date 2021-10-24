@@ -15,7 +15,6 @@ beforeEach(function() {
 test('test hr', function (): void {
     putenv('COLUMNS=20');
     $value = hr('Stay RAD!')->render();
-    dd(str_replace(["\r\n", "\r", "\n", " "], "", $value));
     $hr = "\e[38;2;23;162;184m―――\e[39m\e[38;2;23;162;184mStayRAD!\e[39m\e[38;2;23;162;184m――――――\e[39m";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($hr);
 });
