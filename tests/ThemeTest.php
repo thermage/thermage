@@ -17,7 +17,7 @@ test('test get theme variables', function (): void {
     expect(Termage::getTheme()->getThemeVariables())->toBeArray();
 });
 
-test('test get theme variables objec', function (): void {
+test('test get theme variables object', function (): void {
     expect(Termage::getTheme()->variables()->toArray())->toBeArray();
 });
 
