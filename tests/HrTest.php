@@ -40,35 +40,35 @@ test('test hr info', function (): void {
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($hr);
 });
 
-test('test danger info', function (): void {
+test('test hr danger', function (): void {
     putenv('COLUMNS=20');
     $value = hr('Stay RAD!')->danger()->render();
     $hr = "\e[31m―――\e[39m\e[31mStayRAD!\e[39m\e[31m――――――\e[39m";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($hr);
 });
 
-test('test warning info', function (): void {
+test('test hr warning', function (): void {
     putenv('COLUMNS=20');
     $value = hr('Stay RAD!')->warning()->render();
     $hr = "\e[33m―――\e[39m\e[33mStayRAD!\e[39m\e[33m――――――\e[39m";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($hr);
 });
 
-test('test success info', function (): void {
+test('test hr success', function (): void {
     putenv('COLUMNS=20');
     $value = hr('Stay RAD!')->success()->render();
     $hr = "\e[32m―――\e[39m\e[32mStayRAD!\e[39m\e[32m――――――\e[39m";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($hr);
 });
 
-test('test primary info', function (): void {
+test('test hr primary', function (): void {
     putenv('COLUMNS=20');
-    $value = hr('Stay RAD!')->success()->render();
-    $hr = "\e[32m―――\e[39m\e[32mStayRAD!\e[39m\e[32m――――――\e[39m";
+    $value = hr('Stay RAD!')->primary()->render();
+    $hr = "\e[34m―――\e[39m\e[34mStayRAD!\e[39m\e[34m――――――\e[39m";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($hr);
 });
 
-test('test secondary info', function (): void {
+test('test hr secondary', function (): void {
     putenv('COLUMNS=20');
     $value = hr('Stay RAD!')->secondary()->render();
     $hr = "\e[90m―――\e[39m\e[90mStayRAD!\e[39m\e[90m――――――\e[39m";
