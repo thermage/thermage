@@ -18,16 +18,16 @@ declare(strict_types=1);
 
 namespace Termage\Themes;
 
-use Atomastic\Arrays\Arrays;
+use Atomastic\Arrays\Arrays as Collection;
 
-use function arrays;
+use function arrays as collection;
 
 class Theme implements ThemeInterface
 {
     /**
      * Theme variables.
      */
-    private Arrays $variables;
+    private Collection $variables;
 
     /**
      * Create a new Theme instance.
@@ -36,19 +36,19 @@ class Theme implements ThemeInterface
      */
     final public function __construct()
     {
-        $this->variables = arrays($this->getDefaultVariables())->replace($this->getThemeVariables(), true);
+        $this->variables = collection($this->getDefaultVariables())->replace($this->getThemeVariables(), true);
     }
 
     /**
      * Get Theme default variables.
      *
-     * @return array Theme default variables.
+     * @return Collection Theme default variables.
      *
      * @access public
      */
-    final public function getDefaultVariables(): array
+    final public function getDefaultVariables(): Collection
     {
-        return [
+        return collection([
             // Base.
             'colors' => [
                 'white'   => '#ffffff',
@@ -238,7 +238,7 @@ class Theme implements ThemeInterface
                     'secondary' => ['color' => '#6c757d'],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
@@ -248,20 +248,36 @@ class Theme implements ThemeInterface
      *
      * @access public
      */
-    public function getThemeVariables(): array
+    public function getThemeVariables(): Collection
     {
-        return [];
+        return collection();
     }
 
     /**
      * Get all registered theme variables.
      *
-     * @return Arrays Registered theme variables.
+     * @return Collection Registered theme variables.
      *
      * @access public
      */
-    public function variables(): Arrays
+    public function getVariables(): Collection
     {
         return $this->variables;
+    }
+
+    /**
+     * Set theme variables.
+     *
+     * @param array $variables theme variables.
+     *
+     * @return self Returns instance of the Theme class.
+     *
+     * @access public
+     */
+    public function variables($variables = []): self
+    {
+        $this->variables = $variables;
+
+        return $this;
     }
 }
