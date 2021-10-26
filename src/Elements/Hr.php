@@ -103,7 +103,7 @@ final class Hr extends Element
         $value               = parent::render();
         $valueLength         = strings($this->stripDecorations($value))->length();
         $theme               = self::getTheme();
-        $hrColor             = $this->getStyles()['color'] ?? white;
+        $hrColor             = $this->getStyles()['color'] ?? 'white';
         $hrTextAlign         = $this->hrTextAlign ?? $theme->getVariables()->get('hr.text-align', $elementStyles['hr']['text-align']);
         $hrPaddingX          = 5;
         $terminalWidth       = terminal()->getWidth();
