@@ -203,8 +203,8 @@ final class Hr extends Element
         $elementStyles       = $this->getElementStyles();
         $theme               = self::getTheme();
         $ruleType            = $this->ruleType ?? 'info';
-        $ruleColor           = $theme->variables()->get('hr.type.' . $ruleType . '.color', $elementStyles['hr']['type'][$ruleType]['color']);
-        $ruleTextAlign       = $this->ruleTextAlign ?? $theme->variables()->get('hr.text-align', $elementStyles['hr']['text-align']);
+        $ruleColor           = $theme->getVariables()->get('hr.type.' . $ruleType . '.color', $elementStyles['hr']['type'][$ruleType]['color']);
+        $ruleTextAlign       = $this->ruleTextAlign ?? $theme->getVariables()->get('hr.text-align', $elementStyles['hr']['text-align']);
         $rulePaddingX        = 5;
         $terminalWidth       = terminal()->getWidth();
         $hr                  = '';
