@@ -296,12 +296,12 @@ final class Alert extends Element
         $theme               = $this->getTheme();
         $elementVariables    = $this->getElementVariables();
         $alertType           = $this->alertType ?? 'info';
-        $alertTextAlign      = $this->alertTextAlign ?? $theme->variables()->get('alert.text-align', $elementVariables['alert']['text-align']);
+        $alertTextAlign      = $this->alertTextAlign ?? $theme->getVariables()->get('alert.text-align', $elementVariables['alert']['text-align']);
         $alertPaddingX       = 2;
-        $alertWidthFull      = $this->alertWidthFull ?? $theme->variables()->get('alert.width-full', $elementVariables['alert']['width-full']);
-        $alertWidth          = $this->alertWidth ?? $theme->variables()->get('alert.width', $elementVariables['alert']['width']);
-        $alertBg             = $theme->variables()->get('alert.type.' . $alertType . '.bg', $elementVariables['alert']['type'][$alertType]['bg']);
-        $alertColor          = $theme->variables()->get('alert.type.' . $alertType . '.color', $elementVariables['alert']['type'][$alertType]['color']);
+        $alertWidthFull      = $this->alertWidthFull ?? $theme->getVariables()->get('alert.width-full', $elementVariables['alert']['width-full']);
+        $alertWidth          = $this->alertWidth ?? $theme->getVariables()->get('alert.width', $elementVariables['alert']['width']);
+        $alertBg             = $theme->getVariables()->get('alert.type.' . $alertType . '.bg', $elementVariables['alert']['type'][$alertType]['bg']);
+        $alertColor          = $theme->getVariables()->get('alert.type.' . $alertType . '.color', $elementVariables['alert']['type'][$alertType]['color']);
 
         $pl = 0;
         $pr = 0;
