@@ -75,7 +75,7 @@ final class Heading extends Element
     public function __call(string $method, array $parameters)
     {
         if (strings($method)->startsWith('size')) {
-            return $this->size(strings(substr($method, 4))->kebab()->toInteger());
+            return $this->size(strings($method)->substr(4)->kebab()->toInteger());
         }
 
         return parent::__call($method, $parameters);
