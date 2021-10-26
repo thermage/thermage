@@ -411,9 +411,9 @@ abstract class Element
      */
     public function mx(int $value): self
     {
-        $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
-        $themeMarginLeft   = self::$theme->variables()->get('margin.left', 1);
-        $themeMarginRight  = self::$theme->variables()->get('margin.right', 1);
+        $themeMarginGlobal = self::$theme->getVariables()->get('margin.global', 1);
+        $themeMarginLeft   = self::$theme->getVariables()->get('margin.left', 1);
+        $themeMarginRight  = self::$theme->getVariables()->get('margin.right', 1);
 
         $this->styles->set('margin.left', intval($value / 2 * $themeMarginLeft * $themeMarginGlobal));
         $this->styles->set('margin.right', intval($value / 2 * $themeMarginRight * $themeMarginGlobal));
@@ -432,8 +432,8 @@ abstract class Element
      */
     public function ml(int $value): self
     {
-        $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
-        $themeMarginLeft   = self::$theme->variables()->get('margin.left', 1);
+        $themeMarginGlobal = self::$theme->getVariables()->get('margin.global', 1);
+        $themeMarginLeft   = self::$theme->getVariables()->get('margin.left', 1);
 
         $this->styles->set('margin.left', intval($value * $themeMarginLeft * $themeMarginGlobal));
 
@@ -451,8 +451,8 @@ abstract class Element
      */
     public function mr(int $value): self
     {
-        $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
-        $themeMarginRight  = self::$theme->variables()->get('margin.right', 1);
+        $themeMarginGlobal = self::$theme->getVariables()->get('margin.global', 1);
+        $themeMarginRight  = self::$theme->getVariables()->get('margin.right', 1);
 
         $this->styles->set('margin.right', intval($value * $themeMarginRight * $themeMarginGlobal));
 
@@ -470,9 +470,9 @@ abstract class Element
      */
     public function px(int $value): self
     {
-        $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
-        $themePaddingLeft   = self::$theme->variables()->get('padding.left', 1);
-        $themePaddingRight  = self::$theme->variables()->get('padding.right', 1);
+        $themePaddingGlobal = self::$theme->getVariables()->get('padding.global', 1);
+        $themePaddingLeft   = self::$theme->getVariables()->get('padding.left', 1);
+        $themePaddingRight  = self::$theme->getVariables()->get('padding.right', 1);
 
         $this->styles->set('padding.left', intval($value / 2 * $themePaddingLeft * $themePaddingGlobal));
         $this->styles->set('padding.right', intval($value / 2 * $themePaddingRight * $themePaddingGlobal));
@@ -491,8 +491,8 @@ abstract class Element
      */
     public function pl(int $value): self
     {
-        $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
-        $themePaddingLeft   = self::$theme->variables()->get('padding.left', 1);
+        $themePaddingGlobal = self::$theme->getVariables()->get('padding.global', 1);
+        $themePaddingLeft   = self::$theme->getVariables()->get('padding.left', 1);
 
         $this->styles->set('padding.left', intval($value * $themePaddingLeft * $themePaddingGlobal));
 
@@ -510,8 +510,8 @@ abstract class Element
      */
     public function pr(int $value): self
     {
-        $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
-        $themePaddingRight  = self::$theme->variables()->get('padding.right', 1);
+        $themePaddingGlobal = self::$theme->getVariables()->get('padding.global', 1);
+        $themePaddingRight  = self::$theme->getVariables()->get('padding.right', 1);
 
         $this->styles->set('padding.right', intval($value * $themePaddingRight * $themePaddingGlobal));
 
@@ -608,8 +608,8 @@ abstract class Element
         $styles = [
             'padding'       => ['l' => $this->styles->get('padding.left') ?? 0, 'r' => $this->styles->get('padding.right') ?? 0],
             'margin'        => ['l' => $this->styles->get('margin.left') ?? 0, 'r' => $this->styles->get('margin.right') ?? 0],
-            'color'         => $this->styles->get('color') ? self::$theme->variables()->get('colors.' . $this->styles->get('color'), $this->styles->get('color')) : false,
-            'bg'            => $this->styles->get('bg') ? self::$theme->variables()->get('colors.' . $this->styles->get('bg'), $this->styles->get('bg')) : false,
+            'color'         => $this->styles->get('color') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('color'), $this->styles->get('color')) : false,
+            'bg'            => $this->styles->get('bg') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('bg'), $this->styles->get('bg')) : false,
             'bold'          => $this->styles->get('bold') ?? false,
             'italic'        => $this->styles->get('italic') ?? false,
             'underline'     => $this->styles->get('underline') ?? false,
