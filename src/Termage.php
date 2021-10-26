@@ -20,6 +20,7 @@ namespace Termage;
 
 use Atomastic\Macroable\Macroable;
 use Termage\Elements\Alert;
+use Termage\Elements\Heading;
 use Termage\Elements\Anchor;
 use Termage\Elements\Bold;
 use Termage\Elements\Breakline;
@@ -232,6 +233,26 @@ class Termage
     public static function alert(string $value = '', string $classes = ''): Alert
     {
         return new Alert(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Heading element instance.
+     *
+     * @param string $value   Heading element value.
+     * @param string $classes Heading element classes.
+     *
+     * @return Heading Returns Heading element instance.
+     *
+     * @access public
+     */
+    public static function heading(string $value = '', string $classes = ''): Heading
+    {
+        return new Heading(
             self::getTheme(),
             self::getShortcodes(),
             $value,
