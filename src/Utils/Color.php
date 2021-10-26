@@ -6,15 +6,10 @@ declare(strict_types=1);
  * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
- * Licensed under The MIT License
+ * Licensed under The MIT License.
+ *
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
- *
- * @author    Fabien Potencier <fabien@symfony.com>
- * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
- * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
- * @link      https://digital.flextype.org/termage/ Termage
- * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace Termage\Utils;
@@ -27,11 +22,14 @@ use function count;
 use function getenv;
 use function hexdec;
 use function implode;
+use function intval;
 use function max;
 use function min;
 use function mt_rand;
+use function preg_match;
 use function round;
 use function sprintf;
+use function strings;
 use function strlen;
 use function substr;
 
@@ -112,6 +110,7 @@ final class Color
     public function bgColor($color): self
     {
         $this->background = $this->parseColor($color, true);
+
         return $this;
     }
 
@@ -263,10 +262,10 @@ final class Color
      */
     public function convertRgbColorToHex(string $color): string
     {
-        if (preg_match("/(\d{1,3})\,?\s?(\d{1,3})\,?\s?(\d{1,3})/", $color, $matches)) {
-            $color = sprintf("%02x%02x%02x", $matches[1], $matches[2], $matches[3]);
+        if (preg_match('/(\d{1,3})\,?\s?(\d{1,3})\,?\s?(\d{1,3})/', $color, $matches)) {
+            $color = sprintf('%02x%02x%02x', $matches[1], $matches[2], $matches[3]);
         }
-    
+
         return $color;
     }
 
