@@ -127,6 +127,34 @@ abstract class Element
     }
 
     /**
+     * Get element styles.
+     *
+     * @return Collection Returns element styles.
+     *
+     * @access public
+     */
+    public function getStyles(): Collection
+    {
+        return $this->styles;
+    }
+
+    /**
+     * Set element styles.
+     *
+     * @param string $styles Element styles.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function styles(array $styles = []): self
+    {
+        $this->styles = $styles;
+
+        return $this;
+    }
+
+    /**
      * Get element classes.
      *
      * @return string Returns Element classes.
