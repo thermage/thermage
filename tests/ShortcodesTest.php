@@ -10,6 +10,8 @@ use Thunder\Shortcode\Events;
 use Thunder\Shortcode\Shortcode\ShortcodeInterface;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
+use Atomastic\Arrays\Arrays as Collection;
+use function arrays as collection;
 
 test('test termage getShortcodes method', function (): void {
     $this->assertInstanceOf(Shortcodes::class, Termage::getShortcodes());
@@ -149,9 +151,9 @@ test('test [color=] shortcode', function (): void {
 
 class ShortcodeTestTheme extends Theme implements ThemeInterface
 {
-    public function getThemeVariables(): array
+    public function getThemeVariables(): Collection
     {
-        return [
+        return collection([
             'colors' => [
                 'blue' => 'blue',
                 'yellow' => 'yellow',
@@ -161,6 +163,6 @@ class ShortcodeTestTheme extends Theme implements ThemeInterface
                 'green' => 'green',
                 'gray' => 'gray',
             ],
-        ];
+        ]);
     }
 }

@@ -6,6 +6,8 @@ use Termage\Termage;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
 use Termage\Elements\Div;
+use Atomastic\Arrays\Arrays as Collection;
+use function arrays as collection;
 use function Termage\div;
 use function Termage\setTheme;
 use Termage\Parsers\Shortcodes;
@@ -177,9 +179,9 @@ test('test setShortcodes', function (): void {
 
 class DivTestTheme extends Theme implements ThemeInterface
 {
-    public function getThemeVariables(): array
+    public function getThemeVariables(): Collection
     {
-        return [
+        return collection([
             'colors' => [
                 'blue' => 'blue',
                 'yellow' => 'yellow',
@@ -189,6 +191,6 @@ class DivTestTheme extends Theme implements ThemeInterface
                 'green' => 'green',
                 'gray' => 'gray',
             ],
-        ];
+        ]);
     }
 }

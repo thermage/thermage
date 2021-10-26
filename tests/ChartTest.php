@@ -5,6 +5,8 @@ declare(strict_types=1);
 use Termage\Termage;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
+use Atomastic\Arrays\Arrays as Collection;
+use function arrays as collection;
 use Termage\Elements\Chart;
 use function Termage\chart;
 use function Termage\setTheme;
@@ -73,9 +75,9 @@ test('test getType', function (): void {
 
 class ChartTestTheme extends Theme implements ThemeInterface
 {
-    public function getThemeVariables(): array
+    public function getThemeVariables(): Collection
     {
-        return [
+        return collection([
             'colors' => [
                 'blue' => 'blue',
                 'yellow' => 'yellow',
@@ -85,6 +87,6 @@ class ChartTestTheme extends Theme implements ThemeInterface
                 'green' => 'green',
                 'gray' => 'gray',
             ],
-        ];
+        ]);
     }
 }

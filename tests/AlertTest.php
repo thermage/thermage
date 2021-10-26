@@ -6,6 +6,8 @@ use Termage\Termage;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
 use Termage\Elements\Alert;
+use Atomastic\Arrays\Arrays as Collection;
+use function arrays as collection;
 use function Termage\alert;
 use function Termage\setTheme;
 
@@ -87,9 +89,9 @@ test('test alert w magic', function (): void {
 
 class AlertTestTheme extends Theme implements ThemeInterface
 {
-    public function getThemeVariables(): array
+    public function getThemeVariables(): Collection
     {
-        return [
+        return collection([
             'colors' => [
                 'blue' => 'blue',
                 'yellow' => 'yellow',
@@ -130,6 +132,6 @@ class AlertTestTheme extends Theme implements ThemeInterface
                     ],
                 ],
             ],
-        ];
+        ]);
     }
 }
