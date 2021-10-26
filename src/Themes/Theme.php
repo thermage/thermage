@@ -274,9 +274,9 @@ class Theme implements ThemeInterface
      *
      * @access public
      */
-    public function variables($variables = []): self
+    public function variables(array $variables = []): self
     {
-        $this->variables = $variables;
+        $this->variables = collection($variables);
 
         return $this;
     }
