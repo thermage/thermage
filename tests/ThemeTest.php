@@ -5,6 +5,8 @@ declare(strict_types=1);
 use Termage\Termage;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
+use Atomastic\Arrays\Arrays as Collection;
+use function arrays as collection;
 
 test('test set and get theme', function (): void {
     $this->assertInstanceOf(Theme::class, Termage::getTheme());
@@ -22,8 +24,8 @@ test('test get theme variables object', function (): void {
 });
 
 class FooTheme extends Theme implements ThemeInterface {
-    public function getThemeVariables(): array
+    public function getThemeVariables(): Collection
     {
-        return [];
+        return collection();
     }
 }
