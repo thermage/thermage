@@ -32,6 +32,7 @@ use Termage\Elements\Paragraph;
 use Termage\Elements\Reverse;
 use Termage\Elements\Span;
 use Termage\Elements\Strikethrough;
+use Termage\Elements\Heading;
 use Termage\Elements\Underline;
 use Termage\Utils\Color;
 use Termage\Utils\Terminal;
@@ -114,6 +115,11 @@ function chart(string $value = '', string $class = ''): Chart
 function alert(string $value = '', string $class = ''): Alert
 {
     return Termage::alert($value, $class);
+}
+
+function heading(string $value = '', string $class = ''): Heading
+{
+    return Termage::heading($value, $class);
 }
 
 function color(): Color 
