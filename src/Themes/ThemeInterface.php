@@ -23,27 +23,29 @@ use Atomastic\Arrays\Arrays as Collection;
 interface ThemeInterface
 {
     /**
-     * Get Theme variables.
+     * Get Theme custom variables.
      *
-     * @return Collection Theme variables.
+     * @return Collection Collection of theme custom variables.
      *
      * @access public
      */
     public function getThemeVariables(): Collection;
 
     /**
-     * Get all registered theme variables.
+     * Get theme variables.
      *
-     * @return Collection Registered theme variables.
+     * @return Collection Collecton of theme variables.
      *
      * @access public
      */
     public function getVariables(): Collection;
 
     /**
-     * Get all registered theme variables.
+     * Set theme variables.
      *
-     * @return Collection Registered theme variables.
+     * @param array $variables Theme variables.
+     *
+     * @return self Returns instance of the Theme class.
      *
      * @access public
      */

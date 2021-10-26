@@ -242,9 +242,9 @@ class Theme implements ThemeInterface
     }
 
     /**
-     * Get Theme variables.
+     * Get Theme custom variables.
      *
-     * @return array Theme variables.
+     * @return Collection Collection of theme custom variables.
      *
      * @access public
      */
@@ -254,9 +254,9 @@ class Theme implements ThemeInterface
     }
 
     /**
-     * Get all registered theme variables.
+     * Get theme variables.
      *
-     * @return Collection Registered theme variables.
+     * @return Collection Collecton of theme variables.
      *
      * @access public
      */
@@ -268,7 +268,7 @@ class Theme implements ThemeInterface
     /**
      * Set theme variables.
      *
-     * @param array $variables theme variables.
+     * @param array $variables Theme variables.
      *
      * @return self Returns instance of the Theme class.
      *
