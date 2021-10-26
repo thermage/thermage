@@ -18,25 +18,34 @@ declare(strict_types=1);
 
 namespace Termage\Themes;
 
-use Atomastic\Arrays\Arrays;
+use Atomastic\Arrays\Arrays as Collection;
 
 interface ThemeInterface
 {
     /**
      * Get Theme variables.
      *
-     * @return array Theme variables.
+     * @return Collection Theme variables.
      *
      * @access public
      */
-    public function getThemeVariables(): array;
+    public function getThemeVariables(): Collection;
 
     /**
      * Get all registered theme variables.
      *
-     * @return Arrays Registered theme variables.
+     * @return Collection Registered theme variables.
      *
      * @access public
      */
-    public function variables(): Arrays;
+    public function getVariables(): Collection;
+
+    /**
+     * Get all registered theme variables.
+     *
+     * @return Collection Registered theme variables.
+     *
+     * @access public
+     */
+    public function variables(array $variables = []): self;
 }
