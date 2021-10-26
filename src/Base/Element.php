@@ -19,14 +19,14 @@ declare(strict_types=1);
 namespace Termage\Base;
 
 use Atomastic\Strings\Strings;
-use Atomastic\Arrays\Arrays;
+use Atomastic\Arrays\Arrays as Collection;
 use BadMethodCallException;
 use Termage\Parsers\Shortcodes;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
 
 use function Termage\color;
-use function arrays;
+use function arrays as collection;
 use function intval;
 use function sprintf;
 use function strings;
@@ -53,7 +53,7 @@ abstract class Element
      *
      * @access private
      */
-    private Arrays $styles;
+    private Collection $styles;
 
     /**
      * The implementation of Theme interface.
@@ -70,7 +70,7 @@ abstract class Element
     /** 
      * Registered element classes.
      */
-    private Arrays $registeredClasses;
+    private Collection $registeredClasses;
 
     /**
      * Create a new Element instance.
@@ -94,8 +94,8 @@ abstract class Element
         self::$shortcodes        = $shortcodes ??= new Shortcodes(self::getTheme());
         $this->value             = $value;
         $this->classes           = $classes;
-        $this->registeredClasses = arrays($this->getDefaultClasses())->merge($this->getElementClasses(), true);
-        $this->styles            = arrays();
+        $this->registeredClasses = collection($this->getDefaultClasses())->merge($this->getElementClasses(), true);
+        $this->styles            = collection();
     }
 
     /**
