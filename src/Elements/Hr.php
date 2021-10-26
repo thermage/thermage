@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace Termage\Elements;
 
 use Termage\Base\Element;
+use Atomastic\Arrays\Arrays as Collection;
 
 use function strings;
 use function Termage\div;
@@ -28,18 +29,27 @@ use function Termage\terminal;
 final class Hr extends Element
 {
     /**
-     * Rule text align.
+     * Hr text align.
      *
      * @access private
      */
-    private string $ruleTextAlign;
+    private string $hrTextAlign;
 
     /**
-     * Rule type.
+     * Get element styles.
      *
-     * @access private
+     * @return Collection Element styles.
+     *
+     * @access public
      */
-    private string $ruleType;
+    public function getElementStyles(): Collection
+    {
+        return collection([
+            'hr' => [
+                'text-align' => 'left',
+            ],
+        ]);
+    }
 
     /**
      * Set hr text align left.
@@ -50,7 +60,7 @@ final class Hr extends Element
      */
     public function textAlignLeft(): self
     {
-        $this->ruleTextAlign = 'left';
+        $this->hrTextAlign = 'left';
 
         return $this;
     }
@@ -64,117 +74,9 @@ final class Hr extends Element
      */
     public function textAlignRight(): self
     {
-        $this->ruleTextAlign = 'right';
+        $this->hrTextAlign = 'right';
 
         return $this;
-    }
-
-    /**
-     * Set hr color info.
-     *
-     * @return self Returns instance of the Rule class.
-     *
-     * @access public
-     */
-    public function info(): self
-    {
-        $this->ruleType = 'info';
-
-        return $this;
-    }
-
-    /**
-     * Set hr color warning.
-     *
-     * @return self Returns instance of the Rule class.
-     *
-     * @access public
-     */
-    public function warning(): self
-    {
-        $this->ruleType = 'warning';
-
-        return $this;
-    }
-
-    /**
-     * Set hr color danger.
-     *
-     * @return self Returns instance of the Rule class.
-     *
-     * @access public
-     */
-    public function danger(): self
-    {
-        $this->ruleType = 'danger';
-
-        return $this;
-    }
-
-    /**
-     * Set hr color success.
-     *
-     * @return self Returns instance of the Rule class.
-     *
-     * @access public
-     */
-    public function success(): self
-    {
-        $this->ruleType = 'success';
-
-        return $this;
-    }
-
-    /**
-     * Set hr color primary.
-     *
-     * @return self Returns instance of the Rule class.
-     *
-     * @access public
-     */
-    public function primary(): self
-    {
-        $this->ruleType = 'primary';
-
-        return $this;
-    }
-
-    /**
-     * Set hr color secondary.
-     *
-     * @return self Returns instance of the Rule class.
-     *
-     * @access public
-     */
-    public function secondary(): self
-    {
-        $this->ruleType = 'secondary';
-
-        return $this;
-    }
-
-    /**
-     * Get component properties.
-     *
-     * @return array Component properties.
-     *
-     * @access public
-     */
-    public function getElementStyles(): array
-    {
-        return [
-            'hr' => [
-                'text-align' => 'left',
-                'type' => [
-                    'info' => ['color' => 'info'],
-                    'warning' => ['color' => 'warning'],
-                    'danger' => ['color' => 'danger'],
-                    'success' => ['color' => 'success'],
-                    'primary' => ['color' => 'primary'],
-                    'secondary' => ['color' => 'secondary'],
-                ],
-            ],
-        ];
     }
 
     /** 
@@ -186,7 +88,7 @@ final class Hr extends Element
      */
     public function getElementClasses(): array
     {
-        return ['danger', 'info', 'warning', 'success', 'success', 'primary', 'secondary', 'text-align-left', 'text-align-right'];
+        return ['text-align-left', 'text-align-right'];
     }
 
     /**
@@ -200,17 +102,15 @@ final class Hr extends Element
     {
         $value               = parent::render();
         $valueLength         = strings($this->stripDecorations($value))->length();
-        $elementStyles       = $this->getElementStyles();
         $theme               = self::getTheme();
-        $ruleType            = $this->ruleType ?? 'info';
-        $ruleColor           = $theme->getVariables()->get('hr.type.' . $ruleType . '.color', $elementStyles['hr']['type'][$ruleType]['color']);
-        $ruleTextAlign       = $this->ruleTextAlign ?? $theme->getVariables()->get('hr.text-align', $elementStyles['hr']['text-align']);
-        $rulePaddingX        = 5;
+        $hrColor             = $this->getStyles()['color'] ?? white;
+        $hrTextAlign         = $this->hrTextAlign ?? $theme->getVariables()->get('hr.text-align', $elementStyles['hr']['text-align']);
+        $hrPaddingX          = 5;
         $terminalWidth       = terminal()->getWidth();
         $hr                  = '';
 
-        if ($ruleTextAlign === 'right') {
-            $ruleSize = $terminalWidth - $valueLength - $rulePaddingX;
+        if ($hrTextAlign === 'right') {
+            $ruleSize = $terminalWidth - $valueLength - $hrPaddingX;
 
             $rulePrepend = '';
             for ($i = 0; $i < $ruleSize; $i++) {
@@ -218,18 +118,18 @@ final class Hr extends Element
             }
 
             $ruleAppend = '';
-            for ($i = 0; $i < $rulePaddingX - 2; $i++) {
+            for ($i = 0; $i < $hrPaddingX - 2; $i++) {
                 $ruleAppend .= '─';
             }
 
             $ruleAppend = ' ' . $ruleAppend;
             $value      = ' ' . $value;
 
-            $hr = span($rulePrepend)->color($ruleColor) . span($value)->color($ruleColor) . span($ruleAppend)->color($ruleColor);
+            $hr = span($rulePrepend)->color($hrColor) . span($value)->color($hrColor) . span($ruleAppend)->color($hrColor);
         }
 
-        if ($ruleTextAlign === 'left') {
-            $ruleSize = $terminalWidth - $valueLength - $rulePaddingX;
+        if ($hrTextAlign === 'left') {
+            $ruleSize = $terminalWidth - $valueLength - $hrPaddingX;
 
             $ruleAppend = '';
             for ($i = 0; $i < $ruleSize; $i++) {
@@ -237,14 +137,14 @@ final class Hr extends Element
             }
 
             $rulePrepend = '';
-            for ($i = 0; $i < $rulePaddingX - 2; $i++) {
+            for ($i = 0; $i < $hrPaddingX - 2; $i++) {
                 $rulePrepend .= '─';
             }
 
             $rulePrepend .= ' ';
             $value       .= ' ';
 
-            $hr = span($rulePrepend)->color($ruleColor) . span($value)->color($ruleColor) . span($ruleAppend)->color($ruleColor);
+            $hr = span($rulePrepend)->color($hrColor) . span($value)->color($hrColor) . span($ruleAppend)->color($hrColor);
         }
 
         if ($valueLength === 0) {
@@ -253,7 +153,7 @@ final class Hr extends Element
                 $ruleElement .= '─';
             }
 
-            $hr = span($ruleElement)->color($ruleColor);
+            $hr = span($ruleElement)->color($hrColor);
         }
 
         return (string) div((string) $hr);
