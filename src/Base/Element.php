@@ -6,31 +6,28 @@ declare(strict_types=1);
  * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
- * Licensed under The MIT License
+ * Licensed under The MIT License.
+ *
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
- *
- * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
- * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
- * @link      https://digital.flextype.org/termage/ Termage
- * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace Termage\Base;
 
-use Atomastic\Strings\Strings;
 use Atomastic\Arrays\Arrays as Collection;
+use Atomastic\Strings\Strings;
 use BadMethodCallException;
 use Termage\Parsers\Shortcodes;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
 
-use function Termage\color;
 use function arrays as collection;
 use function intval;
+use function preg_replace;
 use function sprintf;
 use function strings;
 use function substr;
+use function Termage\color;
 
 abstract class Element
 {
@@ -67,7 +64,7 @@ abstract class Element
      */
     private static Shortcodes $shortcodes;
 
-    /** 
+    /**
      * Registered element classes.
      */
     private Collection $registeredClasses;
@@ -75,10 +72,10 @@ abstract class Element
     /**
      * Create a new Element instance.
      *
-     * @param        $theme 
-     * @param        $shortcodes 
-     * @param string $value   Element value.
-     * @param string $classes Element classes.
+     * @param        $theme
+     * @param        $shortcodes
+     * @param string     $value   Element value.
+     * @param string     $classes Element classes.
      *
      * @return Element Returns element.
      *
@@ -223,8 +220,6 @@ abstract class Element
      *
      * @param ThemeInterface $theme Theme interface.
      *
-     * @return void
-     *
      * @access public
      */
     public static function setTheme(ThemeInterface $theme): void
@@ -232,21 +227,21 @@ abstract class Element
         self::$theme = $theme;
     }
 
-    /** 
+    /**
      * Get default element classes.
-     * 
+     *
      * @return array Array of default classes.
      *
      * @access public
      */
-    final public function getDefaultClasses(): array 
+    final public function getDefaultClasses(): array
     {
         return ['bold', 'italic', 'bg', 'color', 'pl', 'pr', 'px', 'ml', 'mr', 'mx', 'dim', 'invisible', 'underline', 'reverse', 'blink'];
     }
 
-    /** 
+    /**
      * Get element classes.
-     * 
+     *
      * @return array Array of element classes.
      *
      * @access public
@@ -571,35 +566,37 @@ abstract class Element
         ));
     }
 
-    /** 
+    /**
      * Process element classes.
-     * 
+     *
      * @access public
-     * 
-     * @return void
      */
     public function processClasses(): void
     {
         $classes = strings($this->classes)->trim();
-        if ($classes->length() > 0) {
-            foreach ($classes->segments() as $class) {
-                $methodName = (string) strings($class)->camel()->trim();
-                foreach($this->registeredClasses->toArray() as $registeredClass) {
-                    $registeredClassName = (string) strings($registeredClass)->camel()->trim();
-                    if (strings($methodName)->startsWith($registeredClassName)) {
-                        $this->{$methodName}();
-                    }
+
+        if ($classes->length() <= 0) {
+            return;
+        }
+
+        foreach ($classes->segments() as $class) {
+            $methodName = (string) strings($class)->camel()->trim();
+            foreach ($this->registeredClasses->toArray() as $registeredClass) {
+                $registeredClassName = (string) strings($registeredClass)->camel()->trim();
+                
+                if (! strings($methodName)->startsWith($registeredClassName)) {
+                    continue;
                 }
+
+                $this->{$methodName}();
             }
         }
     }
 
-    /** 
+    /**
      * Process styles for element value.
-     * 
+     *
      * @access public
-     * 
-     * @return void
      */
     public function processStyles(): void
     {
@@ -638,42 +635,40 @@ abstract class Element
         }
     }
 
-    /** 
+    /**
      * Process shortcodes for element value.
-     * 
+     *
      * @access public
-     * 
-     * @return void
      */
     public function processShortcodes(): void
     {
         $this->value = self::$shortcodes->parse($this->value);
     }
 
-    /** 
+    /**
      * Strip styles.
-     * 
+     *
      * @param string $value Value with styles.
-     * 
-     * @access public
-     * 
+     *
      * @return string Value without styles.
+     *
+     * @access public
      */
     public function stripStyles(string $value): string
     {
         return preg_replace("/\e\[[^m]*m/", '', $value ?? '');
     }
 
-    /** 
+    /**
      * Strip all decorations.
-     * 
+     *
      * @param string $value Value with decorations.
-     * 
-     * @access public
-     * 
+     *
      * @return string Value without decorations.
+     *
+     * @access public
      */
-    public function stripDecorations($value): string
+    public function stripDecorations(string $value): string
     {
         return self::getShortcodes()->stripShortcodes($this->stripStyles($value));
     }
@@ -690,7 +685,7 @@ abstract class Element
         $this->processClasses();
         $this->processStyles();
         $this->processShortcodes();
- 
+
         return $this->value;
     }
 
