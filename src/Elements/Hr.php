@@ -6,23 +6,19 @@ declare(strict_types=1);
  * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
- * Licensed under The MIT License
+ * Licensed under The MIT License.
+ *
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
- *
- * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
- * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
- * @link      https://digital.flextype.org/termage/ Termage
- * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace Termage\Elements;
 
-use Termage\Base\Element;
 use Atomastic\Arrays\Arrays as Collection;
+use Termage\Base\Element;
 
-use function strings;
 use function arrays as collection;
+use function strings;
 use function Termage\div;
 use function Termage\span;
 use function Termage\terminal;
@@ -46,9 +42,7 @@ final class Hr extends Element
     public function getElementStyles(): Collection
     {
         return collection([
-            'hr' => [
-                'text-align' => 'left',
-            ],
+            'hr' => ['text-align' => 'left'],
         ]);
     }
 
@@ -80,9 +74,9 @@ final class Hr extends Element
         return $this;
     }
 
-    /** 
+    /**
      * Get element classes.
-     * 
+     *
      * @return array Array of element classes.
      *
      * @access public
@@ -101,14 +95,14 @@ final class Hr extends Element
      */
     public function render(): string
     {
-        $value               = parent::render();
-        $valueLength         = strings($this->stripDecorations($value))->length();
-        $theme               = self::getTheme();
-        $hrColor             = $this->getStyles()['color'] ?? 'white';
-        $hrTextAlign         = $this->hrTextAlign ?? $theme->getVariables()->get('hr.text-align', $this->getElementStyles()['hr']['text-align']);
-        $hrPaddingX          = 5;
-        $terminalWidth       = terminal()->getWidth();
-        $hr                  = '';
+        $value         = parent::render();
+        $valueLength   = strings($this->stripDecorations($value))->length();
+        $theme         = self::getTheme();
+        $hrColor       = $this->getStyles()['color'] ?? 'white';
+        $hrTextAlign   = $this->hrTextAlign ?? $theme->getVariables()->get('hr.text-align', $this->getElementStyles()['hr']['text-align']);
+        $hrPaddingX    = 5;
+        $terminalWidth = terminal()->getWidth();
+        $hr            = '';
 
         if ($hrTextAlign === 'right') {
             $ruleSize = $terminalWidth - $valueLength - $hrPaddingX;

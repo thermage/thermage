@@ -6,21 +6,16 @@ declare(strict_types=1);
  * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
- * Licensed under The MIT License
+ * Licensed under The MIT License.
+ *
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
- *
- * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
- * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
- * @link      https://digital.flextype.org/termage/ Termage
- * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace Termage\Elements;
 
 use Termage\Base\Element;
 
-use function Termage\color;
 use function array_column;
 use function array_sum;
 use function count;
@@ -28,8 +23,9 @@ use function intval;
 use function max;
 use function round;
 use function strings;
-use function Termage\span;
 use function Termage\breakline as br;
+use function Termage\color;
+use function Termage\span;
 
 final class Chart extends Element
 {
@@ -178,9 +174,9 @@ final class Chart extends Element
         return $this->chartType;
     }
 
-    /** 
+    /**
      * Get element classes.
-     * 
+     *
      * @return array Array of element classes.
      *
      * @access public
@@ -198,11 +194,11 @@ final class Chart extends Element
      * @access public
      */
     public function render(): string
-    {       
+    {
         $value     = parent::render();
         $chartData = $this->сhartData;
         $chartType = $this->chartType;
-      
+
         // Get total value
         $total = array_sum(array_column($chartData, 'value'));
 
@@ -298,7 +294,7 @@ final class Chart extends Element
         $labels = '';
         $suffix = '';
         foreach ($data as $key => $value) {
-            $suffix = ($showPercents ? span((string) $value['percentage'] . '%')->pr1()->color($value['color'])->render() : '') .
+            $suffix            = ($showPercents ? span((string) $value['percentage'] . '%')->pr1()->color($value['color'])->render() : '') .
                       ($showValues ? span('(' . (string) $value['value'] . $valuesSufix . ')')->pr1()->color($value['color'])->render() : '');
                       $labels .= span($value['label'] . (empty($suffix) ? ' ' : ' ' . $suffix))->color($value['color'])->render();
         }
