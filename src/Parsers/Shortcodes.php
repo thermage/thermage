@@ -389,7 +389,7 @@ class Shortcodes
     protected function colorShortcode(ShortcodeInterface $s): string
     {
         if ($s->getBbCode()) {
-            return (new Color())->textColor(self::$theme->variables()->get('colors.' . $s->getBbCode(), $s->getBbCode()))->apply($s->getContent());
+            return (new Color())->textColor(self::$theme->getVariables()->get('colors.' . $s->getBbCode(), $s->getBbCode()))->apply($s->getContent());
         }
 
         return $s->getContent();
@@ -407,7 +407,7 @@ class Shortcodes
     protected function bgShortcode(ShortcodeInterface $s): string
     {
         if ($s->getBbCode()) {
-            return (new Color())->bgColor(self::$theme->variables()->get('colors.' . $s->getBbCode(), $s->getBbCode()))->apply($s->getContent());
+            return (new Color())->bgColor(self::$theme->getVariables()->get('colors.' . $s->getBbCode(), $s->getBbCode()))->apply($s->getContent());
         }
 
         return $s->getContent();
@@ -450,9 +450,9 @@ class Shortcodes
     {
         $p = ['l' => '', 'r' => ''];
 
-        $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
-        $themePaddingLeft   = self::$theme->variables()->get('padding.left', 1);
-        $themePaddingRight  = self::$theme->variables()->get('padding.right', 1);
+        $themePaddingGlobal = self::$theme->getVariables()->get('padding.global', 1);
+        $themePaddingLeft   = self::$theme->getVariables()->get('padding.left', 1);
+        $themePaddingRight  = self::$theme->getVariables()->get('padding.right', 1);
 
         $pl = intval($s->getBbCode() / 2 * $themePaddingLeft * $themePaddingGlobal);
         $pr = intval($s->getBbCode() / 2 * $themePaddingRight * $themePaddingGlobal);
@@ -478,8 +478,8 @@ class Shortcodes
     {
         $p = ['l' => ''];
 
-        $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
-        $themePaddingLeft   = self::$theme->variables()->get('padding.left', 1);
+        $themePaddingGlobal = self::$theme->getVariables()->get('padding.global', 1);
+        $themePaddingLeft   = self::$theme->getVariables()->get('padding.left', 1);
 
         $pl = intval($s->getBbCode() * $themePaddingLeft * $themePaddingGlobal);
 
@@ -503,8 +503,8 @@ class Shortcodes
     {
         $p = ['r' => ''];
 
-        $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
-        $themePaddingRight  = self::$theme->variables()->get('padding.right', 1);
+        $themePaddingGlobal = self::$theme->getVariables()->get('padding.global', 1);
+        $themePaddingRight  = self::$theme->getVariables()->get('padding.right', 1);
 
         $pr = intval($s->getBbCode() * $themePaddingRight * $themePaddingGlobal);
 
@@ -552,9 +552,9 @@ class Shortcodes
     {
         $m = ['l' => '', 'r' => ''];
 
-        $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
-        $themeMarginLeft   = self::$theme->variables()->get('margin.left', 1);
-        $themeMarginRight  = self::$theme->variables()->get('margin.right', 1);
+        $themeMarginGlobal = self::$theme->getVariables()->get('margin.global', 1);
+        $themeMarginLeft   = self::$theme->getVariables()->get('margin.left', 1);
+        $themeMarginRight  = self::$theme->getVariables()->get('margin.right', 1);
 
         $ml = intval($s->getBbCode() / 2 * $themeMarginLeft * $themeMarginGlobal);
         $mr = intval($s->getBbCode() / 2 * $themeMarginRight * $themeMarginGlobal);
@@ -580,8 +580,8 @@ class Shortcodes
     {
         $m = ['l' => ''];
 
-        $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
-        $themeMarginLeft   = self::$theme->variables()->get('margin.left', 1);
+        $themeMarginGlobal = self::$theme->getVariables()->get('margin.global', 1);
+        $themeMarginLeft   = self::$theme->getVariables()->get('margin.left', 1);
 
         $ml = intval($s->getBbCode() * $themeMarginLeft * $themeMarginGlobal);
 
@@ -605,8 +605,8 @@ class Shortcodes
     {
         $m = ['r' => ''];
 
-        $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
-        $themeMarginRight  = self::$theme->variables()->get('margin.right', 1);
+        $themeMarginGlobal = self::$theme->getVariables()->get('margin.global', 1);
+        $themeMarginRight  = self::$theme->getVariables()->get('margin.right', 1);
 
         $mr = intval($s->getBbCode() * $themeMarginRight * $themeMarginGlobal);
 
