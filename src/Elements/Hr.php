@@ -214,12 +214,12 @@ final class Hr extends Element
 
             $rulePrepend = '';
             for ($i = 0; $i < $ruleSize; $i++) {
-                $rulePrepend .= '―';
+                $rulePrepend .= '─';
             }
 
             $ruleAppend = '';
             for ($i = 0; $i < $rulePaddingX - 2; $i++) {
-                $ruleAppend .= '―';
+                $ruleAppend .= '─';
             }
 
             $ruleAppend = ' ' . $ruleAppend;
@@ -233,12 +233,12 @@ final class Hr extends Element
 
             $ruleAppend = '';
             for ($i = 0; $i < $ruleSize; $i++) {
-                $ruleAppend .= '―';
+                $ruleAppend .= '─';
             }
 
             $rulePrepend = '';
             for ($i = 0; $i < $rulePaddingX - 2; $i++) {
-                $rulePrepend .= '―';
+                $rulePrepend .= '─';
             }
 
             $rulePrepend .= ' ';
@@ -250,7 +250,7 @@ final class Hr extends Element
         if ($valueLength === 0) {
             $ruleElement = '';
             for ($i = 0; $i < $terminalWidth; $i++) {
-                $ruleElement .= '―';
+                $ruleElement .= '─';
             }
 
             $hr = span($ruleElement)->color($ruleColor);
