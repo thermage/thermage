@@ -229,14 +229,6 @@ class Theme implements ThemeInterface
             // Hr element.
             'hr' => [
                 'text-align' => 'left',
-                'type' => [
-                    'info' => ['color' => '#17a2b8'],
-                    'warning' => ['color' => '#ffc107'],
-                    'danger' => ['color' => '#dc3545'],
-                    'success' => ['color' => '#28a745'],
-                    'primary' => ['color' => '#007bff'],
-                    'secondary' => ['color' => '#6c757d'],
-                ],
             ],
         ]);
     }
