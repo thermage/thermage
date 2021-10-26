@@ -6,33 +6,26 @@ declare(strict_types=1);
  * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
- * Licensed under The MIT License
+ * Licensed under The MIT License.
+ *
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
- *
- * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
- * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
- * @link      https://digital.flextype.org/termage/ Termage
- * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace Termage;
 
 use Termage\Elements\Alert;
 use Termage\Elements\Anchor;
-use Termage\Elements\Blink;
 use Termage\Elements\Bold;
 use Termage\Elements\Breakline;
 use Termage\Elements\Chart;
 use Termage\Elements\Div;
+use Termage\Elements\Heading;
 use Termage\Elements\Hr;
-use Termage\Elements\Invisible;
 use Termage\Elements\Italic;
 use Termage\Elements\Paragraph;
-use Termage\Elements\Reverse;
 use Termage\Elements\Span;
 use Termage\Elements\Strikethrough;
-use Termage\Elements\Heading;
 use Termage\Elements\Underline;
 use Termage\Utils\Color;
 use Termage\Utils\Terminal;
@@ -122,12 +115,12 @@ function heading(string $value = '', string $classes = ''): Heading
     return Termage::heading($value, $classes);
 }
 
-function color(): Color 
+function color(): Color
 {
     return new Color();
 }
 
-function terminal(): Terminal 
+function terminal(): Terminal
 {
     return new Terminal();
 }
