@@ -22,6 +22,7 @@ use Termage\Base\Element;
 use Atomastic\Arrays\Arrays as Collection;
 
 use function strings;
+use function arrays as collection;
 use function Termage\div;
 use function Termage\span;
 use function Termage\terminal;
@@ -104,7 +105,7 @@ final class Hr extends Element
         $valueLength         = strings($this->stripDecorations($value))->length();
         $theme               = self::getTheme();
         $hrColor             = $this->getStyles()['color'] ?? 'white';
-        $hrTextAlign         = $this->hrTextAlign ?? $theme->getVariables()->get('hr.text-align', $elementStyles['hr']['text-align']);
+        $hrTextAlign         = $this->hrTextAlign ?? $theme->getVariables()->get('hr.text-align', $this->getElementStyles()['hr']['text-align']);
         $hrPaddingX          = 5;
         $terminalWidth       = terminal()->getWidth();
         $hr                  = '';
