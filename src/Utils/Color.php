@@ -334,6 +334,6 @@ final class Color
             return 0;
         }
 
-        return (int) $diff * 100 / $v;
+        return intval((int) $diff * 100 / $v);
     }
 }
