@@ -96,12 +96,12 @@ test('test classes and getClasses', function (): void {
 
 test('test mx', function (): void {
     $value = div()->value('RAD')->mx(10)->render();
-    expect($value)->toBe('     RAD     ' . PHP_EOL);
+    expect($value)->toBe('          RAD          ' . PHP_EOL);
 });
 
 test('test magic mx', function (): void {
     $value = div()->value('RAD')->mx10()->render();
-    expect($value)->toBe('     RAD     ' . PHP_EOL);
+    expect($value)->toBe('          RAD          ' . PHP_EOL);
 });
 
 test('test mr', function (): void {
@@ -126,12 +126,12 @@ test('test magic ml', function (): void {
 
 test('test px', function (): void {
     $value = div()->value('RAD')->px(10)->render();
-    expect($value)->toBe('     RAD     ' . PHP_EOL);
+    expect($value)->toBe('          RAD          ' . PHP_EOL);
 });
 
 test('test magic px', function (): void {
     $value = div()->value('RAD')->px10()->render();
-    expect($value)->toBe('     RAD     ' . PHP_EOL);
+    expect($value)->toBe('          RAD          ' . PHP_EOL);
 });
 
 test('test pr', function (): void {

@@ -112,7 +112,7 @@ test('test [m l= r=] shortcode', function (): void {
 });
 
 test('test [mx=] shortcode', function (): void {
-    expect(Termage::getShortcodes()->parse('[mx=4]Margin left and right[/mx]'))->toEqual("  Margin left and right  ");
+    expect(Termage::getShortcodes()->parse('[mx=10]Margin left and right[/mx]'))->toEqual("          Margin left and right          ");
 });
 
 test('test [ml=] shortcode', function (): void {
@@ -128,7 +128,7 @@ test('test [p l= r=] shortcode', function (): void {
 });
 
 test('test [px=] shortcode', function (): void {
-    expect(Termage::getShortcodes()->parse('[px=4]Padding left and right[/px]'))->toEqual("  Padding left and right  ");
+    expect(Termage::getShortcodes()->parse('[px=10]Padding left and right[/px]'))->toEqual("          Padding left and right          ");
 });
 
 test('test [pl=] shortcode', function (): void {

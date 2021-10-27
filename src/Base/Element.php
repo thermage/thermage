@@ -406,12 +406,10 @@ abstract class Element
      */
     public function mx(int $value): self
     {
-        $themeMarginGlobal = self::$theme->getVariables()->get('margin.global', 1);
-        $themeMarginLeft   = self::$theme->getVariables()->get('margin.left', 1);
-        $themeMarginRight  = self::$theme->getVariables()->get('margin.right', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $this->styles->set('margin.left', intval($value / 2 * $themeMarginLeft * $themeMarginGlobal));
-        $this->styles->set('margin.right', intval($value / 2 * $themeMarginRight * $themeMarginGlobal));
+        $this->styles->set('margin.left', intval($value * $themeSpacer));
+        $this->styles->set('margin.right', intval($value * $themeSpacer));
 
         return $this;
     }
@@ -427,10 +425,9 @@ abstract class Element
      */
     public function ml(int $value): self
     {
-        $themeMarginGlobal = self::$theme->getVariables()->get('margin.global', 1);
-        $themeMarginLeft   = self::$theme->getVariables()->get('margin.left', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $this->styles->set('margin.left', intval($value * $themeMarginLeft * $themeMarginGlobal));
+        $this->styles->set('margin.left', intval($value * $themeSpacer));
 
         return $this;
     }
@@ -446,10 +443,9 @@ abstract class Element
      */
     public function mr(int $value): self
     {
-        $themeMarginGlobal = self::$theme->getVariables()->get('margin.global', 1);
-        $themeMarginRight  = self::$theme->getVariables()->get('margin.right', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $this->styles->set('margin.right', intval($value * $themeMarginRight * $themeMarginGlobal));
+        $this->styles->set('margin.right', intval($value * $themeSpacer));
 
         return $this;
     }
@@ -465,12 +461,10 @@ abstract class Element
      */
     public function px(int $value): self
     {
-        $themePaddingGlobal = self::$theme->getVariables()->get('padding.global', 1);
-        $themePaddingLeft   = self::$theme->getVariables()->get('padding.left', 1);
-        $themePaddingRight  = self::$theme->getVariables()->get('padding.right', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $this->styles->set('padding.left', intval($value / 2 * $themePaddingLeft * $themePaddingGlobal));
-        $this->styles->set('padding.right', intval($value / 2 * $themePaddingRight * $themePaddingGlobal));
+        $this->styles->set('padding.left', intval($value * $themeSpacer));
+        $this->styles->set('padding.right', intval($value * $themeSpacer));
 
         return $this;
     }
@@ -486,10 +480,9 @@ abstract class Element
      */
     public function pl(int $value): self
     {
-        $themePaddingGlobal = self::$theme->getVariables()->get('padding.global', 1);
-        $themePaddingLeft   = self::$theme->getVariables()->get('padding.left', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $this->styles->set('padding.left', intval($value * $themePaddingLeft * $themePaddingGlobal));
+        $this->styles->set('padding.left', intval($value * $themeSpacer));
 
         return $this;
     }
@@ -505,10 +498,9 @@ abstract class Element
      */
     public function pr(int $value): self
     {
-        $themePaddingGlobal = self::$theme->getVariables()->get('padding.global', 1);
-        $themePaddingRight  = self::$theme->getVariables()->get('padding.right', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $this->styles->set('padding.right', intval($value * $themePaddingRight * $themePaddingGlobal));
+        $this->styles->set('padding.right', intval($value * $themeSpacer));
 
         return $this;
     }

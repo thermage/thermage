@@ -45,7 +45,7 @@ class Theme implements ThemeInterface
     final public function getDefaultVariables(): Collection
     {
         return collection([
-            // Base.
+            // Color system.
             'colors' => [
                 'white'   => '#ffffff',
                 'gray100' => '#f8f9fa',
@@ -178,16 +178,9 @@ class Theme implements ThemeInterface
                 'light'     => '#f8f9fa', // gray100
                 'dark'      => '#212529', // gray900
             ],
-            'padding' => [
-                'global' => 1,
-                'left'   => 1,
-                'right'  => 1,
-            ],
-            'margin' => [
-                'global' => 1,
-                'left'   => 1,
-                'right'  => 1,
-            ],
+            
+            // Spacing
+            'spacer' => 1,
 
             // Alert element.
             'alert' => [
