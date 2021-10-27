@@ -92,6 +92,7 @@ final class Heading extends Element
         $valueWidth    = strings($this->stripDecorations($value))->length();
         $terminalWidth = terminal()->getWidth();
         $size          = $this->size;
+        $paddingLeft   = $this->getStyles()['padding']['left'] ?? 1;
 
         if ($size > 5) {
             $size = 5;
@@ -106,7 +107,7 @@ final class Heading extends Element
                 $heading  = '╔';
                 $heading .= strings('═')->repeat($terminalWidth - 2);
                 $heading .= '╗';
-                $heading .= '║' . span($value)->pl(0)->pr($terminalWidth - 0 - $valueWidth - 2) . '║' . PHP_EOL;
+                $heading .= '║' . span($value)->pl($paddingLeft)->pr($terminalWidth - $paddingLeft - $valueWidth - 2) . '║' . PHP_EOL;
                 $heading .= '╚';
                 $heading .= strings('═')->repeat($terminalWidth - 2);
                 $heading .=  '╝';
@@ -117,7 +118,7 @@ final class Heading extends Element
                 $heading  = '┌';
                 $heading .= strings('─')->repeat($terminalWidth - 2);
                 $heading .= '┐';
-                $heading .= '│' . span($value)->pl(0)->pr($terminalWidth - 0 - $valueWidth - 2) . '│' . PHP_EOL;
+                $heading .= '│' . span($value)->pl($paddingLeft)->pr($terminalWidth - $paddingLeft - $valueWidth - 2) . '│' . PHP_EOL;
                 $heading .= '└';
                 $heading .= strings('─')->repeat($terminalWidth - 2);
                 $heading .=  '┘';
