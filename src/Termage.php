@@ -6,14 +6,10 @@ declare(strict_types=1);
  * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
- * Licensed under The MIT License
+ * Licensed under The MIT License.
+ *
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
- *
- * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
- * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
- * @link      https://digital.flextype.org/termage/ Termage
- * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace Termage;
@@ -21,16 +17,14 @@ namespace Termage;
 use Atomastic\Macroable\Macroable;
 use Termage\Elements\Alert;
 use Termage\Elements\Anchor;
-use Termage\Elements\Blink;
 use Termage\Elements\Bold;
 use Termage\Elements\Breakline;
 use Termage\Elements\Chart;
 use Termage\Elements\Div;
+use Termage\Elements\Heading;
 use Termage\Elements\Hr;
-use Termage\Elements\Invisible;
 use Termage\Elements\Italic;
 use Termage\Elements\Paragraph;
-use Termage\Elements\Reverse;
 use Termage\Elements\Span;
 use Termage\Elements\Strikethrough;
 use Termage\Elements\Underline;
@@ -203,46 +197,6 @@ class Termage
     }
 
     /**
-     * Create a new Blink element instance.
-     *
-     * @param string $value   Blink element value.
-     * @param string $classes Blink element classes.
-     *
-     * @return Blink Returns Blink element instance.
-     *
-     * @access public
-     */
-    public static function blink(string $value = '', string $classes = ''): Blink
-    {
-        return new Blink(
-            self::getTheme(),
-            self::getShortcodes(),
-            $value,
-            $classes
-        );
-    }
-
-    /**
-     * Create a new Invisible element instance.
-     *
-     * @param string $value   Invisible element value.
-     * @param string $classes Invisible element classes.
-     *
-     * @return Invisible Returns Invisible element instance.
-     *
-     * @access public
-     */
-    public static function invisible(string $value = '', string $classes = ''): Invisible
-    {
-        return new Invisible(
-            self::getTheme(),
-            self::getShortcodes(),
-            $value,
-            $classes
-        );
-    }
-
-    /**
      * Create a new Anchor element instance.
      *
      * @param string $value   Anchor element value.
@@ -283,18 +237,18 @@ class Termage
     }
 
     /**
-     * Create a new Reverse element instance.
+     * Create a new Heading element instance.
      *
-     * @param string $value   Reverse element value.
-     * @param string $classes Reverse element classes.
+     * @param string $value   Heading element value.
+     * @param string $classes Heading element classes.
      *
-     * @return Reverse Returns Reverse element instance.
+     * @return Heading Returns Heading element instance.
      *
      * @access public
      */
-    public static function reverse(string $value = '', string $classes = ''): Reverse
+    public static function heading(string $value = '', string $classes = ''): Heading
     {
-        return new Reverse(
+        return new Heading(
             self::getTheme(),
             self::getShortcodes(),
             $value,

@@ -6,11 +6,25 @@ use Termage\Termage;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
 use Termage\Elements\Alert;
+use Atomastic\Arrays\Arrays as Collection;
+use function arrays as collection;
 use function Termage\alert;
 use function Termage\setTheme;
 
 beforeEach(function() {
     setTheme(new AlertTestTheme());
+});
+
+test('test alert w italic', function (): void {
+    $value = alert('Stay RAD!')->bgRed()->render();
+    $alert = "\e[44m\e[49m\e[30m\e[44m\e[41mStayRAD!\e[49m\e[49m\e[39m\e[44m\e[49m";
+    expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($alert);
+});
+
+test('test alert w full', function (): void {
+    $value = alert('Stay RAD!')->wFull()->render();
+    $alert = "\e[44m\e[49m\e[30m\e[44mStayRAD!\e[49m\e[39m\e[44m\e[49m";
+    expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert info', function (): void {
@@ -75,9 +89,9 @@ test('test alert w magic', function (): void {
 
 class AlertTestTheme extends Theme implements ThemeInterface
 {
-    public function getThemeVariables(): array
+    public function getThemeVariables(): Collection
     {
-        return [
+        return collection([
             'colors' => [
                 'blue' => 'blue',
                 'yellow' => 'yellow',
@@ -118,6 +132,6 @@ class AlertTestTheme extends Theme implements ThemeInterface
                     ],
                 ],
             ],
-        ];
+        ]);
     }
 }

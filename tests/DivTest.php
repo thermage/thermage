@@ -6,11 +6,21 @@ use Termage\Termage;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
 use Termage\Elements\Div;
+use Atomastic\Arrays\Arrays as Collection;
+use function arrays as collection;
 use function Termage\div;
 use function Termage\setTheme;
+use Termage\Parsers\Shortcodes;
 
 beforeEach(function() {
     setTheme(new DivTestTheme());
+});
+
+test('test set and get theme', function (): void {
+    $this->assertInstanceOf(Theme::class, div()::getTheme());
+
+    div()::setTheme(new DivTestTheme());
+    $this->assertInstanceOf(DivTestTheme::class, div()::getTheme());
 });
 
 test('test color', function (): void {
@@ -53,6 +63,11 @@ test('test italic', function (): void {
     expect($value)->toBe("\e[3mRAD\e[23m\n");
 });
 
+test('test dim', function (): void {
+    $value = div()->value('RAD')->dim()->render();
+    expect($value)->toBe("\e[2mRAD\e[22m\n");
+});
+
 test('test strikethrough', function (): void {
     $value = div()->value('RAD')->strikethrough()->render();
     expect($value)->toBe("\e[9mRAD\e[29m\n");
@@ -74,14 +89,19 @@ test('test value and getValue', function (): void {
     expect($value->getValue())->toBe('RAD');
 });
 
+test('test classes and getClasses', function (): void {
+    $value = div()->classes('RAD');;
+    expect($value->getClasses())->toBe('RAD');
+});
+
 test('test mx', function (): void {
     $value = div()->value('RAD')->mx(10)->render();
-    expect($value)->toBe('     RAD     ' . PHP_EOL);
+    expect($value)->toBe('          RAD          ' . PHP_EOL);
 });
 
 test('test magic mx', function (): void {
     $value = div()->value('RAD')->mx10()->render();
-    expect($value)->toBe('     RAD     ' . PHP_EOL);
+    expect($value)->toBe('          RAD          ' . PHP_EOL);
 });
 
 test('test mr', function (): void {
@@ -106,12 +126,12 @@ test('test magic ml', function (): void {
 
 test('test px', function (): void {
     $value = div()->value('RAD')->px(10)->render();
-    expect($value)->toBe('     RAD     ' . PHP_EOL);
+    expect($value)->toBe('          RAD          ' . PHP_EOL);
 });
 
 test('test magic px', function (): void {
     $value = div()->value('RAD')->px10()->render();
-    expect($value)->toBe('     RAD     ' . PHP_EOL);
+    expect($value)->toBe('          RAD          ' . PHP_EOL);
 });
 
 test('test pr', function (): void {
@@ -148,11 +168,20 @@ test('test magic __toString', function (): void {
     expect((string) $value)->toBe('RAD' . PHP_EOL);
 });
 
+test('test getShortcodes', function (): void {
+    $this->assertInstanceOf(Shortcodes::class, div()::getShortcodes());
+});
+
+test('test setShortcodes', function (): void {
+    div()::setShortcodes(div()::getShortcodes());
+    $this->assertInstanceOf(Shortcodes::class, div()::getShortcodes());
+});
+
 class DivTestTheme extends Theme implements ThemeInterface
 {
-    public function getThemeVariables(): array
+    public function getThemeVariables(): Collection
     {
-        return [
+        return collection([
             'colors' => [
                 'blue' => 'blue',
                 'yellow' => 'yellow',
@@ -162,6 +191,6 @@ class DivTestTheme extends Theme implements ThemeInterface
                 'green' => 'green',
                 'gray' => 'gray',
             ],
-        ];
+        ]);
     }
 }

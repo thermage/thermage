@@ -1,3 +1,21 @@
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/termage/termage) (2021-10-27)
+* Added `Heading` element.
+* Added new element methods `styles` and `getStyles`.
+* Added new element methods `classes` and `getClasses`.
+* Added new theme method `getVariables` and changed logic for method `variables`.
+* Added `classes` method to set element classes.
+* Fixed `getSaturation` method for non TRUECOLOR terminals.
+* Fixed margin and padding calculations using global `spacer`.
+* Fixes and improvements for Theming.
+* Fixes and improvements for all Elements.
+* Tests improvements. 
+
+### BREAKING CHANGES
+
+* Removed non semantic elements: blink, invisible, reverse. Use styles instead.
+* Removed theme variables for margins and paddings, use spacer variable instead.
+
 <a name="0.7.0"></a>
 # [0.7.0](https://github.com/termage/termage) (2021-10-21)
 * Added new **rendering framework agnostic** logic instead of **old symfony** based. 

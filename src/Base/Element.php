@@ -6,31 +6,28 @@ declare(strict_types=1);
  * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
- * Licensed under The MIT License
+ * Licensed under The MIT License.
+ *
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
- *
- * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
- * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
- * @link      https://digital.flextype.org/termage/ Termage
- * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace Termage\Base;
 
+use Atomastic\Arrays\Arrays as Collection;
 use Atomastic\Strings\Strings;
-use Atomastic\Arrays\Arrays;
 use BadMethodCallException;
 use Termage\Parsers\Shortcodes;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
 
-use function Termage\color;
-use function arrays;
+use function arrays as collection;
 use function intval;
+use function preg_replace;
 use function sprintf;
 use function strings;
 use function substr;
+use function Termage\color;
 
 abstract class Element
 {
@@ -46,14 +43,14 @@ abstract class Element
      *
      * @access private
      */
-    private Strings $classes;
+    private string $classes;
 
     /**
      * Element styles.
      *
      * @access private
      */
-    private Arrays $styles;
+    private Collection $styles;
 
     /**
      * The implementation of Theme interface.
@@ -67,18 +64,18 @@ abstract class Element
      */
     private static Shortcodes $shortcodes;
 
-    /** 
+    /**
      * Registered element classes.
      */
-    private Arrays $registeredClasses;
+    private Collection $registeredClasses;
 
     /**
      * Create a new Element instance.
      *
-     * @param        $theme 
-     * @param        $shortcodes 
-     * @param string $value   Element value.
-     * @param string $classes Element classes.
+     * @param        $theme
+     * @param        $shortcodes
+     * @param string     $value   Element value.
+     * @param string     $classes Element classes.
      *
      * @return Element Returns element.
      *
@@ -93,9 +90,9 @@ abstract class Element
         self::$theme             = $theme ??= new Theme();
         self::$shortcodes        = $shortcodes ??= new Shortcodes(self::getTheme());
         $this->value             = $value;
-        $this->classes           = strings($classes)->trim();
-        $this->registeredClasses = arrays($this->getDefaultClasses())->merge($this->getElementClasses(), true);
-        $this->styles            = arrays();
+        $this->classes           = $classes;
+        $this->registeredClasses = collection($this->getDefaultClasses())->merge($this->getElementClasses(), true);
+        $this->styles            = collection();
     }
 
     /**
@@ -122,6 +119,62 @@ abstract class Element
     public function value(string $value = ''): self
     {
         $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get element styles.
+     *
+     * @return Collection Returns element styles.
+     *
+     * @access public
+     */
+    public function getStyles(): Collection
+    {
+        return $this->styles;
+    }
+
+    /**
+     * Set element styles.
+     *
+     * @param string $styles Element styles.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function styles(array $styles = []): self
+    {
+        $this->styles = $styles;
+
+        return $this;
+    }
+
+    /**
+     * Get element classes.
+     *
+     * @return string Returns Element classes.
+     *
+     * @access public
+     */
+    public function getClasses(): string
+    {
+        return $this->classes;
+    }
+
+    /**
+     * Set element classes.
+     *
+     * @param string $classes Element classes.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function classes(string $classes = ''): self
+    {
+        $this->classes = $classes;
 
         return $this;
     }
@@ -167,8 +220,6 @@ abstract class Element
      *
      * @param ThemeInterface $theme Theme interface.
      *
-     * @return void
-     *
      * @access public
      */
     public static function setTheme(ThemeInterface $theme): void
@@ -176,21 +227,21 @@ abstract class Element
         self::$theme = $theme;
     }
 
-    /** 
+    /**
      * Get default element classes.
-     * 
+     *
      * @return array Array of default classes.
      *
      * @access public
      */
-    final public function getDefaultClasses(): array 
+    final public function getDefaultClasses(): array
     {
         return ['bold', 'italic', 'bg', 'color', 'pl', 'pr', 'px', 'ml', 'mr', 'mx', 'dim', 'invisible', 'underline', 'reverse', 'blink'];
     }
 
-    /** 
+    /**
      * Get element classes.
-     * 
+     *
      * @return array Array of element classes.
      *
      * @access public
@@ -355,12 +406,10 @@ abstract class Element
      */
     public function mx(int $value): self
     {
-        $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
-        $themeMarginLeft   = self::$theme->variables()->get('margin.left', 1);
-        $themeMarginRight  = self::$theme->variables()->get('margin.right', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $this->styles->set('margin.left', intval($value / 2 * $themeMarginLeft * $themeMarginGlobal));
-        $this->styles->set('margin.right', intval($value / 2 * $themeMarginRight * $themeMarginGlobal));
+        $this->styles->set('margin.left', intval($value * $themeSpacer));
+        $this->styles->set('margin.right', intval($value * $themeSpacer));
 
         return $this;
     }
@@ -376,10 +425,9 @@ abstract class Element
      */
     public function ml(int $value): self
     {
-        $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
-        $themeMarginLeft   = self::$theme->variables()->get('margin.left', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $this->styles->set('margin.left', intval($value * $themeMarginLeft * $themeMarginGlobal));
+        $this->styles->set('margin.left', intval($value * $themeSpacer));
 
         return $this;
     }
@@ -395,10 +443,9 @@ abstract class Element
      */
     public function mr(int $value): self
     {
-        $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
-        $themeMarginRight  = self::$theme->variables()->get('margin.right', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $this->styles->set('margin.right', intval($value * $themeMarginRight * $themeMarginGlobal));
+        $this->styles->set('margin.right', intval($value * $themeSpacer));
 
         return $this;
     }
@@ -414,12 +461,10 @@ abstract class Element
      */
     public function px(int $value): self
     {
-        $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
-        $themePaddingLeft   = self::$theme->variables()->get('padding.left', 1);
-        $themePaddingRight  = self::$theme->variables()->get('padding.right', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $this->styles->set('padding.left', intval($value / 2 * $themePaddingLeft * $themePaddingGlobal));
-        $this->styles->set('padding.right', intval($value / 2 * $themePaddingRight * $themePaddingGlobal));
+        $this->styles->set('padding.left', intval($value * $themeSpacer));
+        $this->styles->set('padding.right', intval($value * $themeSpacer));
 
         return $this;
     }
@@ -435,10 +480,9 @@ abstract class Element
      */
     public function pl(int $value): self
     {
-        $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
-        $themePaddingLeft   = self::$theme->variables()->get('padding.left', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $this->styles->set('padding.left', intval($value * $themePaddingLeft * $themePaddingGlobal));
+        $this->styles->set('padding.left', intval($value * $themeSpacer));
 
         return $this;
     }
@@ -454,10 +498,9 @@ abstract class Element
      */
     public function pr(int $value): self
     {
-        $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
-        $themePaddingRight  = self::$theme->variables()->get('padding.right', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $this->styles->set('padding.right', intval($value * $themePaddingRight * $themePaddingGlobal));
+        $this->styles->set('padding.right', intval($value * $themeSpacer));
 
         return $this;
     }
@@ -515,34 +558,37 @@ abstract class Element
         ));
     }
 
-    /** 
-     * Process classes.
-     * 
+    /**
+     * Process element classes.
+     *
      * @access public
-     * 
-     * @return void
      */
     public function processClasses(): void
     {
-        if ($this->classes->length() > 0) {
-            foreach ($this->classes->segments() as $class) {
-                $methodName = (string) strings($class)->camel()->trim();
-                foreach($this->registeredClasses->toArray() as $registeredClass) {
-                    $registeredClassName = (string) strings($registeredClass)->camel()->trim();
-                    if (strings($methodName)->startsWith($registeredClassName)) {
-                        $this->{$methodName}();
-                    }
+        $classes = strings($this->classes)->trim();
+
+        if ($classes->length() <= 0) {
+            return;
+        }
+
+        foreach ($classes->segments() as $class) {
+            $methodName = (string) strings($class)->camel()->trim();
+            foreach ($this->registeredClasses->toArray() as $registeredClass) {
+                $registeredClassName = (string) strings($registeredClass)->camel()->trim();
+                
+                if (! strings($methodName)->startsWith($registeredClassName)) {
+                    continue;
                 }
+
+                $this->{$methodName}();
             }
         }
     }
 
-    /** 
+    /**
      * Process styles for element value.
-     * 
+     *
      * @access public
-     * 
-     * @return void
      */
     public function processStyles(): void
     {
@@ -551,8 +597,8 @@ abstract class Element
         $styles = [
             'padding'       => ['l' => $this->styles->get('padding.left') ?? 0, 'r' => $this->styles->get('padding.right') ?? 0],
             'margin'        => ['l' => $this->styles->get('margin.left') ?? 0, 'r' => $this->styles->get('margin.right') ?? 0],
-            'color'         => $this->styles->get('color') ? self::$theme->variables()->get('colors.' . $this->styles->get('color'), $this->styles->get('color')) : false,
-            'bg'            => $this->styles->get('bg') ? self::$theme->variables()->get('colors.' . $this->styles->get('bg'), $this->styles->get('bg')) : false,
+            'color'         => $this->styles->get('color') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('color'), $this->styles->get('color')) : false,
+            'bg'            => $this->styles->get('bg') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('bg'), $this->styles->get('bg')) : false,
             'bold'          => $this->styles->get('bold') ?? false,
             'italic'        => $this->styles->get('italic') ?? false,
             'underline'     => $this->styles->get('underline') ?? false,
@@ -581,42 +627,40 @@ abstract class Element
         }
     }
 
-    /** 
+    /**
      * Process shortcodes for element value.
-     * 
+     *
      * @access public
-     * 
-     * @return void
      */
     public function processShortcodes(): void
     {
         $this->value = self::$shortcodes->parse($this->value);
     }
 
-    /** 
+    /**
      * Strip styles.
-     * 
+     *
      * @param string $value Value with styles.
-     * 
-     * @access public
-     * 
+     *
      * @return string Value without styles.
+     *
+     * @access public
      */
     public function stripStyles(string $value): string
     {
         return preg_replace("/\e\[[^m]*m/", '', $value ?? '');
     }
 
-    /** 
+    /**
      * Strip all decorations.
-     * 
+     *
      * @param string $value Value with decorations.
-     * 
-     * @access public
-     * 
+     *
      * @return string Value without decorations.
+     *
+     * @access public
      */
-    public function stripDecorations($value): string
+    public function stripDecorations(string $value): string
     {
         return self::getShortcodes()->stripShortcodes($this->stripStyles($value));
     }
@@ -633,7 +677,7 @@ abstract class Element
         $this->processClasses();
         $this->processStyles();
         $this->processShortcodes();
- 
+
         return $this->value;
     }
 

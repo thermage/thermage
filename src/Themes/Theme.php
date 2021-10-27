@@ -6,28 +6,24 @@ declare(strict_types=1);
  * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
- * Licensed under The MIT License
+ * Licensed under The MIT License.
+ *
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
- *
- * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
- * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
- * @link      https://digital.flextype.org/termage/ Termage
- * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace Termage\Themes;
 
-use Atomastic\Arrays\Arrays;
+use Atomastic\Arrays\Arrays as Collection;
 
-use function arrays;
+use function arrays as collection;
 
 class Theme implements ThemeInterface
 {
     /**
      * Theme variables.
      */
-    private Arrays $variables;
+    private Collection $variables;
 
     /**
      * Create a new Theme instance.
@@ -36,20 +32,20 @@ class Theme implements ThemeInterface
      */
     final public function __construct()
     {
-        $this->variables = arrays($this->getDefaultVariables())->replace($this->getThemeVariables(), true);
+        $this->variables = collection($this->getDefaultVariables())->replace($this->getThemeVariables(), true);
     }
 
     /**
      * Get Theme default variables.
      *
-     * @return array Theme default variables.
+     * @return Collection Theme default variables.
      *
      * @access public
      */
-    final public function getDefaultVariables(): array
+    final public function getDefaultVariables(): Collection
     {
-        return [
-            // Base.
+        return collection([
+            // Color system.
             'colors' => [
                 'white'   => '#ffffff',
                 'gray100' => '#f8f9fa',
@@ -182,16 +178,9 @@ class Theme implements ThemeInterface
                 'light'     => '#f8f9fa', // gray100
                 'dark'      => '#212529', // gray900
             ],
-            'padding' => [
-                'global' => 1,
-                'left'   => 1,
-                'right'  => 1,
-            ],
-            'margin' => [
-                'global' => 1,
-                'left'   => 1,
-                'right'  => 1,
-            ],
+            
+            // Spacing
+            'spacer' => 1,
 
             // Alert element.
             'alert' => [
@@ -227,41 +216,47 @@ class Theme implements ThemeInterface
             ],
 
             // Hr element.
-            'hr' => [
-                'text-align' => 'left',
-                'type' => [
-                    'info' => ['color' => '#17a2b8'],
-                    'warning' => ['color' => '#ffc107'],
-                    'danger' => ['color' => '#dc3545'],
-                    'success' => ['color' => '#28a745'],
-                    'primary' => ['color' => '#007bff'],
-                    'secondary' => ['color' => '#6c757d'],
-                ],
-            ],
-        ];
+            'hr' => ['text-align' => 'left'],
+        ]);
     }
 
     /**
-     * Get Theme variables.
+     * Get Theme custom variables.
      *
-     * @return array Theme variables.
+     * @return Collection Collection of theme custom variables.
      *
      * @access public
      */
-    public function getThemeVariables(): array
+    public function getThemeVariables(): Collection
     {
-        return [];
+        return collection();
     }
 
     /**
-     * Get all registered theme variables.
+     * Get theme variables.
      *
-     * @return Arrays Registered theme variables.
+     * @return Collection Collecton of theme variables.
      *
      * @access public
      */
-    public function variables(): Arrays
+    public function getVariables(): Collection
     {
         return $this->variables;
+    }
+
+    /**
+     * Set theme variables.
+     *
+     * @param array $variables Theme variables.
+     *
+     * @return self Returns instance of the Theme class.
+     *
+     * @access public
+     */
+    public function variables(array $variables = []): self
+    {
+        $this->variables = collection($variables);
+
+        return $this;
     }
 }

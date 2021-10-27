@@ -6,24 +6,20 @@ declare(strict_types=1);
  * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
- * Licensed under The MIT License
+ * Licensed under The MIT License.
+ *
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
- *
- * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
- * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
- * @link      https://digital.flextype.org/termage/ Termage
- * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace Termage\Elements;
 
 use Termage\Base\Element;
 
-use function Termage\terminal;
 use function strings;
+use function substr;
 use function Termage\div;
-use function Termage\breakline as br;
+use function Termage\terminal;
 
 final class Alert extends Element
 {
@@ -62,9 +58,9 @@ final class Alert extends Element
      */
     private string $alertTextAlign;
 
-    /** 
+    /**
      * Get element classes.
-     * 
+     *
      * @return array Array of element classes.
      *
      * @access public
@@ -272,7 +268,7 @@ final class Alert extends Element
      */
     public function __call(string $method, array $parameters)
     {
-        if ($method == 'wFull') {
+        if ($method === 'wFull') {
             return $this->wFull();
         }
 
@@ -292,20 +288,20 @@ final class Alert extends Element
      */
     public function render(): string
     {
-        $value               = parent::render();
-        $theme               = $this->getTheme();
-        $elementVariables    = $this->getElementVariables();
-        $alertType           = $this->alertType ?? 'info';
-        $alertTextAlign      = $this->alertTextAlign ?? $theme->variables()->get('alert.text-align', $elementVariables['alert']['text-align']);
-        $alertPaddingX       = 2;
-        $alertWidthFull      = $this->alertWidthFull ?? $theme->variables()->get('alert.width-full', $elementVariables['alert']['width-full']);
-        $alertWidth          = $this->alertWidth ?? $theme->variables()->get('alert.width', $elementVariables['alert']['width']);
-        $alertBg             = $theme->variables()->get('alert.type.' . $alertType . '.bg', $elementVariables['alert']['type'][$alertType]['bg']);
-        $alertColor          = $theme->variables()->get('alert.type.' . $alertType . '.color', $elementVariables['alert']['type'][$alertType]['color']);
+        $value            = parent::render();
+        $theme            = $this->getTheme();
+        $elementVariables = $this->getElementVariables();
+        $alertType        = $this->alertType ?? 'info';
+        $alertTextAlign   = $this->alertTextAlign ?? $theme->getVariables()->get('alert.text-align', $elementVariables['alert']['text-align']);
+        $alertPaddingX    = 2;
+        $alertWidthFull   = $this->alertWidthFull ?? $theme->getVariables()->get('alert.width-full', $elementVariables['alert']['width-full']);
+        $alertWidth       = $this->alertWidth ?? $theme->getVariables()->get('alert.width', $elementVariables['alert']['width']);
+        $alertBg          = $theme->getVariables()->get('alert.type.' . $alertType . '.bg', $elementVariables['alert']['type'][$alertType]['bg']);
+        $alertColor       = $theme->getVariables()->get('alert.type.' . $alertType . '.color', $elementVariables['alert']['type'][$alertType]['color']);
 
-        $pl = 0;
-        $pr = 0;
-        $valueLength = strings($this->stripDecorations($value))->length();
+        $pl            = 0;
+        $pr            = 0;
+        $valueLength   = strings($this->stripDecorations($value))->length();
         $terminalWidth = terminal()->getWidth();
 
         if ($alertWidthFull) {

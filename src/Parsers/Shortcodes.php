@@ -6,14 +6,10 @@ declare(strict_types=1);
  * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
- * Licensed under The MIT License
+ * Licensed under The MIT License.
+ *
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
- *
- * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
- * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
- * @link      https://digital.flextype.org/termage/ Termage
- * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace Termage\Parsers;
@@ -23,7 +19,6 @@ use Termage\Themes\ThemeInterface;
 use Termage\Utils\Color;
 use Thunder\Shortcode\Shortcode\ShortcodeInterface;
 use Thunder\Shortcode\ShortcodeFacade;
-use Thunder\Shortcode\Shortcode\ParsedShortcode;
 
 use function intval;
 use function str_replace;
@@ -72,8 +67,6 @@ class Shortcodes
      * Set a new instance of the theme that implements Themes interface.
      *
      * @param ThemeInterface $theme Theme interface.
-     *
-     * @return void 
      *
      * @access public
      */
@@ -389,7 +382,7 @@ class Shortcodes
     protected function colorShortcode(ShortcodeInterface $s): string
     {
         if ($s->getBbCode()) {
-            return (new Color())->textColor(self::$theme->variables()->get('colors.' . $s->getBbCode(), $s->getBbCode()))->apply($s->getContent());
+            return (new Color())->textColor(self::$theme->getVariables()->get('colors.' . $s->getBbCode(), $s->getBbCode()))->apply($s->getContent());
         }
 
         return $s->getContent();
@@ -407,7 +400,7 @@ class Shortcodes
     protected function bgShortcode(ShortcodeInterface $s): string
     {
         if ($s->getBbCode()) {
-            return (new Color())->bgColor(self::$theme->variables()->get('colors.' . $s->getBbCode(), $s->getBbCode()))->apply($s->getContent());
+            return (new Color())->bgColor(self::$theme->getVariables()->get('colors.' . $s->getBbCode(), $s->getBbCode()))->apply($s->getContent());
         }
 
         return $s->getContent();
@@ -426,12 +419,14 @@ class Shortcodes
     {
         $p = ['l' => '', 'r' => ''];
 
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
+
         if ($s->getParameter('l')) {
-            $p['l'] = (string) strings(' ')->repeat((int) $s->getParameter('l'));
+            $p['l'] = (string) strings(' ')->repeat(intval($s->getParameter('l') * $themeSpacer));
         }
 
         if ($s->getParameter('r')) {
-            $p['r'] = (string) strings(' ')->repeat((int) $s->getParameter('r'));
+            $p['r'] = (string) strings(' ')->repeat(intval($s->getParameter('r') * $themeSpacer));
         }
 
         return $p['l'] . $s->getContent() . $p['r'];
@@ -450,12 +445,10 @@ class Shortcodes
     {
         $p = ['l' => '', 'r' => ''];
 
-        $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
-        $themePaddingLeft   = self::$theme->variables()->get('padding.left', 1);
-        $themePaddingRight  = self::$theme->variables()->get('padding.right', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $pl = intval($s->getBbCode() / 2 * $themePaddingLeft * $themePaddingGlobal);
-        $pr = intval($s->getBbCode() / 2 * $themePaddingRight * $themePaddingGlobal);
+        $pl = intval($s->getBbCode() * $themeSpacer);
+        $pr = intval($s->getBbCode() * $themeSpacer);
 
         if ($s->getBbCode()) {
             $p['l'] = (string) strings(' ')->repeat($pl);
@@ -478,10 +471,9 @@ class Shortcodes
     {
         $p = ['l' => ''];
 
-        $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
-        $themePaddingLeft   = self::$theme->variables()->get('padding.left', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $pl = intval($s->getBbCode() * $themePaddingLeft * $themePaddingGlobal);
+        $pl = intval($s->getBbCode() * $themeSpacer);
 
         if ($s->getBbCode()) {
             $p['l'] = (string) strings(' ')->repeat($pl);
@@ -503,10 +495,9 @@ class Shortcodes
     {
         $p = ['r' => ''];
 
-        $themePaddingGlobal = self::$theme->variables()->get('padding.global', 1);
-        $themePaddingRight  = self::$theme->variables()->get('padding.right', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $pr = intval($s->getBbCode() * $themePaddingRight * $themePaddingGlobal);
+        $pr = intval($s->getBbCode() * $themeSpacer);
 
         if ($s->getBbCode()) {
             $p['r'] = (string) strings(' ')->repeat($pr);
@@ -528,12 +519,14 @@ class Shortcodes
     {
         $m = ['l' => '', 'r' => ''];
 
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
+
         if ($s->getParameter('l')) {
-            $m['l'] = (string) strings(' ')->repeat((int) $s->getParameter('l'));
+            $m['l'] = (string) strings(' ')->repeat(intval($s->getParameter('l') * $themeSpacer));
         }
 
         if ($s->getParameter('r')) {
-            $m['r'] = (string) strings(' ')->repeat((int) $s->getParameter('r'));
+            $m['r'] = (string) strings(' ')->repeat(intval($s->getParameter('r') * $themeSpacer));
         }
 
         return $m['l'] . $s->getContent() . $m['r'];
@@ -552,12 +545,10 @@ class Shortcodes
     {
         $m = ['l' => '', 'r' => ''];
 
-        $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
-        $themeMarginLeft   = self::$theme->variables()->get('margin.left', 1);
-        $themeMarginRight  = self::$theme->variables()->get('margin.right', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $ml = intval($s->getBbCode() / 2 * $themeMarginLeft * $themeMarginGlobal);
-        $mr = intval($s->getBbCode() / 2 * $themeMarginRight * $themeMarginGlobal);
+        $ml = intval($s->getBbCode() * $themeSpacer);
+        $mr = intval($s->getBbCode() * $themeSpacer);
 
         if ($s->getBbCode()) {
             $m['l'] = (string) strings(' ')->repeat($ml);
@@ -580,10 +571,9 @@ class Shortcodes
     {
         $m = ['l' => ''];
 
-        $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
-        $themeMarginLeft   = self::$theme->variables()->get('margin.left', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $ml = intval($s->getBbCode() * $themeMarginLeft * $themeMarginGlobal);
+        $ml = intval($s->getBbCode() * $themeSpacer);
 
         if ($s->getBbCode()) {
             $m['l'] = (string) strings(' ')->repeat($ml);
@@ -605,10 +595,9 @@ class Shortcodes
     {
         $m = ['r' => ''];
 
-        $themeMarginGlobal = self::$theme->variables()->get('margin.global', 1);
-        $themeMarginRight  = self::$theme->variables()->get('margin.right', 1);
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $mr = intval($s->getBbCode() * $themeMarginRight * $themeMarginGlobal);
+        $mr = intval($s->getBbCode() * $themeSpacer);
 
         if ($s->getBbCode()) {
             $m['r'] = (string) strings(' ')->repeat($mr);

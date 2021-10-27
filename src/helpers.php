@@ -6,30 +6,24 @@ declare(strict_types=1);
  * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
- * Licensed under The MIT License
+ * Licensed under The MIT License.
+ *
  * For full copyright and license information, please see the LICENSE
  * Redistributions of files must retain the above copyright notice.
- *
- * @author    Sergey Romanenko <sergey.romanenko@flextype.org>
- * @copyright Copyright (c) Sergey Romanenko (https://awilum.github.io)
- * @link      https://digital.flextype.org/termage/ Termage
- * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
 namespace Termage;
 
 use Termage\Elements\Alert;
 use Termage\Elements\Anchor;
-use Termage\Elements\Blink;
 use Termage\Elements\Bold;
 use Termage\Elements\Breakline;
 use Termage\Elements\Chart;
 use Termage\Elements\Div;
+use Termage\Elements\Heading;
 use Termage\Elements\Hr;
-use Termage\Elements\Invisible;
 use Termage\Elements\Italic;
 use Termage\Elements\Paragraph;
-use Termage\Elements\Reverse;
 use Termage\Elements\Span;
 use Termage\Elements\Strikethrough;
 use Termage\Elements\Underline;
@@ -56,87 +50,77 @@ function getTheme()
     return Termage::getTheme();
 }
 
-function div(string $value = '', string $class = ''): Div
+function div(string $value = '', string $classes = ''): Div
 {
-    return Termage::div($value, $class);
+    return Termage::div($value, $classes);
 }
 
-function paragraph(string $value = '', string $class = ''): Paragraph
+function paragraph(string $value = '', string $classes = ''): Paragraph
 {
-    return Termage::paragraph($value, $class);
+    return Termage::paragraph($value, $classes);
 }
 
-function span(string $value = '', string $class = ''): Span
+function span(string $value = '', string $classes = ''): Span
 {
-    return Termage::span($value, $class);
+    return Termage::span($value, $classes);
 }
 
-function hr(string $value = '', string $class = ''): Hr
+function hr(string $value = '', string $classes = ''): Hr
 {
-    return Termage::hr($value, $class);
+    return Termage::hr($value, $classes);
 }
 
-function anchor(string $value = '', string $class = ''): Anchor
+function anchor(string $value = '', string $classes = ''): Anchor
 {
-    return Termage::anchor($value, $class);
+    return Termage::anchor($value, $classes);
 }
 
-function bold(string $value = '', string $class = ''): Bold
+function bold(string $value = '', string $classes = ''): Bold
 {
-    return Termage::bold($value, $class);
+    return Termage::bold($value, $classes);
 }
 
-function italic(string $value = '', string $class = ''): Italic
+function italic(string $value = '', string $classes = ''): Italic
 {
-    return Termage::italic($value, $class);
+    return Termage::italic($value, $classes);
 }
 
-function underline(string $value = '', string $class = ''): Underline
+function underline(string $value = '', string $classes = ''): Underline
 {
-    return Termage::underline($value, $class);
+    return Termage::underline($value, $classes);
 }
 
-function strikethrough(string $value = '', string $class = ''): Strikethrough
+function strikethrough(string $value = '', string $classes = ''): Strikethrough
 {
-    return Termage::strikethrough($value, $class);
+    return Termage::strikethrough($value, $classes);
 }
 
-function blink(string $value = '', string $class = ''): Blink
+function breakline(string $value = '', string $classes = ''): Breakline
 {
-    return Termage::blink($value, $class);
+    return Termage::breakline($value, $classes);
 }
 
-function reverse(string $value = '', string $class = ''): Reverse
+function chart(string $value = '', string $classes = ''): Chart
 {
-    return Termage::reverse($value, $class);
+    return Termage::chart($value, $classes);
 }
 
-function invisible(string $value = '', string $class = ''): Invisible
+function alert(string $value = '', string $classes = ''): Alert
 {
-    return Termage::invisible($value, $class);
+    return Termage::alert($value, $classes);
 }
 
-function breakline(string $value = '', string $class = ''): Breakline
+function heading(string $value = '', string $classes = ''): Heading
 {
-    return Termage::breakline($value, $class);
+    return Termage::heading($value, $classes);
 }
 
-function chart(string $value = '', string $class = ''): Chart
-{
-    return Termage::chart($value, $class);
-}
-
-function alert(string $value = '', string $class = ''): Alert
-{
-    return Termage::alert($value, $class);
-}
-
-function color(): Color 
+function color(): Color
 {
     return new Color();
 }
 
-function terminal(): Terminal 
+function terminal(): Terminal
 {
     return new Terminal();
 }
