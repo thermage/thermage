@@ -22,6 +22,8 @@ final class Bold extends Element
     {
         $this->bold();
 
+        $this->d($this->getStyles()->get('display') ?? 'inline');
+
         return parent::render();
     }
 }
