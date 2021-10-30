@@ -18,4 +18,10 @@ use Termage\Base\Element;
 
 final class Span extends Element
 {
+    public function render(): string
+    {
+        $this->d($this->getStyles()->get('display') ?? 'inline');
+
+        return parent::render();
+    }
 }
