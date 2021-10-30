@@ -25,39 +25,11 @@ use function Termage\terminal;
 final class Alert extends Element
 {
     /**
-     * Alert width.
-     *
-     * @access private
-     */
-    private int $alertWidth;
-
-    /**
-     * Alert width full.
-     *
-     * @access private
-     */
-    private bool $alertWidthFull;
-
-    /**
-     * Alert padding x.
-     *
-     * @access private
-     */
-    private int $alertPaddingX;
-
-    /**
      * Alert type.
      *
      * @access private
      */
     private string $alertType;
-
-    /**
-     * Alert text align.
-     *
-     * @access private
-     */
-    private string $alertTextAlign;
 
     /**
      * Get element classes.
