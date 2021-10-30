@@ -33,4 +33,11 @@ final class Anchor extends Element
 
         return $this;
     }
+
+    public function render(): string
+    {
+        $this->d($this->getStyles()->get('display') ?? 'inline');
+
+        return parent::render();
+    }
 }
