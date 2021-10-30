@@ -22,6 +22,8 @@ final class Italic extends Element
     {
         $this->italic();
 
+        $this->d($this->getStyles()->get('display') ?? 'inline');
+
         return parent::render();
     }
 }
