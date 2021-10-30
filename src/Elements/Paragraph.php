@@ -22,6 +22,8 @@ final class Paragraph extends Element
 {
     public function render(): string
     {
-        return parent::render() . PHP_EOL;
+        $this->d($this->getStyles()->get('display') ?? 'block');
+
+        return parent::render();
     }
 }
