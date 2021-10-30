@@ -22,6 +22,8 @@ final class Strikethrough extends Element
     {
         $this->strikethrough();
 
+        $this->d($this->getStyles()->get('display') ?? 'inline');
+
         return parent::render();
     }
 }
