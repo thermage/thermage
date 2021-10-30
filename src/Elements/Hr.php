@@ -26,64 +26,17 @@ use function Termage\terminal;
 final class Hr extends Element
 {
     /**
-     * Hr text align.
+     * Get element variables.
      *
-     * @access private
-     */
-    private string $hrTextAlign;
-
-    /**
-     * Get element styles.
-     *
-     * @return Collection Element styles.
+     * @return Collection Element variables.
      *
      * @access public
      */
-    public function getElementStyles(): Collection
+    public function getElementVariables(): Collection
     {
         return collection([
             'hr' => ['text-align' => 'left'],
         ]);
-    }
-
-    /**
-     * Set hr text align left.
-     *
-     * @return self Returns instance of the Rule class.
-     *
-     * @access public
-     */
-    public function textAlignLeft(): self
-    {
-        $this->hrTextAlign = 'left';
-
-        return $this;
-    }
-
-    /**
-     * Set hr text align right.
-     *
-     * @return self Returns instance of the Rule class.
-     *
-     * @access public
-     */
-    public function textAlignRight(): self
-    {
-        $this->hrTextAlign = 'right';
-
-        return $this;
-    }
-
-    /**
-     * Get element classes.
-     *
-     * @return array Array of element classes.
-     *
-     * @access public
-     */
-    public function getElementClasses(): array
-    {
-        return ['text-align-left', 'text-align-right'];
     }
 
     /**
@@ -95,62 +48,34 @@ final class Hr extends Element
      */
     public function render(): string
     {
-        $value         = parent::render();
-        $valueLength   = strings($this->stripDecorations($value))->length();
-        $theme         = self::getTheme();
-        $hrColor       = $this->getStyles()['color'] ?? 'white';
-        $hrTextAlign   = $this->hrTextAlign ?? $theme->getVariables()->get('hr.text-align', $this->getElementStyles()['hr']['text-align']);
-        $hrPaddingX    = 5;
-        $terminalWidth = terminal()->getWidth();
-        $hr            = '';
+        $this->processClasses();
 
-        if ($hrTextAlign === 'right') {
-            $ruleSize = $terminalWidth - $valueLength - $hrPaddingX;
+        $theme            = self::getTheme();
+        $hrValuePaddingX  = 2;
+        $hrValueMarginX   = 3;
+        $valueLength      = strings($this->stripDecorations($this->getValue() ?? ''))->length();
+        $hrTextAlign      = $this->getStyles()['text-align'] ?? $theme->getVariables()->get('hr.text-align', $this->getElementVariables()['hr']['text-align']);
 
-            $rulePrepend = '';
-            for ($i = 0; $i < $ruleSize; $i++) {
-                $rulePrepend .= '─';
-            }
+        if ($hrTextAlign === 'left' && $valueLength > 0) {
+            $hr = strings('─')->repeat($hrValueMarginX) . 
+                    strings(' ')->repeat($hrValuePaddingX) . 
+                    $this->getValue() . 
+                    strings(' ')->repeat($hrValuePaddingX).
+                    strings('─')->repeat(terminal()->getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX * 2);
 
-            $ruleAppend = '';
-            for ($i = 0; $i < $hrPaddingX - 2; $i++) {
-                $ruleAppend .= '─';
-            }
-
-            $ruleAppend = ' ' . $ruleAppend;
-            $value      = ' ' . $value;
-
-            $hr = span($rulePrepend)->color($hrColor) . span($value)->color($hrColor) . span($ruleAppend)->color($hrColor);
+            return (string) div($hr)->styles($this->getStyles()->toArray());
         }
 
-        if ($hrTextAlign === 'left') {
-            $ruleSize = $terminalWidth - $valueLength - $hrPaddingX;
+        if ($hrTextAlign === 'right' && $valueLength > 0) {
+            $hr = strings('─')->repeat(terminal()->getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX * 2) . 
+                    strings(' ')->repeat($hrValuePaddingX) . 
+                    $this->getValue() . 
+                    strings(' ')->repeat($hrValuePaddingX) . 
+                    strings('─')->repeat($hrValueMarginX);
 
-            $ruleAppend = '';
-            for ($i = 0; $i < $ruleSize; $i++) {
-                $ruleAppend .= '─';
-            }
-
-            $rulePrepend = '';
-            for ($i = 0; $i < $hrPaddingX - 2; $i++) {
-                $rulePrepend .= '─';
-            }
-
-            $rulePrepend .= ' ';
-            $value       .= ' ';
-
-            $hr = span($rulePrepend)->color($hrColor) . span($value)->color($hrColor) . span($ruleAppend)->color($hrColor);
+            return (string) div($hr)->styles($this->getStyles()->toArray());
         }
-
-        if ($valueLength === 0) {
-            $ruleElement = '';
-            for ($i = 0; $i < $terminalWidth; $i++) {
-                $ruleElement .= '─';
-            }
-
-            $hr = span($ruleElement)->color($hrColor);
-        }
-
-        return (string) div((string) $hr);
+        
+        return (string) div(strings('─')->repeat(terminal()->getWidth())->toString())->styles($this->getStyles()->toArray());
     }
 }
