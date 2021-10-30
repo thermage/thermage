@@ -22,6 +22,8 @@ final class Div extends Element
 {
     public function render(): string
     {
-        return parent::render() . br();
+        $this->d($this->getStyles()->get('display') ?? 'block');
+        
+        return parent::render();
     }
 }
