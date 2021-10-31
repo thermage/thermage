@@ -16,11 +16,7 @@ namespace Termage\Elements;
 
 use Termage\Base\Element;
 
-use function strings;
-use function substr;
 use function Termage\div;
-use function Termage\span;
-use function Termage\terminal;
 
 final class Alert extends Element
 {
@@ -182,23 +178,23 @@ final class Alert extends Element
     {
         $this->processClasses();
 
-        $theme             = $this->getTheme();
-        $elementVariables  = $this->getElementVariables();
-        $alertType         = $this->alertType ?? 'info';
-        $alertTextAlign    = $this->getStyles()['text-align'] ?? $theme->getVariables()->get('alert.text-align', $elementVariables['alert']['text-align']);
-        $alertWidth        = $this->getStyles()['width'] ?? $theme->getVariables()->get('alert.width', $elementVariables['alert']['width']);
-        $alertBg           = $theme->getVariables()->get('alert.type.' . $alertType . '.bg', $elementVariables['alert']['type'][$alertType]['bg']);
-        $alertColor        = $theme->getVariables()->get('alert.type.' . $alertType . '.color', $elementVariables['alert']['type'][$alertType]['color']);
-        $alertPaddingX     = 2;
- 
+        $theme            = $this->getTheme();
+        $elementVariables = $this->getElementVariables();
+        $alertType        = $this->alertType ?? 'info';
+        $alertTextAlign   = $this->getStyles()['text-align'] ?? $theme->getVariables()->get('alert.text-align', $elementVariables['alert']['text-align']);
+        $alertWidth       = $this->getStyles()['width'] ?? $theme->getVariables()->get('alert.width', $elementVariables['alert']['width']);
+        $alertBg          = $theme->getVariables()->get('alert.type.' . $alertType . '.bg', $elementVariables['alert']['type'][$alertType]['bg']);
+        $alertColor       = $theme->getVariables()->get('alert.type.' . $alertType . '.color', $elementVariables['alert']['type'][$alertType]['color']);
+        $alertPaddingX    = 2;
+
         $this->textAlign($alertTextAlign);
         $this->color($alertColor);
         $this->bg($alertBg);
         $this->w($alertWidth);
         $this->px($alertPaddingX);
-    
-        return (string) div()->styles($this->getStyles()->toArray()).
-                        div()->value($this->getValue())->styles($this->getStyles()->toArray()).
+
+        return (string) div()->styles($this->getStyles()->toArray()) .
+                        div()->value($this->getValue())->styles($this->getStyles()->toArray()) .
                         div()->styles($this->getStyles()->toArray());
     }
 }
