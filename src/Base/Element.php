@@ -899,10 +899,7 @@ abstract class Element
      */
     public function getLength(string $value): int
     {
-        return strings($this->stripDecorations($value))
-                    ->replace("\n", '')
-                    ->replace("\r", '')
-                    ->length();
+        return strings($this->stripDecorations($value))->replace(PHP_EOL, '')->length();
     }
 
     /**
