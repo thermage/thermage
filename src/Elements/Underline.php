@@ -21,9 +21,9 @@ final class Underline extends Element
     public function render(): string
     {
         $this->underline();
-        
+
         $this->d($this->getStyles()->get('display') ?? 'inline');
-          
+
         return parent::render();
     }
 }
