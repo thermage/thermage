@@ -21,14 +21,16 @@ use Termage\Parsers\Shortcodes;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
 
+use function abs;
 use function arrays as collection;
-use function Termage\terminal;
 use function intval;
 use function preg_replace;
 use function sprintf;
 use function strings;
-use function substr;
 use function Termage\color;
+use function Termage\terminal;
+
+use const PHP_EOL;
 
 abstract class Element
 {
@@ -75,8 +77,8 @@ abstract class Element
      *
      * @param        $theme
      * @param        $shortcodes
-     * @param string $value       Element value.
-     * @param string $classes     Element classes.
+     * @param string     $value   Element value.
+     * @param string     $classes Element classes.
      *
      * @return Element Returns element.
      *
@@ -550,7 +552,7 @@ abstract class Element
      * Set element text align style.
      *
      * @param mixed $value Text align value.
-     * 
+     *
      * @return self Returns instance of the Element class.
      *
      * @access public
@@ -560,13 +562,13 @@ abstract class Element
         $this->styles->set('text-align', $value);
 
         return $this;
-    }  
+    }
 
     /**
      * Set element width style.
      *
      * @param mixed $value Width value.
-     * 
+     *
      * @return self Returns instance of the Element class.
      *
      * @access public
@@ -582,12 +584,12 @@ abstract class Element
      * Set element display style.
      *
      * @param string $value Display value.
-     * 
+     *
      * @return self Returns instance of the Element class.
      *
      * @access public
      */
-    public function d(string $value): self 
+    public function d(string $value): self
     {
         $this->styles->set('display', $value);
 
@@ -657,11 +659,11 @@ abstract class Element
         }
 
         if (strings($method)->startsWith('w')) {
-            if ($method == 'wAuto') {
+            if ($method === 'wAuto') {
                 return $this->w('auto');
-            } else {
-                return $this->w(strings($method)->substr(1)->toInteger());
             }
+
+            return $this->w(strings($method)->substr(1)->toInteger());
         }
 
         throw new BadMethodCallException(sprintf(
@@ -688,7 +690,7 @@ abstract class Element
             $methodName = (string) strings($class)->camel()->trim();
             foreach ($this->registeredClasses->toArray() as $registeredClass) {
                 $registeredClassName = (string) strings($registeredClass)->camel()->trim();
-                
+
                 if (! strings($methodName)->startsWith($registeredClassName)) {
                     continue;
                 }
@@ -711,10 +713,10 @@ abstract class Element
         // Process style: margin
         $margin = function ($value) {
             return strings(' ')->repeat($this->styles->get('margin.left') ?? 0) .
-                   $value . 
+                   $value .
                    strings(' ')->repeat($this->styles->get('margin.right') ?? 0);
         };
- 
+
         // Process style: width
         // based on element paddings (spaces)
         $width = function ($value) {
@@ -724,66 +726,65 @@ abstract class Element
             $displayStyle   = $this->styles->get('display') ?? 'block';
 
             $spaces = 0;
-            $pl = 0;
-            $pr = 0;
+            $pl     = 0;
+            $pr     = 0;
 
             if ($widthStyle === 'auto' && $displayStyle === 'block') {
-                
                 $spaces = abs(terminal()->getwidth() - $valueLength);
 
-                if ($textAlignStyle == 'left') {
+                if ($textAlignStyle === 'left') {
                     $pl = $this->styles->get('padding.left') ?? 0;
 
                     return strings(' ')->repeat($pl) . $value . strings(' ')->repeat($spaces - $pl);
                 }
 
-                if ($textAlignStyle == 'right') {
+                if ($textAlignStyle === 'right') {
                     $pr = $this->styles->get('padding.right') ?? 0;
 
                     return strings(' ')->repeat($spaces - $pr) . $value . strings(' ')->repeat($pr);
                 }
             }
 
-            if ($widthStyle != 'auto' && $displayStyle === 'block') {
-                $pl = $this->styles->get('padding.left') ?? 0;
-                $pr = $this->styles->get('padding.right') ?? 0;
-                $spaces = (($widthStyle - $valueLength) < $valueLength) ? 0 : $widthStyle - $valueLength;
+            if ($widthStyle !== 'auto' && $displayStyle === 'block') {
+                $pl     = $this->styles->get('padding.left') ?? 0;
+                $pr     = $this->styles->get('padding.right') ?? 0;
+                $spaces = $widthStyle - $valueLength < $valueLength ? 0 : $widthStyle - $valueLength;
 
-                if ($textAlignStyle == 'left') {
-                    return strings(' ')->repeat($pl) . $value . strings(' ')->repeat($spaces + $pr); 
+                if ($textAlignStyle === 'left') {
+                    return strings(' ')->repeat($pl) . $value . strings(' ')->repeat($spaces + $pr);
                 }
 
-                if ($textAlignStyle == 'right') {
-                    return strings(' ')->repeat($spaces + $pl) . $value . strings(' ')->repeat($pr); 
+                if ($textAlignStyle === 'right') {
+                    return strings(' ')->repeat($spaces + $pl) . $value . strings(' ')->repeat($pr);
                 }
             }
 
-            if ($displayStyle == 'inline') {
+            if ($displayStyle === 'inline') {
                 $pl = $this->styles->get('padding.left') ?? 0;
                 $pr = $this->styles->get('padding.right') ?? 0;
-                
-                return strings(' ')->repeat($pl).
-                       $value . 
+
+                return strings(' ')->repeat($pl) .
+                       $value .
                        strings(' ')->repeat($pr);
             }
         };
 
         // Process style: color
-        $color = function ($value) { 
+        $color = function ($value) {
             $color = $this->styles->get('color') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('color'), $this->styles->get('color')) : false;
 
             return $color ? color()->textColor($color)->apply($value) : $value;
         };
 
         // Process style: bg
-        $bg = function ($value) { 
+        $bg = function ($value) {
             $bg = $this->styles->get('bg') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('bg'), $this->styles->get('bg')) : false;
 
             return $bg ? color()->bgColor($bg)->apply($value) : $value;
         };
 
         // Process style: bold
-        $bold = function ($value) { 
+        $bold = function ($value) {
             return $this->styles['bold'] ? "\e[1m" . $value . "\e[22m" : $value;
         };
 
@@ -793,12 +794,12 @@ abstract class Element
         };
 
         // Process style: underline
-        $underline = function ($value) { 
+        $underline = function ($value) {
             return $this->styles['underline'] ? "\e[4m" . $value . "\e[24m" : $value;
         };
 
         // Process style: strikethrough
-        $strikethrough = function ($value) { 
+        $strikethrough = function ($value) {
             return $this->styles['strikethrough'] ? "\e[9m" . $value . "\e[29m" : $value;
         };
 
@@ -818,24 +819,27 @@ abstract class Element
         };
 
         // Process style: reverse
-        $invisible = function ($value) { 
+        $invisible = function ($value) {
             return $this->styles['invisible'] ? "\e[8m" . $value . "\e[28m" : $value;
         };
-        
+
         // Process style: display
-        $display = function($value) {
+        $display = function ($value) {
             $displayStyle = $this->styles->get('display') ?? 'block';
-            
+
             switch ($displayStyle) {
                 case 'inline':
                     return $value;
+
                     break;
                 case 'hidden':
                     return '';
+
                     break;
                 case 'block':
                 default:
                     return $value . PHP_EOL;
+
                     break;
             }
         };
@@ -893,11 +897,11 @@ abstract class Element
      *
      * @access public
      */
-    public function getLength(string $value): int 
+    public function getLength(string $value): int
     {
         return strings($this->stripDecorations($value))
-                    ->replace("\n", "")
-                    ->replace("\r", "")
+                    ->replace("\n", '')
+                    ->replace("\r", '')
                     ->length();
     }
 
