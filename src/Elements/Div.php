@@ -16,14 +16,12 @@ namespace Termage\Elements;
 
 use Termage\Base\Element;
 
-use function Termage\breakline as br;
-
 final class Div extends Element
 {
     public function render(): string
     {
         $this->d($this->getStyles()->get('display') ?? 'block');
-        
+
         return parent::render();
     }
 }
