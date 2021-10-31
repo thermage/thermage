@@ -16,8 +16,6 @@ namespace Termage\Elements;
 
 use Termage\Base\Element;
 
-use const PHP_EOL;
-
 final class Paragraph extends Element
 {
     public function render(): string
