@@ -178,7 +178,7 @@ class Theme implements ThemeInterface
                 'light'     => '#f8f9fa', // gray100
                 'dark'      => '#212529', // gray900
             ],
-            
+
             // Spacing
             'spacer' => 1,
 
