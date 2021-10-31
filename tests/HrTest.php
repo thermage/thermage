@@ -17,28 +17,28 @@ beforeEach(function() {
 test('test hr', function (): void {
     putenv('COLUMNS=20');
     $value = hr('Stay RAD!')->render();
-    $hr = "\e[37m───\e[39m\e[37mStayRAD!\e[39m\e[37m──────\e[39m";
+    $hr = "───StayRAD!────";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($hr);
 });
 
 test('test hr without value', function (): void {
     putenv('COLUMNS=20');
     $value = hr()->render();
-    $hr = "\e[37m────────────────────\e[39m";
+    $hr = "────────────────────";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($hr);
 });
 
 test('test hr with text align left', function (): void {
     putenv('COLUMNS=20');
     $value = hr('Stay RAD!')->textAlignLeft()->render();
-    $hr = "\e[37m───\e[39m\e[37mStayRAD!\e[39m\e[37m──────\e[39m";
+    $hr = "───StayRAD!────";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($hr);
 });
 
 test('test hr with text align right', function (): void {
     putenv('COLUMNS=20');
     $value = hr('Stay RAD!')->textAlignRight()->render();
-    $hr = "\e[37m──────\e[39m\e[37mStayRAD!\e[39m\e[37m───\e[39m";
+    $hr =  "────StayRAD!───";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($hr);
 });
 
@@ -58,14 +58,6 @@ class HrTestTheme extends Theme implements ThemeInterface
             ],
             'hr' => [
                 'text-align' => 'left',
-                'type' => [
-                    'info' => ['color' => 'blue'],
-                    'warning' => ['color' => 'yellow'],
-                    'danger' => ['color' => 'red'],
-                    'success' => ['color' => 'green'],
-                    'primary' => ['color' => 'blue'],
-                    'secondary' => ['color' => 'gray'],
-                ],
             ],
         ]);
     }
