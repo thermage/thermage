@@ -359,14 +359,14 @@ class Termage
     /**
      * Render element.
      *
-     * @param string $element Element to render.
+     * @param mixed $element Element to render.
      *
      * @return string Returns rendered element as string representation.
      *
      * @access public
      */
-    public static function render(string $element): string 
+    public static function render($element): string 
     {
-        return (string) strings($element)->trim()->append("\n");
+        return (string) strings($element)->trim(PHP_EOL)->append(PHP_EOL);
     }
 }
