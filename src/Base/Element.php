@@ -56,7 +56,7 @@ abstract class Element
     private static $displayState = 'block';
 
     /**
-     * Element wrap state for nested elements.
+     * Element wrap block state for nested elements.
      *
      * @access private
      */
@@ -762,7 +762,24 @@ abstract class Element
      */
     public function processStyles(): void
     {
-        // Box model styles hierarchy.
+        // Termage box model and styles hierarchy.
+        //
+        // ┌───────────────────────────────────────────────────────┐
+        // │ display                                               │
+        // │ ┌───────────────────────────────────────────────────┐ │
+        // │ │ margin                                            │ │
+        // │ │ ┌───────────────────────────────────────────────┐ │ │
+        // │ │ │ bg, color                                     │ │ │
+        // │ │ │ ┌───────────────────────────────────────────┐ │ │ │
+        // │ │ │ │ width (+padding)                          │ │ │ │
+        // │ │ │ │ ┌───────────────────────────────────────┐ │ │ │ │
+        // │ │ │ │ │ invisible, reverse, blink, dim, bold, │ │ │ │ │
+        // │ │ │ │ │ italic, underline, strikethrough.     │ │ │ │ │
+        // │ │ │ │ └───────────────────────────────────────┘ │ │ │ │
+        // │ │ │ └───────────────────────────────────────────┘ │ │ │
+        // | | └───────────────────────────────────────────────┘ │ │
+        // │ └───────────────────────────────────────────────────┘ │
+        // └───────────────────────────────────────────────────────┘
         $stylesHierarchy = ['invisible', 'reverse', 'blink', 'dim', 'bold', 'italic', 'underline', 'strikethrough', 'width', 'bg', 'color', 'margin', 'display'];
 
         // Process style: margin
@@ -883,7 +900,7 @@ abstract class Element
             return $this->styles['reverse'] ? "\e[7m" . strings($value)->trim(PHP_EOL) . "\e[27m" : $value;
         };
 
-        // Process style: reverse
+        // Process style: invisible
         $invisible = function ($value) {
             return $this->styles['invisible'] ? "\e[8m" . strings($value)->trim(PHP_EOL) . "\e[28m" : $value;
         };
