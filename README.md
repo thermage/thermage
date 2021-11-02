@@ -14,19 +14,19 @@ Termage provides a fluent and incredibly powerful object-oriented interface for 
 
 ### Features
 
-**Consistent colors**  
++ **Consistent colors**  
 Termage uses the ANSI color scheme which is widely used by terminals to ensure consistent colors in different terminal themes. If that’s not enough, Termage can be used to access the full RGB color scheme (16+ million colors) in terminals that support TrueColor.
 
-**Component system**  
++ **Component system**  
 Termage consists of built-in components, called Elements, which can be used individually or together to generate pretty console output.
 
-**Theming**  
++ **Theming**  
 Termage provides ability to create and use custom themes to change the style of command line output with preconfigured themes variables.
 
-**Shortcodes**  
++ **Shortcodes**  
 Termage provides ability to create and use custom themes to change the style of command line output with preconfigured themes variables.
 
-**Framework agnostic**  
++ **Framework agnostic**  
 Termage can be used with any Modern PHP Framework: Symfony, Laravel, Yii, CakePHP, CodeIgniter, Phalcon and others.
 
 ### Installation
