@@ -355,4 +355,18 @@ class Termage
             $classes
         );
     }
+
+    /**
+     * Render element.
+     *
+     * @param string $element Element to render.
+     *
+     * @return string Returns rendered element as string representation.
+     *
+     * @access public
+     */
+    public static function render(string $element): string 
+    {
+        return (string) strings($element)->trim()->append("\n");
+    }
 }
