@@ -32,6 +32,10 @@ use Termage\Parsers\Shortcodes;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
 
+use function strings;
+
+use const PHP_EOL;
+
 class Termage
 {
     use Macroable;
@@ -365,7 +369,7 @@ class Termage
      *
      * @access public
      */
-    public static function render($element): string 
+    public static function render($element): string
     {
         return (string) strings($element)->trim(PHP_EOL)->append(PHP_EOL);
     }
