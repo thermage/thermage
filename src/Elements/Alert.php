@@ -14,8 +14,10 @@ declare(strict_types=1);
 
 namespace Termage\Elements;
 
+use Atomastic\Arrays\Arrays as Collection;
 use Termage\Base\Element;
 
+use function arrays as collection;
 use function Termage\div;
 
 final class Alert extends Element
@@ -40,18 +42,18 @@ final class Alert extends Element
     }
 
     /**
-     * Get element variables.
+     * Get Alert element variables.
      *
-     * @return array Element variables.
+     * @return Collection Alert element variables.
      *
      * @access public
      */
-    public function getElementVariables(): array
+    public function getElementVariables(): Collection
     {
-        return [
+        return collection([
             'alert' => [
                 'text-align' => 'left',
-                'width-full' => false,
+                'width-auto' => false,
                 'width' => 50,
                 'type' => [
                     'info' => [
@@ -80,11 +82,11 @@ final class Alert extends Element
                     ],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
-     * Set alert type info.
+     * Set Alert type info.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -98,7 +100,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert type warning.
+     * Set Alert type warning.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -112,7 +114,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert type danger.
+     * Set Alert type danger.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -126,7 +128,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert type success.
+     * Set Alert type success.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -140,7 +142,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert type primary.
+     * Set Alert type primary.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -154,7 +156,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert type secondary.
+     * Set Alert type secondary.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -168,9 +170,9 @@ final class Alert extends Element
     }
 
     /**
-     * Render alert element.
+     * Render Alert element.
      *
-     * @return string Returns rendered alert element.
+     * @return string Returns rendered Alert element.
      *
      * @access public
      */
