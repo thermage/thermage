@@ -193,16 +193,16 @@ class Shortcodes
         // shortcode: [invisible]Invisible[/invisible]
         $this->add('invisible', fn (ShortcodeInterface $s) => $this->invisibleShortcode($s));
 
-        // shortcode: [anchor href=]Anchor[/anchor]
+        // shortcode: [anchor]Anchor[/anchor]
         $this->add('anchor', fn (ShortcodeInterface $s) => $this->anchorShortcode($s));
 
         // shortcode: [a href=]Anchor[/a]
         $this->add('a', fn (ShortcodeInterface $s) => $this->anchorShortcode($s));
 
-        // shortcode: [color=]Color[/color]
+        // shortcode: [color]Color[/color]
         $this->add('color', fn (ShortcodeInterface $s) => $this->colorShortcode($s));
 
-        // shortcode: [bg=]Background Color[/color]
+        // shortcode: [bg]Background Color[/color]
         $this->add('bg', fn (ShortcodeInterface $s) => $this->bgShortcode($s));
     }
 
