@@ -60,14 +60,14 @@ abstract class Element
      *
      * @access private
      */
-    private $wrapState;
+    private $wrapBlock;
 
     /**
      * Element first inline state for nested inline elements.
      *
      * @access private
      */
-    private $firstInlineState;
+    private $firstInline;
 
     /**
      * Element styles.
@@ -117,8 +117,8 @@ abstract class Element
         $this->classes           = $classes;
         $this->registeredClasses = collection($this->getDefaultClasses())->merge($this->getElementClasses(), true);
         $this->styles            = collection();
-        $this->wrapState         = false;
-        $this->firstInlineState  = false;
+        $this->wrapBlock         = false;
+        $this->firstInline       = false;
     }
 
     /**
@@ -686,8 +686,8 @@ abstract class Element
                 return $this->w('auto');
             }
 
-            if ($method === 'wrap') {
-                return $this->wrap();
+            if ($method === 'wrapBlock') {
+                return $this->wrapBlock();
             }
 
             return $this->w(strings($method)->substr(1)->toInteger());
@@ -703,8 +703,8 @@ abstract class Element
     /** 
      * Set wrap state for nested elements.
      */
-    public function wrap() {
-        $this->wrapState = true;
+    public function wrapBlock() {
+        $this->wrapBlock = true;
 
         return $this;
     }
@@ -713,7 +713,7 @@ abstract class Element
      * Set first inline state for nested inline elements.
      */
     public function firstInline() {
-        $this->firstInlineState = true;
+        $this->firstInline = true;
 
         return $this;
     }
@@ -758,8 +758,8 @@ abstract class Element
         // Process style: margin
         $margin = function ($value) {
 
-            // Do not allow set margins for root element with wrapState == true
-            if ($this->wrapState) {
+            // Do not allow set margins for root element with wrapBlock == true
+            if ($this->wrapBlock) {
                 return $value;
             } 
             
@@ -784,8 +784,8 @@ abstract class Element
             if ($widthStyle === 'auto' && $displayStyle === 'block') {
                 $spaces = abs(terminal()->getwidth() - $valueLength);
 
-                // Do not allow set paddings for root element with wrapState == true
-                if ($this->wrapState) {
+                // Do not allow set paddings for root element with wrapBlock == true
+                if ($this->wrapBlock) {
                     return $value;
                 } 
             
@@ -893,7 +893,7 @@ abstract class Element
                     } else {
 
                         // If current inline element is first children element then current inline element should have PHP_EOL before. 
-                        if ($this->firstInlineState) {
+                        if ($this->firstInline) {
                             $result = PHP_EOL . $value;
                         } else {
                             $result = $value;
@@ -914,7 +914,7 @@ abstract class Element
                 default:
 
                     // If block element contains childrens then do not add PHP_EOL before.
-                    if ($this->wrapState === true) {
+                    if ($this->wrapBlock === true) {
                         $result = $value;
                     } else {
                         $result = PHP_EOL . $value;
