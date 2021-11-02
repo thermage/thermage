@@ -753,9 +753,16 @@ abstract class Element
 
         // Process style: margin
         $margin = function ($value) {
+
+            // Do not allow set margins for root element with wrapState == true
+            if ($this->wrapState) {
+                return $value;
+            } 
+            
             return strings(' ')->repeat($this->styles->get('margin.left') ?? 0) .
-                   $value .
+                   $value.
                    strings(' ')->repeat($this->styles->get('margin.right') ?? 0);
+        
         };
 
         // Process style: width
@@ -773,9 +780,11 @@ abstract class Element
             if ($widthStyle === 'auto' && $displayStyle === 'block') {
                 $spaces = abs(terminal()->getwidth() - $valueLength);
 
-                // Clean spaces for elements with childrens.
-                $spaces = (($this->wrapState == true) ? 0 : $spaces);
-
+                // Do not allow set paddings for root element with wrapState == true
+                if ($this->wrapState) {
+                    return $value;
+                } 
+            
                 if ($textAlignStyle === 'left') {
                     $pl = $this->styles->get('padding.left') ?? 0;
 
@@ -817,54 +826,54 @@ abstract class Element
         $color = function ($value) {
             $color = $this->styles->get('color') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('color'), $this->styles->get('color')) : false;
 
-            return $color ? color()->textColor($color)->apply($value) : $value;
+            return $color ? color()->textColor($color)->apply((string) strings($value)->trim(PHP_EOL)) : $value;
         };
 
         // Process style: bg
         $bg = function ($value) {
             $bg = $this->styles->get('bg') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('bg'), $this->styles->get('bg')) : false;
 
-            return $bg ? color()->bgColor($bg)->apply($value) : $value;
+            return $bg ? color()->bgColor($bg)->apply((string) strings($value)->trim(PHP_EOL)) : $value;
         };
 
         // Process style: bold
         $bold = function ($value) {
-            return $this->styles['bold'] ? "\e[1m" . $value . "\e[22m" : $value;
+            return $this->styles['bold'] ? "\e[1m" . strings($value)->trim(PHP_EOL) . "\e[22m" : $value;
         };
 
         // Process style: italic
         $italic = function ($value) {
-            return $this->styles['italic'] ? "\e[3m" . $value . "\e[23m" : $value;
+            return $this->styles['italic'] ? "\e[3m" . strings($value)->trim(PHP_EOL) . "\e[23m" : $value;
         };
 
         // Process style: underline
         $underline = function ($value) {
-            return $this->styles['underline'] ? "\e[4m" . $value . "\e[24m" : $value;
+            return $this->styles['underline'] ? "\e[4m" . strings($value)->trim(PHP_EOL) . "\e[24m" : $value;
         };
 
         // Process style: strikethrough
         $strikethrough = function ($value) {
-            return $this->styles['strikethrough'] ? "\e[9m" . $value . "\e[29m" : $value;
+            return $this->styles['strikethrough'] ? "\e[9m" . strings($value)->trim(PHP_EOL) . "\e[29m" : $value;
         };
 
         // Process style: dim
         $dim = function ($value) {
-            return $this->styles['dim'] ? "\e[2m" . $value . "\e[22m" : $value;
+            return $this->styles['dim'] ? "\e[2m" . strings($value)->trim(PHP_EOL) . "\e[22m" : $value;
         };
 
         // Process style: blink
         $blink = function ($value) {
-            return $this->styles['blink'] ? "\e[5m" . $value . "\e[25m" : $value;
+            return $this->styles['blink'] ? "\e[5m" . strings($value)->trim(PHP_EOL) . "\e[25m" : $value;
         };
 
         // Process style: reverse
         $reverse = function ($value) {
-            return $this->styles['reverse'] ? "\e[7m" . $value . "\e[27m" : $value;
+            return $this->styles['reverse'] ? "\e[7m" . strings($value)->trim(PHP_EOL) . "\e[27m" : $value;
         };
 
         // Process style: reverse
         $invisible = function ($value) {
-            return $this->styles['invisible'] ? "\e[8m" . $value . "\e[28m" : $value;
+            return $this->styles['invisible'] ? "\e[8m" . strings($value)->trim(PHP_EOL) . "\e[28m" : $value;
         };
 
         // Process style: display
