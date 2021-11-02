@@ -49,6 +49,27 @@ abstract class Element
     private string $classes;
 
     /**
+     * Element display state.
+     *
+     * @access private
+     */
+    private static $displayState = 'block';
+
+    /**
+     * Element wrap state for nested elements.
+     *
+     * @access private
+     */
+    private $wrapState;
+
+    /**
+     * Element first inline state for nested inline elements.
+     *
+     * @access private
+     */
+    private $firstInlineState;
+
+    /**
      * Element styles.
      *
      * @access private
@@ -96,6 +117,8 @@ abstract class Element
         $this->classes           = $classes;
         $this->registeredClasses = collection($this->getDefaultClasses())->merge($this->getElementClasses(), true);
         $this->styles            = collection();
+        $this->wrapStateState         = false;
+        $this->firstInlineStateState  = false;
     }
 
     /**
@@ -673,6 +696,24 @@ abstract class Element
         ));
     }
 
+    /** 
+     * Set wrap state for nested elements.
+     */
+    public function wrap() {
+        $this->wrapState = true;
+
+        return $this;
+    }
+
+    /** 
+     * Set first inline state for nested inline elements.
+     */
+    public function firstInline() {
+        $this->firstInlineStateState = true;
+
+        return $this;
+    }
+
     /**
      * Process element classes.
      *
@@ -732,6 +773,9 @@ abstract class Element
             if ($widthStyle === 'auto' && $displayStyle === 'block') {
                 $spaces = abs(terminal()->getwidth() - $valueLength);
 
+                // Clean spaces for elements with childrens.
+                $spaces = (($this->wrapState == true) ? 0 : $spaces);
+
                 if ($textAlignStyle === 'left') {
                     $pl = $this->styles->get('padding.left') ?? 0;
 
@@ -762,7 +806,7 @@ abstract class Element
             if ($displayStyle === 'inline') {
                 $pl = $this->styles->get('padding.left') ?? 0;
                 $pr = $this->styles->get('padding.right') ?? 0;
-
+                
                 return strings(' ')->repeat($pl) .
                        $value .
                        strings(' ')->repeat($pr);
@@ -829,7 +873,24 @@ abstract class Element
 
             switch ($displayStyle) {
                 case 'inline':
-                    return $value;
+                    
+                    // If previous element has display block then current inline element should have PHP_EOL before.
+                    if (self::$displayState === 'block') {
+                        $result = PHP_EOL . $value;
+                    } else {
+
+                        // If current inline element is first children element then current inline element should have PHP_EOL before. 
+                        if ($this->firstInlineState) {
+                            $result = PHP_EOL . $value;
+                        } else {
+                            $result = $value;
+                        }
+                    }
+
+                    // Set current display inline value for element 
+                    self::$displayState = 'inline';
+
+                    return $result;
 
                     break;
                 case 'hidden':
@@ -838,7 +899,18 @@ abstract class Element
                     break;
                 case 'block':
                 default:
-                    return $value . PHP_EOL;
+
+                    // If block element contains childrens then do not add PHP_EOL before.
+                    if ($this->wrapState === true) {
+                        $result = $value;
+                    } else {
+                        $result = PHP_EOL . $value;
+                    }
+
+                    // Set current display block value for element 
+                    self::$displayState = 'block';
+
+                    return $result;
 
                     break;
             }
