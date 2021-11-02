@@ -713,7 +713,7 @@ abstract class Element
      * Set first inline state for nested inline elements.
      */
     public function firstInline() {
-        $this->firstInlineStateState = true;
+        $this->firstInlineState = true;
 
         return $this;
     }
