@@ -701,9 +701,13 @@ abstract class Element
     }
 
     /**
-     * Set wrap state for nested elements.
+     * Set wrap block state for nested elements.
+     * 
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
      */
-    public function wrapBlock()
+    public function wrapBlock(): self
     {
         $this->wrapBlock = true;
 
@@ -712,8 +716,12 @@ abstract class Element
 
     /**
      * Set first inline state for nested inline elements.
+     * 
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
      */
-    public function firstInline()
+    public function firstInline(): self
     {
         $this->firstInline = true;
 
@@ -759,7 +767,7 @@ abstract class Element
 
         // Process style: margin
         $margin = function ($value) {
-            // Do not allow set margins for root element with wrapBlock == true
+            // Do not allow margins for root element with wrapBlock == true
             if ($this->wrapBlock) {
                 return $value;
             }
@@ -784,7 +792,7 @@ abstract class Element
             if ($widthStyle === 'auto' && $displayStyle === 'block') {
                 $spaces = abs(terminal()->getwidth() - $valueLength);
 
-                // Do not allow set paddings for root element with wrapBlock == true
+                // Do not allow paddings for root element with wrapBlock == true
                 if ($this->wrapBlock) {
                     return $value;
                 }
@@ -886,11 +894,13 @@ abstract class Element
 
             switch ($displayStyle) {
                 case 'inline':
-                    // If previous element has display block then current inline element should have PHP_EOL before.
+                    // If previous element has display block 
+                    // then current inline element should have PHP_EOL before.
                     if (self::$displayState === 'block') {
                         $result = PHP_EOL . $value;
                     } else {
-                        // If current inline element is first children element then current inline element should have PHP_EOL before.
+                        // If current inline element is first children element 
+                        // then current inline element should have PHP_EOL before.
                         if ($this->firstInline) {
                             $result = PHP_EOL . $value;
                         } else {
@@ -898,7 +908,7 @@ abstract class Element
                         }
                     }
 
-                    // Set current display inline value for element
+                    // Set current display state = inline for element
                     self::$displayState = 'inline';
 
                     return $result;
@@ -917,7 +927,7 @@ abstract class Element
                         $result = PHP_EOL . $value;
                     }
 
-                    // Set current display block value for element
+                    // Set current display state = block for element
                     self::$displayState = 'block';
 
                     return $result;
