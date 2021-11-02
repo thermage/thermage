@@ -1,12 +1,17 @@
 <a name="0.9.0"></a>
 # [0.9.0](https://github.com/termage/termage) (2021-xx-xx)
-# New box model for elements.
-# New public element method `d` to set display.
-# New public element method `w` to set width.
-# New public element method `firstInline`.
-# New public element method `wrapBlock`.
-# Added new public static method `render` for Termage class.
-# Added new helper function `render`.
+* New box model for elements.
+* Added new public element method `d` to set display state.
+* Added new public element method `w` to set width.
+* Added new public element method `firstInline`.
+* Added new public element method `wrapBlock`.
+* Added new public static method `render` for Termage class.
+* Added new helper function `render`.
+* Fixes for Theme default color scheme.
+
+### BREAKING CHANGES
+
+* Removed shortcodes `[p]`, `[px]`, `[pr]`, `[pl]`, `[m]`, `[mx]`, `[mr]`, `[ml]`
 
 <a name="0.8.0"></a>
 # [0.8.0](https://github.com/termage/termage) (2021-10-27)
