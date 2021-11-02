@@ -30,7 +30,7 @@ final class Alert extends Element
     private string $alertType;
 
     /**
-     * Get element classes.
+     * Get Alert element classes.
      *
      * @return array Array of element classes.
      *

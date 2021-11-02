@@ -18,6 +18,13 @@ use Termage\Base\Element;
 
 final class Underline extends Element
 {
+    /**
+     * Render Underline element.
+     *
+     * @return string Returns rendered Underline element.
+     *
+     * @access public
+     */
     public function render(): string
     {
         $this->underline();

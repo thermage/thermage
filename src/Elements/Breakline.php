@@ -20,6 +20,13 @@ use const PHP_EOL;
 
 final class Breakline extends Element
 {
+    /**
+     * Render breakline element.
+     *
+     * @return string Returns rendered breakline element.
+     *
+     * @access public
+     */
     public function render(): string
     {
         $this->value($this->getValue() . PHP_EOL);

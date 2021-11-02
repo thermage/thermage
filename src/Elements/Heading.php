@@ -33,7 +33,7 @@ final class Heading extends Element
     private int $size = 1;
 
     /**
-     * Set heading size.
+     * Set Heading size.
      *
      * @param int $value Heading size 1 - 5.
      *
@@ -49,7 +49,7 @@ final class Heading extends Element
     }
 
     /**
-     * Get element classes.
+     * Get Heading element classes.
      *
      * @return array Array of element classes.
      *
@@ -80,9 +80,9 @@ final class Heading extends Element
     }
 
     /**
-     * Render heading element.
+     * Render Heading element.
      *
-     * @return string Returns rendered heading element.
+     * @return string Returns rendered Heading element.
      *
      * @access public
      */

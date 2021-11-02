@@ -18,6 +18,13 @@ use Termage\Base\Element;
 
 final class Italic extends Element
 {
+    /**
+     * Render Italic element.
+     *
+     * @return string Returns rendered Italic element.
+     *
+     * @access public
+     */
     public function render(): string
     {
         $this->italic();

@@ -25,9 +25,9 @@ use function Termage\terminal;
 final class Hr extends Element
 {
     /**
-     * Get element variables.
+     * Get hr element variables.
      *
-     * @return Collection Element variables.
+     * @return Collection Hr element variables.
      *
      * @access public
      */

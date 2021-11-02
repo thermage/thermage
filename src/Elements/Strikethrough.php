@@ -18,6 +18,13 @@ use Termage\Base\Element;
 
 final class Strikethrough extends Element
 {
+    /**
+     * Render Strikethrough element.
+     *
+     * @return string Returns rendered Strikethrough element.
+     *
+     * @access public
+     */
     public function render(): string
     {
         $this->strikethrough();

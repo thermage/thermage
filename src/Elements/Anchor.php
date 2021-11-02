@@ -34,6 +34,13 @@ final class Anchor extends Element
         return $this;
     }
 
+    /**
+     * Render anchor element.
+     *
+     * @return string Returns rendered anchor element.
+     *
+     * @access public
+     */
     public function render(): string
     {
         $this->d($this->getStyles()->get('display') ?? 'inline');

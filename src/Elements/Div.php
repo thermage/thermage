@@ -18,6 +18,13 @@ use Termage\Base\Element;
 
 final class Div extends Element
 {
+    /**
+     * Render Div element.
+     *
+     * @return string Returns rendered Div element.
+     *
+     * @access public
+     */
     public function render(): string
     {
         $this->d($this->getStyles()->get('display') ?? 'block');

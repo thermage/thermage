@@ -18,6 +18,13 @@ use Termage\Base\Element;
 
 final class Paragraph extends Element
 {
+    /**
+     * Render Paragraph element.
+     *
+     * @return string Returns rendered Paragraph element.
+     *
+     * @access public
+     */
     public function render(): string
     {
         $this->d($this->getStyles()->get('display') ?? 'block');
