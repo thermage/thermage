@@ -20,9 +20,7 @@ use Termage\Utils\Color;
 use Thunder\Shortcode\Shortcode\ShortcodeInterface;
 use Thunder\Shortcode\ShortcodeFacade;
 
-use function intval;
 use function str_replace;
-use function strings;
 use function strip_tags;
 
 class Shortcodes
