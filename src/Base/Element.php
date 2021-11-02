@@ -702,7 +702,7 @@ abstract class Element
 
     /**
      * Set wrap block state for nested elements.
-     * 
+     *
      * @return self Returns instance of the Element class.
      *
      * @access public
@@ -716,7 +716,7 @@ abstract class Element
 
     /**
      * Set first inline state for nested inline elements.
-     * 
+     *
      * @return self Returns instance of the Element class.
      *
      * @access public
@@ -894,12 +894,12 @@ abstract class Element
 
             switch ($displayStyle) {
                 case 'inline':
-                    // If previous element has display block 
+                    // If previous element has display block
                     // then current inline element should have PHP_EOL before.
                     if (self::$displayState === 'block') {
                         $result = PHP_EOL . $value;
                     } else {
-                        // If current inline element is first children element 
+                        // If current inline element is first children element
                         // then current inline element should have PHP_EOL before.
                         if ($this->firstInline) {
                             $result = PHP_EOL . $value;
