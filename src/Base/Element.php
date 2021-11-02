@@ -262,7 +262,7 @@ abstract class Element
      */
     final public function getDefaultClasses(): array
     {
-        return ['bold', 'italic', 'bg', 'color', 'pl', 'pr', 'px', 'ml', 'mr', 'mx', 'dim', 'invisible', 'underline', 'reverse', 'blink', 'w', 'd', 'text-align'];
+        return ['bold', 'italic', 'bg', 'color', 'pl', 'pr', 'px', 'ml', 'mr', 'mx', 'dim', 'invisible', 'underline', 'reverse', 'blink', 'w', 'd', 'text-align', 'wrap', 'first-inline'];
     }
 
     /**
@@ -684,6 +684,10 @@ abstract class Element
         if (strings($method)->startsWith('w')) {
             if ($method === 'wAuto') {
                 return $this->w('auto');
+            }
+
+            if ($method === 'wrap') {
+                return $this->wrap();
             }
 
             return $this->w(strings($method)->substr(1)->toInteger());
