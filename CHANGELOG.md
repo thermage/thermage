@@ -1,3 +1,13 @@
+<a name="0.9.0"></a>
+# [0.9.0](https://github.com/termage/termage) (2021-xx-xx)
+# New box model for elements.
+# New public element method `d` to set display.
+# New public element method `w` to set width.
+# New public element method `firstInline`.
+# New public element method `wrapBlock`.
+# Added new public static method `render` for Termage class.
+# Added new helper function `render`.
+
 <a name="0.8.0"></a>
 # [0.8.0](https://github.com/termage/termage) (2021-10-27)
 * Added `Heading` element.
