@@ -124,3 +124,8 @@ function terminal(): Terminal
 {
     return new Terminal();
 }
+
+function render(string $element): string
+{
+    return Termage::render($element);
+}
