@@ -24,7 +24,7 @@ Termage consists of built-in components, called Elements, which can be used indi
 Termage provides ability to create and use custom themes to change the style of command line output with preconfigured themes variables.
 
 + **Shortcodes**  
-Termage provides ability to create and use custom themes to change the style of command line output with preconfigured themes variables.
+Termage provides incredible simple and powerful Shortcodes API to create and use shortcodes markup for customizing CLI output text color, background, formatting.
 
 + **Framework agnostic**  
 Termage can be used with any Modern PHP Framework: Symfony, Laravel, Yii, CakePHP, CodeIgniter, Phalcon and others.
