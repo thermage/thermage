@@ -117,8 +117,8 @@ abstract class Element
         $this->classes           = $classes;
         $this->registeredClasses = collection($this->getDefaultClasses())->merge($this->getElementClasses(), true);
         $this->styles            = collection();
-        $this->wrapStateState         = false;
-        $this->firstInlineStateState  = false;
+        $this->wrapState         = false;
+        $this->firstInlineState  = false;
     }
 
     /**
