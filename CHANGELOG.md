@@ -1,12 +1,12 @@
 <a name="0.9.0"></a>
 # [0.9.0](https://github.com/termage/termage) (2021-xx-xx)
-* New box model for elements.
+* Imrpoved box model for elements. 
+* Added new public element method `p` to set left and right paddings.
+* Added new public element method `m` to set left and right margin.
 * Added new public element method `d` to set display state.
 * Added new public element method `w` to set width.
-* Added new public element method `firstInline`.
-* Added new public element method `wrapBlock`.
-* Added new public static method `render` for Termage class.
-* Added new helper function `render`.
+* Added new public element method `fixInline`.
+* Added new public element method `fixBlock`.
 * Fixes for Theme default color scheme.
 
 ### BREAKING CHANGES
