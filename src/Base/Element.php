@@ -765,7 +765,7 @@ abstract class Element
         // Termage box model and styles hierarchy.
         //
         // ┌───────────────────────────────────────────────────────┐
-        // │ display [inline, block]                               │
+        // │ display [inline, block, none]                         │
         // │ ┌───────────────────────────────────────────────────┐ │
         // │ │ margin (left, right)                              │ │
         // │ │ ┌───────────────────────────────────────────────┐ │ │
@@ -930,7 +930,7 @@ abstract class Element
                     return $result;
 
                     break;
-                case 'hidden':
+                case 'none':
                     return '';
 
                     break;
