@@ -111,7 +111,7 @@ final class Heading extends Element
                 $heading .= '╚';
                 $heading .= strings('═')->repeat($terminalWidth - 2);
                 $heading .=  '╝';
-                $heading .= PHP_EOL . PHP_EOL;
+                $heading .= PHP_EOL . PHP_EOL . PHP_EOL;
                 $heading  = bold($heading);
                 break;
             case 2:
@@ -122,7 +122,7 @@ final class Heading extends Element
                 $heading .= '└';
                 $heading .= strings('─')->repeat($terminalWidth - 2);
                 $heading .=  '┘';
-                $heading .= PHP_EOL . PHP_EOL;
+                $heading .= PHP_EOL . PHP_EOL . PHP_EOL;
                 $heading  = bold($heading);
                 break;
             case 3:
