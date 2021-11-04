@@ -359,18 +359,4 @@ class Termage
             $classes
         );
     }
-
-    /**
-     * Render element.
-     *
-     * @param mixed $element Element to render.
-     *
-     * @return string Returns rendered element as string representation.
-     *
-     * @access public
-     */
-    public static function render($element): string
-    {
-        return (string) strings($element)->trim(PHP_EOL)->append(PHP_EOL);
-    }
 }
