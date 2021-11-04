@@ -55,7 +55,7 @@ test('test alert primary', function (): void {
 test('test alert secondary', function (): void {
     $value = alert('Stay RAD!')->secondary()->render();
     $alert = "\e[30m\e[100m\e[49m\e[39m\e[30m\e[100mStayRAD!\e[49m\e[39m\e[30m\e[100m\e[49m\e[39m";
-    expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($alert);
+    expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert with text align right', function (): void {
