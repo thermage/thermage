@@ -117,8 +117,8 @@ abstract class Element
         $this->classes           = $classes;
         $this->registeredClasses = collection($this->getDefaultClasses())->merge($this->getElementClasses(), true);
         $this->styles            = collection();
-        $this->fixBlock         = false;
-        $this->fixInline       = false;
+        $this->fixBlock          = false;
+        $this->fixInline         = false;
     }
 
     /**
@@ -784,7 +784,6 @@ abstract class Element
 
         // Process style: margin
         $margin = function ($value) {
-
             $ml = $this->styles->get('margin.left') ?? 0;
             $mr = $this->styles->get('margin.right') ?? 0;
 
@@ -793,10 +792,10 @@ abstract class Element
                 $ml = 0;
                 $mr = 0;
             }
-            
-            return (($ml > 0) ? strings(' ')->repeat($ml) : '') .
+
+            return ($ml > 0 ? strings(' ')->repeat($ml) : '') .
                    $value .
-                   (($mr > 0) ? strings(' ')->repeat($mr) : '');
+                   ($mr > 0 ? strings(' ')->repeat($mr) : '');
         };
 
         // Process style: width
@@ -916,7 +915,6 @@ abstract class Element
 
             switch ($displayStyle) {
                 case 'inline':
-
                     // Fix inline state
                     if ($this->fixInline) {
                         $result = PHP_EOL . $value;
@@ -936,12 +934,10 @@ abstract class Element
                     break;
                 case 'block':
                 default:
-
                     // Fix block state
                     if ($this->fixBlock) {
                         $result = $value;
                     } else {
-
                         // If prev display state was inline that fix block state
                         if (self::$displayState === 'inline') {
                             $result = PHP_EOL . $value . PHP_EOL;
@@ -949,7 +945,7 @@ abstract class Element
                             $result = $value . PHP_EOL;
                         }
                     }
-                    
+
                     // Set current display state = block for element
                     self::$displayState = 'block';
 

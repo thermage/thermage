@@ -32,10 +32,6 @@ use Termage\Parsers\Shortcodes;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
 
-use function strings;
-
-use const PHP_EOL;
-
 class Termage
 {
     use Macroable;
