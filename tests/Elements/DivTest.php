@@ -95,6 +95,11 @@ test('test classes and getClasses', function (): void {
     expect($value->getClasses())->toBe('RAD');
 });
 
+test('test m', function (): void {
+    $value = div()->value('RAD')->m(10, 10)->render();
+    expect($value)->toBe("          RAD                           " . PHP_EOL);
+});
+
 test('test mx', function (): void {
     $value = div()->value('RAD')->mx(10)->render();
     expect($value)->toBe("          RAD                           " . PHP_EOL);
@@ -123,6 +128,11 @@ test('test ml', function (): void {
 test('test magic ml', function (): void {
     $value = div()->value('RAD')->ml10()->render();
     expect($value)->toBe("          RAD                 " . PHP_EOL);
+});
+
+test('test p', function (): void {
+    $value = div()->value('RAD')->p(10, 10)->render();
+    expect($value)->toBe("          RAD       " . PHP_EOL);
 });
 
 test('test px', function (): void {
