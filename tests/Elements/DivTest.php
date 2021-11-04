@@ -9,6 +9,7 @@ use Termage\Elements\Div;
 use Atomastic\Arrays\Arrays as Collection;
 use function arrays as collection;
 use function Termage\div;
+use function Termage\span;
 use function Termage\setTheme;
 use Termage\Parsers\Shortcodes;
 
@@ -123,6 +124,24 @@ test('test magic mr', function (): void {
 test('test ml', function (): void {
     $value = div()->value('RAD')->ml(10)->render();
     expect($value)->toBe("          RAD                 " . PHP_EOL);
+});
+
+test('test fixBlock', function (): void {
+    $value = div(
+        div('Stay').
+        div('RAD')
+    )->fixBlock()->render();
+
+    expect($value)->toBe("Stay                " . PHP_EOL . "RAD                 " . PHP_EOL);
+});
+
+test('test fixInline', function (): void {
+    $value = div(span('Stay').div(
+                span('RAD')->fixInline().
+                div('!')
+            )->fixBlock())->fixBlock()->render();
+
+    expect($value)->toBe("Stay" . PHP_EOL . "RAD" . PHP_EOL . "!                   " . PHP_EOL);
 });
 
 test('test magic ml', function (): void {
