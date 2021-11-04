@@ -8,7 +8,6 @@ use Termage\Themes\ThemeInterface;
 use Termage\Elements\Div;
 use Atomastic\Arrays\Arrays as Collection;
 use function arrays as collection;
-use function Termage\render;
 use function Termage\div;
 use function Termage\setTheme;
 use Termage\Parsers\Shortcodes;
@@ -26,133 +25,133 @@ test('test set and get theme', function (): void {
 });
 
 test('test color', function (): void {
-    $value = render(div('RAD')->color('blue'));
-    expect($value)->toBe("\e[34mRAD                 \e[39m\n");
+    $value = div('RAD')->color('blue')->render();
+    expect($value)->toBe(PHP_EOL . "\e[34mRAD                 \e[39m" . PHP_EOL);
 });
 
 test('test magic color', function (): void {
-    $value = render(div()->value('RAD')->colorBlue());     
-    expect($value)->toBe("\e[34mRAD                 \e[39m\n");
+    $value = div()->value('RAD')->colorBlue()->render();     
+    expect($value)->toBe("\e[34mRAD                 \e[39m" . PHP_EOL);
 });
 
 test('test bg', function (): void {
-    $value = render(div()->value('RAD')->bg('blue'));
-    expect($value)->toBe("\e[44mRAD                 \e[49m\n");
+    $value = div()->value('RAD')->bg('blue')->render();
+    expect($value)->toBe("\e[44mRAD                 \e[49m" . PHP_EOL);
 });
 
 test('test magic bg', function (): void {
-    $value = render(div()->value('RAD')->bgBlue());
+    $value = div()->value('RAD')->bgBlue()->render();
     expect($value)->toBe("\e[44mRAD                 \e[49m" . PHP_EOL);
 });
 
 test('test bold', function (): void {
-    $value = render(div()->value('RAD')->bold());
+    $value = div()->value('RAD')->bold()->render();
     expect($value)->toBe("\e[1mRAD\e[22m                 " . PHP_EOL);
 });
 
 test('test underline', function (): void {
-    $value = render(div()->value('RAD')->underline());
+    $value = div()->value('RAD')->underline()->render();
     expect($value)->toBe("\e[4mRAD\e[24m                 " . PHP_EOL);
 });
 
 test('test blink', function (): void {
-    $value = render(div()->value('RAD')->blink());
+    $value = div()->value('RAD')->blink()->render();
     expect($value)->toBe("\e[5mRAD\e[25m                 " . PHP_EOL);
 });
 
 test('test italic', function (): void {
-    $value = render(div()->value('RAD')->italic());
+    $value = div()->value('RAD')->italic()->render();
     expect($value)->toBe("\e[3mRAD\e[23m                 " . PHP_EOL);
 });
 
 test('test dim', function (): void {
-    $value = render(div()->value('RAD')->dim());
+    $value = div()->value('RAD')->dim()->render();
     expect($value)->toBe("\e[2mRAD\e[22m                 " . PHP_EOL);
 });
 
 test('test strikethrough', function (): void {
-    $value = render(div()->value('RAD')->strikethrough());
+    $value = div()->value('RAD')->strikethrough()->render();
     expect($value)->toBe("\e[9mRAD\e[29m                 " . PHP_EOL);
 });
 
 test('test reverse', function (): void {
-    $value = render(div()->value('RAD')->reverse());
+    $value = div()->value('RAD')->reverse()->render();
     expect($value)->toBe("\e[7mRAD\e[27m                 " . PHP_EOL);
 });
 
 test('test invisible', function (): void {
-    $value = render(div()->value('RAD')->invisible());
+    $value = div()->value('RAD')->invisible()->render();
     expect($value)->toBe("\e[8mRAD\e[28m                 " . PHP_EOL);
 });
 
 test('test value and getValue', function (): void {
     $div = div()->value('RAD');
-    expect(render($div))->toBe("RAD                 " . PHP_EOL);
-    expect(render($div->getValue()))->toBe("RAD                 " . PHP_EOL);
+    expect($div->render())->toBe("RAD                 " . PHP_EOL);
+    expect($div->getValue())->toBe("RAD                 " . PHP_EOL);
 });
 
 test('test classes and getClasses', function (): void {
-    $value = div()->classes('RAD');;
+    $value = div()->classes('RAD');
     expect($value->getClasses())->toBe('RAD');
 });
 
 test('test mx', function (): void {
-    $value = render(div()->value('RAD')->mx(10));
+    $value = div()->value('RAD')->mx(10)->render();
     expect($value)->toBe("          RAD                           " . PHP_EOL);
 });
 
 test('test magic mx', function (): void {
-    $value = render(div()->value('RAD')->mx10());
+    $value = div()->value('RAD')->mx10()->render();
     expect($value)->toBe("          RAD                           " . PHP_EOL);
 });
 
 test('test mr', function (): void {
-    $value = render(div()->value('RAD')->mr(10));
+    $value = div()->value('RAD')->mr(10)->render();
     expect($value)->toBe("RAD                           " . PHP_EOL);
 });
 
 test('test magic mr', function (): void {
-    $value = render(div()->value('RAD')->mr10());
+    $value = div()->value('RAD')->mr10()->render();
     expect($value)->toBe("RAD                           " . PHP_EOL);
 });
 
 test('test ml', function (): void {
-    $value = render(div()->value('RAD')->ml(10));
+    $value = div()->value('RAD')->ml(10)->render();
     expect($value)->toBe("          RAD                 " . PHP_EOL);
 });
 
 test('test magic ml', function (): void {
-    $value = render(div()->value('RAD')->ml10());
+    $value = div()->value('RAD')->ml10()->render();
     expect($value)->toBe("          RAD                 " . PHP_EOL);
 });
 
 test('test px', function (): void {
-    $value = render(div()->value('RAD')->px(10));
+    $value = div()->value('RAD')->px(10)->render();
     expect($value)->toBe("          RAD       " . PHP_EOL);
 });
 
 test('test magic px', function (): void {
-    $value = render(div()->value('RAD')->px10());
+    $value = div()->value('RAD')->px10()->render();
     expect($value)->toBe("          RAD       " . PHP_EOL);
 });
 
 test('test pr', function (): void {
-    $value = render(div()->value('RAD')->pr(10));
+    $value = div()->value('RAD')->pr(10)->render();
     expect($value)->toBe("RAD                 " . PHP_EOL);
 });
 
 test('test magic pr', function (): void {
-    $value = render(div()->value('RAD')->pr10());
+    $value = div()->value('RAD')->pr10()->render();
     expect($value)->toBe("RAD                 " . PHP_EOL);
 });
 
 test('test pl', function (): void {
-    $value = render(div()->value('RAD')->pl(10));
+    $value = div()->value('RAD')->pl(10)->render();
     expect($value)->toBe('          RAD       ' . PHP_EOL);
 });
 
 test('test magic pl', function (): void {
-    $value = render(div()->value('RAD')->pl10());
+    $value = div()->value('RAD')->pl10()->render();
     expect($value)->toBe('          RAD       ' . PHP_EOL);
 });
 
@@ -167,7 +166,7 @@ test('magic throw exception BadMethodCallException', function (): void {
 
 test('test magic __toString', function (): void {
     $value = div()->value('RAD');
-    expect((string) $value)->toBe(PHP_EOL . 'RAD                 ');
+    expect((string) $value)->toBe("RAD                 " . PHP_EOL);
 });
 
 test('test getShortcodes', function (): void {

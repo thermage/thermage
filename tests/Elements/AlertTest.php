@@ -9,7 +9,6 @@ use Termage\Elements\Alert;
 use Atomastic\Arrays\Arrays as Collection;
 use function arrays as collection;
 use function Termage\alert;
-use function Termage\render;
 use function Termage\setTheme;
 use function Termage\getTheme;
 
@@ -18,67 +17,67 @@ beforeEach(function() {
 });
 
 test('test alert w auto', function (): void {
-    $value = render(alert('Stay RAD!')->wAuto());
+    $value = alert('Stay RAD!')->wAuto()->render();
     $alert = "\e[30m\e[44m\e[49m\e[39m\e[30m\e[44mStayRAD!\e[49m\e[39m\e[30m\e[44m\e[49m\e[39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert info', function (): void {
-    $value = render(alert('Stay RAD!')->info());
+    $value = alert('Stay RAD!')->info()->render();
     $alert = "\e[30m\e[44m\e[49m\e[39m\e[30m\e[44mStayRAD!\e[49m\e[39m\e[30m\e[44m\e[49m\e[39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert warning', function (): void {
-    $value = render(alert('Stay RAD!')->warning());
+    $value = alert('Stay RAD!')->warning()->render();
     $alert = "\e[30m\e[43m\e[49m\e[39m\e[30m\e[43mStayRAD!\e[49m\e[39m\e[30m\e[43m\e[49m\e[39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert danger', function (): void {
-    $value = render(alert('Stay RAD!')->danger());
+    $value = alert('Stay RAD!')->danger()->render();
     $alert = "\e[37m\e[41m\e[49m\e[39m\e[37m\e[41mStayRAD!\e[49m\e[39m\e[37m\e[41m\e[49m\e[39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert success', function (): void {
-    $value = render(alert('Stay RAD!')->success());
+    $value = alert('Stay RAD!')->success()->render();
     $alert = "\e[30m\e[42m\e[49m\e[39m\e[30m\e[42mStayRAD!\e[49m\e[39m\e[30m\e[42m\e[49m\e[39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert primary', function (): void {
-    $value = render(alert('Stay RAD!')->primary());
+    $value = alert('Stay RAD!')->primary()->render();
     $alert = "\e[37m\e[44m\e[49m\e[39m\e[37m\e[44mStayRAD!\e[49m\e[39m\e[37m\e[44m\e[49m\e[39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert secondary', function (): void {
-    $value = render(alert('Stay RAD!')->secondary());
+    $value = alert('Stay RAD!')->secondary()->render();
     $alert = "\e[30m\e[100m\e[49m\e[39m\e[30m\e[100mStayRAD!\e[49m\e[39m\e[30m\e[100m\e[49m\e[39m";
     expect(str_replace(["\r\n", "\r", "\n", " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert with text align right', function (): void {
-    $value = render(alert('Stay RAD!')->textAlignRight());
+    $value = alert('Stay RAD!')->textAlignRight()->render();
     $alert = "\e[30m\e[44m\e[49m\e[39m\e[30m\e[44mStayRAD!\e[49m\e[39m\e[30m\e[44m\e[49m\e[39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert with text align left', function (): void {
-    $value = render(alert('Stay RAD!')->textAlignLeft());
+    $value = alert('Stay RAD!')->textAlignLeft()->render();
     $alert = "\e[30m\e[44m\e[49m\e[39m\e[30m\e[44mStayRAD!\e[49m\e[39m\e[30m\e[44m\e[49m\e[39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert w', function (): void {
-    $value = render(alert('Stay RAD!')->w(200));
+    $value = alert('Stay RAD!')->w(200)->render();
     $alert = "\e[30m\e[44m\e[49m\e[39m\e[30m\e[44mStayRAD!\e[49m\e[39m\e[30m\e[44m\e[49m\e[39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert w magic', function (): void {
-    $value = render(alert('Stay RAD!')->w200());
+    $value = alert('Stay RAD!')->w200()->render();
     $alert = "\e[30m\e[44m\e[49m\e[39m\e[30m\e[44mStayRAD!\e[49m\e[39m\e[30m\e[44m\e[49m\e[39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
