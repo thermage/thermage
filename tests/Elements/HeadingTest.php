@@ -9,6 +9,11 @@ beforeEach(function() {
     putenv('COLUMNS=20');
 });
 
+test('test heading size < 1', function (): void {
+    $value = heading('RAD')->size0()->render();
+    expect(str_replace([PHP_EOL, " "], "", $value))->toBe("\e[1m╔══════════════════╗║RAD║╚══════════════════╝\e[22m");
+});
+
 test('test heading size 1', function (): void {
     $value = heading('RAD')->size1()->render();
     expect(str_replace([PHP_EOL, " "], "", $value))->toBe("\e[1m╔══════════════════╗║RAD║╚══════════════════╝\e[22m");
@@ -31,5 +36,10 @@ test('test heading size 4', function (): void {
 
 test('test heading size 5', function (): void {
     $value = heading('RAD')->size5()->render();
+    expect(str_replace([PHP_EOL, " "], "", $value))->toBe("\e[2mRAD\e[22m");
+});
+
+test('test heading size > 5', function (): void {
+    $value = heading('RAD')->size6()->render();
     expect(str_replace([PHP_EOL, " "], "", $value))->toBe("\e[2mRAD\e[22m");
 });
