@@ -2,7 +2,7 @@
 # [0.9.0](https://github.com/termage/termage) (2021-xx-xx)
 * Imrpoved box model for elements. 
 * Added new public element method `p` to set left and right paddings.
-* Added new public element method `m` to set left and right margin.
+* Added new public element method `m` to set left and right margins.
 * Added new public element method `d` to set display state.
 * Added new public element method `w` to set width.
 * Added new public element method `fixInline`.
