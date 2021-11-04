@@ -262,7 +262,7 @@ abstract class Element
      */
     final public function getDefaultClasses(): array
     {
-        return ['bold', 'italic', 'bg', 'color', 'pl', 'pr', 'px', 'ml', 'mr', 'mx', 'dim', 'invisible', 'underline', 'reverse', 'blink', 'w', 'd', 'text-align', 'wrap', 'first-inline'];
+        return ['bold', 'italic', 'bg', 'color', 'pl', 'pr', 'px', 'ml', 'mr', 'mx', 'dim', 'invisible', 'underline', 'reverse', 'blink', 'w', 'd', 'text-align', 'fix-block', 'fix-inline'];
     }
 
     /**
