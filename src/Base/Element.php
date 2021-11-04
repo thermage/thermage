@@ -56,18 +56,18 @@ abstract class Element
     private static $displayState = 'block';
 
     /**
-     * Element wrap block state for nested elements.
+     * Element fix block state for nested elements.
      *
      * @access private
      */
-    private $wrapBlock;
+    private bool $fixBlock;
 
     /**
-     * Element first inline state for nested inline elements.
+     * Element fix inline state for nested inline elements.
      *
      * @access private
      */
-    private $firstInline;
+    private bool $fixInline;
 
     /**
      * Element styles.
@@ -117,8 +117,8 @@ abstract class Element
         $this->classes           = $classes;
         $this->registeredClasses = collection($this->getDefaultClasses())->merge($this->getElementClasses(), true);
         $this->styles            = collection();
-        $this->wrapBlock         = false;
-        $this->firstInline       = false;
+        $this->fixBlock         = false;
+        $this->fixInline       = false;
     }
 
     /**
@@ -686,8 +686,8 @@ abstract class Element
                 return $this->w('auto');
             }
 
-            if ($method === 'wrapBlock') {
-                return $this->wrapBlock();
+            if ($method === 'fixBlock') {
+                return $this->fixBlock();
             }
 
             return $this->w(strings($method)->substr(1)->toInteger());
@@ -701,29 +701,29 @@ abstract class Element
     }
 
     /**
-     * Set wrap block state for nested elements.
+     * Set fix block state for nested elements.
      *
      * @return self Returns instance of the Element class.
      *
      * @access public
      */
-    public function wrapBlock(): self
+    public function fixBlock(): self
     {
-        $this->wrapBlock = true;
+        $this->fixBlock = true;
 
         return $this;
     }
 
     /**
-     * Set first inline state for nested inline elements.
+     * Set fix inline state for nested inline elements.
      *
      * @return self Returns instance of the Element class.
      *
      * @access public
      */
-    public function firstInline(): self
+    public function fixInline(): self
     {
-        $this->firstInline = true;
+        $this->fixInline = true;
 
         return $this;
     }
@@ -765,13 +765,13 @@ abstract class Element
         // Termage box model and styles hierarchy.
         //
         // ┌───────────────────────────────────────────────────────┐
-        // │ display                                               │
+        // │ display [inline, block]                               │
         // │ ┌───────────────────────────────────────────────────┐ │
-        // │ │ margin                                            │ │
+        // │ │ margin (left, right)                              │ │
         // │ │ ┌───────────────────────────────────────────────┐ │ │
         // │ │ │ bg, color                                     │ │ │
         // │ │ │ ┌───────────────────────────────────────────┐ │ │ │
-        // │ │ │ │ width (+padding)                          │ │ │ │
+        // │ │ │ │ width (+ left and right padding)          │ │ │ │
         // │ │ │ │ ┌───────────────────────────────────────┐ │ │ │ │
         // │ │ │ │ │ invisible, reverse, blink, dim, bold, │ │ │ │ │
         // │ │ │ │ │ italic, underline, strikethrough.     │ │ │ │ │
@@ -784,14 +784,19 @@ abstract class Element
 
         // Process style: margin
         $margin = function ($value) {
-            // Do not allow margins for root element with wrapBlock == true
-            if ($this->wrapBlock) {
-                return $value;
-            }
 
-            return strings(' ')->repeat($this->styles->get('margin.left') ?? 0) .
+            $ml = $this->styles->get('margin.left') ?? 0;
+            $mr = $this->styles->get('margin.right') ?? 0;
+
+            // Do not allow left and right margins for root element with fixBlock == true
+            if ($this->fixBlock) {
+                $ml = 0;
+                $mr = 0;
+            }
+            
+            return (($ml > 0) ? strings(' ')->repeat($ml) : '') .
                    $value .
-                   strings(' ')->repeat($this->styles->get('margin.right') ?? 0);
+                   (($mr > 0) ? strings(' ')->repeat($mr) : '');
         };
 
         // Process style: width
@@ -809,8 +814,8 @@ abstract class Element
             if ($widthStyle === 'auto' && $displayStyle === 'block') {
                 $spaces = abs(terminal()->getwidth() - $valueLength);
 
-                // Do not allow paddings for root element with wrapBlock == true
-                if ($this->wrapBlock) {
+                // Do not allow paddings for root element with fixBlock == true
+                if ($this->fixBlock) {
                     return $value;
                 }
 
@@ -855,54 +860,54 @@ abstract class Element
         $color = function ($value) {
             $color = $this->styles->get('color') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('color'), $this->styles->get('color')) : false;
 
-            return $color ? color()->textColor($color)->apply((string) strings($value)->trim(PHP_EOL)) : $value;
+            return $color ? color()->textColor($color)->apply($value) : $value;
         };
 
         // Process style: bg
         $bg = function ($value) {
             $bg = $this->styles->get('bg') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('bg'), $this->styles->get('bg')) : false;
 
-            return $bg ? color()->bgColor($bg)->apply((string) strings($value)->trim(PHP_EOL)) : $value;
+            return $bg ? color()->bgColor($bg)->apply($value) : $value;
         };
 
         // Process style: bold
         $bold = function ($value) {
-            return $this->styles['bold'] ? "\e[1m" . strings($value)->trim(PHP_EOL) . "\e[22m" : $value;
+            return $this->styles['bold'] ? "\e[1m" . $value . "\e[22m" : $value;
         };
 
         // Process style: italic
         $italic = function ($value) {
-            return $this->styles['italic'] ? "\e[3m" . strings($value)->trim(PHP_EOL) . "\e[23m" : $value;
+            return $this->styles['italic'] ? "\e[3m" . $value . "\e[23m" : $value;
         };
 
         // Process style: underline
         $underline = function ($value) {
-            return $this->styles['underline'] ? "\e[4m" . strings($value)->trim(PHP_EOL) . "\e[24m" : $value;
+            return $this->styles['underline'] ? "\e[4m" . $value . "\e[24m" : $value;
         };
 
         // Process style: strikethrough
         $strikethrough = function ($value) {
-            return $this->styles['strikethrough'] ? "\e[9m" . strings($value)->trim(PHP_EOL) . "\e[29m" : $value;
+            return $this->styles['strikethrough'] ? "\e[9m" . $value . "\e[29m" : $value;
         };
 
         // Process style: dim
         $dim = function ($value) {
-            return $this->styles['dim'] ? "\e[2m" . strings($value)->trim(PHP_EOL) . "\e[22m" : $value;
+            return $this->styles['dim'] ? "\e[2m" . $value . "\e[22m" : $value;
         };
 
         // Process style: blink
         $blink = function ($value) {
-            return $this->styles['blink'] ? "\e[5m" . strings($value)->trim(PHP_EOL) . "\e[25m" : $value;
+            return $this->styles['blink'] ? "\e[5m" . $value . "\e[25m" : $value;
         };
 
         // Process style: reverse
         $reverse = function ($value) {
-            return $this->styles['reverse'] ? "\e[7m" . strings($value)->trim(PHP_EOL) . "\e[27m" : $value;
+            return $this->styles['reverse'] ? "\e[7m" . $value . "\e[27m" : $value;
         };
 
         // Process style: invisible
         $invisible = function ($value) {
-            return $this->styles['invisible'] ? "\e[8m" . strings($value)->trim(PHP_EOL) . "\e[28m" : $value;
+            return $this->styles['invisible'] ? "\e[8m" . $value . "\e[28m" : $value;
         };
 
         // Process style: display
@@ -911,18 +916,12 @@ abstract class Element
 
             switch ($displayStyle) {
                 case 'inline':
-                    // If previous element has display block
-                    // then current inline element should have PHP_EOL before.
-                    if (self::$displayState === 'block') {
+
+                    // Fix inline state
+                    if ($this->fixInline) {
                         $result = PHP_EOL . $value;
                     } else {
-                        // If current inline element is first children element
-                        // then current inline element should have PHP_EOL before.
-                        if ($this->firstInline) {
-                            $result = PHP_EOL . $value;
-                        } else {
-                            $result = $value;
-                        }
+                        $result = $value;
                     }
 
                     // Set current display state = inline for element
@@ -937,13 +936,20 @@ abstract class Element
                     break;
                 case 'block':
                 default:
-                    // If block element contains childrens then do not add PHP_EOL before.
-                    if ($this->wrapBlock === true) {
+
+                    // Fix block state
+                    if ($this->fixBlock) {
                         $result = $value;
                     } else {
-                        $result = PHP_EOL . $value;
-                    }
 
+                        // If prev display state was inline that fix block state
+                        if (self::$displayState === 'inline') {
+                            $result = PHP_EOL . $value . PHP_EOL;
+                        } else {
+                            $result = $value . PHP_EOL;
+                        }
+                    }
+                    
                     // Set current display state = block for element
                     self::$displayState = 'block';
 
