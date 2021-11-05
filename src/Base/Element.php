@@ -73,7 +73,7 @@ abstract class Element
     private Collection $registeredClasses;
 
     /**
-     * Force an Element To Self-Clear its Children block elements linebreaks.
+     * Force element to self-clear its children block elements linebreaks.
      *
      * @access private
      */
@@ -686,7 +686,7 @@ abstract class Element
     }
 
     /**
-     * Force an Element To Self-Clear its Children block elements linebreaks.
+     * Force element to self-clear its children block elements linebreaks.
      *
      * @return self Returns instance of the Element class.
      *
