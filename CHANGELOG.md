@@ -1,5 +1,5 @@
 <a name="0.9.0"></a>
-# [0.9.0](https://github.com/termage/termage) (2021-xx-xx)
+# [0.9.0](https://github.com/termage/termage) (2021-11-05)
 * Imrpoved box model for elements with ability do set element display state and width. 
 * Added new public element method `p` to set left and right paddings.
 * Added new public element method `m` to set left and right margins.
