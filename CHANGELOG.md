@@ -1,3 +1,8 @@
+<a name="0.10.0"></a>
+# [0.10.0](https://github.com/termage/termage) (2021-xx-xx)
+* Added ability to set text alignment center for base element.
+* Added ability to set text alignment center for hr element.
+
 <a name="0.9.0"></a>
 # [0.9.0](https://github.com/termage/termage) (2021-11-05)
 * Imrpoved box model for elements with ability do set element display state and width. 
