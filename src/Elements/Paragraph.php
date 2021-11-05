@@ -16,12 +16,19 @@ namespace Termage\Elements;
 
 use Termage\Base\Element;
 
-use const PHP_EOL;
-
 final class Paragraph extends Element
 {
+    /**
+     * Render Paragraph element.
+     *
+     * @return string Returns rendered Paragraph element.
+     *
+     * @access public
+     */
     public function render(): string
     {
-        return parent::render() . PHP_EOL;
+        $this->d($this->getStyles()->get('display') ?? 'block');
+
+        return parent::render();
     }
 }

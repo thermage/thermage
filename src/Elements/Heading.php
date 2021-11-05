@@ -33,7 +33,7 @@ final class Heading extends Element
     private int $size = 1;
 
     /**
-     * Set heading size.
+     * Set Heading size.
      *
      * @param int $value Heading size 1 - 5.
      *
@@ -49,7 +49,7 @@ final class Heading extends Element
     }
 
     /**
-     * Get element classes.
+     * Get Heading element classes.
      *
      * @return array Array of element classes.
      *
@@ -80,16 +80,16 @@ final class Heading extends Element
     }
 
     /**
-     * Render heading element.
+     * Render Heading element.
      *
-     * @return string Returns rendered heading element.
+     * @return string Returns rendered Heading element.
      *
      * @access public
      */
     public function render(): string
     {
-        $value         = parent::render();
-        $valueWidth    = strings($this->stripDecorations($value))->length();
+        $value         = $this->getValue();
+        $valueLength   = $this->getLength($value);
         $terminalWidth = terminal()->getWidth();
         $size          = $this->size;
         $paddingLeft   = $this->getStyles()['padding']['left'] ?? 1;
@@ -107,22 +107,22 @@ final class Heading extends Element
                 $heading  = '╔';
                 $heading .= strings('═')->repeat($terminalWidth - 2);
                 $heading .= '╗';
-                $heading .= '║' . span($value)->pl($paddingLeft)->pr($terminalWidth - $paddingLeft - $valueWidth - 2) . '║' . PHP_EOL;
+                $heading .= '║' . span($value)->pl($paddingLeft)->pr($terminalWidth - $paddingLeft - $valueLength - 2) . '║' . PHP_EOL;
                 $heading .= '╚';
                 $heading .= strings('═')->repeat($terminalWidth - 2);
                 $heading .=  '╝';
-                $heading .= PHP_EOL . PHP_EOL;
+                $heading .= PHP_EOL . PHP_EOL . PHP_EOL;
                 $heading  = bold($heading);
                 break;
             case 2:
                 $heading  = '┌';
                 $heading .= strings('─')->repeat($terminalWidth - 2);
                 $heading .= '┐';
-                $heading .= '│' . span($value)->pl($paddingLeft)->pr($terminalWidth - $paddingLeft - $valueWidth - 2) . '│' . PHP_EOL;
+                $heading .= '│' . span($value)->pl($paddingLeft)->pr($terminalWidth - $paddingLeft - $valueLength - 2) . '│' . PHP_EOL;
                 $heading .= '└';
                 $heading .= strings('─')->repeat($terminalWidth - 2);
                 $heading .=  '┘';
-                $heading .= PHP_EOL . PHP_EOL;
+                $heading .= PHP_EOL . PHP_EOL . PHP_EOL;
                 $heading  = bold($heading);
                 break;
             case 3:

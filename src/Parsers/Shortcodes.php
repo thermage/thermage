@@ -20,9 +20,7 @@ use Termage\Utils\Color;
 use Thunder\Shortcode\Shortcode\ShortcodeInterface;
 use Thunder\Shortcode\ShortcodeFacade;
 
-use function intval;
 use function str_replace;
-use function strings;
 use function strip_tags;
 
 class Shortcodes
@@ -193,40 +191,16 @@ class Shortcodes
         // shortcode: [invisible]Invisible[/invisible]
         $this->add('invisible', fn (ShortcodeInterface $s) => $this->invisibleShortcode($s));
 
-        // shortcode: [anchor href=]Anchor[/anchor]
+        // shortcode: [anchor]Anchor[/anchor]
         $this->add('anchor', fn (ShortcodeInterface $s) => $this->anchorShortcode($s));
 
         // shortcode: [a href=]Anchor[/a]
         $this->add('a', fn (ShortcodeInterface $s) => $this->anchorShortcode($s));
 
-        // shortcode: [m l= r=]Margin left and right[/m]
-        $this->add('m', fn (ShortcodeInterface $s) => $this->marginShortcode($s));
-
-        // shortcode: [mx=]Margin left and right[/p]
-        $this->add('mx', fn (ShortcodeInterface $s) => $this->marginBothShortcode($s));
-
-        // shortcode: [ml=]Margin left[/p]
-        $this->add('ml', fn (ShortcodeInterface $s) => $this->marginLeftShortcode($s));
-
-        // shortcode: [mr=]Margin right[/p]
-        $this->add('mr', fn (ShortcodeInterface $s) => $this->marginRightShortcode($s));
-
-        // shortcode: [p l= r=]Padding left and right[/p]
-        $this->add('p', fn (ShortcodeInterface $s) => $this->paddingShortcode($s));
-
-        // shortcode: [px=]Padding left and right[/p]
-        $this->add('px', fn (ShortcodeInterface $s) => $this->paddingBothShortcode($s));
-
-        // shortcode: [pl=]Padding left[/p]
-        $this->add('pl', fn (ShortcodeInterface $s) => $this->paddingLeftShortcode($s));
-
-        // shortcode: [pr=]Padding right[/p]
-        $this->add('pr', fn (ShortcodeInterface $s) => $this->paddingRightShortcode($s));
-
-        // shortcode: [color=]Color[/color]
+        // shortcode: [color]Color[/color]
         $this->add('color', fn (ShortcodeInterface $s) => $this->colorShortcode($s));
 
-        // shortcode: [bg=]Background Color[/color]
+        // shortcode: [bg]Background Color[/color]
         $this->add('bg', fn (ShortcodeInterface $s) => $this->bgShortcode($s));
     }
 
@@ -404,205 +378,5 @@ class Shortcodes
         }
 
         return $s->getContent();
-    }
-
-    /**
-     * Padding shortcode.
-     *
-     * @param ShortcodeInterface $s ShortcodeInterface
-     *
-     * @return string Padding shortcode result.
-     *
-     * @access protected
-     */
-    protected function paddingShortcode(ShortcodeInterface $s): string
-    {
-        $p = ['l' => '', 'r' => ''];
-
-        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
-
-        if ($s->getParameter('l')) {
-            $p['l'] = (string) strings(' ')->repeat(intval($s->getParameter('l') * $themeSpacer));
-        }
-
-        if ($s->getParameter('r')) {
-            $p['r'] = (string) strings(' ')->repeat(intval($s->getParameter('r') * $themeSpacer));
-        }
-
-        return $p['l'] . $s->getContent() . $p['r'];
-    }
-
-    /**
-     * Padding both shortcode.
-     *
-     * @param ShortcodeInterface $s ShortcodeInterface
-     *
-     * @return string Padding both shortcode result.
-     *
-     * @access protected
-     */
-    protected function paddingBothShortcode(ShortcodeInterface $s): string
-    {
-        $p = ['l' => '', 'r' => ''];
-
-        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
-
-        $pl = intval($s->getBbCode() * $themeSpacer);
-        $pr = intval($s->getBbCode() * $themeSpacer);
-
-        if ($s->getBbCode()) {
-            $p['l'] = (string) strings(' ')->repeat($pl);
-            $p['r'] = (string) strings(' ')->repeat($pr);
-        }
-
-        return $p['l'] . $s->getContent() . $p['r'];
-    }
-
-    /**
-     * Padding left shortcode.
-     *
-     * @param ShortcodeInterface $s ShortcodeInterface
-     *
-     * @return string Padding left shortcode result.
-     *
-     * @access protected
-     */
-    protected function paddingLeftShortcode(ShortcodeInterface $s): string
-    {
-        $p = ['l' => ''];
-
-        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
-
-        $pl = intval($s->getBbCode() * $themeSpacer);
-
-        if ($s->getBbCode()) {
-            $p['l'] = (string) strings(' ')->repeat($pl);
-        }
-
-        return $p['l'] . $s->getContent();
-    }
-
-    /**
-     * Padding right shortcode.
-     *
-     * @param ShortcodeInterface $s ShortcodeInterface
-     *
-     * @return string Padding right shortcode result.
-     *
-     * @access protected
-     */
-    protected function paddingRightShortcode(ShortcodeInterface $s): string
-    {
-        $p = ['r' => ''];
-
-        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
-
-        $pr = intval($s->getBbCode() * $themeSpacer);
-
-        if ($s->getBbCode()) {
-            $p['r'] = (string) strings(' ')->repeat($pr);
-        }
-
-        return $s->getContent() . $p['r'];
-    }
-
-    /**
-     * Margin shortcode.
-     *
-     * @param ShortcodeInterface $s ShortcodeInterface
-     *
-     * @return string Margin shortcode result.
-     *
-     * @access protected
-     */
-    protected function marginShortcode(ShortcodeInterface $s): string
-    {
-        $m = ['l' => '', 'r' => ''];
-
-        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
-
-        if ($s->getParameter('l')) {
-            $m['l'] = (string) strings(' ')->repeat(intval($s->getParameter('l') * $themeSpacer));
-        }
-
-        if ($s->getParameter('r')) {
-            $m['r'] = (string) strings(' ')->repeat(intval($s->getParameter('r') * $themeSpacer));
-        }
-
-        return $m['l'] . $s->getContent() . $m['r'];
-    }
-
-    /**
-     * Margin both shortcode.
-     *
-     * @param ShortcodeInterface $s ShortcodeInterface
-     *
-     * @return string Margin both shortcode result.
-     *
-     * @access protected
-     */
-    protected function marginBothShortcode(ShortcodeInterface $s): string
-    {
-        $m = ['l' => '', 'r' => ''];
-
-        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
-
-        $ml = intval($s->getBbCode() * $themeSpacer);
-        $mr = intval($s->getBbCode() * $themeSpacer);
-
-        if ($s->getBbCode()) {
-            $m['l'] = (string) strings(' ')->repeat($ml);
-            $m['r'] = (string) strings(' ')->repeat($mr);
-        }
-
-        return $m['l'] . $s->getContent() . $m['r'];
-    }
-
-    /**
-     * Margin left shortcode.
-     *
-     * @param ShortcodeInterface $s ShortcodeInterface
-     *
-     * @return string Margin left shortcode result.
-     *
-     * @access protected
-     */
-    protected function marginLeftShortcode(ShortcodeInterface $s): string
-    {
-        $m = ['l' => ''];
-
-        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
-
-        $ml = intval($s->getBbCode() * $themeSpacer);
-
-        if ($s->getBbCode()) {
-            $m['l'] = (string) strings(' ')->repeat($ml);
-        }
-
-        return $m['l'] . $s->getContent();
-    }
-
-    /**
-     * Margin right shortcode.
-     *
-     * @param ShortcodeInterface $s ShortcodeInterface
-     *
-     * @return string Margin right shortcode result.
-     *
-     * @access protected
-     */
-    protected function marginRightShortcode(ShortcodeInterface $s): string
-    {
-        $m = ['r' => ''];
-
-        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
-
-        $mr = intval($s->getBbCode() * $themeSpacer);
-
-        if ($s->getBbCode()) {
-            $m['r'] = (string) strings(' ')->repeat($mr);
-        }
-
-        return $s->getContent() . $m['r'];
     }
 }

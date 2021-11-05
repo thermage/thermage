@@ -21,13 +21,16 @@ use Termage\Parsers\Shortcodes;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
 
+use function abs;
 use function arrays as collection;
 use function intval;
 use function preg_replace;
 use function sprintf;
 use function strings;
-use function substr;
 use function Termage\color;
+use function Termage\terminal;
+
+use const PHP_EOL;
 
 abstract class Element
 {
@@ -70,6 +73,13 @@ abstract class Element
     private Collection $registeredClasses;
 
     /**
+     * Force element to self-clear its children block elements linebreaks.
+     *
+     * @access private
+     */
+    private bool $clearfix;
+
+    /**
      * Create a new Element instance.
      *
      * @param        $theme
@@ -93,6 +103,7 @@ abstract class Element
         $this->classes           = $classes;
         $this->registeredClasses = collection($this->getDefaultClasses())->merge($this->getElementClasses(), true);
         $this->styles            = collection();
+        $this->clearfix          = false;
     }
 
     /**
@@ -146,7 +157,7 @@ abstract class Element
      */
     public function styles(array $styles = []): self
     {
-        $this->styles = $styles;
+        $this->styles = collection($styles);
 
         return $this;
     }
@@ -236,7 +247,7 @@ abstract class Element
      */
     final public function getDefaultClasses(): array
     {
-        return ['bold', 'italic', 'bg', 'color', 'pl', 'pr', 'px', 'ml', 'mr', 'mx', 'dim', 'invisible', 'underline', 'reverse', 'blink'];
+        return ['bold', 'italic', 'bg', 'color', 'pl', 'pr', 'px', 'ml', 'mr', 'mx', 'dim', 'invisible', 'underline', 'reverse', 'blink', 'w', 'd', 'text-align', 'clearfix'];
     }
 
     /**
@@ -366,7 +377,7 @@ abstract class Element
     /**
      * Set element text color style.
      *
-     * @param string $color Element text color style.
+     * @param string $color Element text color value.
      *
      * @return self Returns instance of the Element class.
      *
@@ -382,7 +393,7 @@ abstract class Element
     /**
      * Set element background color style.
      *
-     * @param string $color Element background color style.
+     * @param string $color Element background color value.
      *
      * @return self Returns instance of the Element class.
      *
@@ -396,9 +407,29 @@ abstract class Element
     }
 
     /**
+     * Set element margin left and right style.
+     *
+     * @param int $left Margin left value.
+     * @param int $left Margin right value.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function m(int $left, int $right): self
+    {
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
+
+        $this->styles->set('margin.left', intval($left * $themeSpacer));
+        $this->styles->set('margin.right', intval($right * $themeSpacer));
+
+        return $this;
+    }
+
+    /**
      * Set element margin x style.
      *
-     * @param int $value Margin x.
+     * @param int $value Margin x value.
      *
      * @return self Returns instance of the Element class.
      *
@@ -417,7 +448,7 @@ abstract class Element
     /**
      * Set element margin left style.
      *
-     * @param int $value Margin left.
+     * @param int $value Margin left value.
      *
      * @return self Returns instance of the Element class.
      *
@@ -435,7 +466,7 @@ abstract class Element
     /**
      * Set element margin right style.
      *
-     * @param int $value Margin right.
+     * @param int $value Margin right value.
      *
      * @return self Returns instance of the Element class.
      *
@@ -453,7 +484,7 @@ abstract class Element
     /**
      * Set element padding x style.
      *
-     * @param int $value Padding x.
+     * @param int $value Padding x value.
      *
      * @return self Returns instance of the Element class.
      *
@@ -470,9 +501,29 @@ abstract class Element
     }
 
     /**
+     * Set element padding left and right style.
+     *
+     * @param int $left Padding left value.
+     * @param int $left Padding right value.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function p(int $left, int $right): self
+    {
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
+
+        $this->styles->set('padding.left', intval($left * $themeSpacer));
+        $this->styles->set('padding.right', intval($right * $themeSpacer));
+
+        return $this;
+    }
+
+    /**
      * Set element padding left style.
      *
-     * @param int $value Padding left.
+     * @param int $value Padding left value.
      *
      * @return self Returns instance of the Element class.
      *
@@ -490,7 +541,7 @@ abstract class Element
     /**
      * Set element padding right style.
      *
-     * @param int $value Padding right.
+     * @param int $value Padding right value.
      *
      * @return self Returns instance of the Element class.
      *
@@ -501,6 +552,54 @@ abstract class Element
         $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
         $this->styles->set('padding.right', intval($value * $themeSpacer));
+
+        return $this;
+    }
+
+    /**
+     * Set element text align style.
+     *
+     * @param mixed $value Text align value.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function textAlign(string $value): self
+    {
+        $this->styles->set('text-align', $value);
+
+        return $this;
+    }
+
+    /**
+     * Set element width style.
+     *
+     * @param mixed $value Width value.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function w($value): self
+    {
+        $this->styles->set('width', $value);
+
+        return $this;
+    }
+
+    /**
+     * Set element display style.
+     *
+     * @param string $value Display value.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function d(string $value): self
+    {
+        $this->styles->set('display', $value);
 
         return $this;
     }
@@ -520,35 +619,63 @@ abstract class Element
     public function __call(string $method, array $parameters)
     {
         if (strings($method)->startsWith('bg')) {
-            return $this->bg(strings(substr($method, 2))->kebab()->toString());
+            return $this->bg(strings($method)->substr(2)->kebab()->toString());
         }
 
         if (strings($method)->startsWith('color')) {
-            return $this->color(strings(substr($method, 5))->kebab()->toString());
+            return $this->color(strings($method)->substr(5)->kebab()->toString());
         }
 
-        if (strings($method)->startsWith('mx')) {
-            return $this->mx(strings(substr($method, 2))->toInteger());
+        if (strings($method)->startsWith('m')) {
+            if (strings($method)->startsWith('mx')) {
+                return $this->mx(strings($method)->substr(2)->toInteger());
+            }
+
+            if (strings($method)->startsWith('ml')) {
+                return $this->ml(strings($method)->substr(2)->toInteger());
+            }
+
+            if (strings($method)->startsWith('mr')) {
+                return $this->mr(strings($method)->substr(2)->toInteger());
+            }
+
+            return $this->m(...$parameters);
         }
 
-        if (strings($method)->startsWith('ml')) {
-            return $this->ml(strings(substr($method, 2))->toInteger());
+        if (strings($method)->startsWith('p')) {
+            if (strings($method)->startsWith('px')) {
+                return $this->px(strings($method)->substr(2)->toInteger());
+            }
+
+            if (strings($method)->startsWith('pl')) {
+                return $this->pl(strings($method)->substr(2)->toInteger());
+            }
+
+            if (strings($method)->startsWith('pr')) {
+                return $this->pr(strings($method)->substr(2)->toInteger());
+            }
+
+            return $this->p(...$parameters);
         }
 
-        if (strings($method)->startsWith('mr')) {
-            return $this->mr(strings(substr($method, 2))->toInteger());
+        if (strings($method)->startsWith('d')) {
+            return $this->d(strings($method)->substr(1)->kebab()->toString());
         }
 
-        if (strings($method)->startsWith('px')) {
-            return $this->px(strings(substr($method, 2))->toInteger());
+        if (strings($method)->startsWith('textAlign')) {
+            return $this->textAlign(strings($method)->substr(9)->kebab()->toString());
         }
 
-        if (strings($method)->startsWith('pl')) {
-            return $this->pl(strings(substr($method, 2))->toInteger());
-        }
+        if (strings($method)->startsWith('w')) {
+            if ($method === 'wAuto') {
+                return $this->w('auto');
+            }
 
-        if (strings($method)->startsWith('pr')) {
-            return $this->pr(strings(substr($method, 2))->toInteger());
+            if ($method === 'fixBlock') {
+                return $this->fixBlock();
+            }
+
+            return $this->w(strings($method)->substr(1)->toInteger());
         }
 
         throw new BadMethodCallException(sprintf(
@@ -556,6 +683,20 @@ abstract class Element
             static::class,
             $method
         ));
+    }
+
+    /**
+     * Force element to self-clear its children block elements linebreaks.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function clearfix(): self
+    {
+        $this->clearfix = true;
+
+        return $this;
     }
 
     /**
@@ -575,7 +716,7 @@ abstract class Element
             $methodName = (string) strings($class)->camel()->trim();
             foreach ($this->registeredClasses->toArray() as $registeredClass) {
                 $registeredClassName = (string) strings($registeredClass)->camel()->trim();
-                
+
                 if (! strings($methodName)->startsWith($registeredClassName)) {
                     continue;
                 }
@@ -592,36 +733,183 @@ abstract class Element
      */
     public function processStyles(): void
     {
-        $stylesHierarchy = ['invisible', 'reverse', 'blink', 'dim', 'bold', 'italic', 'underline', 'strikethrough', 'padding', 'bg', 'color', 'margin'];
+        // Termage box model and styles hierarchy.
+        //
+        // ┌───────────────────────────────────────────────────────┐
+        // │ display [inline, block, none]                         │
+        // │ ┌───────────────────────────────────────────────────┐ │
+        // │ │ margin (left, right)                              │ │
+        // │ │ ┌───────────────────────────────────────────────┐ │ │
+        // │ │ │ bg, color                                     │ │ │
+        // │ │ │ ┌───────────────────────────────────────────┐ │ │ │
+        // │ │ │ │ width (+ left and right padding)          │ │ │ │
+        // │ │ │ │ ┌───────────────────────────────────────┐ │ │ │ │
+        // │ │ │ │ │ invisible, reverse, blink, dim, bold, │ │ │ │ │
+        // │ │ │ │ │ italic, underline, strikethrough.     │ │ │ │ │
+        // │ │ │ │ └───────────────────────────────────────┘ │ │ │ │
+        // │ │ │ └───────────────────────────────────────────┘ │ │ │
+        // | | └───────────────────────────────────────────────┘ │ │
+        // │ └───────────────────────────────────────────────────┘ │
+        // └───────────────────────────────────────────────────────┘
+        $stylesHierarchy = ['invisible', 'reverse', 'blink', 'dim', 'bold', 'italic', 'underline', 'strikethrough', 'width', 'bg', 'color', 'margin', 'display'];
 
-        $styles = [
-            'padding'       => ['l' => $this->styles->get('padding.left') ?? 0, 'r' => $this->styles->get('padding.right') ?? 0],
-            'margin'        => ['l' => $this->styles->get('margin.left') ?? 0, 'r' => $this->styles->get('margin.right') ?? 0],
-            'color'         => $this->styles->get('color') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('color'), $this->styles->get('color')) : false,
-            'bg'            => $this->styles->get('bg') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('bg'), $this->styles->get('bg')) : false,
-            'bold'          => $this->styles->get('bold') ?? false,
-            'italic'        => $this->styles->get('italic') ?? false,
-            'underline'     => $this->styles->get('underline') ?? false,
-            'strikethrough' => $this->styles->get('strikethrough') ?? false,
-            'dim'           => $this->styles->get('dim') ?? false,
-            'blink'         => $this->styles->get('blink') ?? false,
-            'reverse'       => $this->styles->get('reverse') ?? false,
-            'invisible'     => $this->styles->get('invisible') ?? false,
-        ];
+        // Process style: margin
+        $margin = function ($value) {
+            $ml = $this->styles->get('margin.left') ?? 0;
+            $mr = $this->styles->get('margin.right') ?? 0;
 
-        $padding       = static fn ($value) => strings(' ')->repeat($styles['padding']['l']) . $value . strings(' ')->repeat($styles['padding']['r']);
-        $margin        = static fn ($value) => strings(' ')->repeat($styles['margin']['l']) . $value . strings(' ')->repeat($styles['margin']['r']);
-        $color         = static fn ($value) => $styles['color'] ? color()->textColor($styles['color'])->apply($value) : $value;
-        $bg            = static fn ($value) => $styles['bg'] ? color()->bgColor($styles['bg'])->apply($value) : $value;
-        $bold          = static fn ($value) => $styles['bold'] ? "\e[1m" . $value . "\e[22m" : $value;
-        $italic        = static fn ($value) => $styles['italic'] ? "\e[3m" . $value . "\e[23m" : $value;
-        $underline     = static fn ($value) => $styles['underline'] ? "\e[4m" . $value . "\e[24m" : $value;
-        $strikethrough = static fn ($value) => $styles['strikethrough'] ? "\e[9m" . $value . "\e[29m" : $value;
-        $dim           = static fn ($value) => $styles['dim'] ? "\e[2m" . $value . "\e[22m" : $value;
-        $blink         = static fn ($value) => $styles['blink'] ? "\e[5m" . $value . "\e[25m" : $value;
-        $reverse       = static fn ($value) => $styles['reverse'] ? "\e[7m" . $value . "\e[27m" : $value;
-        $invisible     = static fn ($value) => $styles['invisible'] ? "\e[8m" . $value . "\e[28m" : $value;
+            // Do not allow margin left and right for block elements with clearfix flag.
+            if ($this->clearfix) {
+                return $value;
+            }
+            
+            return ($ml > 0 ? strings(' ')->repeat($ml) : '') .
+                   $value .
+                   ($mr > 0 ? strings(' ')->repeat($mr) : '');
+        };
 
+        // Process style: width
+        // based on element paddings (spaces)
+        $width = function ($value) {
+            $valueLength    = $this->getLength($value);
+            $textAlignStyle = $this->styles->get('text-align') ?? 'left';
+            $widthStyle     = $this->styles->get('width') ?? 'auto';
+            $displayStyle   = $this->styles->get('display') ?? 'block';
+
+            $spaces = 0;
+            $pl     = 0;
+            $pr     = 0;
+
+            if ($widthStyle === 'auto' && $displayStyle === 'block') {
+                $spaces = abs(terminal()->getwidth() - $valueLength);
+
+                // Do not allow width for block elements with clearfix flag.
+                if ($this->clearfix) {
+                    return $value;
+                }
+
+                if ($textAlignStyle === 'left') {
+                    $pl = $this->styles->get('padding.left') ?? 0;
+
+                    return strings(' ')->repeat($pl) . $value . strings(' ')->repeat($spaces - $pl);
+                }
+
+                if ($textAlignStyle === 'right') {
+                    $pr = $this->styles->get('padding.right') ?? 0;
+
+                    return strings(' ')->repeat($spaces - $pr) . $value . strings(' ')->repeat($pr);
+                }
+            }
+
+            if ($widthStyle !== 'auto' && $displayStyle === 'block') {
+                $pl     = $this->styles->get('padding.left') ?? 0;
+                $pr     = $this->styles->get('padding.right') ?? 0;
+                $spaces = $widthStyle - $valueLength < $valueLength ? 0 : $widthStyle - $valueLength;
+
+                if ($textAlignStyle === 'left') {
+                    return strings(' ')->repeat($pl) . $value . strings(' ')->repeat($spaces + $pr);
+                }
+
+                if ($textAlignStyle === 'right') {
+                    return strings(' ')->repeat($spaces + $pl) . $value . strings(' ')->repeat($pr);
+                }
+            }
+
+            if ($displayStyle === 'inline') {
+                $pl = $this->styles->get('padding.left') ?? 0;
+                $pr = $this->styles->get('padding.right') ?? 0;
+
+                return strings(' ')->repeat($pl) .
+                       $value .
+                       strings(' ')->repeat($pr);
+            }
+        };
+
+        // Process style: color
+        $color = function ($value) {
+            $color = $this->styles->get('color') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('color'), $this->styles->get('color')) : false;
+
+            return $color ? color()->textColor($color)->apply($value) : $value;
+        };
+
+        // Process style: bg
+        $bg = function ($value) {
+            $bg = $this->styles->get('bg') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('bg'), $this->styles->get('bg')) : false;
+
+            return $bg ? color()->bgColor($bg)->apply($value) : $value;
+        };
+
+        // Process style: bold
+        $bold = function ($value) {
+            return $this->styles['bold'] ? "\e[1m" . $value . "\e[22m" : $value;
+        };
+
+        // Process style: italic
+        $italic = function ($value) {
+            return $this->styles['italic'] ? "\e[3m" . $value . "\e[23m" : $value;
+        };
+
+        // Process style: underline
+        $underline = function ($value) {
+            return $this->styles['underline'] ? "\e[4m" . $value . "\e[24m" : $value;
+        };
+
+        // Process style: strikethrough
+        $strikethrough = function ($value) {
+            return $this->styles['strikethrough'] ? "\e[9m" . $value . "\e[29m" : $value;
+        };
+
+        // Process style: dim
+        $dim = function ($value) {
+            return $this->styles['dim'] ? "\e[2m" . $value . "\e[22m" : $value;
+        };
+
+        // Process style: blink
+        $blink = function ($value) {
+            return $this->styles['blink'] ? "\e[5m" . $value . "\e[25m" : $value;
+        };
+
+        // Process style: reverse
+        $reverse = function ($value) {
+            return $this->styles['reverse'] ? "\e[7m" . $value . "\e[27m" : $value;
+        };
+
+        // Process style: invisible
+        $invisible = function ($value) {
+            return $this->styles['invisible'] ? "\e[8m" . $value . "\e[28m" : $value;
+        };
+
+        // Process style: display
+        $display = function ($value) {
+            $displayStyle = $this->styles->get('display') ?? 'block';
+
+            switch ($displayStyle) {
+                case 'inline':
+
+                    return $value;
+
+                    break;
+                case 'none':
+                    return '';
+
+                    break;
+                case 'block':
+                default:
+
+                    // Do not add linebreak for block elements if it has clearfix flag.
+                    if ($this->clearfix) {
+                        $result = $value;
+                    } else {
+                        $result = $value . PHP_EOL;
+                    }
+        
+                    return $result;
+
+                    break;
+            }
+        };
+
+        // Process styles accorind to box model based on styles hierarchy.
         foreach ($stylesHierarchy as $propertyName) {
             $this->value = ${$propertyName}($this->value);
         }
@@ -648,7 +936,7 @@ abstract class Element
      */
     public function stripStyles(string $value): string
     {
-        return preg_replace("/\e\[[^m]*m/", '', $value ?? '');
+        return preg_replace("/\e\[[^m]*m/", '', $value);
     }
 
     /**
@@ -663,6 +951,20 @@ abstract class Element
     public function stripDecorations(string $value): string
     {
         return self::getShortcodes()->stripShortcodes($this->stripStyles($value));
+    }
+
+    /**
+     * Get value length without decorations and line breaks.
+     *
+     * @param string $value Value.
+     *
+     * @return int Value length without decorations and line breaks.
+     *
+     * @access public
+     */
+    public function getLength(string $value): int
+    {
+        return strings($this->stripDecorations($value))->replace(PHP_EOL, '')->length();
     }
 
     /**

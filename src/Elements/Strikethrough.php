@@ -18,9 +18,18 @@ use Termage\Base\Element;
 
 final class Strikethrough extends Element
 {
+    /**
+     * Render Strikethrough element.
+     *
+     * @return string Returns rendered Strikethrough element.
+     *
+     * @access public
+     */
     public function render(): string
     {
         $this->strikethrough();
+
+        $this->d($this->getStyles()->get('display') ?? 'inline');
 
         return parent::render();
     }

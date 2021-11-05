@@ -14,36 +14,14 @@ declare(strict_types=1);
 
 namespace Termage\Elements;
 
+use Atomastic\Arrays\Arrays as Collection;
 use Termage\Base\Element;
 
-use function strings;
-use function substr;
+use function arrays as collection;
 use function Termage\div;
-use function Termage\terminal;
 
 final class Alert extends Element
 {
-    /**
-     * Alert width.
-     *
-     * @access private
-     */
-    private int $alertWidth;
-
-    /**
-     * Alert width full.
-     *
-     * @access private
-     */
-    private bool $alertWidthFull;
-
-    /**
-     * Alert padding x.
-     *
-     * @access private
-     */
-    private int $alertPaddingX;
-
     /**
      * Alert type.
      *
@@ -52,14 +30,7 @@ final class Alert extends Element
     private string $alertType;
 
     /**
-     * Alert text align.
-     *
-     * @access private
-     */
-    private string $alertTextAlign;
-
-    /**
-     * Get element classes.
+     * Get Alert element classes.
      *
      * @return array Array of element classes.
      *
@@ -67,22 +38,22 @@ final class Alert extends Element
      */
     public function getElementClasses(): array
     {
-        return ['danger', 'info', 'warning', 'success', 'success', 'primary', 'secondary', 'w', 'w-full', 'text-align-left', 'text-align-right'];
+        return ['danger', 'info', 'warning', 'success', 'success', 'primary', 'secondary'];
     }
 
     /**
-     * Get element variables.
+     * Get Alert element variables.
      *
-     * @return array Element variables.
+     * @return Collection Alert element variables.
      *
      * @access public
      */
-    public function getElementVariables(): array
+    public function getElementVariables(): Collection
     {
-        return [
+        return collection([
             'alert' => [
                 'text-align' => 'left',
-                'width-full' => false,
+                'width-auto' => false,
                 'width' => 50,
                 'type' => [
                     'info' => [
@@ -111,39 +82,11 @@ final class Alert extends Element
                     ],
                 ],
             ],
-        ];
+        ]);
     }
 
     /**
-     * Set alert text align left.
-     *
-     * @return self Returns instance of the Alert class.
-     *
-     * @access public
-     */
-    public function textAlignLeft(): self
-    {
-        $this->alertTextAlign = 'left';
-
-        return $this;
-    }
-
-    /**
-     * Set alert text align right.
-     *
-     * @return self Returns instance of the Alert class.
-     *
-     * @access public
-     */
-    public function textAlignRight(): self
-    {
-        $this->alertTextAlign = 'right';
-
-        return $this;
-    }
-
-    /**
-     * Set alert type info.
+     * Set Alert type info.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -157,7 +100,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert type warning.
+     * Set Alert type warning.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -171,7 +114,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert type danger.
+     * Set Alert type danger.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -185,7 +128,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert type success.
+     * Set Alert type success.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -199,7 +142,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert type primary.
+     * Set Alert type primary.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -213,7 +156,7 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert type secondary.
+     * Set Alert type secondary.
      *
      * @return self Returns instance of the Alert class.
      *
@@ -227,107 +170,33 @@ final class Alert extends Element
     }
 
     /**
-     * Set alert width
+     * Render Alert element.
      *
-     * @param int $value Alert width.
-     *
-     * @return self Returns instance of the Alert class.
-     *
-     * @access public
-     */
-    public function w(int $value): self
-    {
-        $this->alertWidth = $value;
-
-        return $this;
-    }
-
-    /**
-     * Set alert width full.
-     *
-     * @return self Returns instance of the Alert class.
-     *
-     * @access public
-     */
-    public function wFull(): self
-    {
-        $this->alertWidthFull = true;
-
-        return $this;
-    }
-
-    /**
-     * Dynamically bind magic methods to the Element class.
-     *
-     * @param string $method     Method.
-     * @param array  $parameters Parameters.
-     *
-     * @return mixed Returns mixed content.
-     *
-     * @access public
-     */
-    public function __call(string $method, array $parameters)
-    {
-        if ($method === 'wFull') {
-            return $this->wFull();
-        }
-
-        if (strings($method)->startsWith('w')) {
-            return $this->w(strings(substr($method, 1))->kebab()->toInteger());
-        }
-
-        return parent::__call($method, $parameters);
-    }
-
-    /**
-     * Render alert element.
-     *
-     * @return string Returns rendered alert element.
+     * @return string Returns rendered Alert element.
      *
      * @access public
      */
     public function render(): string
     {
-        $value            = parent::render();
+        $this->processClasses();
+
         $theme            = $this->getTheme();
         $elementVariables = $this->getElementVariables();
         $alertType        = $this->alertType ?? 'info';
-        $alertTextAlign   = $this->alertTextAlign ?? $theme->getVariables()->get('alert.text-align', $elementVariables['alert']['text-align']);
-        $alertPaddingX    = 2;
-        $alertWidthFull   = $this->alertWidthFull ?? $theme->getVariables()->get('alert.width-full', $elementVariables['alert']['width-full']);
-        $alertWidth       = $this->alertWidth ?? $theme->getVariables()->get('alert.width', $elementVariables['alert']['width']);
+        $alertTextAlign   = $this->getStyles()['text-align'] ?? $theme->getVariables()->get('alert.text-align', $elementVariables['alert']['text-align']);
+        $alertWidth       = $this->getStyles()['width'] ?? $theme->getVariables()->get('alert.width', $elementVariables['alert']['width']);
         $alertBg          = $theme->getVariables()->get('alert.type.' . $alertType . '.bg', $elementVariables['alert']['type'][$alertType]['bg']);
         $alertColor       = $theme->getVariables()->get('alert.type.' . $alertType . '.color', $elementVariables['alert']['type'][$alertType]['color']);
+        $alertPaddingX    = 2;
 
-        $pl            = 0;
-        $pr            = 0;
-        $valueLength   = strings($this->stripDecorations($value))->length();
-        $terminalWidth = terminal()->getWidth();
+        $this->textAlign($alertTextAlign);
+        $this->color($alertColor);
+        $this->bg($alertBg);
+        $this->w($alertWidth);
+        $this->px($alertPaddingX);
 
-        if ($alertWidthFull) {
-            $alertWidth = $terminalWidth;
-        }
-
-        if ($alertWidth > $terminalWidth) {
-            $alertWidth = $terminalWidth;
-        }
-
-        if ($alertTextAlign === 'right') {
-            $pr  = $alertPaddingX;
-            $pl  = $alertWidth - $alertPaddingX;
-            $pl -= $valueLength;
-        }
-
-        if ($alertTextAlign === 'left') {
-            $pl  = $alertPaddingX;
-            $pr  = $alertWidth - $alertPaddingX;
-            $pr -= $valueLength;
-        }
-
-        $header = div()->pl($alertWidth)->bg($alertBg);
-        $body   = div($value)->pl($pl)->pr($pr)->bg($alertBg)->color($alertColor);
-        $footer = div()->pl($alertWidth)->bg($alertBg);
-
-        return $header . $body . $footer;
+        return (string) div()->styles($this->getStyles()->toArray()) .
+                        div()->value($this->getValue())->styles($this->getStyles()->toArray()) .
+                        div()->styles($this->getStyles()->toArray());
     }
 }

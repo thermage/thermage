@@ -16,12 +16,19 @@ namespace Termage\Elements;
 
 use Termage\Base\Element;
 
-use function Termage\breakline as br;
-
 final class Div extends Element
 {
+    /**
+     * Render Div element.
+     *
+     * @return string Returns rendered Div element.
+     *
+     * @access public
+     */
     public function render(): string
     {
-        return parent::render() . br();
+        $this->d($this->getStyles()->get('display') ?? 'block');
+
+        return parent::render();
     }
 }

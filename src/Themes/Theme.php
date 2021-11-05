@@ -98,10 +98,10 @@ class Theme implements ThemeInterface
                 'pink300' => '#e374ab',
                 'pink400' => '#dd5498',
                 'pink500' => '#d63384',
-                'pink600' => '#5d37a2',
-                'pink700' => '#4b2d83',
-                'pink800' => '#3a2264',
-                'pink900' => '#281845',
+                'pink600' => '#b42b6f',
+                'pink700' => '#92235a',
+                'pink800' => '#6f1b45',
+                'pink900' => '#4d1230',
 
                 'red'    => '#dc3545',
                 'red100' => '#f2b6bc',
@@ -178,14 +178,14 @@ class Theme implements ThemeInterface
                 'light'     => '#f8f9fa', // gray100
                 'dark'      => '#212529', // gray900
             ],
-            
+
             // Spacing
             'spacer' => 1,
 
             // Alert element.
             'alert' => [
                 'text-align' => 'left',
-                'width-full' => false,
+                'width-auto' => false,
                 'width' => 50,
                 'type' => [
                     'info' => [
@@ -223,7 +223,7 @@ class Theme implements ThemeInterface
     /**
      * Get Theme custom variables.
      *
-     * @return Collection Collection of theme custom variables.
+     * @return Collection Collection of Theme custom variables.
      *
      * @access public
      */
@@ -233,9 +233,9 @@ class Theme implements ThemeInterface
     }
 
     /**
-     * Get theme variables.
+     * Get Theme variables.
      *
-     * @return Collection Collecton of theme variables.
+     * @return Collection Collecton of Theme variables.
      *
      * @access public
      */
@@ -245,7 +245,7 @@ class Theme implements ThemeInterface
     }
 
     /**
-     * Set theme variables.
+     * Set Theme variables.
      *
      * @param array $variables Theme variables.
      *

@@ -187,9 +187,9 @@ final class Chart extends Element
     }
 
     /**
-     * Render chart component.
+     * Render chart element.
      *
-     * @return string Returns rendered alert component.
+     * @return string Returns rendered chart element.
      *
      * @access public
      */

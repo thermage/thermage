@@ -12,6 +12,23 @@
 
 Termage provides a fluent and incredibly powerful object-oriented interface for customizing CLI output text color, background, formatting, theming and more.
 
+### Features
+
++ **Consistent colors**  
+Termage uses the ANSI color scheme which is widely used by terminals to ensure consistent colors in different terminal themes. If that’s not enough, Termage can be used to access the full RGB color scheme (16+ million colors) in terminals that support TrueColor.
+
++ **Component system**  
+Termage consists of built-in components, called Elements, which can be used individually or together to generate pretty console output.
+
++ **Theming**  
+Termage provides ability to create and use custom themes to change the style of command line output with preconfigured themes variables.
+
++ **Shortcodes**  
+Termage provides incredible simple and powerful Shortcodes API to create and use shortcodes markup for customizing CLI output text color, background, formatting.
+
++ **Framework agnostic**  
+Termage can be used with any Modern PHP Framework: Symfony, Laravel, Yii, CakePHP, CodeIgniter, Phalcon and others.
+
 ### Installation
 
 #### With [Composer](https://getcomposer.org)

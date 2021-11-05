@@ -18,9 +18,18 @@ use Termage\Base\Element;
 
 final class Bold extends Element
 {
+    /**
+     * Render Bold element.
+     *
+     * @return string Returns rendered Bold element.
+     *
+     * @access public
+     */
     public function render(): string
     {
         $this->bold();
+
+        $this->d($this->getStyles()->get('display') ?? 'inline');
 
         return parent::render();
     }

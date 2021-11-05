@@ -107,38 +107,6 @@ test('test [anchor] shortcode', function (): void {
     expect(Termage::getShortcodes()->parse('[anchor href="https://github.com/termage/termage"]Termage[/anchor]'))->toEqual("\e]8;;https://github.com/termage/termage\e\\Termage\e]8;;\e\\");
 });
 
-test('test [m l= r=] shortcode', function (): void {
-    expect(Termage::getShortcodes()->parse('[m l=2 r=2]Margin left and right[/m]'))->toEqual("  Margin left and right  ");
-});
-
-test('test [mx=] shortcode', function (): void {
-    expect(Termage::getShortcodes()->parse('[mx=10]Margin left and right[/mx]'))->toEqual("          Margin left and right          ");
-});
-
-test('test [ml=] shortcode', function (): void {
-    expect(Termage::getShortcodes()->parse('[ml=2]Margin left[/ml]'))->toEqual("  Margin left");
-});
-
-test('test [mr=] shortcode', function (): void {
-    expect(Termage::getShortcodes()->parse('[mr=2]Margin right[/mr]'))->toEqual("Margin right  ");
-});
-
-test('test [p l= r=] shortcode', function (): void {
-    expect(Termage::getShortcodes()->parse('[p l=2 r=2]Padding left and right[/p]'))->toEqual("  Padding left and right  ");
-});
-
-test('test [px=] shortcode', function (): void {
-    expect(Termage::getShortcodes()->parse('[px=10]Padding left and right[/px]'))->toEqual("          Padding left and right          ");
-});
-
-test('test [pl=] shortcode', function (): void {
-    expect(Termage::getShortcodes()->parse('[pl=2]Padding left[/pl]'))->toEqual("  Padding left");
-});
-
-test('test [pr=] shortcode', function (): void {
-    expect(Termage::getShortcodes()->parse('[pr=2]Padding right[/pr]'))->toEqual("Padding right  ");
-});
-
 test('test [bg=] shortcode', function (): void {
     expect(Termage::getShortcodes()->parse('[bg=red]BG[/bg]'))->toEqual("\e[41mBG\e[49m");
     expect(Termage::getShortcodes()->parse('[bg]BG[/bg]'))->toEqual("BG");
