@@ -5,6 +5,8 @@
 * Added new public element method `m` to set left and right margins.
 * Added new public element method `d` to set display state.
 * Added new public element method `w` to set width.
+* Added new public element method `textAlign` to set text alignment.
+* Added new magic classes `w`, `d`, clearfix`, `text-align`.
 * Added new public element method `clearfix` to force element self-clear its children block elements linebreaks.
 * Fixes for Theme default color scheme.
 * Tests improvements. 
