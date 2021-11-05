@@ -49,27 +49,6 @@ abstract class Element
     private string $classes;
 
     /**
-     * Element display state.
-     *
-     * @access private
-     */
-    private static $displayState = 'block';
-
-    /**
-     * Element fix block state for nested elements.
-     *
-     * @access private
-     */
-    private bool $fixBlock;
-
-    /**
-     * Element fix inline state for nested inline elements.
-     *
-     * @access private
-     */
-    private bool $fixInline;
-
-    /**
      * Element styles.
      *
      * @access private
@@ -92,6 +71,13 @@ abstract class Element
      * Registered element classes.
      */
     private Collection $registeredClasses;
+
+    /**
+     * Force an Element To Self-Clear its Children block elements linebreaks.
+     *
+     * @access private
+     */
+    private bool $clearfix;
 
     /**
      * Create a new Element instance.
@@ -117,8 +103,7 @@ abstract class Element
         $this->classes           = $classes;
         $this->registeredClasses = collection($this->getDefaultClasses())->merge($this->getElementClasses(), true);
         $this->styles            = collection();
-        $this->fixBlock          = false;
-        $this->fixInline         = false;
+        $this->clearfix          = false;
     }
 
     /**
@@ -262,7 +247,7 @@ abstract class Element
      */
     final public function getDefaultClasses(): array
     {
-        return ['bold', 'italic', 'bg', 'color', 'pl', 'pr', 'px', 'ml', 'mr', 'mx', 'dim', 'invisible', 'underline', 'reverse', 'blink', 'w', 'd', 'text-align', 'fix-block', 'fix-inline'];
+        return ['bold', 'italic', 'bg', 'color', 'pl', 'pr', 'px', 'ml', 'mr', 'mx', 'dim', 'invisible', 'underline', 'reverse', 'blink', 'w', 'd', 'text-align', 'clearfix'];
     }
 
     /**
@@ -701,29 +686,15 @@ abstract class Element
     }
 
     /**
-     * Set fix block state for nested elements.
+     * Force an Element To Self-Clear its Children block elements linebreaks.
      *
      * @return self Returns instance of the Element class.
      *
      * @access public
      */
-    public function fixBlock(): self
+    public function clearfix(): self
     {
-        $this->fixBlock = true;
-
-        return $this;
-    }
-
-    /**
-     * Set fix inline state for nested inline elements.
-     *
-     * @return self Returns instance of the Element class.
-     *
-     * @access public
-     */
-    public function fixInline(): self
-    {
-        $this->fixInline = true;
+        $this->clearfix = true;
 
         return $this;
     }
@@ -787,12 +758,11 @@ abstract class Element
             $ml = $this->styles->get('margin.left') ?? 0;
             $mr = $this->styles->get('margin.right') ?? 0;
 
-            // Do not allow left and right margins for root element with fixBlock == true
-            if ($this->fixBlock) {
-                $ml = 0;
-                $mr = 0;
+            // Do not allow margin left and right for block elements with clearfix flag.
+            if ($this->clearfix) {
+                return $value;
             }
-
+            
             return ($ml > 0 ? strings(' ')->repeat($ml) : '') .
                    $value .
                    ($mr > 0 ? strings(' ')->repeat($mr) : '');
@@ -813,8 +783,8 @@ abstract class Element
             if ($widthStyle === 'auto' && $displayStyle === 'block') {
                 $spaces = abs(terminal()->getwidth() - $valueLength);
 
-                // Do not allow paddings for root element with fixBlock == true
-                if ($this->fixBlock) {
+                // Do not allow width for block elements with clearfix flag.
+                if ($this->clearfix) {
                     return $value;
                 }
 
@@ -915,17 +885,8 @@ abstract class Element
 
             switch ($displayStyle) {
                 case 'inline':
-                    // Fix inline state
-                    if ($this->fixInline) {
-                        $result = PHP_EOL . $value;
-                    } else {
-                        $result = $value;
-                    }
 
-                    // Set current display state = inline for element
-                    self::$displayState = 'inline';
-
-                    return $result;
+                    return $value;
 
                     break;
                 case 'none':
@@ -934,21 +895,14 @@ abstract class Element
                     break;
                 case 'block':
                 default:
-                    // Fix block state
-                    if ($this->fixBlock) {
+
+                    // Do not add linebreak for block elements if it has clearfix flag.
+                    if ($this->clearfix) {
                         $result = $value;
                     } else {
-                        // If prev display state was inline that fix block state
-                        if (self::$displayState === 'inline') {
-                            $result = PHP_EOL . $value . PHP_EOL;
-                        } else {
-                            $result = $value . PHP_EOL;
-                        }
+                        $result = $value . PHP_EOL;
                     }
-
-                    // Set current display state = block for element
-                    self::$displayState = 'block';
-
+        
                     return $result;
 
                     break;
@@ -982,7 +936,7 @@ abstract class Element
      */
     public function stripStyles(string $value): string
     {
-        return preg_replace("/\e\[[^m]*m/", '', $value ?? '');
+        return preg_replace("/\e\[[^m]*m/", '', $value);
     }
 
     /**
