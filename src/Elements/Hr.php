@@ -75,6 +75,26 @@ final class Hr extends Element
             return (string) div($hr)->styles($this->getStyles()->toArray());
         }
 
+        if ($hrTextAlign === 'center' && $valueLength > 0) {
+            $mod = (($hrValuePaddingX + $hrValueMarginX) % 2 == 0) ? 0 : 1;
+            $spaces = terminal()->getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX + $mod;
+
+            $leftSpaces  = intval($spaces / 2);
+            $rightSpaces = intval($spaces / 2);
+
+            if (intval($leftSpaces * 2) < $spaces) {
+                $leftSpaces++;
+            }
+
+            $hr = strings('─')->repeat($leftSpaces) .
+                    strings(' ')->repeat($hrValuePaddingX) .
+                    $this->getValue() .
+                    strings(' ')->repeat($hrValuePaddingX) .
+                    strings('─')->repeat($rightSpaces);
+                    
+            return (string) div($hr)->styles($this->getStyles()->toArray());
+        }
+
         return (string) div(strings('─')->repeat(terminal()->getWidth())->toString())->styles($this->getStyles()->toArray());
     }
 }
