@@ -8,5 +8,5 @@ use function Termage\paragraph;
 test('test paragraph', function (): void {
     putenv('COLUMNS=20');
     $value = paragraph('RAD')->render();
-    expect($value)->toBe(PHP_EOL . "RAD                 " . PHP_EOL);
+    expect($value)->toBe("RAD                 " . PHP_EOL);
 });

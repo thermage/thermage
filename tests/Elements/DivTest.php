@@ -27,7 +27,7 @@ test('test set and get theme', function (): void {
 
 test('test color', function (): void {
     $value = div('RAD')->color('blue')->render();
-    expect($value)->toBe(PHP_EOL . "\e[34mRAD                 \e[39m" . PHP_EOL);
+    expect($value)->toBe("\e[34mRAD                 \e[39m" . PHP_EOL);
 });
 
 test('test magic color', function (): void {
@@ -130,18 +130,18 @@ test('test fixBlock', function (): void {
     $value = div(
         div('Stay').
         div('RAD')
-    )->fixBlock()->render();
+    )->clearfix()->render();
 
     expect($value)->toBe("Stay                " . PHP_EOL . "RAD                 " . PHP_EOL);
 });
 
 test('test fixInline', function (): void {
-    $value = div(span('Stay').div(
-                span('RAD')->fixInline().
+    $value = div(
+                div(span('Stay').span('RAD')).
                 div('!')
-            )->fixBlock())->fixBlock()->render();
+            )->clearfix()->render();
 
-    expect($value)->toBe("Stay" . PHP_EOL . "RAD" . PHP_EOL . "!                   " . PHP_EOL);
+    expect($value)->toBe("StayRAD             " . PHP_EOL . "!                   " . PHP_EOL);
 });
 
 test('test magic ml', function (): void {
