@@ -775,10 +775,9 @@ abstract class Element
             $textAlignStyle = $this->styles->get('text-align') ?? 'left';
             $widthStyle     = $this->styles->get('width') ?? 'auto';
             $displayStyle   = $this->styles->get('display') ?? 'block';
-
-            $spaces = 0;
-            $pl     = 0;
-            $pr     = 0;
+            $pl             = $this->styles->get('padding.left') ?? 0;
+            $pr             = $this->styles->get('padding.right') ?? 0;
+            $spaces         = 0;
 
             if ($widthStyle === 'auto' && $displayStyle === 'block') {
                 $spaces = abs(terminal()->getwidth() - $valueLength);
@@ -789,21 +788,26 @@ abstract class Element
                 }
 
                 if ($textAlignStyle === 'left') {
-                    $pl = $this->styles->get('padding.left') ?? 0;
-
                     return strings(' ')->repeat($pl) . $value . strings(' ')->repeat($spaces - $pl);
                 }
 
                 if ($textAlignStyle === 'right') {
-                    $pr = $this->styles->get('padding.right') ?? 0;
-
                     return strings(' ')->repeat($spaces - $pr) . $value . strings(' ')->repeat($pr);
+                }
+
+                if ($textAlignStyle === 'center') {
+                    $leftSpaces  = intval($spaces / 2);
+                    $rightSpaces = intval($spaces / 2);
+                    
+                    if (intval($leftSpaces * 2) < $spaces) {
+                        $leftSpaces++;
+                    }
+
+                    return strings(' ')->repeat($leftSpaces) . $value . strings(' ')->repeat($rightSpaces);
                 }
             }
 
             if ($widthStyle !== 'auto' && $displayStyle === 'block') {
-                $pl     = $this->styles->get('padding.left') ?? 0;
-                $pr     = $this->styles->get('padding.right') ?? 0;
                 $spaces = $widthStyle - $valueLength < $valueLength ? 0 : $widthStyle - $valueLength;
 
                 if ($textAlignStyle === 'left') {
@@ -813,15 +817,21 @@ abstract class Element
                 if ($textAlignStyle === 'right') {
                     return strings(' ')->repeat($spaces + $pl) . $value . strings(' ')->repeat($pr);
                 }
+
+                if ($textAlignStyle === 'center') {
+                    $leftSpaces  = intval($spaces / 2);
+                    $rightSpaces = intval($spaces / 2);
+                    
+                    if (intval($leftSpaces * 2) < $spaces) {
+                        $leftSpaces++;
+                    }
+
+                    return strings(' ')->repeat($leftSpaces + $pl) . $value . strings(' ')->repeat($rightSpaces + $pr);
+                }
             }
 
             if ($displayStyle === 'inline') {
-                $pl = $this->styles->get('padding.left') ?? 0;
-                $pr = $this->styles->get('padding.right') ?? 0;
-
-                return strings(' ')->repeat($pl) .
-                       $value .
-                       strings(' ')->repeat($pr);
+                return strings(' ')->repeat($pl) . $value . strings(' ')->repeat($pr);
             }
         };
 
