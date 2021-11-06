@@ -649,6 +649,10 @@ abstract class Element
             if (strings($method)->startsWith('mx')) {
                 return $this->mx(strings($method)->substr(2)->toInteger());
             }
+            
+            if (strings($method)->startsWith('my')) {
+                return $this->my(strings($method)->substr(2)->toInteger());
+            }
 
             if (strings($method)->startsWith('ml')) {
                 return $this->ml(strings($method)->substr(2)->toInteger());
