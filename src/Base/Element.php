@@ -446,6 +446,25 @@ abstract class Element
     }
 
     /**
+     * Set element margin y style.
+     *
+     * @param int $value Margin y value.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function my(int $value): self
+    {
+        $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
+
+        $this->styles->set('margin.top', intval($value * $themeSpacer));
+        $this->styles->set('margin.bottom', intval($value * $themeSpacer));
+
+        return $this;
+    }
+
+    /**
      * Set element margin left style.
      *
      * @param int $value Margin left value.
@@ -757,15 +776,19 @@ abstract class Element
         $margin = function ($value) {
             $ml = $this->styles->get('margin.left') ?? 0;
             $mr = $this->styles->get('margin.right') ?? 0;
+            $mt = $this->styles->get('margin.top') ?? 0;
+            $mb = $this->styles->get('margin.bottom') ?? 0;
 
-            // Do not allow margin left and right for block elements with clearfix flag.
+            // Do not allow margins for block elements with clearfix flag.
             if ($this->clearfix) {
                 return $value;
             }
             
-            return ($ml > 0 ? strings(' ')->repeat($ml) : '') .
+            return ($mt > 0 ? strings(PHP_EOL)->repeat($mt) : '') .
+                   ($ml > 0 ? strings(' ')->repeat($ml) : '') .
                    $value .
-                   ($mr > 0 ? strings(' ')->repeat($mr) : '');
+                   ($mr > 0 ? strings(' ')->repeat($mr) : '') . 
+                   ($mb > 0 ? strings(PHP_EOL)->repeat($mb) : '') ;
         };
 
         // Process style: width
