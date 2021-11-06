@@ -24,6 +24,7 @@ use Termage\Themes\ThemeInterface;
 use function abs;
 use function arrays as collection;
 use function intval;
+use function is_null;
 use function preg_replace;
 use function sprintf;
 use function strings;
@@ -409,18 +410,24 @@ abstract class Element
     /**
      * Set element margin top, right, bottom, left style.
      *
-     * @param int $top    Margin top value.
-     * @param int $right  Margin right value.
-     * @param int $bottom Margin bottom value.
-     * @param int $left   Margin left value.
+     * @param int      $top    Margin top value.
+     * @param int|null $right  Margin right value.
+     * @param int|null $bottom Margin bottom value.
+     * @param int|null $left   Margin left value.
      *
      * @return self Returns instance of the Element class.
      *
      * @access public
      */
-    public function m(int $top, int $right, int $bottom, int $left): self
+    public function m(int $top, ?int $right = null, ?int $bottom = null, ?int $left = null): self
     {
         $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
+
+        if (is_null($right) && is_null($bottom) && is_null($left)) {
+            $right  = $top;
+            $bottom = $top;
+            $left   = $top;
+        }
 
         $this->styles->set('margin.top', intval($top * $themeSpacer));
         $this->styles->set('margin.right', intval($right * $themeSpacer));
@@ -653,7 +660,7 @@ abstract class Element
             if (strings($method)->startsWith('mx')) {
                 return $this->mx(strings($method)->substr(2)->toInteger());
             }
-            
+
             if (strings($method)->startsWith('my')) {
                 return $this->my(strings($method)->substr(2)->toInteger());
             }
@@ -791,12 +798,12 @@ abstract class Element
             if ($this->clearfix) {
                 return $value;
             }
-            
+
             return ($mt > 0 ? strings(PHP_EOL)->repeat($mt) : '') .
                    ($ml > 0 ? strings(' ')->repeat($ml) : '') .
                    $value .
-                   ($mr > 0 ? strings(' ')->repeat($mr) : '') . 
-                   ($mb > 0 ? strings(PHP_EOL)->repeat($mb) : '') ;
+                   ($mr > 0 ? strings(' ')->repeat($mr) : '') .
+                   ($mb > 0 ? strings(PHP_EOL)->repeat($mb) : '');
         };
 
         // Process style: width
@@ -829,7 +836,7 @@ abstract class Element
                 if ($textAlignStyle === 'center') {
                     $leftSpaces  = intval($spaces / 2);
                     $rightSpaces = intval($spaces / 2);
-                    
+
                     if (intval($leftSpaces * 2) < $spaces) {
                         $leftSpaces++;
                     }
@@ -852,7 +859,7 @@ abstract class Element
                 if ($textAlignStyle === 'center') {
                     $leftSpaces  = intval($spaces / 2);
                     $rightSpaces = intval($spaces / 2);
-                    
+
                     if (intval($leftSpaces * 2) < $spaces) {
                         $leftSpaces++;
                     }
@@ -926,7 +933,6 @@ abstract class Element
 
             switch ($displayStyle) {
                 case 'inline':
-
                     return $value;
 
                     break;
@@ -936,14 +942,13 @@ abstract class Element
                     break;
                 case 'block':
                 default:
-
                     // Do not add linebreak for block elements if it has clearfix flag.
                     if ($this->clearfix) {
                         $result = $value;
                     } else {
                         $result = $value . PHP_EOL;
                     }
-        
+
                     return $result;
 
                     break;
