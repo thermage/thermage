@@ -97,8 +97,17 @@ test('test classes and getClasses', function (): void {
 });
 
 test('test m', function (): void {
-    $value = div()->value('RAD')->m(10, 10)->render();
+    $value = div()->value('RAD')->m(0, 10, 0, 10)->render();
     expect($value)->toBe("          RAD                           " . PHP_EOL);
+
+    $value = div()->value('RAD')->m(2, 2, 2, 2)->render();
+    expect($value)->toBe(PHP_EOL . PHP_EOL . "  RAD                   " . PHP_EOL . PHP_EOL . PHP_EOL);
+
+    $value = div()->value('RAD')->m(2)->render();
+    expect($value)->toBe(PHP_EOL . PHP_EOL . "  RAD                   " . PHP_EOL . PHP_EOL . PHP_EOL);
+
+    $value = div()->value('RAD')->m2()->render();
+    expect($value)->toBe(PHP_EOL . PHP_EOL . "  RAD                   " . PHP_EOL . PHP_EOL . PHP_EOL);
 });
 
 test('test mx', function (): void {
