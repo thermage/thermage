@@ -803,6 +803,12 @@ abstract class Element
                 return $value;
             }
 
+            // Do not allow vertical margins for inline elements.
+            if ($this->styles->get('display') == 'inline') {
+                $mt = 0;
+                $mb = 0;
+            }
+
             return ($mt > 0 ? strings(PHP_EOL)->repeat($mt) : '') .
                    ($ml > 0 ? strings(' ')->repeat($ml) : '') .
                    $value .
