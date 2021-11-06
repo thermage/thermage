@@ -407,21 +407,25 @@ abstract class Element
     }
 
     /**
-     * Set element margin left and right style.
+     * Set element margin top, right, bottom, left style.
      *
-     * @param int $left Margin left value.
-     * @param int $left Margin right value.
+     * @param int $top    Margin top value.
+     * @param int $right  Margin right value.
+     * @param int $bottom Margin bottom value.
+     * @param int $left   Margin left value.
      *
      * @return self Returns instance of the Element class.
      *
      * @access public
      */
-    public function m(int $left, int $right): self
+    public function m(int $top, int $right, int $bottom, int $left): self
     {
         $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $this->styles->set('margin.left', intval($left * $themeSpacer));
+        $this->styles->set('margin.top', intval($left * $themeSpacer));
         $this->styles->set('margin.right', intval($right * $themeSpacer));
+        $this->styles->set('margin.bottom', intval($left * $themeSpacer));
+        $this->styles->set('margin.left', intval($right * $themeSpacer));
 
         return $this;
     }
