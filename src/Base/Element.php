@@ -422,10 +422,10 @@ abstract class Element
     {
         $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
-        $this->styles->set('margin.top', intval($left * $themeSpacer));
+        $this->styles->set('margin.top', intval($top * $themeSpacer));
         $this->styles->set('margin.right', intval($right * $themeSpacer));
-        $this->styles->set('margin.bottom', intval($left * $themeSpacer));
-        $this->styles->set('margin.left', intval($right * $themeSpacer));
+        $this->styles->set('margin.bottom', intval($bottom * $themeSpacer));
+        $this->styles->set('margin.left', intval($left * $themeSpacer));
 
         return $this;
     }
