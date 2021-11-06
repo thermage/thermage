@@ -673,6 +673,10 @@ abstract class Element
                 return $this->mr(strings($method)->substr(2)->toInteger());
             }
 
+            if (strings($method)->substr(1)->toInteger()) {
+                return $this->m(strings($method)->substr(1)->toInteger());
+            }
+
             return $this->m(...$parameters);
         }
 
