@@ -25,9 +25,9 @@ use Termage\Elements\Hr;
 use Termage\Elements\Italic;
 use Termage\Elements\Paragraph;
 use Termage\Elements\Span;
+use Termage\Elements\Spinner;
 use Termage\Elements\Strikethrough;
 use Termage\Elements\Underline;
-use Termage\Elements\Spinner;
 use Termage\Utils\Color;
 use Termage\Utils\Terminal;
 
