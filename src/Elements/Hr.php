@@ -18,6 +18,7 @@ use Atomastic\Arrays\Arrays as Collection;
 use Termage\Base\Element;
 
 use function arrays as collection;
+use function intval;
 use function strings;
 use function Termage\div;
 use function Termage\terminal;
@@ -76,7 +77,7 @@ final class Hr extends Element
         }
 
         if ($hrTextAlign === 'center' && $valueLength > 0) {
-            $mod = (($hrValuePaddingX + $hrValueMarginX) % 2 == 0) ? 0 : 1;
+            $mod    = ($hrValuePaddingX + $hrValueMarginX) % 2 === 0 ? 0 : 1;
             $spaces = terminal()->getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX + $mod;
 
             $leftSpaces  = intval($spaces / 2);
@@ -91,7 +92,7 @@ final class Hr extends Element
                     $this->getValue() .
                     strings(' ')->repeat($hrValuePaddingX) .
                     strings('─')->repeat($rightSpaces);
-                    
+
             return (string) div($hr)->styles($this->getStyles()->toArray());
         }
 
