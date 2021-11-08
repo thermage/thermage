@@ -1211,13 +1211,13 @@ abstract class Element
                     // Create box padding top value.
                     $ptStyleValue = '';
                     for ($i = 0; $i < $pt; $i++) {
-                        $ptStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength - $mr - $ml)) . "\e[0m" . PHP_EOL;
+                        $ptStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength + $pl + $pr)) . "\e[0m" . PHP_EOL;
                     }
 
                     // Create box padding bottom value.
                     $pbStyleValue = PHP_EOL;
                     for ($i = 0; $i < $pb; $i++) {
-                        $pbStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength - $mr - $ml)) . "\e[0m" . PHP_EOL;
+                        $pbStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength + $pl + $pr)) . "\e[0m" . PHP_EOL;
                     }
 
                     // Calculate spaces for current box.
@@ -1237,9 +1237,9 @@ abstract class Element
 
                               // Set box margin left, padding left and right, and re-apply text and background colors.
                               "\e[0m" . strings(' ')->repeat($ml) .
-                              $applyTextAndBackgroundColor(strings(' ')->repeat($currentLeftSpaces) .
+                              $applyTextAndBackgroundColor(strings(' ')->repeat($currentLeftSpaces + $pl) .
                                                             $value .
-                                                            strings(' ')->repeat($currentRightSpaces)) .
+                                                            strings(' ')->repeat($currentRightSpaces + $pr)) .
 
                               // Set box padding bottom.
                               ($pb > 0 ? strings($pbStyleValue)->trimRight(PHP_EOL) : '');
