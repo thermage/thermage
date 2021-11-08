@@ -249,10 +249,33 @@ abstract class Element
     final public function getDefaultClasses(): array
     {
         return [
-            'bold', 'italic', 'bg', 'color', 'dim', 'strikethrough', 'invisible',
-            'underline', 'reverse', 'blink', 'text-align', 'clearfix',
-            'pl', 'pr', 'px', 'py', 'pt', 'pb', 'ml', 'mr', 'mx', 'my', 'mt', 
-            'mb', 'w', 'h', 'd'
+            'bold',
+            'italic',
+            'bg',
+            'color',
+            'dim',
+            'strikethrough',
+            'invisible',
+            'underline',
+            'reverse',
+            'blink',
+            'text-align',
+            'clearfix',
+            'pl',
+            'pr',
+            'px',
+            'py',
+            'pt',
+            'pb',
+            'ml',
+            'mr',
+            'mx',
+            'my',
+            'mt',
+            'mb',
+            'w',
+            'h',
+            'd',
         ];
     }
 
@@ -952,12 +975,12 @@ abstract class Element
             }
 
             // Do not allow vertical margins for inline elements.
-            if ($this->styles->get('display') == 'inline') {
+            if ($this->styles->get('display') === 'inline') {
                 $mt = 0;
                 $mb = 0;
             }
 
-            $result = // Set margin top
+            return // Set margin top
                     ($mt > 0 ? strings(PHP_EOL)->repeat($mt) : '') .
 
                     // Set margin left, only padding left is not set.
@@ -971,8 +994,6 @@ abstract class Element
 
                     // Set margin bottom
                     ($mb > 0 ? strings(PHP_EOL)->repeat($mb) : '');
-
-            return $result;
         };
 
         // Process style: inner (width, height, paddings)
@@ -991,7 +1012,7 @@ abstract class Element
             $spaces         = 0;
 
             // Helper function for re-apply text and background colors.
-            $applyTextAndBackgroundColor = function($value) {
+            $applyTextAndBackgroundColor = function ($value) {
                 $bg    = $this->styles->get('bg') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('bg'), $this->styles->get('bg')) : false;
                 $color = $this->styles->get('color') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('color'), $this->styles->get('color')) : false;
 
@@ -1000,21 +1021,20 @@ abstract class Element
 
                 return $value;
             };
-        
+
             // Calculate height
             // Reset padding top and padding bottom
             if ($heightStyle !== 'auto' && $heightStyle > 0) {
                 $topHeight    = intval($heightStyle / 2);
                 $bottomHeight = intval($heightStyle / 2);
 
-                $mod = ($heightStyle % 2) === 0 ? 1 : 0;
+                $mod = $heightStyle % 2 === 0 ? 1 : 0;
 
                 $pt = $topHeight - $mod;
                 $pb = $bottomHeight;
             }
-            
-            if ($widthStyle === 'auto' && $displayStyle === 'block') {
 
+            if ($widthStyle === 'auto' && $displayStyle === 'block') {
                 // Calculate available spaces
                 $spaces = abs(terminal()->getwidth() - $valueLength);
 
@@ -1025,58 +1045,54 @@ abstract class Element
 
                 if ($textAlignStyle === 'left') {
                     // Create box padding top value.
-                    $ptStyleValue = ''; 
-                    for ($i=0; $i < $pt; $i++) {
+                    $ptStyleValue = '';
+                    for ($i = 0; $i < $pt; $i++) {
                         $ptStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength - $mr - $ml)) . "\e[0m" . PHP_EOL;
                     }
 
                     // Create box padding bottom value.
                     $pbStyleValue = PHP_EOL;
-                    for ($i=0; $i < $pb; $i++) { 
+                    for ($i = 0; $i < $pb; $i++) {
                         $pbStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength - $mr - $ml)) . "\e[0m" . PHP_EOL;
                     }
 
-                    $result = // Set box padding top.
-                            ($pt > 0 ? $ptStyleValue : '') .   
-                
+                    return // Set box padding top.
+                            ($pt > 0 ? $ptStyleValue : '') .
+
                             // Set box margin left, padding left and right, and re-apply text and background colors.
-                            "\e[0m" . strings(' ')->repeat($ml) . 
-                            $applyTextAndBackgroundColor(strings(' ')->repeat($pl) . 
-                                                        $value . 
+                            "\e[0m" . strings(' ')->repeat($ml) .
+                            $applyTextAndBackgroundColor(strings(' ')->repeat($pl) .
+                                                        $value .
                                                         strings(' ')->repeat($spaces - $pl - $ml - $mr)) .
-                        
+
                             // Set box padding bottom.
                             ($pb > 0 ? strings($pbStyleValue)->trimRight(PHP_EOL) : '');
-                    
-                    return $result;
                 }
 
                 if ($textAlignStyle === 'right') {
                     // Create box padding top value.
-                    $ptStyleValue = ''; 
-                    for ($i=0; $i < $pt; $i++) {
+                    $ptStyleValue = '';
+                    for ($i = 0; $i < $pt; $i++) {
                         $ptStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength - $mr - $ml)) . "\e[0m" . PHP_EOL;
                     }
 
                     // Create box padding bottom value.
                     $pbStyleValue = PHP_EOL;
-                    for ($i=0; $i < $pb; $i++) { 
+                    for ($i = 0; $i < $pb; $i++) {
                         $pbStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength - $mr - $ml)) . "\e[0m" . PHP_EOL;
                     }
 
-                    $result = // Set box padding top.
-                            ($pt > 0 ? $ptStyleValue : '') .   
-                
+                    return // Set box padding top.
+                            ($pt > 0 ? $ptStyleValue : '') .
+
                             // Set box margin left, padding left and right, and re-apply text and background colors.
-                            "\e[0m" . strings(' ')->repeat($ml) . 
-                            $applyTextAndBackgroundColor(strings(' ')->repeat($spaces - $pr - $ml - $mr) . 
-                                                        $value . 
+                            "\e[0m" . strings(' ')->repeat($ml) .
+                            $applyTextAndBackgroundColor(strings(' ')->repeat($spaces - $pr - $ml - $mr) .
+                                                        $value .
                                                         strings(' ')->repeat($pr)) .
-                        
+
                             // Set box padding bottom.
                             ($pb > 0 ? strings($pbStyleValue)->trimRight(PHP_EOL) : '');
-                    
-                    return $result;
                 }
 
                 if ($textAlignStyle === 'center') {
@@ -1090,19 +1106,19 @@ abstract class Element
                     }
 
                     // Create box padding top value.
-                    $ptStyleValue = ''; 
-                    for ($i=0; $i < $pt; $i++) {
+                    $ptStyleValue = '';
+                    for ($i = 0; $i < $pt; $i++) {
                         $ptStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength - $mr - $ml)) . "\e[0m" . PHP_EOL;
                     }
 
                     // Create box padding bottom value.
                     $pbStyleValue = PHP_EOL;
-                    for ($i=0; $i < $pb; $i++) { 
+                    for ($i = 0; $i < $pb; $i++) {
                         $pbStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength - $mr - $ml)) . "\e[0m" . PHP_EOL;
                     }
 
                     // Calculate spaces for current box.
-                    $currentSpaces = $leftSpaces - $ml + $rightSpaces - $mr;                    
+                    $currentSpaces = $leftSpaces - $ml + $rightSpaces - $mr;
 
                     // Calculate left spaces for current box.
                     $currentLeftSpaces  = intval($currentSpaces / 2);
@@ -1113,19 +1129,17 @@ abstract class Element
                         $currentLeftSpaces++;
                     }
 
-                    $result = // Set box padding top.
-                              ($pt > 0 ? $ptStyleValue : '') .   
-                    
+                    return // Set box padding top.
+                              ($pt > 0 ? $ptStyleValue : '') .
+
                               // Set box margin left, padding left and right, and re-apply text and background colors.
-                              "\e[0m" . strings(' ')->repeat($ml) . 
-                              $applyTextAndBackgroundColor(strings(' ')->repeat($currentLeftSpaces) . 
-                                                            $value . 
+                              "\e[0m" . strings(' ')->repeat($ml) .
+                              $applyTextAndBackgroundColor(strings(' ')->repeat($currentLeftSpaces) .
+                                                            $value .
                                                             strings(' ')->repeat($currentRightSpaces)) .
-                            
+
                               // Set box padding bottom.
                               ($pb > 0 ? strings($pbStyleValue)->trimRight(PHP_EOL) : '');
-                    
-                    return $result;
                 }
             }
 
@@ -1134,58 +1148,54 @@ abstract class Element
 
                 if ($textAlignStyle === 'left') {
                     // Create box padding top value.
-                    $ptStyleValue = ''; 
-                    for ($i=0; $i < $pt; $i++) {
+                    $ptStyleValue = '';
+                    for ($i = 0; $i < $pt; $i++) {
                         $ptStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength + $pl + $pr)) . "\e[0m" . PHP_EOL;
                     }
 
                     // Create box padding bottom value.
                     $pbStyleValue = PHP_EOL;
-                    for ($i=0; $i < $pb; $i++) { 
+                    for ($i = 0; $i < $pb; $i++) {
                         $pbStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength + $pl + $pr)) . "\e[0m" . PHP_EOL;
                     }
 
-                    $result = // Set box padding top.
-                            ($pt > 0 ? $ptStyleValue : '') .   
+                    return // Set box padding top.
+                            ($pt > 0 ? $ptStyleValue : '') .
 
                             // Set box margin left, padding left and right, and re-apply text and background colors.
-                            "\e[0m" . strings(' ')->repeat($ml) . 
-                            $applyTextAndBackgroundColor(strings(' ')->repeat($pl) . 
-                                                        $value . 
+                            "\e[0m" . strings(' ')->repeat($ml) .
+                            $applyTextAndBackgroundColor(strings(' ')->repeat($pl) .
+                                                        $value .
                                                         strings(' ')->repeat($spaces + $pr)) .
-                        
+
                             // Set box padding bottom.
                             ($pb > 0 ? strings($pbStyleValue)->trimRight(PHP_EOL) : '');
-
-                    return $result;
                 }
 
                 if ($textAlignStyle === 'right') {
                     // Create box padding top value.
-                    $ptStyleValue = ''; 
-                    for ($i=0; $i < $pt; $i++) {
+                    $ptStyleValue = '';
+                    for ($i = 0; $i < $pt; $i++) {
                         $ptStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength + $pl + $pr)) . "\e[0m" . PHP_EOL;
                     }
 
                     // Create box padding bottom value.
                     $pbStyleValue = PHP_EOL;
-                    for ($i=0; $i < $pb; $i++) { 
+                    for ($i = 0; $i < $pb; $i++) {
                         $pbStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength + $pl + $pr)) . "\e[0m" . PHP_EOL;
                     }
 
-                    $result = // Set box padding top.
-                            ($pt > 0 ? $ptStyleValue : '') .   
+                    return // Set box padding top.
+                            ($pt > 0 ? $ptStyleValue : '') .
 
                             // Set box margin left, padding left and right, and re-apply text and background colors.
-                            "\e[0m" . strings(' ')->repeat($ml) . 
-                            $applyTextAndBackgroundColor(strings(' ')->repeat($spaces + $pl) . 
-                                                        $value . 
+                            "\e[0m" . strings(' ')->repeat($ml) .
+                            $applyTextAndBackgroundColor(strings(' ')->repeat($spaces + $pl) .
+                                                        $value .
                                                         strings(' ')->repeat($pr)) .
-                        
+
                             // Set box padding bottom.
                             ($pb > 0 ? strings($pbStyleValue)->trimRight(PHP_EOL) : '');
-
-                    return $result;
                 }
 
                 if ($textAlignStyle === 'center') {
@@ -1199,19 +1209,19 @@ abstract class Element
                     }
 
                     // Create box padding top value.
-                    $ptStyleValue = ''; 
-                    for ($i=0; $i < $pt; $i++) {
+                    $ptStyleValue = '';
+                    for ($i = 0; $i < $pt; $i++) {
                         $ptStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength - $mr - $ml)) . "\e[0m" . PHP_EOL;
                     }
 
                     // Create box padding bottom value.
                     $pbStyleValue = PHP_EOL;
-                    for ($i=0; $i < $pb; $i++) { 
+                    for ($i = 0; $i < $pb; $i++) {
                         $pbStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength - $mr - $ml)) . "\e[0m" . PHP_EOL;
                     }
 
                     // Calculate spaces for current box.
-                    $currentSpaces = $leftSpaces - $ml + $rightSpaces - $mr;                    
+                    $currentSpaces = $leftSpaces - $ml + $rightSpaces - $mr;
 
                     // Calculate left spaces for current box.
                     $currentLeftSpaces  = intval($currentSpaces / 2);
@@ -1222,19 +1232,17 @@ abstract class Element
                         $currentLeftSpaces++;
                     }
 
-                    $result = // Set box padding top.
-                              ($pt > 0 ? $ptStyleValue : '') .   
-                    
+                    return // Set box padding top.
+                              ($pt > 0 ? $ptStyleValue : '') .
+
                               // Set box margin left, padding left and right, and re-apply text and background colors.
-                              "\e[0m" . strings(' ')->repeat($ml) . 
-                              $applyTextAndBackgroundColor(strings(' ')->repeat($currentLeftSpaces) . 
-                                                            $value . 
+                              "\e[0m" . strings(' ')->repeat($ml) .
+                              $applyTextAndBackgroundColor(strings(' ')->repeat($currentLeftSpaces) .
+                                                            $value .
                                                             strings(' ')->repeat($currentRightSpaces)) .
-                            
+
                               // Set box padding bottom.
                               ($pb > 0 ? strings($pbStyleValue)->trimRight(PHP_EOL) : '');
-                    
-                    return $result;
                 }
             }
 
