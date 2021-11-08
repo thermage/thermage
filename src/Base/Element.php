@@ -1003,7 +1003,7 @@ abstract class Element
         
             // Calculate height
             // Reset padding top and padding bottom
-            if ($heightStyle > 0) {
+            if ($heightStyle !== 'auto' && $heightStyle > 0) {
                 $topHeight    = intval($heightStyle / 2);
                 $bottomHeight = intval($heightStyle / 2);
 
