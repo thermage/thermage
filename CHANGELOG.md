@@ -1,5 +1,5 @@
 <a name="0.10.0"></a>
-# [0.10.0](https://github.com/termage/termage) (2021-xx-xx)
+# [0.10.0](https://github.com/termage/termage) (2021-11-09)
 * Improved box model for elements with ability to manage element width, height, text alignment.
 * Added ability to set text alignment `center` for base element.
 * Added ability to set text alignment `center` for hr element.
