@@ -15,7 +15,7 @@
 * Added new public element method `h` to set element height.
 * Added ability to set `top`, `right`, `bottom`, `left` margins with updated element method `m`. 
 * Added ability to set `top`, `right`, `bottom`, `left` paddings with updated element method `p`. 
-* Added new magic classes: `strikethrough`, `my`, `py`, `mt`, `mb`, `pt`, `pb`, `h`.
+* Added new magic classes: `strikethrough`, `my`, `py`, `mt`, `mb`, `pt`, `pb`, `h`, `m`, `p`.
 
 <a name="0.9.0"></a>
 # [0.9.0](https://github.com/termage/termage) (2021-11-05)
