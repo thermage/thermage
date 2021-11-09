@@ -30,12 +30,37 @@ use const DIRECTORY_SEPARATOR;
 
 final class Terminal
 {
-    private static $width;
-    private static $height;
+    /**
+     * Terminal width.
+     *
+     * @param int Width.
+     *
+     * @access private
+     */
+    private static int $width;
+
+    /**
+     * Terminal height.
+     *
+     * @param int Width.
+     *
+     * @access private
+     */
+    private static int $height;
+
+    /**
+     * Terminal displays or changes the characteristics of the terminal.
+     *
+     * @access private
+     */
     private static $stty;
 
     /**
-     * Gets the terminal width.
+     * Get terminal width.
+     *
+     * @return int Terminal width.
+     *
+     * @access public
      */
     public function getWidth(): int
     {
@@ -52,7 +77,11 @@ final class Terminal
     }
 
     /**
-     * Gets the terminal height.
+     * Get terminal height.
+     *
+     * @return int Terminal width.
+     *
+     * @access public
      */
     public function getHeight(): int
     {
@@ -69,7 +98,11 @@ final class Terminal
     }
 
     /**
-     * @internal
+     * Determine is stty available.
+     *
+     * @return bool True if stty is available otherwise false.
+     *
+     * @access public
      */
     public static function hasSttyAvailable(): bool
     {
@@ -87,6 +120,11 @@ final class Terminal
         return self::$stty = $exitcode === 0;
     }
 
+    /**
+     * Init dimensions.
+     *
+     * @access private
+     */
     private static function initDimensions(): void
     {
         if (DIRECTORY_SEPARATOR === '\\') {
@@ -111,6 +149,10 @@ final class Terminal
 
     /**
      * Returns whether STDOUT has vt100 support (some Windows 10+ configurations).
+     *
+     * @return bool True if STDOUT has vt100 support otherwise false.
+     * 
+     * @access private
      */
     private static function hasVt100Support(): bool
     {
@@ -119,6 +161,8 @@ final class Terminal
 
     /**
      * Initializes dimensions using the output of an stty columns line.
+     *
+     * @access private
      */
     private static function initDimensionsUsingStty(): void
     {
@@ -141,6 +185,8 @@ final class Terminal
      * Runs and parses mode CON if it's available, suppressing any error output.
      *
      * @return int[]|null An array composed of the width and the height or null if it could not be parsed
+     * 
+     * @access private
      */
     private static function getConsoleMode(): ?array
     {
@@ -155,12 +201,19 @@ final class Terminal
 
     /**
      * Runs and parses stty -a if it's available, suppressing any error output.
+     * 
+     * @access private
      */
     private static function getSttyColumns(): ?string
     {
         return self::readFromProcess('stty -a | grep columns');
     }
 
+    /**
+     * Read from process.
+     * 
+     * @access private
+     */
     private static function readFromProcess(string $command): ?string
     {
         if (! function_exists('proc_open')) {
