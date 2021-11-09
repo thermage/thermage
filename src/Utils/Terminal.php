@@ -97,6 +97,35 @@ final class Terminal
         return self::$height ?: 50;
     }
 
+
+    /**
+     * Set terminal width.
+     *
+     * @param int $value Terminal width.
+     *
+     * @access public
+     */
+    public function width(int $value): self
+    {
+        putenv('COLUMNS=' . $value);
+
+        return $this;
+    }
+
+    /**
+     * Set terminal height.
+     *
+     * @param int $value Terminal width.
+     *
+     * @access public
+     */
+    public function height(int $value): self
+    {
+        putenv('ROWS=' . $value);
+
+        return $this;
+    }
+
     /**
      * Determine is stty available.
      *
