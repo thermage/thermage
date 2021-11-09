@@ -12,8 +12,8 @@
 * Added new public element method `mt` to set top margin.
 * Added new public element method `mb` to set bottom margin.
 * Added new public element method `h` to set element height.
-* Added ability to set top, right, bottom, left margins with updated element method `m`. 
-* Added ability to set top, right, bottom, left paddings with updated element method `p`. 
+* Added ability to set `top`, `right`, `bottom`, `left` margins with updated element method `m`. 
+* Added ability to set `top`, `right`, `bottom`, `left` paddings with updated element method `p`. 
 * Added new magic classes: `strikethrough`, `my`, `py`, `mt`, `mb`, `pt`, `pb`, `h`.
 
 <a name="0.9.0"></a>
