@@ -2,6 +2,19 @@
 # [0.10.0](https://github.com/termage/termage) (2021-xx-xx)
 * Added ability to set text alignment center for base element.
 * Added ability to set text alignment center for hr element.
+* Added ability to set text alignment center for alert element.
+* Added new public terminal method terminal `width` to set terminal inner width.
+* Added new public terminal method `height` to set terminal inner height.
+* Added new public element method `my` to set vertical margins.
+* Added new public element method `py` to set vertical paddings.
+* Added new public element method `pt` to set top padding.
+* Added new public element method `pb` to set bottom padding.
+* Added new public element method `mt` to set top margin.
+* Added new public element method `mb` to set bottom margin.
+* Added new public element method `h` to set element height.
+* Added ability to set top, right, bottom, left margins with updated element method `m`. 
+* Added ability to set top, right, bottom, left paddings with updated element method `p`. 
+* Added new magic classes: strikethrough, my, py, mt, mb, pt, pb, h.
 
 <a name="0.9.0"></a>
 # [0.9.0](https://github.com/termage/termage) (2021-11-05)
