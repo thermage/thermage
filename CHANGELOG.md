@@ -3,7 +3,7 @@
 * Added ability to set text alignment center for base element.
 * Added ability to set text alignment center for hr element.
 * Added ability to set text alignment center for alert element.
-* Added new public terminal method terminal `width` to set terminal inner width.
+* Added new public terminal method `width` to set terminal inner width.
 * Added new public terminal method `height` to set terminal inner height.
 * Added new public element method `my` to set vertical margins.
 * Added new public element method `py` to set vertical paddings.
