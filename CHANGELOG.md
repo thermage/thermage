@@ -1,6 +1,25 @@
+<a name="0.10.0"></a>
+# [0.10.0](https://github.com/termage/termage) (2021-11-09)
+* Improved box model for elements with ability to manage element width, height, text alignment.
+* Added ability to set text alignment `center` for base element.
+* Added ability to set text alignment `center` for hr element.
+* Added ability to set text alignment `center` for alert element.
+* Added new public terminal method `width` to set terminal inner width.
+* Added new public terminal method `height` to set terminal inner height.
+* Added new public element method `my` to set vertical margins.
+* Added new public element method `py` to set vertical paddings.
+* Added new public element method `pt` to set top padding.
+* Added new public element method `pb` to set bottom padding.
+* Added new public element method `mt` to set top margin.
+* Added new public element method `mb` to set bottom margin.
+* Added new public element method `h` to set element height.
+* Added ability to set `top`, `right`, `bottom`, `left` margins with updated element method `m`. 
+* Added ability to set `top`, `right`, `bottom`, `left` paddings with updated element method `p`. 
+* Added new magic classes: `strikethrough`, `my`, `py`, `mt`, `mb`, `pt`, `pb`, `h`, `m`, `p`.
+
 <a name="0.9.0"></a>
 # [0.9.0](https://github.com/termage/termage) (2021-11-05)
-* Imrpoved box model for elements with ability do set element display state and width. 
+* Improved box model for elements with ability to set element display state and width. 
 * Added new public element method `p` to set left and right paddings.
 * Added new public element method `m` to set left and right margins.
 * Added new public element method `d` to set display state.

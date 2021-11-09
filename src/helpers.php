@@ -25,6 +25,7 @@ use Termage\Elements\Hr;
 use Termage\Elements\Italic;
 use Termage\Elements\Paragraph;
 use Termage\Elements\Span;
+use Termage\Elements\Spinner;
 use Termage\Elements\Strikethrough;
 use Termage\Elements\Underline;
 use Termage\Utils\Color;
@@ -113,6 +114,11 @@ function alert(string $value = '', string $classes = ''): Alert
 function heading(string $value = '', string $classes = ''): Heading
 {
     return Termage::heading($value, $classes);
+}
+
+function spinner(string $value = '', string $classes = ''): Spinner
+{
+    return Termage::spinner($value, $classes);
 }
 
 function color(): Color

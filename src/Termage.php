@@ -26,6 +26,7 @@ use Termage\Elements\Hr;
 use Termage\Elements\Italic;
 use Termage\Elements\Paragraph;
 use Termage\Elements\Span;
+use Termage\Elements\Spinner;
 use Termage\Elements\Strikethrough;
 use Termage\Elements\Underline;
 use Termage\Parsers\Shortcodes;
@@ -349,6 +350,26 @@ class Termage
     public static function underline(string $value = '', string $classes = ''): Underline
     {
         return new Underline(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes
+        );
+    }
+
+    /**
+     * Create a new Spinner element instance.
+     *
+     * @param string $value   Spinner element value.
+     * @param string $classes Spinner element classes.
+     *
+     * @return Underline Returns Spinner element instance.
+     *
+     * @access public
+     */
+    public static function spinner(string $value = '', string $classes = ''): Spinner
+    {
+        return new Spinner(
             self::getTheme(),
             self::getShortcodes(),
             $value,
