@@ -37,7 +37,7 @@ final class Terminal
      *
      * @access private
      */
-    private static int $width;
+    private static ?int $width null;
 
     /**
      * Terminal height.
@@ -46,7 +46,7 @@ final class Terminal
      *
      * @access private
      */
-    private static int $height;
+    private static ?int $height = null;
 
     /**
      * Terminal displays or changes the characteristics of the terminal.
