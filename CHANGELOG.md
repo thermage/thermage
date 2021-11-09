@@ -1,5 +1,6 @@
 <a name="0.10.0"></a>
 # [0.10.0](https://github.com/termage/termage) (2021-xx-xx)
+* Improved box model for elements with ability to manage element width, height, text alignment.
 * Added ability to set text alignment `center` for base element.
 * Added ability to set text alignment `center` for hr element.
 * Added ability to set text alignment `center` for alert element.
@@ -18,7 +19,7 @@
 
 <a name="0.9.0"></a>
 # [0.9.0](https://github.com/termage/termage) (2021-11-05)
-* Imrpoved box model for elements with ability do set element display state and width. 
+* Improved box model for elements with ability to set element display state and width. 
 * Added new public element method `p` to set left and right paddings.
 * Added new public element method `m` to set left and right margins.
 * Added new public element method `d` to set display state.
