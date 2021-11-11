@@ -1089,21 +1089,21 @@ abstract class Element
                 $pb = intval($heightStyle / 2);
             }
 
-            //
-            // Display block with auto width
-            //
+            // Set block element with auto width
             if ($widthStyle === 'auto' && $displayStyle === 'block') {
-                // Calculate available spaces
-                $spaces = abs(terminal()->getwidth() - $valueLength);
 
                 // Do not allow width for block elements with clearfix flag.
                 if ($this->clearfix) {
                     return $value;
                 }
+                
+                // Calculate amount of available spaces for block element.
+                $spaces = abs(terminal()->getwidth() - $valueLength);
 
+                // Text align left
                 if ($textAlignStyle === 'left') {
 
-                    // Calculate amount of empty spaces for element decorations.
+                    // Calculate amount of available empty spaces for element decorations.
                     $valueSpaces = $spaces + $valueLength - $mr - $ml - ($hasBorder() ? $borderSpaces : 0);
                     
                     // Create box border top value.
