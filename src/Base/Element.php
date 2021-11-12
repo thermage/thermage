@@ -1082,7 +1082,7 @@ abstract class Element
                 return $borderStyle !== 'none' && self::$theme->getVariables()->has('borders.' . $borderStyle);
             };
 
-            // Helper function for paddings and borders, top and bottom
+            // Helper function for adding paddings and borders, top and bottom
             $addPaddingsAndBorders = function ($valueSpaces) use ($borderStyle, $hasBorder, $applyBorderColor, $applyTextAndBackgroundColor, $pt, $pb, $ml, $mr) {
 
                     // Create box border top value.
@@ -1184,30 +1184,35 @@ abstract class Element
 
                 }
 
+                // Text align right
                 if ($textAlignStyle === 'right') {
-                    // Create box padding top value.
-                    $ptStyleValue = '';
-                    for ($i = 0; $i < $pt; $i++) {
-                        $ptStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength - $mr - $ml)) . "\e[0m" . PHP_EOL;
-                    }
 
-                    // Create box padding bottom value.
-                    $pbStyleValue = PHP_EOL;
-                    for ($i = 0; $i < $pb; $i++) {
-                        $pbStyleValue .=  "\e[0m" . strings(' ')->repeat($ml) . $applyTextAndBackgroundColor((string) strings(' ')->repeat($spaces + $valueLength - $mr - $ml)) . "\e[0m" . PHP_EOL;
-                    }
+                    $paddingsAndBorders = $addPaddingsAndBorders($spaces + $valueLength - $mr - $ml - ($hasBorder() ? $borderSpaces : 0));
 
-                    return // Set box padding top.
-                            ($pt > 0 ? $ptStyleValue : '') .
+                    return  // Set box border top style.
+                            ($borderStyle !== 'none' ? $paddingsAndBorders['bt'] : '') . 
 
-                            // Set box margin left, padding left and right, and re-apply text and background colors.
-                            "\e[0m" . strings(' ')->repeat($ml) .
-                            $applyTextAndBackgroundColor(strings(' ')->repeat($spaces - $pr - $ml - $mr) .
+                            // Set box padding top.
+                            ($pt > 0 ? $paddingsAndBorders['pt'] : '') .
+                    
+                            // Set box margin left, 
+                            // paddings left and right, 
+                            // re-apply text and background colors, 
+                            // apply borders.
+                            "\e[0m" . 
+                            strings(' ')->repeat($ml) .
+                            ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') . 
+                            $applyTextAndBackgroundColor(strings(' ')->repeat($spaces - $pr - $ml - $mr - ($hasBorder() ? $borderSpaces : '')) .
                                                         $value .
                                                         strings(' ')->repeat($pr)) .
 
+                            ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+
                             // Set box padding bottom.
-                            ($pb > 0 ? strings($pbStyleValue)->trimRight(PHP_EOL) : '');
+                            ($pb > 0 ? strings($paddingsAndBorders['pb'])->trimRight(PHP_EOL) : '') . 
+
+                            // Set box border top style.
+                            ($hasBorder() ? strings(' ')->repeat($ml) . $paddingsAndBorders['bb'] : '');
                 }
 
                 if ($textAlignStyle === 'center') {
