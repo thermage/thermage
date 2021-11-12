@@ -1134,7 +1134,7 @@ abstract class Element
                         $ptStyleValue .=  "\e[0m" .
                                          strings(' ')->repeat($ml) . 
                                          ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') . 
-                                         (string) strings(' ')->repeat($valueSpaces) . 
+                                         $applyTextAndBackgroundColor((string) strings(' ')->repeat($valueSpaces)) . 
                                          ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') . 
                                          "\e[0m" . 
                                          PHP_EOL;
@@ -1146,7 +1146,7 @@ abstract class Element
                         $pbStyleValue .=  "\e[0m" . 
                                         strings(' ')->repeat($ml) . 
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') . 
-                                        (string) strings(' ')->repeat($valueSpaces) . 
+                                        $applyTextAndBackgroundColor((string) strings(' ')->repeat($valueSpaces)) . 
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') . 
                                         "\e[0m" . 
                                         PHP_EOL;
@@ -1168,7 +1168,7 @@ abstract class Element
                             ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') . 
                             $applyTextAndBackgroundColor(strings(' ')->repeat($pl) .
                                                         $value .
-                                                        strings(' ')->repeat($spaces - $pl - $ml - $mr - $borderSpaces)) .
+                                                        strings(' ')->repeat($spaces - $pl - $ml - $mr - ($hasBorder() ? $borderSpaces : ''))) .
                                                     
                             ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') . 
 
