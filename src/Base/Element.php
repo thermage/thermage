@@ -1082,30 +1082,9 @@ abstract class Element
                 return $borderStyle !== 'none' && self::$theme->getVariables()->has('borders.' . $borderStyle);
             };
 
-            // Calculate height
-            // Update paddings top and bottom
-            if ($heightStyle !== 'auto' && $heightStyle > 0) {
-                $pt = intval($heightStyle / 2) - ($heightStyle % 2 === 0 ? 1 : 0);
-                $pb = intval($heightStyle / 2);
-            }
+            // Helper function for paddings and borders, top and bottom
+            $addPaddingsAndBorders = function ($valueSpaces) use ($borderStyle, $hasBorder, $applyBorderColor, $applyTextAndBackgroundColor, $pt, $pb, $ml, $mr) {
 
-            // Set block element with auto width
-            if ($widthStyle === 'auto' && $displayStyle === 'block') {
-
-                // Do not allow width for block elements with clearfix flag.
-                if ($this->clearfix) {
-                    return $value;
-                }
-                
-                // Calculate amount of available spaces for block element.
-                $spaces = abs(terminal()->getwidth() - $valueLength);
-
-                // Text align left
-                if ($textAlignStyle === 'left') {
-
-                    // Calculate amount of available empty spaces for element decorations.
-                    $valueSpaces = $spaces + $valueLength - $mr - $ml - ($hasBorder() ? $borderSpaces : 0);
-                    
                     // Create box border top value.
                     $btStyleValue = '';
                     if ($hasBorder()) {
@@ -1152,12 +1131,37 @@ abstract class Element
                                         PHP_EOL;
                     }
 
+                    return ['bt' => $btStyleValue, 'bb' => $bbStyleValue, 'pt' => $ptStyleValue, 'pb' => $pbStyleValue];
+            };
+
+            // Calculate height
+            // Update paddings top and bottom
+            if ($heightStyle !== 'auto' && $heightStyle > 0) {
+                $pt = intval($heightStyle / 2) - ($heightStyle % 2 === 0 ? 1 : 0);
+                $pb = intval($heightStyle / 2);
+            }
+
+            // Set block element with auto width
+            if ($widthStyle === 'auto' && $displayStyle === 'block') {
+
+                // Do not allow width for block elements with clearfix flag.
+                if ($this->clearfix) {
+                    return $value;
+                }
+                
+                // Calculate amount of available spaces for block element.
+                $spaces = abs(terminal()->getwidth() - $valueLength);
+
+                // Text align left
+                if ($textAlignStyle === 'left') {
+
+                    $paddingsAndBorders = $addPaddingsAndBorders($spaces + $valueLength - $mr - $ml - ($hasBorder() ? $borderSpaces : 0));
 
                     return  // Set box border top style.
-                            ($borderStyle !== 'none' ? $btStyleValue : '') . 
+                            ($borderStyle !== 'none' ? $paddingsAndBorders['bt'] : '') . 
 
                             // Set box padding top.
-                            ($pt > 0 ? $ptStyleValue : '') .
+                            ($pt > 0 ? $paddingsAndBorders['pt'] : '') .
 
                             // Set box margin left, 
                             // paddings left and right, 
@@ -1173,10 +1177,10 @@ abstract class Element
                             ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') . 
 
                             // Set box padding bottom.
-                            ($pb > 0 ? strings($pbStyleValue)->trimRight(PHP_EOL) : '') .
+                            ($pb > 0 ? strings($paddingsAndBorders['pb'])->trimRight(PHP_EOL) : '') .
 
                             // Set box border top style.
-                            ($hasBorder() ? strings(' ')->repeat($ml) . $bbStyleValue : '');
+                            ($hasBorder() ? strings(' ')->repeat($ml) . $paddingsAndBorders['bb'] : '');
 
                 }
 
