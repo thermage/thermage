@@ -1093,11 +1093,12 @@ abstract class Element
                                         $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.top-left')) . 
                                         $applyBorderColor((string) strings(self::$theme->getVariables()->get('borders.' . $borderStyle . '.top'))->repeat($valueSpaces)) .
                                         $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.top-right')) .  
-                                        "\e[0m";
+                                        "\e[0m" . 
+                                        PHP_EOL;
                     }
 
                     // Create box border bottom value.
-                    $bbStyleValue = '';
+                    $bbStyleValue = PHP_EOL;
                     if ($hasBorder()) {
                         $bbStyleValue =  "\e[0m" . 
                                         strings(' ')->repeat($ml) . 
@@ -1276,7 +1277,7 @@ abstract class Element
                     $paddingsAndBorders = $addPaddingsAndBorders($spaces + $valueLength + $pl + $pr - ($hasBorder() ? $borderSpaces : 0));
 
                     return  // Set box border top style.
-                            ($borderStyle !== 'none' ? $paddingsAndBorders['bt'] . PHP_EOL : '') . 
+                            ($borderStyle !== 'none' ? $paddingsAndBorders['bt'] : '') . 
 
                             // Set box padding top.
                             ($pt > 0 ? $paddingsAndBorders['pt'] : '') .
@@ -1304,7 +1305,7 @@ abstract class Element
                     $paddingsAndBorders = $addPaddingsAndBorders($spaces + $valueLength + $pl + $pr - ($hasBorder() ? $borderSpaces : 0));
 
                     return  // Set box border top style.
-                            ($borderStyle !== 'none' ? $paddingsAndBorders['bt'] . PHP_EOL : '') . 
+                            ($borderStyle !== 'none' ? $paddingsAndBorders['bt'] : '') . 
 
                             // Set box padding top.
                             ($pt > 0 ? $paddingsAndBorders['pt'] : '') .
@@ -1341,7 +1342,7 @@ abstract class Element
                     $paddingsAndBorders = $addPaddingsAndBorders($spaces + $valueLength + $pl + $pr - ($hasBorder() ? $borderSpaces : 0));
 
                     return  // Set box border top style.
-                            ($borderStyle !== 'none' ? $paddingsAndBorders['bt'] . PHP_EOL : '') . 
+                            ($borderStyle !== 'none' ? $paddingsAndBorders['bt'] : '') . 
 
                             // Set box padding top.
                             ($pt > 0 ? $paddingsAndBorders['pt'] : '') .
