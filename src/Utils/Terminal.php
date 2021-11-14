@@ -62,7 +62,7 @@ final class Terminal
      *
      * @access public
      */
-    public function getWidth(): int
+    public static function getWidth(): int
     {
         $width = getenv('COLUMNS');
         if ($width !== false) {
@@ -83,7 +83,7 @@ final class Terminal
      *
      * @access public
      */
-    public function getHeight(): int
+    public static function getHeight(): int
     {
         $height = getenv('LINES');
         if ($height !== false) {
@@ -105,11 +105,9 @@ final class Terminal
      *
      * @access public
      */
-    public function width(int $value): self
+    public static function setWidth(int $value): void
     {
         putenv('COLUMNS=' . $value);
-
-        return $this;
     }
 
     /**
@@ -119,11 +117,9 @@ final class Terminal
      *
      * @access public
      */
-    public function height(int $value): self
+    public static function setHeight(int $value): void
     {
         putenv('ROWS=' . $value);
-
-        return $this;
     }
 
     /**
