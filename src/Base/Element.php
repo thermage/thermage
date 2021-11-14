@@ -261,6 +261,8 @@ abstract class Element
             'blink',
             'text-align',
             'clearfix',
+            'b',
+            'bColor',
             'p',
             'pl',
             'pr',
