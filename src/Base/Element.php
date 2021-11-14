@@ -1248,8 +1248,10 @@ abstract class Element
                             // Set box padding top.
                             ($pt > 0 ? $paddingsAndBorders['pt'] : '') .
 
-                            // Set box margin left, padding left and right, and re-apply text and background colors.
-                            "\e[0m" . 
+                            // Set box margin left, 
+                            // paddings left and right, 
+                            // re-apply text and background colors, 
+                            // apply borders.                            "\e[0m" . 
                             strings(' ')->repeat($ml) .
                             ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') . 
                             $applyTextAndBackgroundColor(strings(' ')->repeat($currentLeftSpaces - ($hasBorder() ? $borderSpaces : 0)) .
@@ -1282,7 +1284,10 @@ abstract class Element
                             // Set box padding top.
                             ($pt > 0 ? $paddingsAndBorders['pt'] : '') .
 
-                            // Set box margin left, padding left and right, and re-apply text and background colors.
+                            // Set box margin left, 
+                            // paddings left and right, 
+                            // re-apply text and background colors, 
+                            // apply borders.
                             "\e[0m" . 
                             strings(' ')->repeat($ml) .
                             ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') . 
@@ -1310,7 +1315,10 @@ abstract class Element
                             // Set box padding top.
                             ($pt > 0 ? $paddingsAndBorders['pt'] : '') .
 
-                            // Set box margin left, padding left and right, and re-apply text and background colors.
+                            // Set box margin left, 
+                            // paddings left and right, 
+                            // re-apply text and background colors, 
+                            // apply borders.
                             "\e[0m" . 
                             strings(' ')->repeat($ml) .
                             ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
@@ -1347,7 +1355,10 @@ abstract class Element
                             // Set box padding top.
                             ($pt > 0 ? $paddingsAndBorders['pt'] : '') .
 
-                            // Set box margin left, padding left and right, and re-apply text and background colors.
+                            // Set box margin left, 
+                            // paddings left and right, 
+                            // re-apply text and background colors, 
+                            // apply borders.
                             "\e[0m" .
                             strings(' ')->repeat($ml) .
                             ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
