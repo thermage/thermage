@@ -1,3 +1,10 @@
+<a name="0.11.0"></a>
+# [0.11.0](https://github.com/termage/termage) (2021-11-xx)
+* Added ability to set element custom borders.
+* Added new public element method `b` to set border style.
+* Added new public element method `bColor` to set border color.
+* Added new magic classes: `b`, `b-color`.
+
 <a name="0.10.0"></a>
 # [0.10.0](https://github.com/termage/termage) (2021-11-09)
 * Improved box model for elements with ability to manage element width, height, text alignment.
