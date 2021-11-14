@@ -1,3 +1,6 @@
+<a name="0.11.0"></a>
+# [0.11.0](https://github.com/termage/termage) (2021-11-xx)
+
 <a name="0.10.0"></a>
 # [0.10.0](https://github.com/termage/termage) (2021-11-09)
 * Improved box model for elements with ability to manage element width, height, text alignment.
