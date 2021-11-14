@@ -46,8 +46,72 @@ class Termage
 
     /**
      * The instance of Shortcodes class.
+     *
+     * @access private
      */
     private static Shortcodes $shortcodes;
+
+    /**
+     * Control Sequence Escape.
+     *
+     * @access private
+     */
+    private static string $esc;
+    
+    /** 
+     * Control Sequence Introducer.
+     *
+     * @access private
+     */
+    private static string $csi;
+
+    /**
+     * Get Control Sequence Introducer.
+     *
+     * @return string Control Sequence Introducer.
+     *
+     * @access public
+     */
+    public static function getCsi(): string
+    {
+        return self::$csi ??= self::getEsc() . "[";
+    }
+
+    /**
+     * Set Control Sequence Introducer.
+     *
+     * @param string $value Control Sequence Introducer.
+     *
+     * @access public
+     */
+    public static function setCsi(string $value): void
+    {
+        self::$csi = $value;
+    }
+
+    /**
+     * Get Control Sequence Escape.
+     *
+     * @return string Control Sequence Escape.
+     *
+     * @access public
+     */
+    public static function getEsc(): string
+    {
+        return self::$esc ??= "\033";
+    }
+
+    /**
+     * Set Control Sequence Escape.
+     *
+     * @param string $value Control Sequence Escape.
+     *
+     * @access public
+     */
+    public static function setEsc(string $value): void
+    {
+        self::$esc = $value;
+    }
 
     /**
      * Get Shortcodes instance.
