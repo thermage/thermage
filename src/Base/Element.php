@@ -1009,7 +1009,7 @@ abstract class Element
         // └─────────────────────────────────────────────────────────────┘
         $stylesHierarchy = ['invisible', 'reverse', 'blink', 'dim', 'bold', 'italic', 'underline', 'strikethrough', 'inner', 'bg', 'color', 'outer', 'display'];
 
-        // Process style: outer (margins)
+        // Process style: outer
         $outer = function ($value) {
             $ml = $this->styles->get('margin.left') ?? 0;
             $mr = $this->styles->get('margin.right') ?? 0;
@@ -1045,7 +1045,7 @@ abstract class Element
                     ($mb > 0 ? strings(PHP_EOL)->repeat($mb) : '');
         };
 
-        // Process style: inner (width, height, paddings)
+        // Process style: inner
         $inner = function ($value) {
             $valueLength    = $this->getLength($value);
             $textAlignStyle = $this->styles->get('text-align') ?? 'left';
