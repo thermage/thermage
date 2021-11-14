@@ -5,6 +5,13 @@
 * Added new public element method `bColor` to set border color.
 * Added new magic classes: `b`, `b-color`.
 
+### BREAKING CHANGES
+
+* Terminal public method `getWidth` changed to public static.
+* Terminal public method `setWidth` changed to public static.
+* Terminal public method `getHeight` changed to public static.
+* Terminal public method `setHeight` changed to public static.
+
 <a name="0.10.0"></a>
 # [0.10.0](https://github.com/termage/termage) (2021-11-09)
 * Improved box model for elements with ability to manage element width, height, text alignment.
