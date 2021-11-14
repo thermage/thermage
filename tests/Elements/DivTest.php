@@ -177,6 +177,26 @@ test('test magic ml', function (): void {
     expect($value)->toBe("\e[0m          RAD       " . PHP_EOL);
 });
 
+test('test mt', function (): void {
+    putenv('COLUMNS=40');
+
+    $value = div()->value('RAD')->mt2()->render();
+    $toBe =  PHP_EOL .
+             PHP_EOL .
+            "\e[0mRAD                                     " . PHP_EOL;
+    expect($value)->toBe($toBe);
+});
+
+test('test magic mt', function (): void {
+    putenv('COLUMNS=40');
+
+    $value = div()->value('RAD')->mt2()->render();
+    $toBe =  PHP_EOL .
+             PHP_EOL .
+            "\e[0mRAD                                     " . PHP_EOL;
+    expect($value)->toBe($toBe);
+});
+
 test('test p', function (): void {
     $value = div()->value('RAD')->p(0, 10, 0, 10)->render();
     expect($value)->toBe("\e[0m          RAD       " . PHP_EOL);
@@ -227,6 +247,26 @@ test('test magic py', function (): void {
             "\e[0mRAD                                     " . PHP_EOL .
             "\e[0m                                        \e[0m" . PHP_EOL .
             "\e[0m                                        \e[0m" . PHP_EOL;
+    expect($value)->toBe($toBe);
+});
+
+test('test pt', function (): void {
+    putenv('COLUMNS=40');
+
+    $value = div()->value('RAD')->pt2()->render();
+    $toBe = "\e[0m                                        \e[0m" . PHP_EOL .
+            "\e[0m                                        \e[0m" . PHP_EOL .
+            "\e[0mRAD                                     " . PHP_EOL;
+    expect($value)->toBe($toBe);
+});
+
+test('test magic pt', function (): void {
+    putenv('COLUMNS=40');
+
+    $value = div()->value('RAD')->pt2()->render();
+    $toBe = "\e[0m                                        \e[0m" . PHP_EOL .
+            "\e[0m                                        \e[0m" . PHP_EOL .
+            "\e[0mRAD                                     " . PHP_EOL;
     expect($value)->toBe($toBe);
 });
 
