@@ -113,6 +113,21 @@ test('test m', function (): void {
     expect($value)->toBe(PHP_EOL . PHP_EOL . "\e[0m  RAD                                 " . PHP_EOL . PHP_EOL . PHP_EOL);
 });
 
+test('test my', function (): void {
+    putenv('COLUMNS=40');
+    
+    $value = div()->value('RAD')->my(2)->render();
+    expect($value)->toBe(PHP_EOL . PHP_EOL . "\e[0mRAD                                     " . PHP_EOL . PHP_EOL . PHP_EOL);
+});
+
+test('test magic my', function (): void {
+    putenv('COLUMNS=40');
+
+    $value = div()->value('RAD')->my2()->render();
+
+    expect($value)->toBe(PHP_EOL . PHP_EOL . "\e[0mRAD                                     " . PHP_EOL . PHP_EOL . PHP_EOL);
+});
+
 test('test mx', function (): void {
     putenv('COLUMNS=40');
     
@@ -188,6 +203,30 @@ test('test p', function (): void {
             "\e[0m  RAD               " . PHP_EOL .
             "\e[0m                    \e[0m" . PHP_EOL .
             "\e[0m                    \e[0m" . PHP_EOL;
+    expect($value)->toBe($toBe);
+});
+
+test('test py', function (): void {
+    putenv('COLUMNS=40');
+    
+    $value = div()->value('RAD')->py(2)->render();
+    $toBe = "\e[0m                                        \e[0m" . PHP_EOL .
+            "\e[0m                                        \e[0m" . PHP_EOL .
+            "\e[0mRAD                                     " . PHP_EOL .
+            "\e[0m                                        \e[0m" . PHP_EOL .
+            "\e[0m                                        \e[0m" . PHP_EOL;
+    expect($value)->toBe($toBe);
+});
+
+test('test magic py', function (): void {
+    putenv('COLUMNS=40');
+
+    $value = div()->value('RAD')->py2()->render();
+    $toBe = "\e[0m                                        \e[0m" . PHP_EOL .
+            "\e[0m                                        \e[0m" . PHP_EOL .
+            "\e[0mRAD                                     " . PHP_EOL .
+            "\e[0m                                        \e[0m" . PHP_EOL .
+            "\e[0m                                        \e[0m" . PHP_EOL;
     expect($value)->toBe($toBe);
 });
 
