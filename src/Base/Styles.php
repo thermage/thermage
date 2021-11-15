@@ -125,4 +125,28 @@ final class Styles {
     {
         return getCsi() . "29m";
     }
+
+    /**
+     * Set dim style.
+     * 
+     * @return string Set dim style.
+     * 
+     * @access public
+     */
+    public static function setDim(): string
+    {
+        return getCsi() . "2m";
+    }
+
+    /**
+     * Reset dim style.
+     * 
+     * @return string Reset dim style.
+     * 
+     * @access public
+     */
+    public static function resetDim(): string 
+    {
+        return getCsi() . "22m";
+    }
 }
