@@ -53,4 +53,28 @@ final class Styles {
     {
         return getCsi() . "22m";
     }
+
+    /**
+     * Set italic style.
+     * 
+     * @return string Set italic style.
+     * 
+     * @access public
+     */
+    public static function setItalic(): string
+    {
+        return getCsi() . "3m";
+    }
+
+    /**
+     * Reset italic style.
+     * 
+     * @return string Reset italic style.
+     * 
+     * @access public
+     */
+    public static function resetItalic(): string 
+    {
+        return getCsi() . "23m";
+    }
 }
