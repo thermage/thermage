@@ -222,9 +222,9 @@ class Theme implements ThemeInterface
             'borders' => [
                 'square' => [
                     'top-left' => '┌',
-                    'top' => '─', 
-                    'top-right' => '┐', 
-                    'right' => '│', 
+                    'top' => '─',
+                    'top-right' => '┐',
+                    'right' => '│',
                     'left' => '│',
                     'bottom-right' => '┘',
                     'bottom' => '─',
@@ -232,9 +232,9 @@ class Theme implements ThemeInterface
                 ],
                 'rounded' => [
                     'top-left' => '╭',
-                    'top' => '─', 
-                    'top-right' => '╮', 
-                    'right' => '│', 
+                    'top' => '─',
+                    'top-right' => '╮',
+                    'right' => '│',
                     'left' => '│',
                     'bottom-right' => '╯',
                     'bottom' => '─',
@@ -242,9 +242,9 @@ class Theme implements ThemeInterface
                 ],
                 'double' => [
                     'top-left' => '╔',
-                    'top' => '═', 
-                    'top-right' => '╗', 
-                    'right' => '║', 
+                    'top' => '═',
+                    'top-right' => '╗',
+                    'right' => '║',
                     'left' => '║',
                     'bottom-right' => '╝',
                     'bottom' => '═',
@@ -252,15 +252,15 @@ class Theme implements ThemeInterface
                 ],
                 'heavy' => [
                     'top-left' => '┏',
-                    'top' => '━', 
-                    'top-right' => '┓', 
-                    'right' => '┃', 
+                    'top' => '━',
+                    'top-right' => '┓',
+                    'right' => '┃',
                     'left' => '┃',
                     'bottom-right' => '┛',
                     'bottom' => '━',
                     'bottom-left' => '┗',
-                ]
-            ]
+                ],
+            ],
         ]);
     }
 
