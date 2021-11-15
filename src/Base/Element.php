@@ -1412,37 +1412,37 @@ abstract class Element
 
         // Process style: italic
         $italic = function ($value) {
-            return $this->styles['italic'] ? getCsi() . "3m" . $value . getCsi() . "23m" : $value;
+            return $this->styles['italic'] ? Styles::setItalic() . $value . Styles::resetItalic() : $value;
         };
 
         // Process style: underline
         $underline = function ($value) {
-            return $this->styles['underline'] ? getCsi() . "4m" . $value . getCsi() . "24m" : $value;
+            return $this->styles['underline'] ? Styles::setUnderline() . $value . Styles::resetUnderline() : $value;
         };
 
         // Process style: strikethrough
         $strikethrough = function ($value) {
-            return $this->styles['strikethrough'] ? getCsi() . "9m" . $value . getCsi() . "29m" : $value;
+            return $this->styles['strikethrough'] ? Styles::setStrikethrough() . $value . Styles::resetStrikethrough() : $value;
         };
 
         // Process style: dim
         $dim = function ($value) {
-            return $this->styles['dim'] ? getCsi() . "2m" . $value . getCsi() . "22m" : $value;
+            return $this->styles['dim'] ? Styles::setDim() . $value . Styles::resetDim() : $value;
         };
 
         // Process style: blink
         $blink = function ($value) {
-            return $this->styles['blink'] ? getCsi() . "5m" . $value . getCsi() . "25m" : $value;
+            return $this->styles['blink'] ? Styles::setBlink() . $value . Styles::resetBlink() : $value;
         };
 
         // Process style: reverse
         $reverse = function ($value) {
-            return $this->styles['reverse'] ? getCsi() . "7m" . $value . getCsi() . "27m" : $value;
+            return $this->styles['reverse'] ? Styles::setReverse() . $value . Styles::resetReverse() : $value;
         };
 
         // Process style: invisible
         $invisible = function ($value) {
-            return $this->styles['invisible'] ? getCsi() . "8m" . $value . getCsi() . "28m" : $value;
+            return $this->styles['invisible'] ? Styles::setInvisible() . $value . Styles::resetInvisible() : $value;
         };
 
         // Process style: display
