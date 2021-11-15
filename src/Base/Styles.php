@@ -149,4 +149,28 @@ final class Styles {
     {
         return getCsi() . "22m";
     }
+
+    /**
+     * Set blink style.
+     * 
+     * @return string Set blink style.
+     * 
+     * @access public
+     */
+    public static function setBlink(): string
+    {
+        return getCsi() . "5m";
+    }
+
+    /**
+     * Reset blink style.
+     * 
+     * @return string Reset blink style.
+     * 
+     * @access public
+     */
+    public static function resetBlink(): string 
+    {
+        return getCsi() . "25m";
+    }
 }
