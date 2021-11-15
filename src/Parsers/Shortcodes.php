@@ -356,7 +356,7 @@ class Shortcodes
     protected function colorShortcode(ShortcodeInterface $s): string
     {
         if ($s->getBbCode()) {
-            return (new Color())->textColor(self::$theme->getVariables()->get('colors.' . $s->getBbCode(), $s->getBbCode()))->apply($s->getContent());
+            return Color::applyForegroundColor($s->getContent(), self::$theme->getVariables()->get('colors.' . $s->getBbCode(), $s->getBbCode()));
         }
 
         return $s->getContent();
@@ -374,7 +374,7 @@ class Shortcodes
     protected function bgShortcode(ShortcodeInterface $s): string
     {
         if ($s->getBbCode()) {
-            return (new Color())->bgColor(self::$theme->getVariables()->get('colors.' . $s->getBbCode(), $s->getBbCode()))->apply($s->getContent());
+            return Color::applyBackgroundColor($s->getContent(), self::$theme->getVariables()->get('colors.' . $s->getBbCode(), $s->getBbCode()));
         }
 
         return $s->getContent();

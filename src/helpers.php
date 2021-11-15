@@ -51,6 +51,26 @@ function getTheme()
     return Termage::getTheme();
 }
 
+function getCsi()
+{
+    return Termage::getCsi();
+}
+
+function setCsi($value)
+{
+    return Termage::setCsi($value);
+}
+
+function getEsc()
+{
+    return Termage::getEsc();
+}
+
+function setEsc($value)
+{
+    return Termage::setEsc($value);
+}
+
 function div(string $value = '', string $classes = ''): Div
 {
     return Termage::div($value, $classes);

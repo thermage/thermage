@@ -14,12 +14,15 @@ declare(strict_types=1);
 
 namespace Termage\Base;
 
+use Termage\Termage;
 use Atomastic\Arrays\Arrays as Collection;
 use Atomastic\Strings\Strings;
 use BadMethodCallException;
 use Termage\Parsers\Shortcodes;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
+use Termage\Utils\Styles;
+use Termage\Utils\Color;
 
 use function abs;
 use function arrays as collection;
@@ -29,6 +32,7 @@ use function preg_replace;
 use function sprintf;
 use function strings;
 use function Termage\color;
+use function Termage\getCsi;
 use function Termage\terminal;
 
 use const PHP_EOL;
@@ -1067,8 +1071,8 @@ abstract class Element
                 $bg    = $this->styles->get('bg') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('bg'), $this->styles->get('bg')) : false;
                 $color = $this->styles->get('color') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('color'), $this->styles->get('color')) : false;
 
-                $value = ($color ? color()->textColor($color)->apply($value) : $value);
-                $value = ($bg ? color()->bgColor($bg)->apply($value) : $value);
+                $value = ($color ? Color::applyForegroundColor($value, $color) : $value);
+                $value = ($bg ? Color::applyBackgroundColor($value, $bg) : $value);
 
                 return $value;
             };
@@ -1077,7 +1081,7 @@ abstract class Element
             $applyBorderColor = function ($value) {
                 $color = $this->styles->get('border-color') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('border-color'), $this->styles->get('border-color')) : false;
 
-                $value = ($color ? color()->textColor($color)->apply($value) : $value);
+                $value = ($color ? Color::applyForegroundColor($value, $color) : $value);
 
                 return $value;
             };
@@ -1093,47 +1097,47 @@ abstract class Element
                     // Create box border top value.
                     $btStyleValue = '';
                     if ($hasBorder()) {
-                        $btStyleValue =  "\e[0m" . 
+                        $btStyleValue = Styles::resetAll() . 
                                         strings(' ')->repeat($ml) . 
                                         $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.top-left')) . 
                                         $applyBorderColor((string) strings(self::$theme->getVariables()->get('borders.' . $borderStyle . '.top'))->repeat($valueSpaces)) .
                                         $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.top-right')) .  
-                                        "\e[0m" . 
+                                        Styles::resetAll() . 
                                         PHP_EOL;
                     }
 
                     // Create box border bottom value.
                     $bbStyleValue = PHP_EOL;
                     if ($hasBorder()) {
-                        $bbStyleValue =  "\e[0m" . 
+                        $bbStyleValue = Styles::resetAll() . 
                                         strings(' ')->repeat($ml) . 
                                         $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.bottom-left')) . 
                                         $applyBorderColor((string) strings(self::$theme->getVariables()->get('borders.' . $borderStyle . '.bottom'))->repeat($valueSpaces)) . 
                                         $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.bottom-right')) . 
-                                        "\e[0m";
+                                        Styles::resetAll();
                     }
 
                     // Create box padding top value.
                     $ptStyleValue = '';
                     for ($i = 0; $i < $pt; $i++) {
-                        $ptStyleValue .=  "\e[0m" .
+                        $ptStyleValue .= Styles::resetAll() .
                                          strings(' ')->repeat($ml) . 
                                          ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') . 
                                          $applyTextAndBackgroundColor((string) strings(' ')->repeat($valueSpaces)) . 
                                          ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') . 
-                                         "\e[0m" . 
+                                         Styles::resetAll() . 
                                          PHP_EOL;
                     }
 
                     // Create box padding bottom value.
                     $pbStyleValue = PHP_EOL;
                     for ($i = 0; $i < $pb; $i++) {
-                        $pbStyleValue .=  "\e[0m" . 
+                        $pbStyleValue .= Styles::resetAll() . 
                                         strings(' ')->repeat($ml) . 
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') . 
                                         $applyTextAndBackgroundColor((string) strings(' ')->repeat($valueSpaces)) . 
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') . 
-                                        "\e[0m" . 
+                                        Styles::resetAll() . 
                                         PHP_EOL;
                     }
 
@@ -1173,7 +1177,7 @@ abstract class Element
                             // paddings left and right, 
                             // re-apply text and background colors, 
                             // apply borders.
-                            "\e[0m" . 
+                            Styles::resetAll() . 
                             strings(' ')->repeat($ml) .
                             ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') . 
                             $applyTextAndBackgroundColor(strings(' ')->repeat($pl) .
@@ -1205,7 +1209,7 @@ abstract class Element
                             // paddings left and right, 
                             // re-apply text and background colors, 
                             // apply borders.
-                            "\e[0m" . 
+                            Styles::resetAll() . 
                             strings(' ')->repeat($ml) .
                             ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') . 
                             $applyTextAndBackgroundColor(strings(' ')->repeat($spaces - $pr - $ml - $mr - ($hasBorder() ? $borderSpaces : 0)) .
@@ -1256,7 +1260,7 @@ abstract class Element
                             // Set box margin left, 
                             // paddings left and right, 
                             // re-apply text and background colors, 
-                            // apply borders.                            "\e[0m" . 
+                            // apply borders.                            Styles::resetAll() . 
                             strings(' ')->repeat($ml) .
                             ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') . 
                             $applyTextAndBackgroundColor(strings(' ')->repeat($currentLeftSpaces - ($hasBorder() ? $borderSpaces : 0)) .
@@ -1293,7 +1297,7 @@ abstract class Element
                             // paddings left and right, 
                             // re-apply text and background colors, 
                             // apply borders.
-                            "\e[0m" . 
+                            Styles::resetAll() . 
                             strings(' ')->repeat($ml) .
                             ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') . 
                             $applyTextAndBackgroundColor(strings(' ')->repeat($pl) .
@@ -1324,7 +1328,7 @@ abstract class Element
                             // paddings left and right, 
                             // re-apply text and background colors, 
                             // apply borders.
-                            "\e[0m" . 
+                            Styles::resetAll() . 
                             strings(' ')->repeat($ml) .
                             ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
                             $applyTextAndBackgroundColor(strings(' ')->repeat($spaces + $pl - ($hasBorder() ? $borderSpaces : 0)) .
@@ -1364,7 +1368,7 @@ abstract class Element
                             // paddings left and right, 
                             // re-apply text and background colors, 
                             // apply borders.
-                            "\e[0m" .
+                            Styles::resetAll() .
                             strings(' ')->repeat($ml) .
                             ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
                             $applyTextAndBackgroundColor(strings(' ')->repeat($leftSpaces + $pl - ($hasBorder() ? $borderSpaces / 2 : 0)) .
@@ -1391,54 +1395,54 @@ abstract class Element
         $color = function ($value) {
             $color = $this->styles->get('color') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('color'), $this->styles->get('color')) : false;
 
-            return $color ? color()->textColor($color)->apply($value) : $value;
+            return $color ? Color::applyForegroundColor($value, $color) : $value;
         };
 
         // Process style: bg
         $bg = function ($value) {
             $bg = $this->styles->get('bg') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('bg'), $this->styles->get('bg')) : false;
 
-            return $bg ? color()->bgColor($bg)->apply($value) : $value;
+            return $bg ? Color::applyBackgroundColor($value, $bg) : $value;
         };
 
         // Process style: bold
         $bold = function ($value) {
-            return $this->styles['bold'] ? "\e[1m" . $value . "\e[22m" : $value;
+            return $this->styles['bold'] ? Styles::setBold() . $value . Styles::resetBold() : $value;
         };
 
         // Process style: italic
         $italic = function ($value) {
-            return $this->styles['italic'] ? "\e[3m" . $value . "\e[23m" : $value;
+            return $this->styles['italic'] ? getCsi() . "3m" . $value . getCsi() . "23m" : $value;
         };
 
         // Process style: underline
         $underline = function ($value) {
-            return $this->styles['underline'] ? "\e[4m" . $value . "\e[24m" : $value;
+            return $this->styles['underline'] ? getCsi() . "4m" . $value . getCsi() . "24m" : $value;
         };
 
         // Process style: strikethrough
         $strikethrough = function ($value) {
-            return $this->styles['strikethrough'] ? "\e[9m" . $value . "\e[29m" : $value;
+            return $this->styles['strikethrough'] ? getCsi() . "9m" . $value . getCsi() . "29m" : $value;
         };
 
         // Process style: dim
         $dim = function ($value) {
-            return $this->styles['dim'] ? "\e[2m" . $value . "\e[22m" : $value;
+            return $this->styles['dim'] ? getCsi() . "2m" . $value . getCsi() . "22m" : $value;
         };
 
         // Process style: blink
         $blink = function ($value) {
-            return $this->styles['blink'] ? "\e[5m" . $value . "\e[25m" : $value;
+            return $this->styles['blink'] ? getCsi() . "5m" . $value . getCsi() . "25m" : $value;
         };
 
         // Process style: reverse
         $reverse = function ($value) {
-            return $this->styles['reverse'] ? "\e[7m" . $value . "\e[27m" : $value;
+            return $this->styles['reverse'] ? getCsi() . "7m" . $value . getCsi() . "27m" : $value;
         };
 
         // Process style: invisible
         $invisible = function ($value) {
-            return $this->styles['invisible'] ? "\e[8m" . $value . "\e[28m" : $value;
+            return $this->styles['invisible'] ? getCsi() . "8m" . $value . getCsi() . "28m" : $value;
         };
 
         // Process style: display
