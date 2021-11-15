@@ -97,7 +97,6 @@ final class Terminal
         return self::$height ?: 50;
     }
 
-
     /**
      * Set terminal width.
      *
