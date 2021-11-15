@@ -23,6 +23,7 @@ use function is_resource;
 use function preg_match;
 use function proc_close;
 use function proc_open;
+use function putenv;
 use function stream_get_contents;
 use function trim;
 
@@ -175,7 +176,7 @@ final class Terminal
      * Returns whether STDOUT has vt100 support (some Windows 10+ configurations).
      *
      * @return bool True if STDOUT has vt100 support otherwise false.
-     * 
+     *
      * @access private
      */
     private static function hasVt100Support(): bool
@@ -209,7 +210,7 @@ final class Terminal
      * Runs and parses mode CON if it's available, suppressing any error output.
      *
      * @return int[]|null An array composed of the width and the height or null if it could not be parsed
-     * 
+     *
      * @access private
      */
     private static function getConsoleMode(): ?array
@@ -225,7 +226,7 @@ final class Terminal
 
     /**
      * Runs and parses stty -a if it's available, suppressing any error output.
-     * 
+     *
      * @access private
      */
     private static function getSttyColumns(): ?string
@@ -235,7 +236,7 @@ final class Terminal
 
     /**
      * Read from process.
-     * 
+     *
      * @access private
      */
     private static function readFromProcess(string $command): ?string
