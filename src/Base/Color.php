@@ -18,7 +18,7 @@ use InvalidArgumentException;
 
 use function array_keys;
 use function array_merge;
-use function count;
+use function arrays as collection;
 use function getenv;
 use function hexdec;
 use function implode;
@@ -30,10 +30,8 @@ use function preg_match;
 use function round;
 use function sprintf;
 use function strings;
-use function strlen;
 use function substr;
 use function Termage\getCsi;
-use function arrays as collection;
 
 final class Color
 {
@@ -77,7 +75,7 @@ final class Color
      * @param string $color Color.
      *
      * @return string Returns text with applied foreground color.
-     * 
+     *
      * @access public
      */
     public static function applyForegroundColor(string $value, string $color): string
@@ -85,7 +83,7 @@ final class Color
         $setCodes   = implode(';', collection(self::parseColor($color))->toArray());
         $unsetCodes = implode(';', collection(['39'])->toArray());
 
-        return sprintf(getCsi() . "%sm", $setCodes) . $value . sprintf(getCsi() . "%sm", $unsetCodes);
+        return sprintf(getCsi() . '%sm', $setCodes) . $value . sprintf(getCsi() . '%sm', $unsetCodes);
     }
 
     /**
@@ -95,15 +93,15 @@ final class Color
      * @param string $color Color.
      *
      * @return string Returns text with applied background color.
-     * 
+     *
      * @access public
      */
     public static function applyBackgroundColor(string $value, string $color): string
     {
         $setCodes   = implode(';', collection(self::parseColor($color, true))->toArray());
         $unsetCodes = implode(';', collection(['49'])->toArray());
-        
-        return sprintf(getCsi() . "%sm", $setCodes) . $value . sprintf(getCsi() . "%sm", $unsetCodes);
+
+        return sprintf(getCsi() . '%sm', $setCodes) . $value . sprintf(getCsi() . '%sm', $unsetCodes);
     }
 
     /**
