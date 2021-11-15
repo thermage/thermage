@@ -173,4 +173,28 @@ final class Styles {
     {
         return getCsi() . "25m";
     }
+
+    /**
+     * Set reverse style.
+     * 
+     * @return string Set reverse style.
+     * 
+     * @access public
+     */
+    public static function setReverse(): string
+    {
+        return getCsi() . "7m";
+    }
+
+    /**
+     * Reset reverse style.
+     * 
+     * @return string Reset reverse style.
+     * 
+     * @access public
+     */
+    public static function resetReverse(): string 
+    {
+        return getCsi() . "27m";
+    }
 }
