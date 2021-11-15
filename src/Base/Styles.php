@@ -77,4 +77,52 @@ final class Styles {
     {
         return getCsi() . "23m";
     }
+
+    /**
+     * Set underline style.
+     * 
+     * @return string Set underline style.
+     * 
+     * @access public
+     */
+    public static function setUnderline(): string
+    {
+        return getCsi() . "4m";
+    }
+
+    /**
+     * Reset underline style.
+     * 
+     * @return string Reset underline style.
+     * 
+     * @access public
+     */
+    public static function resetUnderline(): string 
+    {
+        return getCsi() . "24m";
+    }
+
+    /**
+     * Set strikethrough style.
+     * 
+     * @return string Set strikethrough style.
+     * 
+     * @access public
+     */
+    public static function setStrikethrough(): string
+    {
+        return getCsi() . "9m";
+    }
+
+    /**
+     * Reset strikethrough style.
+     * 
+     * @return string Reset strikethrough style.
+     * 
+     * @access public
+     */
+    public static function resetStrikethrough(): string 
+    {
+        return getCsi() . "29m";
+    }
 }
