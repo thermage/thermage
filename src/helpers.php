@@ -28,8 +28,8 @@ use Termage\Elements\Span;
 use Termage\Elements\Spinner;
 use Termage\Elements\Strikethrough;
 use Termage\Elements\Underline;
-use Termage\Utils\Color;
-use Termage\Utils\Terminal;
+use Termage\Base\Color;
+use Termage\Base\Terminal;
 
 function setShortcodes($shortcodes): void
 {
