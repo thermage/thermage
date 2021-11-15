@@ -19,9 +19,9 @@ use function Termage\getCsi;
 final class Styles {
 
     /**
-     * Reset all styles.
+     * Reset all styles and colors.
      * 
-     * @return string Result all styles.
+     * @return string Result all styles and colors.
      * 
      * @access public
      */
