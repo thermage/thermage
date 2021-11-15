@@ -197,4 +197,28 @@ final class Styles {
     {
         return getCsi() . "27m";
     }
+
+    /**
+     * Set invisible style.
+     * 
+     * @return string Set invisible style.
+     * 
+     * @access public
+     */
+    public static function setInvisible(): string
+    {
+        return getCsi() . "8m";
+    }
+
+    /**
+     * Reset invisible style.
+     * 
+     * @return string Reset invisible style.
+     * 
+     * @access public
+     */
+    public static function resetInvisible(): string 
+    {
+        return getCsi() . "28m";
+    }
 }
