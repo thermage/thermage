@@ -12,7 +12,7 @@ declare(strict_types=1);
  * Redistributions of files must retain the above copyright notice.
  */
 
-namespace Termage\Utils;
+namespace Termage\Base;
 
 use function exec;
 use function fclose;

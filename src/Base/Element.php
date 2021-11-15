@@ -21,8 +21,8 @@ use BadMethodCallException;
 use Termage\Parsers\Shortcodes;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
-use Termage\Utils\Styles;
-use Termage\Utils\Color;
+use Termage\Base\Styles;
+use Termage\Base\Color;
 
 use function abs;
 use function arrays as collection;

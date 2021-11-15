@@ -15,7 +15,7 @@ declare(strict_types=1);
 namespace Termage\Elements;
 
 use Termage\Base\Element;
-use Termage\Utils\Color;
+use Termage\Base\Color;
 
 use function array_column;
 use function array_sum;
