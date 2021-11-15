@@ -14,9 +14,9 @@ declare(strict_types=1);
 
 namespace Termage\Parsers;
 
+use Termage\Base\Color;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
-use Termage\Base\Color;
 use Thunder\Shortcode\Shortcode\ShortcodeInterface;
 use Thunder\Shortcode\ShortcodeFacade;
 
