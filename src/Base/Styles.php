@@ -19,19 +19,37 @@ use function Termage\getCsi;
 final class Styles {
 
     /**
-     * Reset all styles
+     * Reset all styles.
+     * 
+     * @return string Result all styles.
+     * 
+     * @access public
      */
     public static function resetAll(): string
     {
         return getCsi() . "0m";
     }
 
-    public static function setBold()
+    /**
+     * Set bold style.
+     * 
+     * @return string Set bold style.
+     * 
+     * @access public
+     */
+    public static function setBold(): string
     {
         return getCsi() . "1m";
     }
 
-    public static function resetBold()
+    /**
+     * Reset bold style.
+     * 
+     * @return string Reset bold style.
+     * 
+     * @access public
+     */
+    public static function resetBold(): string 
     {
         return getCsi() . "22m";
     }
