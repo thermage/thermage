@@ -58,6 +58,8 @@ final class Cursor
     /**
      * Move cursor up sequence.
      *
+     * @param int $rows Rows.
+     * 
      * @return string Returns move cursor up sequence.
      *
      * @access public
@@ -70,6 +72,8 @@ final class Cursor
     /**
      * Move cursor up to begin of the line sequence.
      *
+     * @param int $rows Rows.
+     * 
      * @return string Returns move cursor up to begin of the line sequence.
      *
      * @access public
@@ -82,6 +86,8 @@ final class Cursor
     /**
      * Move cursor down to begin of the line sequence.
      *
+     * @param int $rows Rows.
+     * 
      * @return string Returns move cursor down to begin of the line sequence.
      *
      * @access public
@@ -94,6 +100,8 @@ final class Cursor
     /**
      * Move cursor down sequence.
      *
+     * @param int $rows Rows.
+     * 
      * @return string Returns Move cursor down sequence.
      *
      * @access public
@@ -106,6 +114,8 @@ final class Cursor
     /**
      * Move cursor forward sequence.
      *
+     * @param int $cols Cols.
+     * 
      * @return string Returns move cursor forward sequence.
      *
      * @access public
@@ -118,6 +128,8 @@ final class Cursor
     /**
      * Move cursor back sequence.
      *
+     * @param int $cols Cols.
+     * 
      * @return string Returns move cursor back sequence.
      *
      * @access public
@@ -130,6 +142,9 @@ final class Cursor
     /**
      * Move cursor to sequence.
      *
+     * @param int $col Col.
+     * @param int $row Row.
+     * 
      * @return string Returns move cursor to sequence.
      *
      * @access public
@@ -142,6 +157,8 @@ final class Cursor
     /**
      * Move cursor to position in current line sequence.
      *
+     * @param int $col Col.
+     * 
      * @return string Returns move cursor to position in current line sequence.
      *
      * @access public
@@ -154,6 +171,8 @@ final class Cursor
     /**
      * Move cursor to position in current column sequence.
      *
+     * @param int $row Row.
+     * 
      * @return string Returns move cursor to position in current column sequence.
      *
      * @access public
