@@ -84,7 +84,7 @@ class Termage
      *
      * @access public
      */
-    public static function setCsi(string $value): void
+    public static function setCsi(string $value)
     {
         self::$csi = $value;
     }
@@ -108,7 +108,7 @@ class Termage
      *
      * @access public
      */
-    public static function setOsc(string $value): void
+    public static function setOsc(string $value)
     {
         self::$csi = $value;
     }
@@ -132,7 +132,7 @@ class Termage
      *
      * @access public
      */
-    public static function setEsc(string $value): void
+    public static function setEsc(string $value)
     {
         self::$esc = $value;
     }
