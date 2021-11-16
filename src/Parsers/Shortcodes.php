@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Termage\Parsers;
 
 use Termage\Base\Color;
+use Termage\Base\Styles;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
 use Thunder\Shortcode\Shortcode\ShortcodeInterface;
@@ -229,7 +230,7 @@ class Shortcodes
      */
     protected function boldShortcode(ShortcodeInterface $s): string
     {
-        return "\e[1m" . $s->getContent() . "\e[22m";
+        return Styles::setBold() . $s->getContent() . Styles::resetBold();
     }
 
     /**
@@ -243,7 +244,7 @@ class Shortcodes
      */
     protected function italicShortcode(ShortcodeInterface $s): string
     {
-        return "\e[3m" . $s->getContent() . "\e[23m";
+        return Styles::setItalic() . $s->getContent() . Styles::resetItalic();
     }
 
     /**
@@ -257,7 +258,7 @@ class Shortcodes
      */
     protected function underlineShortcode(ShortcodeInterface $s): string
     {
-        return "\e[4m" . $s->getContent() . "\e[24m";
+        return Styles::setUnderline() . $s->getContent() . Styles::resetUnderline();
     }
 
     /**
@@ -271,7 +272,7 @@ class Shortcodes
      */
     protected function strikethroughShortcode(ShortcodeInterface $s): string
     {
-        return "\e[9m" . $s->getContent() . "\e[29m";
+        return Styles::setStrikethrough() . $s->getContent() . Styles::resetStrikethrough();
     }
 
     /**
@@ -285,7 +286,7 @@ class Shortcodes
      */
     protected function dimShortcode(ShortcodeInterface $s): string
     {
-        return "\e[2m" . $s->getContent() . "\e[22m";
+        return Styles::setDim() . $s->getContent() . Styles::resetDim();
     }
 
     /**
@@ -299,7 +300,7 @@ class Shortcodes
      */
     protected function blinkShortcode(ShortcodeInterface $s): string
     {
-        return "\e[5m" . $s->getContent() . "\e[25m";
+        return Styles::setBlink() . $s->getContent() . Styles::resetBlink();
     }
 
     /**
@@ -313,7 +314,7 @@ class Shortcodes
      */
     protected function reverseShortcode(ShortcodeInterface $s): string
     {
-        return "\e[7m" . $s->getContent() . "\e[27m";
+        return Styles::setReverse() . $s->getContent() . Styles::resetReverse();
     }
 
     /**
@@ -327,7 +328,7 @@ class Shortcodes
      */
     protected function invisibleShortcode(ShortcodeInterface $s): string
     {
-        return "\e[8m" . $s->getContent() . "\e[28m";
+        return Styles::setInvisible() . $s->getContent() . Styles::setInvisible();
     }
 
     /**
