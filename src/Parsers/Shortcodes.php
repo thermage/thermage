@@ -328,7 +328,7 @@ class Shortcodes
      */
     protected function invisibleShortcode(ShortcodeInterface $s): string
     {
-        return Styles::setInvisible() . $s->getContent() . Styles::setInvisible();
+        return Styles::setInvisible() . $s->getContent() . Styles::resetInvisible();
     }
 
     /**
