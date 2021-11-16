@@ -19,50 +19,49 @@ use function Termage\getCsi;
 final class Screen
 {
     /**
-     * Clear saved lines sequence.
-     * note: works only in xterm
+     * Erase saved lines sequence.
      *
-     * @return string Returns clear saved lines sequence.
+     * @return string Returns erase saved lines sequence.
      *
      * @access public
      */
-    public static function clearSavedLines(): string
+    public static function eraseSavedLines(): string
     {
         return getCsi() . '3J';
     }
 
     /**
-     * Clear all sequence.
+     * Erase entire screen sequence.
      *
-     * @return string Returns clear saved lines sequence.
+     * @return string Returns erase saved lines sequence.
      *
      * @access public
      */
-    public static function clearAll(): string
+    public static function eraseAll(): string
     {
         return getCsi() . '2J';
     }
 
     /**
-     * Clear above sequence.
+     * Erase from cursor to beginning of screen sequence.
      *
-     * @return string Returns clear saved lines sequence.
+     * @return string Returns erase saved lines sequence.
      *
      * @access public
      */
-    public static function clearAbove(): string
+    public static function eraseAbove(): string
     {
         return getCsi() . '1J';
     }
 
     /**
-     * Clear below sequence.
+     * Erase from cursor until end of screen.
      *
-     * @return string Returns clear saved lines sequence.
+     * @return string Returns erase saved lines sequence.
      *
      * @access public
      */
-    public static function clearBelow(): string
+    public static function eraseBelow(): string
     {
         return getCsi() . '0J';
     }
