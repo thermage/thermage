@@ -23,6 +23,9 @@ use Thunder\Shortcode\ShortcodeFacade;
 
 use function str_replace;
 use function strip_tags;
+use function Termage\getOsc;
+use function Termage\getCsi;
+use function Termage\getEsc;
 
 class Shortcodes
 {
@@ -342,7 +345,7 @@ class Shortcodes
      */
     protected function anchorShortcode(ShortcodeInterface $s): string
     {
-        return "\e]8;;" . $s->getParameter('href') . "\e\\" . $s->getContent() . "\e]8;;\e\\";
+        return getOsc() . "8;;" . $s->getParameter('href') . getEsc() . "\\" . $s->getContent() . getOsc() . "8;;" . getEsc() . "\\";
     }
 
     /**
