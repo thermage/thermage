@@ -1,6 +1,9 @@
 <a name="0.11.0"></a>
 # [0.11.0](https://github.com/termage/termage) (2021-11-xx)
 * Added ability to set element custom borders.
+* Added new base class `Styles`.
+* Added new base class `Screen`.
+* Added new base class `Cursor`.
 * Added new public static termage method: `getCsi` to get Control Sequence Introducer.
 * Added new public static termage method: `setCsi` to set Control Sequence Introducer.
 * Added new public static termage method: `getEsc` to get Control Sequence Escape.
