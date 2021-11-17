@@ -1,6 +1,12 @@
 <a name="0.11.0"></a>
 # [0.11.0](https://github.com/termage/termage) (2021-11-xx)
 * Added ability to set element custom borders.
+* Added new public static termage method: `getCsi` to get Control Sequence Introducer.
+* Added new public static termage method: `setCsi` to set Control Sequence Introducer.
+* Added new public static termage method: `getEsc` to get Control Sequence Escape.
+* Added new public static termage method: `setEsc` to set Control Sequence Escape.
+* Added new public static termage method: `getOsc` to get Operating System Command.
+* Added new public static termage method: `setOsc` to set Operating System Command.
 * Added new public element method `b` to set border style.
 * Added new public element method `bColor` to set border color.
 * Added new magic classes: `b`, `b-color`.
@@ -11,6 +17,9 @@
 * Terminal public method `setWidth` changed to public static.
 * Terminal public method `getHeight` changed to public static.
 * Terminal public method `setHeight` changed to public static.
+* Color public method `textColor` changed to public static and renamed to `applyForegroundColor`.
+* Color public method `bgColor` changed to public static and renamed to `applyBackgroundColor`.
+* Classes `Color` and `Terminal` moved from `Utils` to `Base`.
 
 <a name="0.10.0"></a>
 # [0.10.0](https://github.com/termage/termage) (2021-11-09)
