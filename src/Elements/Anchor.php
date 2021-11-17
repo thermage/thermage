@@ -16,6 +16,9 @@ namespace Termage\Elements;
 
 use Termage\Base\Element;
 
+use function Termage\getOsc;
+use function Termage\getEsc;
+
 final class Anchor extends Element
 {
     /**
@@ -29,7 +32,7 @@ final class Anchor extends Element
      */
     public function href(string $value): self
     {
-        $this->value("\e]8;;" . $value . "\e\\" . $this->getValue() . "\e]8;;\e\\");
+        $this->value(getOsc() . "8;;" . $value . getEsc() . "\\" . $this->getValue() . getOsc() . "8;;" . getEsc() . "\\");
 
         return $this;
     }
