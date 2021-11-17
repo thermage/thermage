@@ -17,6 +17,9 @@
 * Terminal public method `setWidth` changed to public static.
 * Terminal public method `getHeight` changed to public static.
 * Terminal public method `setHeight` changed to public static.
+* Color public method `textColor` changed to public static and renamed to `applyForegroundColor`.
+* Color public method `bgColor` changed to public static and renamed to `applyBackgroundColor`.
+* Classes `Color` and `Terminal` moved from `Utils` to `Base`.
 
 <a name="0.10.0"></a>
 # [0.10.0](https://github.com/termage/termage) (2021-11-09)
