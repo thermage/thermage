@@ -1,5 +1,5 @@
 <a name="0.11.0"></a>
-# [0.11.0](https://github.com/termage/termage) (2021-11-xx)
+# [0.11.0](https://github.com/termage/termage) (2021-11-17)
 * Added ability to set element custom borders.
 * Added new base class `Styles`.
 * Added new base class `Screen`.
