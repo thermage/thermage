@@ -11,6 +11,7 @@ use function arrays as collection;
 use function Termage\alert;
 use function Termage\setTheme;
 use function Termage\getTheme;
+use function Termage\getCsi;
 
 beforeEach(function() {
     setTheme(new AlertTestTheme());
@@ -18,67 +19,67 @@ beforeEach(function() {
 
 test('test alert w auto', function (): void {
     $value = alert('Stay RAD!')->wAuto()->render();
-    $alert = "\e[30m\e[44m\e[0m\e[44m\e[30m\e[39m\e[49m\e[49m\e[39m\e[30m\e[44m\e[0m\e[44m\e[30mStayRAD!\e[39m\e[49m\e[49m\e[39m\e[30m\e[44m\e[0m\e[44m\e[30m\e[39m\e[49m\e[49m\e[39m";
+    $alert = getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30mStayRAD!" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert info', function (): void {
     $value = alert('Stay RAD!')->info()->render();
-    $alert = "\e[30m\e[44m\e[0m\e[44m\e[30m\e[39m\e[49m\e[49m\e[39m\e[30m\e[44m\e[0m\e[44m\e[30mStayRAD!\e[39m\e[49m\e[49m\e[39m\e[30m\e[44m\e[0m\e[44m\e[30m\e[39m\e[49m\e[49m\e[39m";
+    $alert = getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30mStayRAD!" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert warning', function (): void {
     $value = alert('Stay RAD!')->warning()->render();
-    $alert = "\e[30m\e[43m\e[0m\e[43m\e[30m\e[39m\e[49m\e[49m\e[39m\e[30m\e[43m\e[0m\e[43m\e[30mStayRAD!\e[39m\e[49m\e[49m\e[39m\e[30m\e[43m\e[0m\e[43m\e[30m\e[39m\e[49m\e[49m\e[39m";
+    $alert = getCsi() . "30m" . getCsi() . "43m" . getCsi() . "0m" . getCsi() . "43m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "43m" . getCsi() . "0m" . getCsi() . "43m" . getCsi() . "30mStayRAD!" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "43m" . getCsi() . "0m" . getCsi() . "43m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert danger', function (): void {
     $value = alert('Stay RAD!')->danger()->render();
-    $alert = "\e[37m\e[41m\e[0m\e[41m\e[37m\e[39m\e[49m\e[49m\e[39m\e[37m\e[41m\e[0m\e[41m\e[37mStayRAD!\e[39m\e[49m\e[49m\e[39m\e[37m\e[41m\e[0m\e[41m\e[37m\e[39m\e[49m\e[49m\e[39m";
+    $alert = getCsi() . "37m" . getCsi() . "41m" . getCsi() . "0m" . getCsi() . "41m" . getCsi() . "37m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "37m" . getCsi() . "41m" . getCsi() . "0m" . getCsi() . "41m" . getCsi() . "37mStayRAD!" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "37m" . getCsi() . "41m" . getCsi() . "0m" . getCsi() . "41m" . getCsi() . "37m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert success', function (): void {
     $value = alert('Stay RAD!')->success()->render();
-    $alert = "\e[30m\e[42m\e[0m\e[42m\e[30m\e[39m\e[49m\e[49m\e[39m\e[30m\e[42m\e[0m\e[42m\e[30mStayRAD!\e[39m\e[49m\e[49m\e[39m\e[30m\e[42m\e[0m\e[42m\e[30m\e[39m\e[49m\e[49m\e[39m";
+    $alert = getCsi() . "30m" . getCsi() . "42m" . getCsi() . "0m" . getCsi() . "42m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "42m" . getCsi() . "0m" . getCsi() . "42m" . getCsi() . "30mStayRAD!" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "42m" . getCsi() . "0m" . getCsi() . "42m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert primary', function (): void {
     $value = alert('Stay RAD!')->primary()->render();
-    $alert = "\e[37m\e[44m\e[0m\e[44m\e[37m\e[39m\e[49m\e[49m\e[39m\e[37m\e[44m\e[0m\e[44m\e[37mStayRAD!\e[39m\e[49m\e[49m\e[39m\e[37m\e[44m\e[0m\e[44m\e[37m\e[39m\e[49m\e[49m\e[39m";
+    $alert = getCsi() . "37m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "37m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "37m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "37mStayRAD!" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "37m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "37m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert secondary', function (): void {
     $value = alert('Stay RAD!')->secondary()->render();
-    $alert = "\e[30m\e[100m\e[0m\e[100m\e[30m\e[39m\e[49m\e[49m\e[39m\e[30m\e[100m\e[0m\e[100m\e[30mStayRAD!\e[39m\e[49m\e[49m\e[39m\e[30m\e[100m\e[0m\e[100m\e[30m\e[39m\e[49m\e[49m\e[39m";
+    $alert = getCsi() . "30m" . getCsi() . "100m" . getCsi() . "0m" . getCsi() . "100m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "100m" . getCsi() . "0m" . getCsi() . "100m" . getCsi() . "30mStayRAD!" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "100m" . getCsi() . "0m" . getCsi() . "100m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert with text align right', function (): void {
     $value = alert('Stay RAD!')->textAlignRight()->render();
-    $alert = "\e[30m\e[44m\e[0m\e[44m\e[30m\e[39m\e[49m\e[49m\e[39m\e[30m\e[44m\e[0m\e[44m\e[30mStayRAD!\e[39m\e[49m\e[49m\e[39m\e[30m\e[44m\e[0m\e[44m\e[30m\e[39m\e[49m\e[49m\e[39m";
+    $alert = getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30mStayRAD!" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert with text align left', function (): void {
     $value = alert('Stay RAD!')->textAlignLeft()->render();
-    $alert = "\e[30m\e[44m\e[0m\e[44m\e[30m\e[39m\e[49m\e[49m\e[39m\e[30m\e[44m\e[0m\e[44m\e[30mStayRAD!\e[39m\e[49m\e[49m\e[39m\e[30m\e[44m\e[0m\e[44m\e[30m\e[39m\e[49m\e[49m\e[39m";
+    $alert = getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30mStayRAD!" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert w', function (): void {
     $value = alert('Stay RAD!')->w(200)->render();
-    $alert = "\e[30m\e[44m\e[0m\e[44m\e[30m\e[39m\e[49m\e[49m\e[39m\e[30m\e[44m\e[0m\e[44m\e[30mStayRAD!\e[39m\e[49m\e[49m\e[39m\e[30m\e[44m\e[0m\e[44m\e[30m\e[39m\e[49m\e[49m\e[39m";
+    $alert = getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30mStayRAD!" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 
 test('test alert w magic', function (): void {
     $value = alert('Stay RAD!')->w200()->render();
-    $alert = "\e[30m\e[44m\e[0m\e[44m\e[30m\e[39m\e[49m\e[49m\e[39m\e[30m\e[44m\e[0m\e[44m\e[30mStayRAD!\e[39m\e[49m\e[49m\e[39m\e[30m\e[44m\e[0m\e[44m\e[30m\e[39m\e[49m\e[49m\e[39m";
+    $alert = getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30mStayRAD!" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m" . getCsi() . "30m" . getCsi() . "44m" . getCsi() . "0m" . getCsi() . "44m" . getCsi() . "30m" . getCsi() . "39m" . getCsi() . "49m" . getCsi() . "49m" . getCsi() . "39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($alert);
 });
 

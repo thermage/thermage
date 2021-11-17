@@ -12,13 +12,13 @@ declare(strict_types=1);
  * Redistributions of files must retain the above copyright notice.
  */
 
-namespace Termage\Utils;
+namespace Termage\Base;
 
 use InvalidArgumentException;
 
 use function array_keys;
 use function array_merge;
-use function count;
+use function arrays as collection;
 use function getenv;
 use function hexdec;
 use function implode;
@@ -30,8 +30,8 @@ use function preg_match;
 use function round;
 use function sprintf;
 use function strings;
-use function strlen;
 use function substr;
+use function Termage\getCsi;
 
 final class Color
 {
@@ -69,49 +69,39 @@ final class Color
     ];
 
     /**
-     * Foreground color.
+     * Set text foreground color.
      *
-     * @param string Foreground color.
+     * @param string $value Value.
+     * @param string $color Color.
      *
-     * @access private
-     */
-    private string $foreground = '';
-
-    /**
-     * Background color.
-     *
-     * @param string Background color.
-     *
-     * @access private
-     */
-    private string $background = '';
-
-    /**
-     * Set text color.
-     *
-     * @return self Returns instance of the Color class.
+     * @return string Returns text with applied foreground color.
      *
      * @access public
      */
-    public function textColor($color): self
+    public static function applyForegroundColor(string $value, string $color): string
     {
-        $this->foreground = $this->parseColor($color);
+        $setCodes   = implode(';', collection(self::parseColor($color))->toArray());
+        $unsetCodes = implode(';', collection(['39'])->toArray());
 
-        return $this;
+        return sprintf(getCsi() . '%sm', $setCodes) . $value . sprintf(getCsi() . '%sm', $unsetCodes);
     }
 
     /**
-     * Set bg color.
+     * Set text background color.
      *
-     * @return self Returns instance of the Color class.
+     * @param string $value Value.
+     * @param string $color Color.
+     *
+     * @return string Returns text with applied background color.
      *
      * @access public
      */
-    public function bgColor($color): self
+    public static function applyBackgroundColor(string $value, string $color): string
     {
-        $this->background = $this->parseColor($color, true);
+        $setCodes   = implode(';', collection(self::parseColor($color, true))->toArray());
+        $unsetCodes = implode(';', collection(['49'])->toArray());
 
-        return $this;
+        return sprintf(getCsi() . '%sm', $setCodes) . $value . sprintf(getCsi() . '%sm', $unsetCodes);
     }
 
     /**
@@ -121,7 +111,7 @@ final class Color
      *
      * @access public
      */
-    public function getRandomHexColor(): string
+    public static function getRandomHexColor(): string
     {
         return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
     }
@@ -133,77 +123,13 @@ final class Color
      *
      * @access public
      */
-    public function getRandomRgbColor(): array
+    public static function getRandomRgbColor(): array
     {
         return [
             'r' => mt_rand(0, 255),
             'g' => mt_rand(0, 255),
             'b' => mt_rand(0, 255),
         ];
-    }
-
-    /**
-     * Apply color for value.
-     *
-     * @param string $value Value.
-     *
-     * @return string Value with applied color.
-     *
-     * @access public
-     */
-    public function apply(string $value): string
-    {
-        return $this->set() . $value . $this->unset();
-    }
-
-    /**
-     * Set color.
-     *
-     * @return string Value with set color.
-     *
-     * @access public
-     */
-    public function set(): string
-    {
-        $setCodes = [];
-        if ($this->foreground !== '') {
-            $setCodes[] = $this->foreground;
-        }
-
-        if ($this->background !== '') {
-            $setCodes[] = $this->background;
-        }
-
-        if (count($setCodes) === 0) {
-            return '';
-        }
-
-        return sprintf("\e[%sm", implode(';', $setCodes));
-    }
-
-    /**
-     * Unset color.
-     *
-     * @return string Value with unset color.
-     *
-     * @access public
-     */
-    public function unset(): string
-    {
-        $unsetCodes = [];
-        if ($this->foreground !== '') {
-            $unsetCodes[] = 39;
-        }
-
-        if ($this->background !== '') {
-            $unsetCodes[] = 49;
-        }
-
-        if (count($unsetCodes) === 0) {
-            return '';
-        }
-
-        return sprintf("\e[%sm", implode(';', $unsetCodes));
     }
 
     /**
@@ -216,28 +142,28 @@ final class Color
      *
      * @access public
      */
-    private function parseColor(string $color, bool $background = false): string
+    private static function parseColor(string $color, bool $background = false): string
     {
         if ($color === '') {
             return '';
         }
 
         if (strings($color)->startsWith('rgb(') && strings($color)->endsWith(')')) {
-            $color = '#' . $this->convertRgbColorToHex($color);
+            $color = '#' . self::convertRgbColorToHex($color);
         }
 
         if (strings($color)->startsWith('#')) {
             $color = substr($color, 1);
 
-            if (strlen($color) === 3) {
+            if (strings($color)->length() === 3) {
                 $color = $color[0] . $color[0] . $color[1] . $color[1] . $color[2] . $color[2];
             }
 
-            if (strlen($color) !== 6) {
+            if (strings($color)->length() !== 6) {
                 throw new InvalidArgumentException(sprintf('Invalid "%s" color.', $color));
             }
 
-            return ($background ? '4' : '3') . $this->convertHexColorToAnsi(hexdec($color));
+            return ($background ? '4' : '3') . self::convertHexColorToAnsi(hexdec($color));
         }
 
         if (isset(self::COLORS[$color])) {
@@ -260,7 +186,7 @@ final class Color
      *
      * @access private
      */
-    public function convertRgbColorToHex(string $color): string
+    public static function convertRgbColorToHex(string $color): string
     {
         if (preg_match('/(\d{1,3})\,?\s?(\d{1,3})\,?\s?(\d{1,3})/', $color, $matches)) {
             $color = sprintf('%02x%02x%02x', $matches[1], $matches[2], $matches[3]);
@@ -278,14 +204,14 @@ final class Color
      *
      * @access private
      */
-    private function convertHexColorToAnsi(int $color): string
+    private static function convertHexColorToAnsi(int $color): string
     {
         $r = ($color >> 16) & 255;
         $g = ($color >> 8) & 255;
         $b = $color & 255;
 
         if (getenv('COLORTERM') !== 'truecolor') {
-            return (string) $this->degradeHexColorToAnsi($r, $g, $b);
+            return (string) self::degradeHexColorToAnsi($r, $g, $b);
         }
 
         return sprintf('8;2;%d;%d;%d', $r, $g, $b);
@@ -302,9 +228,9 @@ final class Color
      *
      * @access private
      */
-    private function degradeHexColorToAnsi(int $r, int $g, int $b): int
+    private static function degradeHexColorToAnsi(int $r, int $g, int $b): int
     {
-        if (round($this->getSaturation($r, $g, $b) / 50) === 0) {
+        if (round(self::getSaturation($r, $g, $b) / 50) === 0) {
             return 0;
         }
 
@@ -322,7 +248,7 @@ final class Color
      *
      * @access private
      */
-    private function getSaturation(int $r, int $g, int $b): int
+    private static function getSaturation(int $r, int $g, int $b): int
     {
         $r /= 255;
         $g /= 255;

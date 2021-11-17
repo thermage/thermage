@@ -14,6 +14,8 @@ declare(strict_types=1);
 
 namespace Termage;
 
+use Termage\Base\Color;
+use Termage\Base\Terminal;
 use Termage\Elements\Alert;
 use Termage\Elements\Anchor;
 use Termage\Elements\Bold;
@@ -28,8 +30,6 @@ use Termage\Elements\Span;
 use Termage\Elements\Spinner;
 use Termage\Elements\Strikethrough;
 use Termage\Elements\Underline;
-use Termage\Utils\Color;
-use Termage\Utils\Terminal;
 
 function setShortcodes($shortcodes): void
 {
@@ -49,6 +49,36 @@ function setTheme($theme): void
 function getTheme()
 {
     return Termage::getTheme();
+}
+
+function getCsi()
+{
+    return Termage::getCsi();
+}
+
+function setCsi($value)
+{
+    return Termage::setCsi($value);
+}
+
+function getOsc()
+{
+    return Termage::getOsc();
+}
+
+function setOsc($value)
+{
+    return Termage::setOsc($value);
+}
+
+function getEsc()
+{
+    return Termage::getEsc();
+}
+
+function setEsc($value)
+{
+    return Termage::setEsc($value);
 }
 
 function div(string $value = '', string $classes = ''): Div

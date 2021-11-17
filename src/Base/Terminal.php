@@ -12,7 +12,7 @@ declare(strict_types=1);
  * Redistributions of files must retain the above copyright notice.
  */
 
-namespace Termage\Utils;
+namespace Termage\Base;
 
 use function exec;
 use function fclose;
@@ -23,6 +23,7 @@ use function is_resource;
 use function preg_match;
 use function proc_close;
 use function proc_open;
+use function putenv;
 use function stream_get_contents;
 use function trim;
 
@@ -62,7 +63,7 @@ final class Terminal
      *
      * @access public
      */
-    public function getWidth(): int
+    public static function getWidth(): int
     {
         $width = getenv('COLUMNS');
         if ($width !== false) {
@@ -83,7 +84,7 @@ final class Terminal
      *
      * @access public
      */
-    public function getHeight(): int
+    public static function getHeight(): int
     {
         $height = getenv('LINES');
         if ($height !== false) {
@@ -97,7 +98,6 @@ final class Terminal
         return self::$height ?: 50;
     }
 
-
     /**
      * Set terminal width.
      *
@@ -105,11 +105,9 @@ final class Terminal
      *
      * @access public
      */
-    public function width(int $value): self
+    public static function setWidth(int $value): void
     {
         putenv('COLUMNS=' . $value);
-
-        return $this;
     }
 
     /**
@@ -119,11 +117,9 @@ final class Terminal
      *
      * @access public
      */
-    public function height(int $value): self
+    public static function setHeight(int $value): void
     {
         putenv('ROWS=' . $value);
-
-        return $this;
     }
 
     /**
@@ -180,7 +176,7 @@ final class Terminal
      * Returns whether STDOUT has vt100 support (some Windows 10+ configurations).
      *
      * @return bool True if STDOUT has vt100 support otherwise false.
-     * 
+     *
      * @access private
      */
     private static function hasVt100Support(): bool
@@ -214,7 +210,7 @@ final class Terminal
      * Runs and parses mode CON if it's available, suppressing any error output.
      *
      * @return int[]|null An array composed of the width and the height or null if it could not be parsed
-     * 
+     *
      * @access private
      */
     private static function getConsoleMode(): ?array
@@ -230,7 +226,7 @@ final class Terminal
 
     /**
      * Runs and parses stty -a if it's available, suppressing any error output.
-     * 
+     *
      * @access private
      */
     private static function getSttyColumns(): ?string
@@ -240,7 +236,7 @@ final class Terminal
 
     /**
      * Read from process.
-     * 
+     *
      * @access private
      */
     private static function readFromProcess(string $command): ?string

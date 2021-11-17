@@ -45,7 +45,7 @@ class Theme implements ThemeInterface
     final public function getDefaultVariables(): Collection
     {
         return collection([
-            // Color system.
+            // Colors.
             'colors' => [
                 'white'   => '#ffffff',
                 'gray100' => '#f8f9fa',
@@ -179,7 +179,7 @@ class Theme implements ThemeInterface
                 'dark'      => '#212529', // gray900
             ],
 
-            // Spacing
+            // Spacing.
             'spacer' => 1,
 
             // Alert element.
@@ -217,6 +217,50 @@ class Theme implements ThemeInterface
 
             // Hr element.
             'hr' => ['text-align' => 'left'],
+
+            // Borders.
+            'borders' => [
+                'square' => [
+                    'top-left' => '┌',
+                    'top' => '─',
+                    'top-right' => '┐',
+                    'right' => '│',
+                    'left' => '│',
+                    'bottom-right' => '┘',
+                    'bottom' => '─',
+                    'bottom-left' => '└',
+                ],
+                'rounded' => [
+                    'top-left' => '╭',
+                    'top' => '─',
+                    'top-right' => '╮',
+                    'right' => '│',
+                    'left' => '│',
+                    'bottom-right' => '╯',
+                    'bottom' => '─',
+                    'bottom-left' => '╰',
+                ],
+                'double' => [
+                    'top-left' => '╔',
+                    'top' => '═',
+                    'top-right' => '╗',
+                    'right' => '║',
+                    'left' => '║',
+                    'bottom-right' => '╝',
+                    'bottom' => '═',
+                    'bottom-left' => '╚',
+                ],
+                'heavy' => [
+                    'top-left' => '┏',
+                    'top' => '━',
+                    'top-right' => '┓',
+                    'right' => '┃',
+                    'left' => '┃',
+                    'bottom-right' => '┛',
+                    'bottom' => '━',
+                    'bottom-left' => '┗',
+                ],
+            ],
         ]);
     }
 
