@@ -13,11 +13,3 @@ test('test eraseSavedLines', function (): void {
 test('test eraseAll', function (): void {
     expect(Screen::eraseAll())->toEqual(getCsi() . '2J');
 });
-
-test('test eraseAbove', function (): void {
-    expect(Screen::eraseAbove())->toEqual(getCsi() . '1J');
-});
-
-test('test eraseBelow', function (): void {
-    expect(Screen::eraseAbove())->toEqual(getCsi() . '0J');
-});
