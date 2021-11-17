@@ -66,6 +66,13 @@ class Termage
     private static string $csi;
 
     /**
+     * Operating System Command.
+     *
+     * @access private
+     */
+    private static string $osc;
+
+    /**
      * Get Control Sequence Introducer.
      *
      * @return string Control Sequence Introducer.
@@ -98,7 +105,7 @@ class Termage
      */
     public static function getOsc(): string
     {
-        return self::$csi ??= self::getEsc() . ']';
+        return self::$osc ??= self::getEsc() . ']';
     }
 
     /**
@@ -110,7 +117,7 @@ class Termage
      */
     public static function setOsc(string $value)
     {
-        self::$csi = $value;
+        self::$osc = $value;
     }
 
     /**
