@@ -29,6 +29,7 @@ use function preg_replace;
 use function sprintf;
 use function strings;
 use function Termage\terminal;
+use function Termage\getEsc;
 
 use const PHP_EOL;
 
@@ -930,6 +931,10 @@ abstract class Element
             return $this->h(strings($method)->substr(1)->toInteger());
         }
 
+        if (strings($method)->startsWith('sm')) {
+            return $this->sm(strings($method)->substr(2)->kebab()->toString());
+        }
+
         throw new BadMethodCallException(sprintf(
             'Method %s::%s does not exist.',
             static::class,
@@ -1273,7 +1278,7 @@ abstract class Element
                 // Text align left
                 if ($textAlignStyle === 'left') {
                     $paddingsAndBorders = $addPaddingsAndBorders($spaces + $valueLength + $pl + $pr - ($hasBorder() ? $borderSpaces : 0));
-
+                
                     return // Set box border top style.
                             ($borderStyle !== 'none' ? $paddingsAndBorders['bt'] : '') .
 
@@ -1485,7 +1490,7 @@ abstract class Element
      */
     public function stripStyles(string $value): string
     {
-        return preg_replace("/\e\[[^m]*m/", '', $value);
+        return preg_replace("/" . getEsc() . "\[[^m]*m/", '', $value);
     }
 
     /**
