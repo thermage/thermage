@@ -16,12 +16,12 @@ namespace Termage\Elements;
 
 use Atomastic\Arrays\Arrays as Collection;
 use Termage\Base\Element;
+use Termage\Base\Terminal;
 
 use function arrays as collection;
 use function intval;
 use function strings;
 use function Termage\div;
-use function Termage\terminal;
 
 final class Hr extends Element
 {
@@ -61,13 +61,13 @@ final class Hr extends Element
                     strings(' ')->repeat($hrValuePaddingX) .
                     $this->getValue() .
                     strings(' ')->repeat($hrValuePaddingX) .
-                    strings('─')->repeat(terminal()->getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX * 2);
+                    strings('─')->repeat(Terminal::getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX * 2);
 
             return (string) div($hr)->styles($this->getStyles()->toArray());
         }
 
         if ($hrTextAlign === 'right' && $valueLength > 0) {
-            $hr = strings('─')->repeat(terminal()->getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX * 2) .
+            $hr = strings('─')->repeat(Terminal::getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX * 2) .
                     strings(' ')->repeat($hrValuePaddingX) .
                     $this->getValue() .
                     strings(' ')->repeat($hrValuePaddingX) .
@@ -78,7 +78,7 @@ final class Hr extends Element
 
         if ($hrTextAlign === 'center' && $valueLength > 0) {
             $mod    = ($hrValuePaddingX + $hrValueMarginX) % 2 === 0 ? 0 : 1;
-            $spaces = terminal()->getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX + $mod;
+            $spaces = Terminal::getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX + $mod;
 
             $leftSpaces  = intval($spaces / 2);
             $rightSpaces = intval($spaces / 2);
@@ -96,6 +96,6 @@ final class Hr extends Element
             return (string) div($hr)->styles($this->getStyles()->toArray());
         }
 
-        return (string) div(strings('─')->repeat(terminal()->getWidth())->toString())->styles($this->getStyles()->toArray());
+        return (string) div(strings('─')->repeat(Terminal::getWidth())->toString())->styles($this->getStyles()->toArray());
     }
 }
