@@ -1032,7 +1032,12 @@ abstract class Element
         $hasBorder = static function () use ($borderStyle) {
             return $borderStyle !== 'none' && self::$theme->getVariables()->has('borders.' . $borderStyle);
         };
-        
+
+        // Redefine value length if clearfix is true. 
+        if ($this->clearfix) {
+            $valueLength = ($widthStyle == 'auto' ? Terminal::getWidth() : $valueLength);
+        }
+
         // Redefine value and value length if value length is higher then width style.
         if ($widthStyle !== 'auto' && $valueLength > $widthStyle) {
             $this->value = strings($this->value)->limit($widthStyle - 3 - $pr - $pl - ($hasBorder() ? $borderSpaces : 0))->toString();
