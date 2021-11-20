@@ -20,6 +20,8 @@ use BadMethodCallException;
 use Termage\Parsers\Shortcodes;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
+use Termage\Base\Color;
+use Termage\Base\Terminal;
 
 use function abs;
 use function arrays as collection;
@@ -28,7 +30,6 @@ use function is_null;
 use function preg_replace;
 use function sprintf;
 use function strings;
-use function Termage\terminal;
 use function Termage\getEsc;
 
 use const PHP_EOL;
@@ -1009,14 +1010,40 @@ abstract class Element
         // └─────────────────────────────────────────────────────────────┘
         $stylesHierarchy = ['invisible', 'reverse', 'blink', 'dim', 'bold', 'italic', 'underline', 'strikethrough', 'inner', 'bg', 'color', 'outer', 'display'];
 
+        // Get element styles
+        $valueLength    = $this->getLength($this->value);
+        $textAlignStyle = $this->styles->get('text-align') ?? 'left';
+        $widthStyle     = $this->styles->get('width') ?? 'auto';
+        $heightStyle    = $this->styles->get('height') ?? 'auto';
+        $displayStyle   = $this->styles->get('display') ?? 'block';
+        $borderStyle    = $this->styles->get('border') ?? 'none';
+        $pl             = $this->styles->get('padding.left') ?? 0;
+        $pr             = $this->styles->get('padding.right') ?? 0;
+        $pt             = $this->styles->get('padding.top') ?? 0;
+        $pb             = $this->styles->get('padding.bottom') ?? 0;
+        $ml             = $this->styles->get('margin.left') ?? 0;
+        $mr             = $this->styles->get('margin.right') ?? 0;
+        $mt             = $this->styles->get('margin.top') ?? 0;
+        $mb             = $this->styles->get('margin.bottom') ?? 0;
+        $spaces         = 0;
+        $borderSpaces   = 2;
+
+        // Helper function for determine is border exist.
+        $hasBorder = static function () use ($borderStyle) {
+            return $borderStyle !== 'none' && self::$theme->getVariables()->has('borders.' . $borderStyle);
+        };
+        
+        // Redefine value and value length if value length is higher then width style.
+        if ($widthStyle !== 'auto' && $valueLength > $widthStyle) {
+            $this->value = strings($this->value)->limit($widthStyle - 3 - $pr - $pl - ($hasBorder() ? $borderSpaces : 0))->toString();
+            $valueLength = $this->getLength($this->value);
+        } elseif ($widthStyle == 'auto' && $valueLength > Terminal::getWidth()) {
+            $this->value = strings($this->value)->limit(Terminal::getWidth() - 3 - $pr - $pl - ($hasBorder() ? $borderSpaces : 0))->toString();
+            $valueLength = $this->getLength($this->value);
+        }
+
         // Process style: outer
-        $outer = function ($value) {
-            $ml = $this->styles->get('margin.left') ?? 0;
-            $mr = $this->styles->get('margin.right') ?? 0;
-            $mt = $this->styles->get('margin.top') ?? 0;
-            $mb = $this->styles->get('margin.bottom') ?? 0;
-            $pl = $this->styles->get('padding.left') ?? 0;
-            $pr = $this->styles->get('padding.right') ?? 0;
+        $outer = function ($value) use ($ml, $mr, $mt, $mb, $pl, $pr) {
 
             // Do not allow margins for block elements with clearfix flag.
             if ($this->clearfix) {
@@ -1046,21 +1073,7 @@ abstract class Element
         };
 
         // Process style: inner
-        $inner = function ($value) {
-            $valueLength    = $this->getLength($value);
-            $textAlignStyle = $this->styles->get('text-align') ?? 'left';
-            $widthStyle     = $this->styles->get('width') ?? 'auto';
-            $heightStyle    = $this->styles->get('height') ?? 'auto';
-            $displayStyle   = $this->styles->get('display') ?? 'block';
-            $borderStyle    = $this->styles->get('border') ?? 'none';
-            $pl             = $this->styles->get('padding.left') ?? 0;
-            $pr             = $this->styles->get('padding.right') ?? 0;
-            $pt             = $this->styles->get('padding.top') ?? 0;
-            $pb             = $this->styles->get('padding.bottom') ?? 0;
-            $ml             = $this->styles->get('margin.left') ?? 0;
-            $mr             = $this->styles->get('margin.right') ?? 0;
-            $spaces         = 0;
-            $borderSpaces   = 2;
+        $inner = function ($value) use ($valueLength, $textAlignStyle, $widthStyle, $heightStyle, $displayStyle, $borderStyle, $pl, $pr, $pt, $pb, $ml, $mr, $spaces, $borderSpaces, $hasBorder) {
 
             // Helper function for re-apply text and background colors.
             $applyTextAndBackgroundColor = function ($value) {
@@ -1082,15 +1095,10 @@ abstract class Element
                 return $value;
             };
 
-            // Helper function for determine is border exist.
-            $hasBorder = static function () use ($borderStyle) {
-                return $borderStyle !== 'none' && self::$theme->getVariables()->has('borders.' . $borderStyle);
-            };
-
             // Helper function for adding paddings and borders, top and bottom
             $addPaddingsAndBorders = static function ($valueSpaces) use ($borderStyle, $hasBorder, $applyBorderColor, $applyTextAndBackgroundColor, $pt, $pb, $ml) {
-                    // Create box border top value.
-                    $btStyleValue = '';
+                // Create box border top value.
+                $btStyleValue = '';
                 if ($hasBorder()) {
                     $btStyleValue = Styles::resetAll() .
                                     strings(' ')->repeat($ml) .
@@ -1101,8 +1109,8 @@ abstract class Element
                                     PHP_EOL;
                 }
 
-                    // Create box border bottom value.
-                    $bbStyleValue = PHP_EOL;
+                // Create box border bottom value.
+                $bbStyleValue = PHP_EOL;
                 if ($hasBorder()) {
                     $bbStyleValue = Styles::resetAll() .
                                     strings(' ')->repeat($ml) .
@@ -1112,8 +1120,8 @@ abstract class Element
                                     Styles::resetAll();
                 }
 
-                    // Create box padding top value.
-                    $ptStyleValue = '';
+                // Create box padding top value.
+                $ptStyleValue = '';
                 for ($i = 0; $i < $pt; $i++) {
                     $ptStyleValue .= Styles::resetAll() .
                                      strings(' ')->repeat($ml) .
@@ -1124,8 +1132,8 @@ abstract class Element
                                      PHP_EOL;
                 }
 
-                    // Create box padding bottom value.
-                    $pbStyleValue = PHP_EOL;
+                // Create box padding bottom value.
+                $pbStyleValue = PHP_EOL;
                 for ($i = 0; $i < $pb; $i++) {
                     $pbStyleValue .= Styles::resetAll() .
                                     strings(' ')->repeat($ml) .
@@ -1136,7 +1144,7 @@ abstract class Element
                                     PHP_EOL;
                 }
 
-                    return ['bt' => $btStyleValue, 'bb' => $bbStyleValue, 'pt' => $ptStyleValue, 'pb' => $pbStyleValue];
+                return ['bt' => $btStyleValue, 'bb' => $bbStyleValue, 'pt' => $ptStyleValue, 'pb' => $pbStyleValue];
             };
 
             // Calculate height
@@ -1154,7 +1162,7 @@ abstract class Element
                 }
 
                 // Calculate amount of available spaces for block element.
-                $spaces = abs(terminal()->getwidth() - $valueLength);
+                $spaces = Terminal::getWidth() - $valueLength;
 
                 // Text align left
                 if ($textAlignStyle === 'left') {
@@ -1269,7 +1277,7 @@ abstract class Element
 
             // Display block with custom width
             if ($widthStyle !== 'auto' && $displayStyle === 'block') {
-                $spaces = $widthStyle - $valueLength < $valueLength ? 0 : $widthStyle - $valueLength;
+                $spaces = $widthStyle - $valueLength; 
 
                 // Text align left
                 if ($textAlignStyle === 'left') {
@@ -1432,9 +1440,7 @@ abstract class Element
         };
 
         // Process style: display
-        $display = function ($value) {
-            $displayStyle = $this->styles->get('display') ?? 'block';
-
+        $display = function ($value) use ($displayStyle) {
             switch ($displayStyle) {
                 case 'inline':
                     return $value;
