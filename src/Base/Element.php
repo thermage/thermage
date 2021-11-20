@@ -931,10 +931,6 @@ abstract class Element
             return $this->h(strings($method)->substr(1)->toInteger());
         }
 
-        if (strings($method)->startsWith('sm')) {
-            return $this->sm(strings($method)->substr(2)->kebab()->toString());
-        }
-
         throw new BadMethodCallException(sprintf(
             'Method %s::%s does not exist.',
             static::class,
