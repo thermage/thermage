@@ -15,11 +15,10 @@ declare(strict_types=1);
 namespace Termage\Elements;
 
 use Termage\Base\Element;
+use Termage\Base\Terminal;
 
 use function strings;
-use function Termage\bold;
-use function Termage\span;
-use function Termage\terminal;
+use function Termage\div;
 
 use const PHP_EOL;
 
@@ -88,11 +87,8 @@ final class Heading extends Element
      */
     public function render(): string
     {
-        $value         = $this->getValue();
-        $valueLength   = $this->getLength($value);
-        $terminalWidth = terminal()->getWidth();
-        $size          = $this->size;
-        $paddingLeft   = $this->getStyles()['padding']['left'] ?? 1;
+        $value = $this->getValue();
+        $size  = $this->size;
 
         if ($size > 5) {
             $size = 5;
@@ -104,39 +100,25 @@ final class Heading extends Element
 
         switch ($size) {
             case 1:
-                $heading  = '╔';
-                $heading .= strings('═')->repeat($terminalWidth - 2);
-                $heading .= '╗';
-                $heading .= '║' . span($value)->pl($paddingLeft)->pr($terminalWidth - $paddingLeft - $valueLength - 2) . '║' . PHP_EOL;
-                $heading .= '╚';
-                $heading .= strings('═')->repeat($terminalWidth - 2);
-                $heading .=  '╝';
-                $heading .= PHP_EOL . PHP_EOL . PHP_EOL;
-                $heading  = bold($heading);
+                $heading  = div($value, 'px-1 b-double text-align-center bold');
+                $heading .= PHP_EOL;
                 break;
             case 2:
-                $heading  = '┌';
-                $heading .= strings('─')->repeat($terminalWidth - 2);
-                $heading .= '┐';
-                $heading .= '│' . span($value)->pl($paddingLeft)->pr($terminalWidth - $paddingLeft - $valueLength - 2) . '│' . PHP_EOL;
-                $heading .= '└';
-                $heading .= strings('─')->repeat($terminalWidth - 2);
-                $heading .=  '┘';
-                $heading .= PHP_EOL . PHP_EOL . PHP_EOL;
-                $heading  = bold($heading);
+                $heading  = div($value, 'px-1 b-heavy text-align-center bold');
+                $heading .= PHP_EOL;
                 break;
             case 3:
-                $heading  = bold($value);
-                $heading .= PHP_EOL . PHP_EOL;
+                $heading  = div($value, 'px-1 b-square text-align-center');
+                $heading .= PHP_EOL;
                 break;
             case 4:
-                $heading  = bold($value);
-                $heading .= PHP_EOL . PHP_EOL;
+                $heading  = div($value, 'px-1 bold text-align-center');
+                $heading .= PHP_EOL;
                 break;
             case 5:
             default:
-                $heading  = span($value)->dim();
-                $heading .= PHP_EOL . PHP_EOL;
+                $heading  = div($value, 'px-1 dim text-align-center');
+                $heading .= PHP_EOL;
                 break;
         }
 
