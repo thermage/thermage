@@ -11,5 +11,5 @@ Be sure to check the source!
 
 #### Hr
 
-Run: `php examples/elements/hr.php`
+Run: `php examples/elements/hr.php`  
 Args: left, center, right 
