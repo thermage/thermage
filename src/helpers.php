@@ -145,18 +145,3 @@ function heading(string $value = '', string $classes = ''): Heading
 {
     return Termage::heading($value, $classes);
 }
-
-function spinner(string $value = '', string $classes = ''): Spinner
-{
-    return Termage::spinner($value, $classes);
-}
-
-function color(): Color
-{
-    return new Color();
-}
-
-function terminal(): Terminal
-{
-    return new Terminal();
-}

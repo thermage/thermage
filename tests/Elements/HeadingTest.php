@@ -11,22 +11,22 @@ beforeEach(function() {
 
 test('test heading size < 1', function (): void {
     $value = heading('RAD')->size0()->render();
-    expect(str_replace([PHP_EOL, " "], "", $value))->toBe("\e[1m╔══════════════════╗║RAD║╚══════════════════╝\e[22m");
+    expect(str_replace([PHP_EOL, " "], "", $value))->toBe("\e[0m╔══════════════════╗\e[0m║\e[1mRAD\e[22m║\e[0m╚══════════════════╝\e[0m");
 });
 
 test('test heading size 1', function (): void {
     $value = heading('RAD')->size1()->render();
-    expect(str_replace([PHP_EOL, " "], "", $value))->toBe("\e[1m╔══════════════════╗║RAD║╚══════════════════╝\e[22m");
+    expect(str_replace([PHP_EOL, " "], "", $value))->toBe("\e[0m╔══════════════════╗\e[0m║\e[1mRAD\e[22m║\e[0m╚══════════════════╝\e[0m");
 });
 
 test('test heading size 2', function (): void {
     $value = heading('RAD')->size2()->render();
-    expect(str_replace([PHP_EOL, " "], "", $value))->toBe("\e[1m┌──────────────────┐│RAD│└──────────────────┘\e[22m");
+    expect(str_replace([PHP_EOL, " "], "", $value))->toBe("\e[0m┏━━━━━━━━━━━━━━━━━━┓\e[0m┃\e[1mRAD\e[22m┃\e[0m┗━━━━━━━━━━━━━━━━━━┛\e[0m");
 });
 
 test('test heading size 3', function (): void {
     $value = heading('RAD')->size3()->render();
-    expect(str_replace([PHP_EOL, " "], "", $value))->toBe("\e[1mRAD\e[22m");
+    expect(str_replace([PHP_EOL, " "], "", $value))->toBe("\e[0m┌──────────────────┐\e[0m│RAD│\e[0m└──────────────────┘\e[0m");
 });
 
 test('test heading size 4', function (): void {

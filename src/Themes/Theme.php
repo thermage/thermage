@@ -179,45 +179,6 @@ class Theme implements ThemeInterface
                 'dark'      => '#212529', // gray900
             ],
 
-            // Spacing.
-            'spacer' => 1,
-
-            // Alert element.
-            'alert' => [
-                'text-align' => 'left',
-                'width-auto' => false,
-                'width' => 50,
-                'type' => [
-                    'info' => [
-                        'bg' => 'info',
-                        'color' => 'black',
-                    ],
-                    'warning' => [
-                        'bg' => 'warning',
-                        'color' => 'black',
-                    ],
-                    'danger' => [
-                        'bg' => 'danger',
-                        'color' => 'white',
-                    ],
-                    'success' => [
-                        'bg' => 'success',
-                        'color' => 'black',
-                    ],
-                    'primary' => [
-                        'bg' => 'primary',
-                        'color' => 'white',
-                    ],
-                    'secondary' => [
-                        'bg' => 'secondary',
-                        'color' => 'white',
-                    ],
-                ],
-            ],
-
-            // Hr element.
-            'hr' => ['text-align' => 'left'],
-
             // Borders.
             'borders' => [
                 'square' => [
@@ -261,6 +222,45 @@ class Theme implements ThemeInterface
                     'bottom-left' => '┗',
                 ],
             ],
+            
+            // Spacing.
+            'spacer' => 1,
+
+            // Alert element.
+            'alert' => [
+                'text-align' => 'left',
+                'width-auto' => false,
+                'width' => 50,
+                'type' => [
+                    'info' => [
+                        'bg' => 'info',
+                        'color' => 'black',
+                    ],
+                    'warning' => [
+                        'bg' => 'warning',
+                        'color' => 'black',
+                    ],
+                    'danger' => [
+                        'bg' => 'danger',
+                        'color' => 'white',
+                    ],
+                    'success' => [
+                        'bg' => 'success',
+                        'color' => 'black',
+                    ],
+                    'primary' => [
+                        'bg' => 'primary',
+                        'color' => 'white',
+                    ],
+                    'secondary' => [
+                        'bg' => 'secondary',
+                        'color' => 'white',
+                    ],
+                ],
+            ],
+
+            // Hr element.
+            'hr' => ['text-align' => 'left'],
         ]);
     }
 

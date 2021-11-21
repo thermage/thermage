@@ -1,3 +1,14 @@
+<a name="0.12.0"></a>
+# [0.12.0](https://github.com/termage/termage) (2021-11-21)
+* Added `getEsc` for method `stripStyles`.
+* Fix terminal width detection for `hr` element.
+* Fix calculations for element width.
+* Improve element styles definition.
+* Redefine value length if clearfix is true.
+* Redefine value and value length if value length is higher then width style.
+* Update styles for `heading` element.
+* Removed unused helper functions.
+
 <a name="0.11.0"></a>
 # [0.11.0](https://github.com/termage/termage) (2021-11-17)
 * Added ability to set element custom borders.
