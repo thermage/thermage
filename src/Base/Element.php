@@ -934,6 +934,10 @@ abstract class Element
             return $this->textAlign(strings($method)->substr(9)->kebab()->toString());
         }
 
+        if (strings($method)->startsWith('textOverflow')) {
+            return $this->textOverflow(strings($method)->substr(12)->kebab()->toString());
+        }
+
         if (strings($method)->startsWith('w')) {
             if ($method === 'wAuto') {
                 return $this->w('auto');
