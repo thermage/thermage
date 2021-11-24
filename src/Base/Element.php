@@ -817,6 +817,20 @@ abstract class Element
     }
 
     /**
+     * Set element value overflow.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function textOverflow($value): self
+    {
+        $this->styles->set('text-overflow', $value);
+
+        return $this;
+    }
+
+    /**
      * Dynamically bind magic methods to the Element class.
      *
      * @param string $method     Method.
@@ -1011,22 +1025,23 @@ abstract class Element
         $stylesHierarchy = ['invisible', 'reverse', 'blink', 'dim', 'bold', 'italic', 'underline', 'strikethrough', 'inner', 'bg', 'color', 'outer', 'display'];
 
         // Get element styles
-        $valueLength    = $this->getLength($this->value);
-        $textAlignStyle = $this->styles->get('text-align') ?? 'left';
-        $widthStyle     = $this->styles->get('width') ?? 'auto';
-        $heightStyle    = $this->styles->get('height') ?? 'auto';
-        $displayStyle   = $this->styles->get('display') ?? 'block';
-        $borderStyle    = $this->styles->get('border') ?? 'none';
-        $pl             = $this->styles->get('padding.left') ?? 0;
-        $pr             = $this->styles->get('padding.right') ?? 0;
-        $pt             = $this->styles->get('padding.top') ?? 0;
-        $pb             = $this->styles->get('padding.bottom') ?? 0;
-        $ml             = $this->styles->get('margin.left') ?? 0;
-        $mr             = $this->styles->get('margin.right') ?? 0;
-        $mt             = $this->styles->get('margin.top') ?? 0;
-        $mb             = $this->styles->get('margin.bottom') ?? 0;
-        $spaces         = 0;
-        $borderSpaces   = 2;
+        $valueLength       = $this->getLength($this->value);
+        $textAlignStyle    = $this->styles->get('text-align') ?? 'left';
+        $widthStyle        = $this->styles->get('width') ?? 'auto';
+        $heightStyle       = $this->styles->get('height') ?? 'auto';
+        $displayStyle      = $this->styles->get('display') ?? 'block';
+        $borderStyle       = $this->styles->get('border') ?? 'none';
+        $textOverflowStyle = $this->styles->get('text-overflow') ?? 'clip';
+        $pl                = $this->styles->get('padding.left') ?? 0;
+        $pr                = $this->styles->get('padding.right') ?? 0;
+        $pt                = $this->styles->get('padding.top') ?? 0;
+        $pb                = $this->styles->get('padding.bottom') ?? 0;
+        $ml                = $this->styles->get('margin.left') ?? 0;
+        $mr                = $this->styles->get('margin.right') ?? 0;
+        $mt                = $this->styles->get('margin.top') ?? 0;
+        $mb                = $this->styles->get('margin.bottom') ?? 0;
+        $spaces            = 0;
+        $borderSpaces      = 2;
 
         // Helper function for determine is border exist.
         $hasBorder = static function () use ($borderStyle) {
@@ -1038,15 +1053,23 @@ abstract class Element
             $valueLength = ($widthStyle == 'auto' ? Terminal::getWidth() : $valueLength);
         }
 
-        // Redefine value and value length if value length is higher then width style.
+        // Redefine value and value length if original value length is higher then width style or terminal width.
         if ($widthStyle !== 'auto' && $valueLength > $widthStyle) {
-            $this->value = strings($this->value)->limit($widthStyle - 3 - $pr - $pl - ($hasBorder() ? $borderSpaces : 0))->toString();
+            if ($textOverflowStyle == 'hidden')  {
+                $this->value = strings($this->value)->limit($widthStyle - $ml - $mr - $pr - $pl - ($hasBorder() ? $borderSpaces : 0), '')->toString();
+            } elseif($textOverflowStyle == 'ellipsis') {
+                $this->value = strings($this->value)->limit($widthStyle - 3 - $ml - $mr - $pr - $pl - ($hasBorder() ? $borderSpaces : 0))->toString();
+            }
             $valueLength = $this->getLength($this->value);
         } elseif ($widthStyle == 'auto' && $valueLength > Terminal::getWidth()) {
-            $this->value = strings($this->value)->limit(Terminal::getWidth() - 3 - $pr - $pl - ($hasBorder() ? $borderSpaces : 0))->toString();
+            if ($textOverflowStyle == 'hidden')  {
+                $this->value = strings($this->value)->limit(Terminal::getWidth() - $ml - $mr - $pr - $pl - ($hasBorder() ? $borderSpaces : 0), '')->toString();
+            } elseif($textOverflowStyle == 'ellipsis') {
+                $this->value = strings($this->value)->limit(Terminal::getWidth() - 3 - $ml - $mr - $pr - $pl - ($hasBorder() ? $borderSpaces : 0))->toString();
+            }
             $valueLength = $this->getLength($this->value);
         }
-
+    
         // Process style: outer
         $outer = function ($value) use ($ml, $mr, $mt, $mb, $pl, $pr) {
 
@@ -1078,7 +1101,7 @@ abstract class Element
         };
 
         // Process style: inner
-        $inner = function ($value) use ($valueLength, $textAlignStyle, $widthStyle, $heightStyle, $displayStyle, $borderStyle, $pl, $pr, $pt, $pb, $ml, $mr, $spaces, $borderSpaces, $hasBorder) {
+        $inner = function ($value) use ($valueLength, $textAlignStyle, $widthStyle, $heightStyle, $displayStyle, $borderStyle, $pl, $pr, $pt, $pb, $ml, $mr, $spaces, $borderSpaces, $hasBorder, $textOverflowStyle) {
 
             // Helper function for re-apply text and background colors.
             $applyTextAndBackgroundColor = function ($value) {
@@ -1101,7 +1124,8 @@ abstract class Element
             };
 
             // Helper function for adding paddings and borders, top and bottom
-            $addPaddingsAndBorders = static function ($valueSpaces) use ($borderStyle, $hasBorder, $applyBorderColor, $applyTextAndBackgroundColor, $pt, $pb, $ml) {
+            $addPaddingsAndBordersY = static function ($valueSpaces) use ($borderStyle, $hasBorder, $applyBorderColor, $applyTextAndBackgroundColor, $pt, $pb, $ml) {
+                
                 // Create box border top value.
                 $btStyleValue = '';
                 if ($hasBorder()) {
@@ -1171,112 +1195,137 @@ abstract class Element
 
                 // Text align left
                 if ($textAlignStyle === 'left') {
-                    $paddingsAndBorders = $addPaddingsAndBorders($spaces + $valueLength - $mr - $ml - ($hasBorder() ? $borderSpaces : 0));
+                    $paddingsAndBordersY = $addPaddingsAndBordersY($spaces + $valueLength - $mr - $ml - ($hasBorder() ? $borderSpaces : 0));
+            
+                    if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden')  {
+                        $lines = [$this->value];
+                    } else {
+                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, Terminal::getWidth() - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                    }
+
+                    $linesValue = '';
+                    foreach ($lines as $key => $line) {
+                        // Set box margin left,
+                        // paddings left and right,
+                        // re-apply text and background colors,
+                        // apply borders.
+                        $linesValue .=  Styles::resetAll() .
+                                        strings(' ')->repeat($ml) .
+                                        ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
+                                        $applyTextAndBackgroundColor(strings(' ')->repeat($pl) .
+                                                                    $line .
+                                                                    strings(' ')->repeat(Terminal::getWidth() - $this->getLength($line) - $pl - $ml - $mr - ($hasBorder() ? $borderSpaces : 0))) .
+                                        ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+                                        ($key === array_key_last($lines) ? '' : PHP_EOL);
+                    }
 
                     return // Set box border top style.
-                            ($borderStyle !== 'none' ? $paddingsAndBorders['bt'] : '') .
+                            ($borderStyle !== 'none' ? $paddingsAndBordersY['bt'] : '') .
 
                             // Set box padding top.
-                            ($pt > 0 ? $paddingsAndBorders['pt'] : '') .
+                            ($pt > 0 ? $paddingsAndBordersY['pt'] : '') .
 
-                            // Set box margin left,
-                            // paddings left and right,
-                            // re-apply text and background colors,
-                            // apply borders.
-                            Styles::resetAll() .
-                            strings(' ')->repeat($ml) .
-                            ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
-                            $applyTextAndBackgroundColor(strings(' ')->repeat($pl) .
-                                                        $value .
-                                                        strings(' ')->repeat($spaces - $pl - $ml - $mr - ($hasBorder() ? $borderSpaces : 0))) .
-
-                            ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+                            $linesValue .
 
                             // Set box padding bottom.
-                            ($pb > 0 ? strings($paddingsAndBorders['pb'])->trimRight(PHP_EOL) : '') .
+                            ($pb > 0 ? strings($paddingsAndBordersY['pb'])->trimRight(PHP_EOL) : '') .
 
                             // Set box border top style.
-                            ($hasBorder() ? strings(' ')->repeat($ml) . $paddingsAndBorders['bb'] : '');
+                            ($hasBorder() ? strings(' ')->repeat($ml) . $paddingsAndBordersY['bb'] : '');
                 }
 
                 // Text align right
                 if ($textAlignStyle === 'right') {
-                    $paddingsAndBorders = $addPaddingsAndBorders($spaces + $valueLength - $mr - $ml - ($hasBorder() ? $borderSpaces : 0));
+                    $paddingsAndBordersY = $addPaddingsAndBordersY($spaces + $valueLength - $mr - $ml - ($hasBorder() ? $borderSpaces : 0));
+                    
+                    if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden')  {
+                        $lines = [$this->value];
+                    } else {
+                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, Terminal::getWidth() - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                    }
+
+                    $linesValue = '';
+                    foreach ($lines as $key => $line) {
+                        // Set box margin left,
+                        // paddings left and right,
+                        // re-apply text and background colors,
+                        // apply borders.
+                        $linesValue .=  Styles::resetAll() .
+                                        strings(' ')->repeat($ml) .
+                                        ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
+                                        $applyTextAndBackgroundColor(strings(' ')->repeat(Terminal::getWidth() - $this->getLength($line) - $pr - $ml - $mr - ($hasBorder() ? $borderSpaces : 0)) .
+                                                                    $line .
+                                                                    strings(' ')->repeat($pr)) .
+                                        ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+                                        ($key === array_key_last($lines) ? '' : PHP_EOL);
+                    }
 
                     return // Set box border top style.
-                            ($borderStyle !== 'none' ? $paddingsAndBorders['bt'] : '') .
+                            ($borderStyle !== 'none' ? $paddingsAndBordersY['bt'] : '') .
 
                             // Set box padding top.
-                            ($pt > 0 ? $paddingsAndBorders['pt'] : '') .
+                            ($pt > 0 ? $paddingsAndBordersY['pt'] : '') .
 
-                            // Set box margin left,
-                            // paddings left and right,
-                            // re-apply text and background colors,
-                            // apply borders.
-                            Styles::resetAll() .
-                            strings(' ')->repeat($ml) .
-                            ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
-                            $applyTextAndBackgroundColor(strings(' ')->repeat($spaces - $pr - $ml - $mr - ($hasBorder() ? $borderSpaces : 0)) .
-                                                        $value .
-                                                        strings(' ')->repeat($pr)) .
-
-                            ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+                            $linesValue .
 
                             // Set box padding bottom.
-                            ($pb > 0 ? strings($paddingsAndBorders['pb'])->trimRight(PHP_EOL) : '') .
+                            ($pb > 0 ? strings($paddingsAndBordersY['pb'])->trimRight(PHP_EOL) : '') .
 
                             // Set box border top style.
-                            ($hasBorder() ? strings(' ')->repeat($ml) . $paddingsAndBorders['bb'] : '');
+                            ($hasBorder() ? strings(' ')->repeat($ml) . $paddingsAndBordersY['bb'] : '');
                 }
 
                 // Text align center
                 if ($textAlignStyle === 'center') {
-                    $paddingsAndBorders = $addPaddingsAndBorders($spaces + $valueLength - $mr - $ml - ($hasBorder() ? $borderSpaces : 0));
-
-                    // Calculate left and right spaces.
-                    $leftSpaces  = intval($spaces / 2);
-                    $rightSpaces = intval($spaces / 2);
-
-                    // Normalize left spaces.
-                    if (intval($leftSpaces * 2) < $spaces) {
-                        $leftSpaces++;
+                    $paddingsAndBordersY = $addPaddingsAndBordersY($spaces + $valueLength - $mr - $ml - ($hasBorder() ? $borderSpaces : 0));
+                    
+                    if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden')  {
+                        $lines = [$this->value];
+                    } else {
+                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, Terminal::getWidth() - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
                     }
 
-                    // Calculate spaces for current box.
-                    $currentSpaces = $leftSpaces - $ml + $rightSpaces - $mr;
+                    $linesValue = '';
+                    foreach ($lines as $key => $line) {
+                        // Get spaces for each line of text.
+                        $spaces = Terminal::getWidth() - $this->getLength($line) - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0);
 
-                    // Calculate left spaces for current box.
-                    $currentLeftSpaces  = intval($currentSpaces / 2);
-                    $currentRightSpaces = intval($currentSpaces / 2);
+                        // Calculate left spaces for current box.
+                        $currentLeftSpaces  = intval($spaces / 2);
+                        $currentRightSpaces = intval($spaces / 2);
 
-                    // Normalize left spaces for current box.
-                    if (intval($currentLeftSpaces * 2) < $currentSpaces) {
-                        $currentLeftSpaces++;
+                        // Normalize left spaces for current box.
+                        if (intval($currentLeftSpaces * 2) < $spaces) {
+                            $currentLeftSpaces++;
+                        }
+                        
+                        // Set box margin left,
+                        // paddings left and right,
+                        // re-apply text and background colors,
+                        // apply borders.
+                        $linesValue .= Styles::resetAll() .
+                                        strings(' ')->repeat($ml) .
+                                        ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
+                                        $applyTextAndBackgroundColor(strings(' ')->repeat($currentLeftSpaces + $pl) .
+                                                                    $line .
+                                                                    strings(' ')->repeat($currentRightSpaces + $pr)) .
+                                        ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+                                        ($key === array_key_last($lines) ? '' : PHP_EOL);
                     }
 
                     return // Set box border top style.
-                            ($borderStyle !== 'none' ? $paddingsAndBorders['bt'] : '') .
+                            ($borderStyle !== 'none' ? $paddingsAndBordersY['bt'] : '') .
 
                             // Set box padding top.
-                            ($pt > 0 ? $paddingsAndBorders['pt'] : '') .
+                            ($pt > 0 ? $paddingsAndBordersY['pt'] : '') .
 
-                            // Set box margin left,
-                            // paddings left and right,
-                            // re-apply text and background colors,
-                            // apply borders.                            Styles::resetAll() .
-                            strings(' ')->repeat($ml) .
-                            ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
-                            $applyTextAndBackgroundColor(strings(' ')->repeat($currentLeftSpaces - ($hasBorder() ? $borderSpaces : 0)) .
-                                                        $value .
-                                                        strings(' ')->repeat($currentRightSpaces)) .
-
-                            ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
-
+                            $linesValue . 
+                            
                             // Set box padding bottom.
-                            ($pb > 0 ? strings($paddingsAndBorders['pb'])->trimRight(PHP_EOL) : '') .
+                            ($pb > 0 ? strings($paddingsAndBordersY['pb'])->trimRight(PHP_EOL) : '') .
 
                             // Set box border top style.
-                            ($hasBorder() ? strings(' ')->repeat($ml) . $paddingsAndBorders['bb'] : '');
+                            ($hasBorder() ? strings(' ')->repeat($ml) . $paddingsAndBordersY['bb'] : '');
                 }
             }
 
@@ -1286,101 +1335,150 @@ abstract class Element
 
                 // Text align left
                 if ($textAlignStyle === 'left') {
-                    $paddingsAndBorders = $addPaddingsAndBorders($spaces + $valueLength + $pl + $pr - ($hasBorder() ? $borderSpaces : 0));
+                    $paddingsAndBordersY = $addPaddingsAndBordersY($spaces + $valueLength + $pl + $pr - ($hasBorder() ? $borderSpaces : 0));
                 
+                    if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden')  {
+                        $lines = [$this->value];
+                    } else {
+                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                    }
+            
+                    $linesValue = '';
+                    foreach ($lines as $key => $line) {
+                        // Set box margin left,
+                        // paddings left and right,
+                        // re-apply text and background colors,
+                        // apply borders.
+                        $linesValue .=  Styles::resetAll() .
+                                        strings(' ')->repeat($ml) .
+                                        ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
+                                        $applyTextAndBackgroundColor(strings(' ')->repeat($pl) .
+                                                                    $line .
+                                                                    strings(' ')->repeat($pr + $widthStyle - $this->getLength($line) - ($hasBorder() ? $borderSpaces : 0))) .
+                                        ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+                                        ($key === array_key_last($lines) ? '' : PHP_EOL);
+                    }
+
                     return // Set box border top style.
-                            ($borderStyle !== 'none' ? $paddingsAndBorders['bt'] : '') .
+                            ($borderStyle !== 'none' ? $paddingsAndBordersY['bt'] : '') .
 
                             // Set box padding top.
-                            ($pt > 0 ? $paddingsAndBorders['pt'] : '') .
+                            ($pt > 0 ? $paddingsAndBordersY['pt'] : '') .
 
-                            // Set box margin left,
-                            // paddings left and right,
-                            // re-apply text and background colors,
-                            // apply borders.
-                            Styles::resetAll() .
-                            strings(' ')->repeat($ml) .
-                            ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
-                            $applyTextAndBackgroundColor(strings(' ')->repeat($pl) .
-                                                        $value .
-                                                        strings(' ')->repeat($spaces + $pr - ($hasBorder() ? $borderSpaces : 0))) .
-
-                            ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+                            $linesValue .
 
                             // Set box padding bottom.
-                            ($pb > 0 ? strings($paddingsAndBorders['pb'])->trimRight(PHP_EOL) : '') .
+                            ($pb > 0 ? strings($paddingsAndBordersY['pb'])->trimRight(PHP_EOL) : '') .
 
                             // Set box border top style.
-                            ($hasBorder() ? strings(' ')->repeat($ml) . PHP_EOL . $paddingsAndBorders['bb'] : '');
+                            ($hasBorder() ? strings(' ')->repeat($ml) . PHP_EOL . $paddingsAndBordersY['bb'] : '');
                 }
 
                 // Text align right
                 if ($textAlignStyle === 'right') {
-                    $paddingsAndBorders = $addPaddingsAndBorders($spaces + $valueLength + $pl + $pr - ($hasBorder() ? $borderSpaces : 0));
+                    $paddingsAndBordersY = $addPaddingsAndBordersY($spaces + $valueLength + $pl + $pr - ($hasBorder() ? $borderSpaces : 0));
+
+                    if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden')  {
+                        $lines = [$this->value];
+                    } else {
+                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                    }
+            
+                    $linesValue = '';
+                    foreach ($lines as $key => $line) {
+                        // Set box margin left,
+                        // paddings left and right,
+                        // re-apply text and background colors,
+                        // apply borders.
+                        $linesValue .=  Styles::resetAll() .
+                                        strings(' ')->repeat($ml) .
+                                        ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
+                                        $applyTextAndBackgroundColor(strings(' ')->repeat($pl + $widthStyle - $this->getLength($line) - ($hasBorder() ? $borderSpaces : 0)) .
+                                                                    $line .
+                                                                    strings(' ')->repeat($pr)) .
+                                        ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+                                        ($key === array_key_last($lines) ? '' : PHP_EOL);
+                    }
 
                     return // Set box border top style.
-                            ($borderStyle !== 'none' ? $paddingsAndBorders['bt'] : '') .
+                            ($borderStyle !== 'none' ? $paddingsAndBordersY['bt'] : '') .
 
                             // Set box padding top.
-                            ($pt > 0 ? $paddingsAndBorders['pt'] : '') .
+                            ($pt > 0 ? $paddingsAndBordersY['pt'] : '') .
 
-                            // Set box margin left,
-                            // paddings left and right,
-                            // re-apply text and background colors,
-                            // apply borders.
-                            Styles::resetAll() .
-                            strings(' ')->repeat($ml) .
-                            ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
-                            $applyTextAndBackgroundColor(strings(' ')->repeat($spaces + $pl - ($hasBorder() ? $borderSpaces : 0)) .
-                                                        $value .
-                                                        strings(' ')->repeat($pr)) .
-
-                            ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+                            $linesValue .
 
                             // Set box padding bottom.
-                            ($pb > 0 ? strings($paddingsAndBorders['pb'])->trimRight(PHP_EOL) : '') .
+                            ($pb > 0 ? strings($paddingsAndBordersY['pb'])->trimRight(PHP_EOL) : '') .
 
                             // Set box border top style.
-                            ($hasBorder() ? strings(' ')->repeat($ml) . PHP_EOL . $paddingsAndBorders['bb'] : '');
+                            ($hasBorder() ? strings(' ')->repeat($ml) . PHP_EOL . $paddingsAndBordersY['bb'] : '');
                 }
 
                 // Text align center
                 if ($textAlignStyle === 'center') {
-                    // Calculate left and right spaces.
-                    $leftSpaces  = intval($spaces / 2);
-                    $rightSpaces = intval($spaces / 2);
-
-                    // Normalize left spaces.
-                    if (intval($leftSpaces * 2) < $spaces) {
-                        $leftSpaces++;
+                    
+                    if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden') {
+                        $lines = [$this->value];
+                    } else {
+                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
                     }
 
-                    $paddingsAndBorders = $addPaddingsAndBorders($spaces + $valueLength + $pl + $pr - ($hasBorder() ? $borderSpaces : 0));
+                    foreach ($lines as $line) {
+                        $linesLength[] = $this->getLength($line);
+                    }
+
+                    $max = max($linesLength) + $pl + $pr - ($hasBorder() ? $borderSpaces : 0);
+
+                    $paddingsAndBordersY = $addPaddingsAndBordersY($max);
+                        
+                    $linesValue = '';
+                    foreach ($lines as $key => $line) {
+
+                
+                        // Get spaces for each line of text.
+                        $currentSpaces = $widthStyle - $this->getLength($line) - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0);
+                       
+                        // Calculate left and right spaces for current box.
+                        $currentLeftSpaces  = intval($currentSpaces / 2);
+                        $currentRightSpaces = intval($currentSpaces / 2);
+
+                        $currentLine = strings(' ')->repeat($currentLeftSpaces + $pl - ($hasBorder() ? $borderSpaces / 2 : 0)) .
+                                      $line .
+                                      strings(' ')->repeat($currentRightSpaces + $pr - ($hasBorder() ? $borderSpaces / 2 : 0));
+
+                        if ($this->getLength($currentLine) < $max) {
+                           $currentLine .= strings(' ')->repeat($max - $this->getLength($currentLine))->toString();
+                        } else if ($this->getLength($currentLine) > $max) {
+                           $currentLine = mb_substr($currentLine, 0, - ($this->getLength($currentLine) - $max));
+                        }
+
+                        //dump($this->getLength($currentLine));
+                        // Set box margin left,
+                        // paddings left and right,
+                        // re-apply text and background colors,
+                        // apply borders.
+                        $linesValue .=  Styles::resetAll() .
+                                        strings(' ')->repeat($ml) .
+                                        ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
+                                        $applyTextAndBackgroundColor($currentLine) .
+                                        ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+                                        ($key === array_key_last($lines) ? '' : PHP_EOL);
+                    }
 
                     return // Set box border top style.
-                            ($borderStyle !== 'none' ? $paddingsAndBorders['bt'] : '') .
+                            ($borderStyle !== 'none' ? $paddingsAndBordersY['bt'] : '') .
 
                             // Set box padding top.
-                            ($pt > 0 ? $paddingsAndBorders['pt'] : '') .
+                            ($pt > 0 ? $paddingsAndBordersY['pt'] : '') .
 
-                            // Set box margin left,
-                            // paddings left and right,
-                            // re-apply text and background colors,
-                            // apply borders.
-                            Styles::resetAll() .
-                            strings(' ')->repeat($ml) .
-                            ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
-                            $applyTextAndBackgroundColor(strings(' ')->repeat($leftSpaces + $pl - ($hasBorder() ? $borderSpaces / 2 : 0)) .
-                                                            $value .
-                                                            strings(' ')->repeat($rightSpaces + $pr - ($hasBorder() ? $borderSpaces / 2 : 0))) .
-
-                            ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
-
+                            $linesValue .
+                            
                             // Set box padding bottom.
-                            ($pb > 0 ? strings($paddingsAndBorders['pb'])->trimRight(PHP_EOL) : '') .
+                            ($pb > 0 ? strings($paddingsAndBordersY['pb'])->trimRight(PHP_EOL) : '') .
 
                             // Set box border top style.
-                            ($hasBorder() ? strings(' ')->repeat($ml) . PHP_EOL . $paddingsAndBorders['bb'] : '');
+                            ($hasBorder() ? strings(' ')->repeat($ml) . PHP_EOL . $paddingsAndBordersY['bb'] : '');
                 }
             }
 
