@@ -1335,6 +1335,7 @@ abstract class Element
 
             // Display block with custom width
             if ($widthStyle !== 'auto' && $displayStyle === 'block') {
+
                 $spaces = $widthStyle - $valueLength; 
 
                 // Text align left
@@ -1380,6 +1381,7 @@ abstract class Element
 
                 // Text align right
                 if ($textAlignStyle === 'right') {
+
                     $paddingsAndBordersY = $addPaddingsAndBordersY($spaces + $valueLength + $pl + $pr - ($hasBorder() ? $borderSpaces : 0));
 
                     if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden')  {
@@ -1432,29 +1434,32 @@ abstract class Element
                         $linesLength[] = $this->getLength($line);
                     }
 
-                    $max = max($linesLength) + $pl + $pr - ($hasBorder() ? $borderSpaces : 0);
-
+                    $max = $widthStyle + $pl + $pr - ($hasBorder() ? $borderSpaces : 0);
+                    
                     $paddingsAndBordersY = $addPaddingsAndBordersY($max);
                         
                     $linesValue = '';
                     foreach ($lines as $key => $line) {
 
-                
                         // Get spaces for each line of text.
-                        $currentSpaces = $widthStyle - $this->getLength($line) - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0);
-                       
+                        $currentSpaces = $widthStyle - $this->getLength($line) - ($hasBorder() ? $borderSpaces : 0);
+                        
+                        if ($currentSpaces < 0) {
+                            $currentSpaces = 0;
+                        }
+
                         // Calculate left and right spaces for current box.
                         $currentLeftSpaces  = intval($currentSpaces / 2);
                         $currentRightSpaces = intval($currentSpaces / 2);
 
-                        $currentLine = strings(' ')->repeat($currentLeftSpaces + $pl - ($hasBorder() ? $borderSpaces / 2 : 0)) .
+                        $currentLine = strings(' ')->repeat($currentLeftSpaces + $pl) .
                                       $line .
-                                      strings(' ')->repeat($currentRightSpaces + $pr - ($hasBorder() ? $borderSpaces / 2 : 0));
+                                      strings(' ')->repeat($currentRightSpaces + $pr);
 
                         if ($this->getLength($currentLine) < $max) {
-                           $currentLine .= strings(' ')->repeat($max - $this->getLength($currentLine))->toString();
+                            $currentLine .= strings(' ')->repeat($max - $this->getLength($currentLine))->toString();
                         } else if ($this->getLength($currentLine) > $max) {
-                           $currentLine = mb_substr($currentLine, 0, - ($this->getLength($currentLine) - $max));
+                            $currentLine = mb_substr($currentLine, 0, - ($this->getLength($currentLine) - $max));
                         }
 
                         //dump($this->getLength($currentLine));
