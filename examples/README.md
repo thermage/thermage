@@ -13,3 +13,11 @@ Be sure to check the source!
 
 Run: `php examples/elements/hr.php`  
 Args: left, center, right 
+
+#### Alert
+
+Run: `php examples/elements/alert.php`  
+
+#### Chart
+
+Run: `php examples/elements/chart.php` 
