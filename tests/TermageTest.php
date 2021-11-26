@@ -70,3 +70,13 @@ test('test setShortcodes', function (): void {
     Termage::setShortcodes(Termage::getShortcodes());
     $this->assertInstanceOf(Shortcodes::class, Termage::getShortcodes());
 });
+
+test('test setCsi and getCsi', function (): void {
+    Termage::setCsi('foo');
+    expect(Termage::getCsi('foo'))->toEqual("foo");
+});
+
+test('test setOsc and getOsc', function (): void {
+    Termage::setOsc('foo');
+    expect(Termage::getOsc('foo'))->toEqual("foo");
+});
