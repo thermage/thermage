@@ -3,7 +3,7 @@
     "description": "Termage provides a fluent and incredibly powerful object-oriented interface for customizing CLI output text color, background, formatting, theming and more.",
     "license": "MIT",
     "keywords": [
-        "Termage", "console", "cli", "terminal", "console-colors"
+        "Termage", "console", "cli", "console-colors", "console-tool", "terminal", "terminal-colors", "ansi-colors"
     ],
     "support": {
       "source": "https://github.com/termage/termage",

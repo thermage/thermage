@@ -260,7 +260,60 @@ class Theme implements ThemeInterface
             ],
 
             // Hr element.
-            'hr' => ['text-align' => 'left'],
+            'hr' => [
+                'text-align' => 'left',
+                'border' => 'thin',
+                'borders' => [
+                    'thin' => [
+                        'top' => '─',
+                    ],
+                    'double' => [
+                        'top' => '═',
+                    ],
+                    'triple' => [
+                        'top' => '≡',
+                    ],
+                    'heavy' => [
+                        'top' => '━'
+                    ],
+                    'super-heavy' => [
+                        'top' => '▬'
+                    ],
+                    'dashed' => [
+                        'top' => '-',
+                    ],
+                    'arrow-down' => [
+                        'top' => '▼'
+                    ],
+                    'arrow-up' => [
+                        'top' => '▲'
+                    ],
+                    'wave' => [
+                        'top' => '~'
+                    ],
+                    'rope' => [
+                        'top' => '▱'
+                    ],
+                    'rope-heavy' => [
+                        'top' => '▰'
+                    ],
+                    'brick' => [
+                        'top' => '▭'
+                    ],
+                    'block-small' => [
+                        'top' => '▫'
+                    ],
+                    'block-small-heavy' => [
+                        'top' => '▪'
+                    ],
+                    'block' => [
+                        'top' => '◻'
+                    ],
+                    'noise' => [
+                        'top' => '▩'
+                    ],
+                ],
+            ],
         ]);
     }
 

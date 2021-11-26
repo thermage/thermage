@@ -35,7 +35,10 @@ final class Hr extends Element
     public function getElementVariables(): Collection
     {
         return collection([
-            'hr' => ['text-align' => 'left'],
+            'hr' => [
+                'text-align' => 'left',
+                'border' => 'thin',
+            ]
         ]);
     }
 
@@ -55,25 +58,33 @@ final class Hr extends Element
         $hrValueMarginX  = 3;
         $valueLength     = strings($this->stripDecorations($this->getValue() ?? ''))->length();
         $hrTextAlign     = $this->getStyles()['text-align'] ?? $theme->getVariables()->get('hr.text-align', $this->getElementVariables()['hr']['text-align']);
+        $borderStyle     = $this->getStyles()['border'] ?? $theme->getVariables()->get('hr.border', $this->getElementVariables()['hr']['border']);
 
+        // Helper function for determine is border exist.
+        $hasBorder = static function () use ($borderStyle, $theme) {
+            return $theme->getVariables()->has('hr.borders.' . $borderStyle);
+        };
+
+        $borderCharacter = ($hasBorder() ? $theme->getVariables()->get('hr.borders.' . $borderStyle . '.top') : $theme->getVariables()->get('hr.borders.thin.top'));
+       
         if ($hrTextAlign === 'left' && $valueLength > 0) {
-            $hr = strings('─')->repeat($hrValueMarginX) .
+            $hr = strings($borderCharacter)->repeat($hrValueMarginX) .
                     strings(' ')->repeat($hrValuePaddingX) .
                     $this->getValue() .
                     strings(' ')->repeat($hrValuePaddingX) .
-                    strings('─')->repeat(Terminal::getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX * 2);
+                    strings($borderCharacter)->repeat(Terminal::getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX * 2);
 
-            return (string) div($hr)->styles($this->getStyles()->toArray());
+            return (string) div($hr)->styles($this->getStyles()->delete('border')->toArray())->textOverflow('hidden');
         }
 
         if ($hrTextAlign === 'right' && $valueLength > 0) {
-            $hr = strings('─')->repeat(Terminal::getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX * 2) .
+            $hr = strings($borderCharacter)->repeat(Terminal::getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX * 2) .
                     strings(' ')->repeat($hrValuePaddingX) .
                     $this->getValue() .
                     strings(' ')->repeat($hrValuePaddingX) .
-                    strings('─')->repeat($hrValueMarginX);
+                    strings($borderCharacter)->repeat($hrValueMarginX);
 
-            return (string) div($hr)->styles($this->getStyles()->toArray());
+            return (string) div($hr)->styles($this->getStyles()->delete('border')->toArray())->textOverflow('hidden');
         }
 
         if ($hrTextAlign === 'center' && $valueLength > 0) {
@@ -87,15 +98,15 @@ final class Hr extends Element
                 $leftSpaces++;
             }
 
-            $hr = strings('─')->repeat($leftSpaces) .
+            $hr = strings($borderCharacter)->repeat($leftSpaces) .
                     strings(' ')->repeat($hrValuePaddingX) .
                     $this->getValue() .
                     strings(' ')->repeat($hrValuePaddingX) .
-                    strings('─')->repeat($rightSpaces);
+                    strings($borderCharacter)->repeat($rightSpaces);
 
-            return (string) div($hr)->styles($this->getStyles()->toArray());
+            return (string) div($hr)->styles($this->getStyles()->delete('border')->toArray())->textOverflow('hidden');
         }
 
-        return (string) div(strings('─')->repeat(Terminal::getWidth())->toString())->styles($this->getStyles()->toArray());
+        return (string) div(strings($borderCharacter)->repeat(Terminal::getWidth())->toString())->styles($this->getStyles()->delete('border')->toArray())->textOverflow('hidden');
     }
 }

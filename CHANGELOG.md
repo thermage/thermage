@@ -1,12 +1,19 @@
+<a name="0.13.0"></a>
+# [0.13.0](https://github.com/termage/termage) (2021-11-26)
+* Added new public method `textOverflow` for element.
+* Added ability to set variants of predefined and custom borders for `hr` element.
+* Improved box model with new text overflow and word wrap functionality for muli-line values.
+* Improved calculations for text alignment center.
+
 <a name="0.12.0"></a>
 # [0.12.0](https://github.com/termage/termage) (2021-11-21)
 * Added `getEsc` for method `stripStyles`.
-* Fix terminal width detection for `hr` element.
-* Fix calculations for element width.
-* Improve element styles definition.
-* Redefine value length if clearfix is true.
-* Redefine value and value length if value length is higher then width style.
-* Update styles for `heading` element.
+* Fixed terminal width detection for `hr` element.
+* Fixed calculations for element width.
+* Improved element styles definition.
+* Redefined value length if clearfix is true.
+* Redefined value and value length if value length is higher then width style.
+* Updated styles for `heading` element.
 * Removed unused helper functions.
 
 <a name="0.11.0"></a>

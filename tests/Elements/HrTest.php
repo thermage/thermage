@@ -42,6 +42,20 @@ test('test hr with text align right', function (): void {
     expect(strings($value)->toString())->toEqual($hr);
 });
 
+test('test hr with text align center', function (): void {
+    putenv('COLUMNS=20');
+    $value = hr('Stay RAD!')->textAlignCenter()->render();
+    $hr = "\e[0m────  Stay RAD!  ───" . PHP_EOL;
+    expect(strings($value)->toString())->toEqual($hr);
+});
+
+test('test hr with double border', function (): void {
+    putenv('COLUMNS=20');
+    $value = hr('Stay RAD!')->bDouble()->render();
+    $hr = "\e[0m═══  Stay RAD!  ════" . PHP_EOL;
+    expect(strings($value)->toString())->toEqual($hr);
+});
+
 class HrTestTheme extends Theme implements ThemeInterface
 {
     public function getThemeVariables(): Collection
