@@ -1111,6 +1111,13 @@ abstract class Element
         // Process style: inner
         $inner = function ($value) use ($valueLength, $textAlignStyle, $widthStyle, $heightStyle, $displayStyle, $borderStyle, $pl, $pr, $pt, $pb, $ml, $mr, $spaces, $borderSpaces, $hasBorder, $textOverflowStyle) {
 
+            // Calculate height
+            // Update paddings top and bottom
+            if ($heightStyle !== 'auto' && $heightStyle > 0) {
+                $pt = intval($heightStyle / 2) - ($heightStyle % 2 === 0 ? 1 : 0);
+                $pb = intval($heightStyle / 2);
+            }
+            
             // Helper function for re-apply text and background colors.
             $applyTextAndBackgroundColor = function ($value) {
                 $bg    = $this->styles->get('bg') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('bg'), $this->styles->get('bg')) : false;
@@ -1183,13 +1190,6 @@ abstract class Element
 
                 return ['bt' => $btStyleValue, 'bb' => $bbStyleValue, 'pt' => $ptStyleValue, 'pb' => $pbStyleValue];
             };
-
-            // Calculate height
-            // Update paddings top and bottom
-            if ($heightStyle !== 'auto' && $heightStyle > 0) {
-                $pt = intval($heightStyle / 2) - ($heightStyle % 2 === 0 ? 1 : 0);
-                $pb = intval($heightStyle / 2);
-            }
 
             // Set block element with auto width
             if ($widthStyle === 'auto' && $displayStyle === 'block') {
