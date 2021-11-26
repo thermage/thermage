@@ -333,7 +333,6 @@ test('test textOverflow', function (): void {
     expect($element)->toBe(getCsi() . "0mTermage - Totally..." . PHP_EOL);
 
     $element = div()->value('Termage - Totally RAD Terminal styling for PHP!')->textOverflowClip()->render();
-
     expect($element)->toBe(getCsi() . "0mTermage - Totally   " . PHP_EOL . getCsi() . "0mRAD Terminal styling" . PHP_EOL . getCsi() . "0mfor PHP!            " . PHP_EOL);
 });
 
