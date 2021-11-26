@@ -2,7 +2,7 @@
 # [0.13.0](https://github.com/termage/termage) (2021-11-xx)
 * Added new public method `textOverflow` for element.
 * Added ability to set variants of predefined and custom borders for `hr` element.
-* Improve box model with new text overflow and word wrap functionality.
+* Improve box model with new text overflow and word wrap functionality for muli-line values.
 * Improve calculations for text alignment center.
 
 <a name="0.12.0"></a>
