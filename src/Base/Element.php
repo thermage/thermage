@@ -97,14 +97,15 @@ abstract class Element
         $theme = null,
         $shortcodes = null,
         string $value = '',
-        string $classes = ''
+        string $classes = '',
+        array  $styles = []
     ) {
         self::$theme             = $theme ??= new Theme();
         self::$shortcodes        = $shortcodes ??= new Shortcodes(self::getTheme());
         $this->value             = $value;
         $this->classes           = $classes;
         $this->registeredClasses = collection($this->getDefaultClasses())->merge($this->getElementClasses(), true);
-        $this->styles            = collection();
+        $this->styles            = collection($styles);
         $this->clearfix          = false;
     }
 

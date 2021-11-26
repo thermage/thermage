@@ -197,18 +197,20 @@ class Termage
      *
      * @param string $value   Div element value.
      * @param string $classes Div element classes.
+     * @param array  $styles  Div element styles.
      *
      * @return Div Returns Div element instance.
      *
      * @access public
      */
-    public static function div(string $value = '', string $classes = ''): Div
+    public static function div(string $value = '', string $classes = '', array $styles = []): Div
     {
         return new Div(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $classes
+            $classes,
+            $styles
         );
     }
 
@@ -217,18 +219,20 @@ class Termage
      *
      * @param string $value   Span element value.
      * @param string $classes Span element classes.
+     * @param array  $styles  Span element styles.
      *
      * @return Span Returns Span element instance.
      *
      * @access public
      */
-    public static function span(string $value = '', string $classes = ''): Span
+    public static function span(string $value = '', string $classes = '', array $styles = []): Span
     {
         return new Span(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $classes
+            $classes,
+            $styles
         );
     }
 
@@ -237,18 +241,20 @@ class Termage
      *
      * @param string $value   Paragraph element value.
      * @param string $classes Paragraph element classes.
+     * @param array  $styles  Paragraph element styles.
      *
      * @return Paragraph Returns Paragraph element instance.
      *
      * @access public
      */
-    public static function paragraph(string $value = '', string $classes = ''): Paragraph
+    public static function paragraph(string $value = '', string $classes = '', array $styles = []): Paragraph
     {
         return new Paragraph(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $classes
+            $classes,
+            $styles
         );
     }
 
@@ -257,18 +263,20 @@ class Termage
      *
      * @param string $value   Hr element value.
      * @param string $classes Hr element classes.
+     * @param array  $styles  Hr element styles.
      *
      * @return Hr Returns Hr element instance.
      *
      * @access public
      */
-    public static function hr(string $value = '', string $classes = ''): Hr
+    public static function hr(string $value = '', string $classes = '', array $styles = []): Hr
     {
         return new Hr(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $classes
+            $classes,
+            $styles
         );
     }
 
@@ -277,18 +285,20 @@ class Termage
      *
      * @param string $value   Bold element value.
      * @param string $classes Bold element classes.
+     * @param array  $styles  Bold element styles.
      *
      * @return Bold Returns Bold element instance.
      *
      * @access public
      */
-    public static function bold(string $value = '', string $classes = ''): Bold
+    public static function bold(string $value = '', string $classes = '', array $styles = []): Bold
     {
         return new Bold(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $classes
+            $classes,
+            $styles
         );
     }
 
@@ -297,18 +307,20 @@ class Termage
      *
      * @param string $value   Anchor element value.
      * @param string $classes Anchor element classes.
+     * @param array  $styles  Anchor element styles.
      *
      * @return Anchor Returns Anchor element instance.
      *
      * @access public
      */
-    public static function anchor(string $value = '', string $classes = ''): Anchor
+    public static function anchor(string $value = '', string $classes = '', array $styles = []): Anchor
     {
         return new Anchor(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $classes
+            $classes,
+            $styles
         );
     }
 
@@ -317,18 +329,20 @@ class Termage
      *
      * @param string $value   Alert element value.
      * @param string $classes Alert element classes.
+     * @param array  $styles  Alert element styles.
      *
      * @return Alert Returns Alert element instance.
      *
      * @access public
      */
-    public static function alert(string $value = '', string $classes = ''): Alert
+    public static function alert(string $value = '', string $classes = '', array $styles = []): Alert
     {
         return new Alert(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $classes
+            $classes,
+            $styles
         );
     }
 
@@ -337,18 +351,20 @@ class Termage
      *
      * @param string $value   Heading element value.
      * @param string $classes Heading element classes.
+     * @param array  $styles  Heading element styles.
      *
      * @return Heading Returns Heading element instance.
      *
      * @access public
      */
-    public static function heading(string $value = '', string $classes = ''): Heading
+    public static function heading(string $value = '', string $classes = '', array $styles = []): Heading
     {
         return new Heading(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $classes
+            $classes,
+            $styles
         );
     }
 
@@ -357,18 +373,20 @@ class Termage
      *
      * @param string $value   Chart element value.
      * @param string $classes Chart element classes.
-     *
+     * @param array  $styles  Chart element styles.
+     * 
      * @return Chart Returns Chart element instance.
      *
      * @access public
      */
-    public static function chart(string $value = '', string $classes = ''): Chart
+    public static function chart(string $value = '', string $classes = '', array $styles = []): Chart
     {
         return new Chart(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $classes
+            $classes,
+            $styles
         );
     }
 
@@ -377,18 +395,20 @@ class Termage
      *
      * @param string $value   Breakline element value.
      * @param string $classes Breakline element classes.
+     * @param array  $styles  Breakline element styles.
      *
      * @return Breakline Returns Breakline element instance.
      *
      * @access public
      */
-    public static function breakline(string $value = '', string $classes = ''): Breakline
+    public static function breakline(string $value = '', string $classes = '', array $styles = []): Breakline
     {
         return new Breakline(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $classes
+            $classes,
+            $styles
         );
     }
 
@@ -397,18 +417,20 @@ class Termage
      *
      * @param string $value   Strikethrough element value.
      * @param string $classes Strikethrough element classes.
+     * @param array  $styles  Strikethrough element styles.
      *
      * @return Strikethrough Returns Strikethrough element instance.
      *
      * @access public
      */
-    public static function strikethrough(string $value = '', string $classes = ''): Strikethrough
+    public static function strikethrough(string $value = '', string $classes = '', array $styles = []): Strikethrough
     {
         return new Strikethrough(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $classes
+            $classes,
+            $styles
         );
     }
 
@@ -417,18 +439,20 @@ class Termage
      *
      * @param string $value   Italic element value.
      * @param string $classes Italic element classes.
+     * @param array  $styles  Italic element styles.
      *
      * @return Italic Returns Italic element instance.
      *
      * @access public
      */
-    public static function italic(string $value = '', string $classes = ''): Italic
+    public static function italic(string $value = '', string $classes = '', array $styles = []): Italic
     {
         return new Italic(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $classes
+            $classes,
+            $styles
         );
     }
 
@@ -437,38 +461,20 @@ class Termage
      *
      * @param string $value   Underline element value.
      * @param string $classes Underline element classes.
+     * @param array  $styles  Underline element styles.
      *
      * @return Underline Returns Underline element instance.
      *
      * @access public
      */
-    public static function underline(string $value = '', string $classes = ''): Underline
+    public static function underline(string $value = '', string $classes = '', array $styles = []): Underline
     {
         return new Underline(
             self::getTheme(),
             self::getShortcodes(),
             $value,
-            $classes
-        );
-    }
-
-    /**
-     * Create a new Spinner element instance.
-     *
-     * @param string $value   Spinner element value.
-     * @param string $classes Spinner element classes.
-     *
-     * @return Underline Returns Spinner element instance.
-     *
-     * @access public
-     */
-    public static function spinner(string $value = '', string $classes = ''): Spinner
-    {
-        return new Spinner(
-            self::getTheme(),
-            self::getShortcodes(),
-            $value,
-            $classes
+            $classes,
+            $styles
         );
     }
 }
