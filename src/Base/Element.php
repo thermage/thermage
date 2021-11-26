@@ -261,6 +261,7 @@ abstract class Element
             'reverse',
             'blink',
             'text-align',
+            'text-overflow',
             'clearfix',
             'b',
             'bColor',
@@ -819,11 +820,13 @@ abstract class Element
     /**
      * Set element value overflow.
      *
+     * @param string $value Variant of value overflow.
+     * 
      * @return self Returns instance of the Element class.
      *
      * @access public
      */
-    public function textOverflow($value): self
+    public function textOverflow(string $value): self
     {
         $this->styles->set('text-overflow', $value);
 
