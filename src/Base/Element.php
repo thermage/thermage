@@ -262,6 +262,7 @@ abstract class Element
             'reverse',
             'blink',
             'text-align',
+            'text-align-vertical',
             'text-overflow',
             'clearfix',
             'b',
@@ -739,6 +740,22 @@ abstract class Element
     }
 
     /**
+     * Set element text align vertical style.
+     *
+     * @param mixed $value Text align vertical value.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function textAlignVertical(string $value): self
+    {
+        $this->styles->set('text-align-vertical', $value);
+
+        return $this;
+    }
+
+    /**
      * Set element width style.
      *
      * @param mixed $value Width value.
@@ -935,6 +952,10 @@ abstract class Element
         }
 
         if (strings($method)->startsWith('textAlign')) {
+            if (strings($method)->startsWith('textAlignVertical')) {
+                $this->textAlignVertical(strings($method)->substr(17)->kebab()->toString());
+            }
+
             return $this->textAlign(strings($method)->substr(9)->kebab()->toString());
         }
 
@@ -1033,23 +1054,24 @@ abstract class Element
         $stylesHierarchy = ['invisible', 'reverse', 'blink', 'dim', 'bold', 'italic', 'underline', 'strikethrough', 'inner', 'bg', 'color', 'outer', 'display'];
 
         // Get element styles
-        $valueLength       = $this->getLength($this->value);
-        $textAlignStyle    = $this->styles->get('text-align') ?? 'left';
-        $widthStyle        = $this->styles->get('width') ?? 'auto';
-        $heightStyle       = $this->styles->get('height') ?? 'auto';
-        $displayStyle      = $this->styles->get('display') ?? 'block';
-        $borderStyle       = $this->styles->get('border') ?? 'none';
-        $textOverflowStyle = $this->styles->get('text-overflow') ?? 'clip';
-        $pl                = $this->styles->get('padding.left') ?? 0;
-        $pr                = $this->styles->get('padding.right') ?? 0;
-        $pt                = $this->styles->get('padding.top') ?? 0;
-        $pb                = $this->styles->get('padding.bottom') ?? 0;
-        $ml                = $this->styles->get('margin.left') ?? 0;
-        $mr                = $this->styles->get('margin.right') ?? 0;
-        $mt                = $this->styles->get('margin.top') ?? 0;
-        $mb                = $this->styles->get('margin.bottom') ?? 0;
-        $spaces            = 0;
-        $borderSpaces      = 2;
+        $valueLength            = $this->getLength($this->value);
+        $textAlignStyle         = $this->styles->get('text-align') ?? 'left';
+        $textAlignVerticalStyle = $this->styles->get('text-align-vertical') ?? 'middle';
+        $widthStyle             = $this->styles->get('width') ?? 'auto';
+        $heightStyle            = $this->styles->get('height') ?? 'auto';
+        $displayStyle           = $this->styles->get('display') ?? 'block';
+        $borderStyle            = $this->styles->get('border') ?? 'none';
+        $textOverflowStyle      = $this->styles->get('text-overflow') ?? 'clip';
+        $pl                     = $this->styles->get('padding.left') ?? 0;
+        $pr                     = $this->styles->get('padding.right') ?? 0;
+        $pt                     = $this->styles->get('padding.top') ?? 0;
+        $pb                     = $this->styles->get('padding.bottom') ?? 0;
+        $ml                     = $this->styles->get('margin.left') ?? 0;
+        $mr                     = $this->styles->get('margin.right') ?? 0;
+        $mt                     = $this->styles->get('margin.top') ?? 0;
+        $mb                     = $this->styles->get('margin.bottom') ?? 0;
+        $spaces                 = 0;
+        $borderSpaces           = 2;
 
         // Helper function for determine is border exist.
         $hasBorder = static function () use ($borderStyle) {
@@ -1109,13 +1131,22 @@ abstract class Element
         };
 
         // Process style: inner
-        $inner = function ($value) use ($valueLength, $textAlignStyle, $widthStyle, $heightStyle, $displayStyle, $borderStyle, $pl, $pr, $pt, $pb, $ml, $mr, $spaces, $borderSpaces, $hasBorder, $textOverflowStyle) {
+        $inner = function ($value) use ($valueLength, $textAlignStyle, $textAlignVerticalStyle, $widthStyle, $heightStyle, $displayStyle, $borderStyle, $pl, $pr, $pt, $pb, $ml, $mr, $spaces, $borderSpaces, $hasBorder, $textOverflowStyle) {
 
-            // Calculate height
-            // Update paddings top and bottom
+            // Calculate element height
             if ($heightStyle !== 'auto' && $heightStyle > 0) {
-                $pt = intval($heightStyle / 2) - ($heightStyle % 2 === 0 ? 1 : 0);
-                $pb = intval($heightStyle / 2);
+                if ($textAlignVerticalStyle == 'middle') {
+                    $pt = $pt + intval($heightStyle / 2);
+                    $pb = $pb + intval($heightStyle / 2);
+                }
+
+                if ($textAlignVerticalStyle == 'top') {
+                    $pb = $pb + intval($heightStyle) - ($heightStyle % 2 === 0 ? 0 : 1);
+                }
+
+                if ($textAlignVerticalStyle == 'bottom') {
+                    $pt = $pt + intval($heightStyle) - ($heightStyle % 2 === 0 ? 0 : 1);
+                }
             }
             
             // Helper function for re-apply text and background colors.
