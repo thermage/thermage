@@ -1099,7 +1099,7 @@ abstract class Element
             }
             $valueLength = $this->getLength($this->value);
         }
-    
+        
         // Process style: outer
         $outer = function ($value) use ($ml, $mr, $mt, $mb, $pl, $pr) {
 
@@ -1109,7 +1109,7 @@ abstract class Element
             }
 
             // Do not allow vertical margins for inline elements.
-            if ($this->styles->get('display') === 'inline') {
+            if ($this->styles->get('display') === 'inline' || $this->styles->get('display') === 'inline-block') {
                 $mt = 0;
                 $mb = 0;
             }
@@ -1221,6 +1221,10 @@ abstract class Element
 
                 return ['bt' => $btStyleValue, 'bb' => $bbStyleValue, 'pt' => $ptStyleValue, 'pb' => $pbStyleValue];
             };
+
+            if ($displayStyle === 'inline-block' && $widthStyle == 'auto') {
+                $widthStyle = $valueLength;
+            }
 
             // Set block element with auto width
             if ($widthStyle === 'auto' && $displayStyle === 'block') {
@@ -1369,7 +1373,17 @@ abstract class Element
             }
 
             // Display block with custom width
-            if ($widthStyle !== 'auto' && $displayStyle === 'block') {
+            if ($widthStyle !== 'auto' && $displayStyle === 'block' || $displayStyle === 'inline-block') {
+
+                // Do not allow to use padding (top, bottom) for inline-block element. 
+                // Set text overflow hidden.
+                if ($displayStyle === 'inline-block') {
+                    $pt = 0;
+                    $pb = 0;
+                    $textOverflowStyle = 'hidden';
+                    $this->value = strings($this->value)->limit($widthStyle, '')->toString();
+                    $valueLength = $this->getLength($this->value);
+                }
 
                 $spaces = $widthStyle - $valueLength; 
 
@@ -1380,7 +1394,7 @@ abstract class Element
                     if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden')  {
                         $lines = [$this->value];
                     } else {
-                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
                     }
             
                     $linesValue = '';
@@ -1396,6 +1410,7 @@ abstract class Element
                                                                     $line .
                                                                     strings(' ')->repeat($pr + $widthStyle - $this->getLength($line) - ($hasBorder() ? $borderSpaces : 0))) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+                                        strings(' ')->repeat($mr) .
                                         ($key === array_key_last($lines) ? '' : PHP_EOL);
                     }
 
@@ -1422,7 +1437,7 @@ abstract class Element
                     if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden')  {
                         $lines = [$this->value];
                     } else {
-                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
                     }
             
                     $linesValue = '';
@@ -1438,6 +1453,7 @@ abstract class Element
                                                                     $line .
                                                                     strings(' ')->repeat($pr)) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+                                        strings(' ')->repeat($mr) .
                                         ($key === array_key_last($lines) ? '' : PHP_EOL);
                     }
 
@@ -1462,7 +1478,7 @@ abstract class Element
                     if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden') {
                         $lines = [$this->value];
                     } else {
-                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
                     }
 
                     foreach ($lines as $line) {
@@ -1507,6 +1523,7 @@ abstract class Element
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
                                         $applyTextAndBackgroundColor($currentLine) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+                                        strings(' ')->repeat($mr) .
                                         ($key === array_key_last($lines) ? '' : PHP_EOL);
                     }
 
@@ -1590,6 +1607,10 @@ abstract class Element
         $display = function ($value) use ($displayStyle) {
             switch ($displayStyle) {
                 case 'inline':
+                    return $value;
+
+                    break;
+                case 'inline-block':
                     return $value;
 
                     break;
