@@ -100,15 +100,15 @@ final class Heading extends Element
 
         switch ($size) {
             case 1:
-                $heading  = div($value, 'px-1 b-double text-align-center bold');
+                $heading  = div($value, 'px-1 border-double text-align-center bold');
                 $heading .= PHP_EOL;
                 break;
             case 2:
-                $heading  = div($value, 'px-1 b-heavy text-align-center bold');
+                $heading  = div($value, 'px-1 border-heavy text-align-center bold');
                 $heading .= PHP_EOL;
                 break;
             case 3:
-                $heading  = div($value, 'px-1 b-square text-align-center');
+                $heading  = div($value, 'px-1 border-square text-align-center');
                 $heading .= PHP_EOL;
                 break;
             case 4:

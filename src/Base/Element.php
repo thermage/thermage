@@ -265,8 +265,8 @@ abstract class Element
             'text-align-vertical',
             'text-overflow',
             'clearfix',
-            'b',
-            'bColor',
+            'border',
+            'borderColor',
             'p',
             'pl',
             'pr',
@@ -812,7 +812,7 @@ abstract class Element
      *
      * @access public
      */
-    public function b(string $value): self
+    public function border(string $value): self
     {
         $this->styles->set('border', $value);
 
@@ -828,7 +828,7 @@ abstract class Element
      *
      * @access public
      */
-    public function bColor(string $value): self
+    public function borderColor(string $value): self
     {
         $this->styles->set('border-color', $value);
 
@@ -870,12 +870,12 @@ abstract class Element
                 return $this->bg(strings($method)->substr(2)->kebab()->toString());
             }
 
-            if (strings($method)->startsWith('bColor')) {
-                return $this->bColor(strings($method)->substr(6)->kebab()->toString());
+            if (strings($method)->startsWith('borderColor')) {
+                return $this->borderColor(strings($method)->substr(11)->kebab()->toString());
             }
 
-            if (strings($method)->substr(1)->toString()) {
-                return $this->b(strings($method)->substr(1)->kebab()->toString());
+            if (strings($method)->substr(6)->toString()) {
+                return $this->border(strings($method)->substr(6)->kebab()->toString());
             }
         }
 
