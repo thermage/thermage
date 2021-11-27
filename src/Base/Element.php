@@ -266,7 +266,7 @@ abstract class Element
             'text-overflow',
             'clearfix',
             'border',
-            'borderColor',
+            'border-color',
             'p',
             'pl',
             'pr',
