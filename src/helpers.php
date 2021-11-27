@@ -27,6 +27,7 @@ use Termage\Elements\Hr;
 use Termage\Elements\Italic;
 use Termage\Elements\Paragraph;
 use Termage\Elements\Span;
+use Termage\Elements\Canvas;
 use Termage\Elements\Spinner;
 use Termage\Elements\Strikethrough;
 use Termage\Elements\Underline;
@@ -145,3 +146,9 @@ function heading(string $value = '', string $classes = '', array $styles = []): 
 {
     return Termage::heading($value, $classes, $styles);
 }
+
+function canvas(string $value = '', string $classes = '', array $styles = []): Canvas
+{
+    return Termage::canvas($value, $classes, $styles);
+}
+

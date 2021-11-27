@@ -29,6 +29,7 @@ use Termage\Elements\Span;
 use Termage\Elements\Spinner;
 use Termage\Elements\Strikethrough;
 use Termage\Elements\Underline;
+use Termage\Elements\Canvas;
 use Termage\Parsers\Shortcodes;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
@@ -470,6 +471,28 @@ class Termage
     public static function underline(string $value = '', string $classes = '', array $styles = []): Underline
     {
         return new Underline(
+            self::getTheme(),
+            self::getShortcodes(),
+            $value,
+            $classes,
+            $styles
+        );
+    }
+
+    /**
+     * Create a new Canvas element instance.
+     *
+     * @param string $value   Canvas element value.
+     * @param string $classes Canvas element classes.
+     * @param array  $styles  Canvas element styles.
+     *
+     * @return Canvas Returns Canvas element instance.
+     *
+     * @access public
+     */
+    public static function canvas(string $value = '', string $classes = '', array $styles = []): Canvas
+    {
+        return new Canvas(
             self::getTheme(),
             self::getShortcodes(),
             $value,

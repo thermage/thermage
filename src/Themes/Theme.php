@@ -309,6 +309,13 @@ class Theme implements ThemeInterface
                 ],
             ],
 
+            // Canvas element.
+            'canvas' => [
+                'width' => 16,
+                'height' => 16,
+                'pixel-width' => 3,
+            ],
+            
             // Hr element.
             'hr' => [
                 'text-align' => 'left',
