@@ -1,5 +1,5 @@
 <a name="0.14.0"></a>
-# [0.14.0](https://github.com/termage/termage) (2021-12-xx)
+# [0.14.0](https://github.com/termage/termage) (2021-12-02)
 * Added new element `Canvas`.
 * Added display `inline-block` for elements.
 * Added new magic class `text-overflow`.
