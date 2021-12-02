@@ -97,14 +97,15 @@ abstract class Element
         $theme = null,
         $shortcodes = null,
         string $value = '',
-        string $classes = ''
+        string $classes = '',
+        array  $styles = []
     ) {
         self::$theme             = $theme ??= new Theme();
         self::$shortcodes        = $shortcodes ??= new Shortcodes(self::getTheme());
         $this->value             = $value;
         $this->classes           = $classes;
         $this->registeredClasses = collection($this->getDefaultClasses())->merge($this->getElementClasses(), true);
-        $this->styles            = collection();
+        $this->styles            = collection($styles);
         $this->clearfix          = false;
     }
 
@@ -261,9 +262,11 @@ abstract class Element
             'reverse',
             'blink',
             'text-align',
+            'text-align-vertical',
+            'text-overflow',
             'clearfix',
-            'b',
-            'bColor',
+            'border',
+            'border-color',
             'p',
             'pl',
             'pr',
@@ -737,6 +740,22 @@ abstract class Element
     }
 
     /**
+     * Set element text align vertical style.
+     *
+     * @param mixed $value Text align vertical value.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function textAlignVertical(string $value): self
+    {
+        $this->styles->set('text-align-vertical', $value);
+
+        return $this;
+    }
+
+    /**
      * Set element width style.
      *
      * @param mixed $value Width value.
@@ -793,7 +812,7 @@ abstract class Element
      *
      * @access public
      */
-    public function b(string $value): self
+    public function border(string $value): self
     {
         $this->styles->set('border', $value);
 
@@ -809,7 +828,7 @@ abstract class Element
      *
      * @access public
      */
-    public function bColor(string $value): self
+    public function borderColor(string $value): self
     {
         $this->styles->set('border-color', $value);
 
@@ -819,11 +838,13 @@ abstract class Element
     /**
      * Set element value overflow.
      *
+     * @param string $value Variant of value overflow.
+     * 
      * @return self Returns instance of the Element class.
      *
      * @access public
      */
-    public function textOverflow($value): self
+    public function textOverflow(string $value): self
     {
         $this->styles->set('text-overflow', $value);
 
@@ -849,12 +870,12 @@ abstract class Element
                 return $this->bg(strings($method)->substr(2)->kebab()->toString());
             }
 
-            if (strings($method)->startsWith('bColor')) {
-                return $this->bColor(strings($method)->substr(6)->kebab()->toString());
+            if (strings($method)->startsWith('borderColor')) {
+                return $this->borderColor(strings($method)->substr(11)->kebab()->toString());
             }
 
-            if (strings($method)->substr(1)->toString()) {
-                return $this->b(strings($method)->substr(1)->kebab()->toString());
+            if (strings($method)->substr(6)->toString()) {
+                return $this->border(strings($method)->substr(6)->kebab()->toString());
             }
         }
 
@@ -931,6 +952,10 @@ abstract class Element
         }
 
         if (strings($method)->startsWith('textAlign')) {
+            if (strings($method)->startsWith('textAlignVertical')) {
+                $this->textAlignVertical(strings($method)->substr(17)->kebab()->toString());
+            }
+
             return $this->textAlign(strings($method)->substr(9)->kebab()->toString());
         }
 
@@ -1029,23 +1054,24 @@ abstract class Element
         $stylesHierarchy = ['invisible', 'reverse', 'blink', 'dim', 'bold', 'italic', 'underline', 'strikethrough', 'inner', 'bg', 'color', 'outer', 'display'];
 
         // Get element styles
-        $valueLength       = $this->getLength($this->value);
-        $textAlignStyle    = $this->styles->get('text-align') ?? 'left';
-        $widthStyle        = $this->styles->get('width') ?? 'auto';
-        $heightStyle       = $this->styles->get('height') ?? 'auto';
-        $displayStyle      = $this->styles->get('display') ?? 'block';
-        $borderStyle       = $this->styles->get('border') ?? 'none';
-        $textOverflowStyle = $this->styles->get('text-overflow') ?? 'clip';
-        $pl                = $this->styles->get('padding.left') ?? 0;
-        $pr                = $this->styles->get('padding.right') ?? 0;
-        $pt                = $this->styles->get('padding.top') ?? 0;
-        $pb                = $this->styles->get('padding.bottom') ?? 0;
-        $ml                = $this->styles->get('margin.left') ?? 0;
-        $mr                = $this->styles->get('margin.right') ?? 0;
-        $mt                = $this->styles->get('margin.top') ?? 0;
-        $mb                = $this->styles->get('margin.bottom') ?? 0;
-        $spaces            = 0;
-        $borderSpaces      = 2;
+        $valueLength            = $this->getLength($this->value);
+        $textAlignStyle         = $this->styles->get('text-align') ?? 'left';
+        $textAlignVerticalStyle = $this->styles->get('text-align-vertical') ?? 'middle';
+        $widthStyle             = $this->styles->get('width') ?? 'auto';
+        $heightStyle            = $this->styles->get('height') ?? 'auto';
+        $displayStyle           = $this->styles->get('display') ?? 'block';
+        $borderStyle            = $this->styles->get('border') ?? 'none';
+        $textOverflowStyle      = $this->styles->get('text-overflow') ?? 'clip';
+        $pl                     = $this->styles->get('padding.left') ?? 0;
+        $pr                     = $this->styles->get('padding.right') ?? 0;
+        $pt                     = $this->styles->get('padding.top') ?? 0;
+        $pb                     = $this->styles->get('padding.bottom') ?? 0;
+        $ml                     = $this->styles->get('margin.left') ?? 0;
+        $mr                     = $this->styles->get('margin.right') ?? 0;
+        $mt                     = $this->styles->get('margin.top') ?? 0;
+        $mb                     = $this->styles->get('margin.bottom') ?? 0;
+        $spaces                 = 0;
+        $borderSpaces           = 2;
 
         // Helper function for determine is border exist.
         $hasBorder = static function () use ($borderStyle) {
@@ -1073,7 +1099,7 @@ abstract class Element
             }
             $valueLength = $this->getLength($this->value);
         }
-    
+        
         // Process style: outer
         $outer = function ($value) use ($ml, $mr, $mt, $mb, $pl, $pr) {
 
@@ -1083,7 +1109,7 @@ abstract class Element
             }
 
             // Do not allow vertical margins for inline elements.
-            if ($this->styles->get('display') === 'inline') {
+            if ($this->styles->get('display') === 'inline' || $this->styles->get('display') === 'inline-block') {
                 $mt = 0;
                 $mb = 0;
             }
@@ -1105,8 +1131,24 @@ abstract class Element
         };
 
         // Process style: inner
-        $inner = function ($value) use ($valueLength, $textAlignStyle, $widthStyle, $heightStyle, $displayStyle, $borderStyle, $pl, $pr, $pt, $pb, $ml, $mr, $spaces, $borderSpaces, $hasBorder, $textOverflowStyle) {
+        $inner = function ($value) use ($valueLength, $textAlignStyle, $textAlignVerticalStyle, $widthStyle, $heightStyle, $displayStyle, $borderStyle, $pl, $pr, $pt, $pb, $ml, $mr, $spaces, $borderSpaces, $hasBorder, $textOverflowStyle) {
 
+            // Calculate element height
+            if ($heightStyle !== 'auto' && $heightStyle > 0) {
+                if ($textAlignVerticalStyle == 'middle') {
+                    $pt = $pt + intval($heightStyle / 2);
+                    $pb = $pb + intval($heightStyle / 2);
+                }
+
+                if ($textAlignVerticalStyle == 'top') {
+                    $pb = $pb + intval($heightStyle) - ($heightStyle % 2 === 0 ? 0 : 1);
+                }
+
+                if ($textAlignVerticalStyle == 'bottom') {
+                    $pt = $pt + intval($heightStyle) - ($heightStyle % 2 === 0 ? 0 : 1);
+                }
+            }
+            
             // Helper function for re-apply text and background colors.
             $applyTextAndBackgroundColor = function ($value) {
                 $bg    = $this->styles->get('bg') ? self::$theme->getVariables()->get('colors.' . $this->styles->get('bg'), $this->styles->get('bg')) : false;
@@ -1180,11 +1222,8 @@ abstract class Element
                 return ['bt' => $btStyleValue, 'bb' => $bbStyleValue, 'pt' => $ptStyleValue, 'pb' => $pbStyleValue];
             };
 
-            // Calculate height
-            // Update paddings top and bottom
-            if ($heightStyle !== 'auto' && $heightStyle > 0) {
-                $pt = intval($heightStyle / 2) - ($heightStyle % 2 === 0 ? 1 : 0);
-                $pb = intval($heightStyle / 2);
+            if ($displayStyle === 'inline-block' && $widthStyle == 'auto') {
+                $widthStyle = $valueLength;
             }
 
             // Set block element with auto width
@@ -1334,7 +1373,17 @@ abstract class Element
             }
 
             // Display block with custom width
-            if ($widthStyle !== 'auto' && $displayStyle === 'block') {
+            if ($widthStyle !== 'auto' && $displayStyle === 'block' || $displayStyle === 'inline-block') {
+
+                // Do not allow to use padding (top, bottom) for inline-block element. 
+                // Set text overflow hidden.
+                if ($displayStyle === 'inline-block') {
+                    $pt = 0;
+                    $pb = 0;
+                    $textOverflowStyle = 'hidden';
+                    $this->value = strings($this->value)->limit($widthStyle, '')->toString();
+                    $valueLength = $this->getLength($this->value);
+                }
 
                 $spaces = $widthStyle - $valueLength; 
 
@@ -1345,7 +1394,7 @@ abstract class Element
                     if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden')  {
                         $lines = [$this->value];
                     } else {
-                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
                     }
             
                     $linesValue = '';
@@ -1361,6 +1410,7 @@ abstract class Element
                                                                     $line .
                                                                     strings(' ')->repeat($pr + $widthStyle - $this->getLength($line) - ($hasBorder() ? $borderSpaces : 0))) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+                                        strings(' ')->repeat($mr) .
                                         ($key === array_key_last($lines) ? '' : PHP_EOL);
                     }
 
@@ -1387,7 +1437,7 @@ abstract class Element
                     if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden')  {
                         $lines = [$this->value];
                     } else {
-                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
                     }
             
                     $linesValue = '';
@@ -1403,6 +1453,7 @@ abstract class Element
                                                                     $line .
                                                                     strings(' ')->repeat($pr)) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+                                        strings(' ')->repeat($mr) .
                                         ($key === array_key_last($lines) ? '' : PHP_EOL);
                     }
 
@@ -1427,7 +1478,7 @@ abstract class Element
                     if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden') {
                         $lines = [$this->value];
                     } else {
-                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
                     }
 
                     foreach ($lines as $line) {
@@ -1472,6 +1523,7 @@ abstract class Element
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
                                         $applyTextAndBackgroundColor($currentLine) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
+                                        strings(' ')->repeat($mr) .
                                         ($key === array_key_last($lines) ? '' : PHP_EOL);
                     }
 
@@ -1555,6 +1607,10 @@ abstract class Element
         $display = function ($value) use ($displayStyle) {
             switch ($displayStyle) {
                 case 'inline':
+                    return $value;
+
+                    break;
+                case 'inline-block':
                     return $value;
 
                     break;

@@ -51,7 +51,7 @@ test('test hr with text align center', function (): void {
 
 test('test hr with double border', function (): void {
     putenv('COLUMNS=20');
-    $value = hr('Stay RAD!')->bDouble()->render();
+    $value = hr('Stay RAD!')->borderDouble()->render();
     $hr = "\e[0m═══  Stay RAD!  ════" . PHP_EOL;
     expect(strings($value)->toString())->toEqual($hr);
 });

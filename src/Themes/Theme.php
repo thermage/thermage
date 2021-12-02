@@ -259,6 +259,63 @@ class Theme implements ThemeInterface
                 ],
             ],
 
+            // Chart element.
+            'chart' => [
+                'text-align' => 'left',
+                'border' => 'filled',
+                'borders' => [
+                    'filled' => [
+                        'top' => ' ',
+                    ],
+                    'thin' => [
+                        'top' => '─',
+                    ],
+                    'double' => [
+                        'top' => '═',
+                    ],
+                    'triple' => [
+                        'top' => '≡',
+                    ],
+                    'heavy' => [
+                        'top' => '━'
+                    ],
+                    'super-heavy' => [
+                        'top' => '▬'
+                    ],
+                    'dashed' => [
+                        'top' => '-',
+                    ],
+                    'rope' => [
+                        'top' => '▱'
+                    ],
+                    'rope-heavy' => [
+                        'top' => '▰'
+                    ],
+                    'brick' => [
+                        'top' => '▭'
+                    ],
+                    'block-small' => [
+                        'top' => '▫'
+                    ],
+                    'block-small-heavy' => [
+                        'top' => '▪'
+                    ],
+                    'block' => [
+                        'top' => '◻'
+                    ],
+                    'noise' => [
+                        'top' => '▩'
+                    ],
+                ],
+            ],
+
+            // Canvas element.
+            'canvas' => [
+                'width' => 16,
+                'height' => 16,
+                'pixel-width' => 3,
+            ],
+            
             // Hr element.
             'hr' => [
                 'text-align' => 'left',

@@ -27,6 +27,7 @@ use Termage\Elements\Hr;
 use Termage\Elements\Italic;
 use Termage\Elements\Paragraph;
 use Termage\Elements\Span;
+use Termage\Elements\Canvas;
 use Termage\Elements\Spinner;
 use Termage\Elements\Strikethrough;
 use Termage\Elements\Underline;
@@ -81,67 +82,73 @@ function setEsc($value)
     return Termage::setEsc($value);
 }
 
-function div(string $value = '', string $classes = ''): Div
+function div(string $value = '', string $classes = '', array $styles = []): Div
 {
-    return Termage::div($value, $classes);
+    return Termage::div($value, $classes, $styles);
 }
 
-function paragraph(string $value = '', string $classes = ''): Paragraph
+function paragraph(string $value = '', string $classes = '', array $styles = []): Paragraph
 {
-    return Termage::paragraph($value, $classes);
+    return Termage::paragraph($value, $classes, $styles);
 }
 
-function span(string $value = '', string $classes = ''): Span
+function span(string $value = '', string $classes = '', array $styles = []): Span
 {
-    return Termage::span($value, $classes);
+    return Termage::span($value, $classes, $styles);
 }
 
-function hr(string $value = '', string $classes = ''): Hr
+function hr(string $value = '', string $classes = '', array $styles = []): Hr
 {
-    return Termage::hr($value, $classes);
+    return Termage::hr($value, $classes, $styles);
 }
 
-function anchor(string $value = '', string $classes = ''): Anchor
+function anchor(string $value = '', string $classes = '', array $styles = []): Anchor
 {
-    return Termage::anchor($value, $classes);
+    return Termage::anchor($value, $classes, $styles);
 }
 
-function bold(string $value = '', string $classes = ''): Bold
+function bold(string $value = '', string $classes = '', array $styles = []): Bold
 {
-    return Termage::bold($value, $classes);
+    return Termage::bold($value, $classes, $styles);
 }
 
-function italic(string $value = '', string $classes = ''): Italic
+function italic(string $value = '', string $classes = '', array $styles = []): Italic
 {
-    return Termage::italic($value, $classes);
+    return Termage::italic($value, $classes, $styles);
 }
 
-function underline(string $value = '', string $classes = ''): Underline
+function underline(string $value = '', string $classes = '', array $styles = []): Underline
 {
-    return Termage::underline($value, $classes);
+    return Termage::underline($value, $classes, $styles);
 }
 
-function strikethrough(string $value = '', string $classes = ''): Strikethrough
+function strikethrough(string $value = '', string $classes = '', array $styles = []): Strikethrough
 {
-    return Termage::strikethrough($value, $classes);
+    return Termage::strikethrough($value, $classes, $styles);
 }
 
-function breakline(string $value = '', string $classes = ''): Breakline
+function breakline(string $value = '', string $classes = '', array $styles = []): Breakline
 {
-    return Termage::breakline($value, $classes);
+    return Termage::breakline($value, $classes, $styles);
 }
 
-function chart(string $value = '', string $classes = ''): Chart
+function chart(string $value = '', string $classes = '', array $styles = []): Chart
 {
-    return Termage::chart($value, $classes);
+    return Termage::chart($value, $classes, $styles);
 }
 
-function alert(string $value = '', string $classes = ''): Alert
+function alert(string $value = '', string $classes = '', array $styles = []): Alert
 {
-    return Termage::alert($value, $classes);
+    return Termage::alert($value, $classes, $styles);
 }
 
-function heading(string $value = '', string $classes = ''): Heading
+function heading(string $value = '', string $classes = '', array $styles = []): Heading
 {
-    return Termage::heading($value, $classes);
+    return Termage::heading($value, $classes, $styles);
 }
+
+function canvas(string $value = '', string $classes = '', array $styles = []): Canvas
+{
+    return Termage::canvas($value, $classes, $styles);
+}
+

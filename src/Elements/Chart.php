@@ -14,9 +14,11 @@ declare(strict_types=1);
 
 namespace Termage\Elements;
 
+use Atomastic\Arrays\Arrays as Collection;
 use Termage\Base\Color;
 use Termage\Base\Element;
 
+use function arrays as collection;
 use function array_column;
 use function array_sum;
 use function count;
@@ -63,6 +65,23 @@ final class Chart extends Element
      * @access private
      */
     private bool $showValues = false;
+
+    /**
+     * Get Chart element variables.
+     *
+     * @return Collection Chart element variables.
+     *
+     * @access public
+     */
+    public function getElementVariables(): Collection
+    {
+        return collection([
+            'chart' => [
+                'type' => 'horizontal',
+                'border' => 'filled',
+            ]
+        ]);
+    }
 
     /**
      * Set chart type = horizontal.
@@ -195,9 +214,18 @@ final class Chart extends Element
      */
     public function render(): string
     {
-        $value     = parent::render();
-        $chartData = $this->сhartData;
-        $chartType = $this->chartType;
+        $value       = parent::render();
+        $theme       = self::getTheme();
+        $chartData   = $this->сhartData;
+        $chartType   = $this->chartType;
+        $borderStyle = $this->getStyles()['border'] ?? $theme->getVariables()->get('chart.border', $this->getElementVariables()['chart']['border']);
+
+        // Helper function for determine is border exist.
+        $hasBorder = static function () use ($borderStyle, $theme) {
+            return $theme->getVariables()->has('hr.borders.' . $borderStyle);
+        };
+        
+        $borderCharacter = ($hasBorder() ? $theme->getVariables()->get('chart.borders.' . $borderStyle . '.top') : $theme->getVariables()->get('chart.borders.thin.top'));
 
         // Get total value
         $total = array_sum(array_column($chartData, 'value'));
@@ -210,12 +238,12 @@ final class Chart extends Element
         // Select chart type
         switch ($chartType) {
             case 'inline':
-                $chart = $this->buildInlineChart($chartData);
+                $chart = $this->buildInlineChart($chartData, $borderStyle, $borderCharacter);
                 break;
 
             case 'horizontal':
             default:
-                $chart = $this->buildHortizontalChart($chartData);
+                $chart = $this->buildHortizontalChart($chartData, $borderStyle, $borderCharacter);
                 break;
         }
 
@@ -231,7 +259,7 @@ final class Chart extends Element
      *
      * @access private
      */
-    private function buildHortizontalChart(array $data): string
+    private function buildHortizontalChart(array $data, $borderStyle, $borderCharacter): string
     {
         $line  = '';
         $i     = 0;
@@ -256,8 +284,14 @@ final class Chart extends Element
 
             $color = $value['color'] ?? Color::getRandomHexColor();
 
+            if ($borderStyle == 'filled') {
+                $borderValue = span(strings(' ')->repeat($value['percentage'])->toString())->bg($color)->render();
+            } else {
+                $borderValue = span(strings($borderCharacter)->repeat($value['percentage'])->toString())->color($color)->render();
+            }
+            
             $line .= span((string) $value['label'])->pr($labelPaddingRight)->color($color)->render() .
-                     span(strings(' ')->repeat($value['percentage'])->toString())->bg($color)->render() .
+                     $borderValue .
                      ($showPercents ? span((string) $value['percentage'] . '%')->pl1()->color($color)->render() : '') .
                      ($showValues ? span('(' . (string) $value['value'] . $valuesSufix . ')')->pl1()->color($color)->render() : '') .
                      ($i < $count ? br() : '');
@@ -275,12 +309,13 @@ final class Chart extends Element
      *
      * @access private
      */
-    private function buildInlineChart(array $data): string
+    private function buildInlineChart(array $data, $borderStyle, $borderCharacter): string
     {
         $showPercents = $this->showPercents ?? false;
         $showValues   = $this->showValues ?? false;
         $valuesSufix  = $this->valuesSufix ?? '';
 
+        
         // Set random color if color isnt defined.
         foreach ($data as $key => $value) {
             $data[$key]['color'] = $value['color'] ?? Color::getRandomHexColor();
@@ -288,13 +323,20 @@ final class Chart extends Element
 
         $line = '';
         foreach ($data as $key => $value) {
-            $line .= span(strings(' ')->repeat($value['percentage'])->toString())->bg($value['color'])->render();
+
+            if ($borderStyle == 'filled') {
+                $borderValue = span(strings(' ')->repeat($value['percentage'])->toString())->bg($value['color'])->render();
+            } else {
+                $borderValue = span(strings($borderCharacter)->repeat($value['percentage'])->toString())->color($value['color'])->render();
+            }
+
+            $line .= $borderValue;
         }
 
         $labels = '';
         $suffix = '';
         foreach ($data as $key => $value) {
-            $suffix            = ($showPercents ? span((string) $value['percentage'] . '%')->pr1()->color($value['color'])->render() : '') .
+            $suffix  = ($showPercents ? span((string) $value['percentage'] . '%')->pr1()->color($value['color'])->render() : '') .
                       ($showValues ? span('(' . (string) $value['value'] . $valuesSufix . ')')->pr1()->color($value['color'])->render() : '');
                       $labels .= span($value['label'] . (empty($suffix) ? ' ' : ' ' . $suffix))->color($value['color'])->render();
         }

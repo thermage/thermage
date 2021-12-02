@@ -20,4 +20,5 @@ Run: `php examples/elements/alert.php`
 
 #### Chart
 
-Run: `php examples/elements/chart.php` 
+Run: `php examples/elements/chart.php`   
+Args: inline, horizontal
