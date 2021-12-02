@@ -144,7 +144,8 @@ final class Canvas extends Element
         $theme            = $this->getTheme();
         $elementVariables = $this->getElementVariables();
         $pixelWidth       = $this->getStyles()['pixel-width'] ?? $theme->getVariables()->get('canvas.pixel-width', $elementVariables['canvas']['pixel-width']);
-
+        $result           = '';
+        
         foreach(self::$canvas as $line) {
             foreach ($line as $pixel) {
                 $result .= span(strings(' ')->repeat(3)->toString())->bg($pixel);
