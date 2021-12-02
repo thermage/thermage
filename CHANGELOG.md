@@ -1,3 +1,19 @@
+<a name="0.14.0"></a>
+# [0.14.0](https://github.com/termage/termage) (2021-12-xx)
+* Added new element `Canvas`.
+* Added display `inline-block` for elements.
+* Added new magic class `text-overflow`.
+* Aded new chart border variants.
+* Added ability to send elements styles array argument.
+* Added ability to set element text vertical alignment.
+* Improved calucations for non auto width elements.
+* Fixed height style logic.
+
+### BREAKING CHANGES
+
+- public method `b` renamed to `border` and magic class `b` renamed to `b`
+- public method `bColor` renamed to `borderColor` and magic class `b-color` renamed to `border-color`
+
 <a name="0.13.0"></a>
 # [0.13.0](https://github.com/termage/termage) (2021-11-26)
 * Added new public method `textOverflow` for element.
