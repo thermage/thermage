@@ -54,7 +54,7 @@ final class Canvas extends Element
     private static ?array $canvas = null;
 
     /**
-     * Set canvas pixel width.
+     * Set Canvas pixel width.
      * 
      * @param int $value Canvase pixel width.
      * 
@@ -72,7 +72,7 @@ final class Canvas extends Element
     }
 
     /**
-     * Set canvas size.
+     * Set Canvas size.
      * 
      * @param int    $width  Canvas width.
      * @param int    $height Canvas height.
@@ -96,7 +96,7 @@ final class Canvas extends Element
     }
 
     /**
-     * Set pixel.
+     * Set Canvas pixel.
      * 
      * @param int    $x     Canvas pixel position x.
      * @param int    $y     Canvas pixel position y.
