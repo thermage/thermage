@@ -1,3 +1,7 @@
+<a name="0.15.0"></a>
+# [0.15.0](https://github.com/termage/termage) (2021-12-xx)
+* Fixed `Canvas` element notice: undefined variable `$result`
+
 <a name="0.14.0"></a>
 # [0.14.0](https://github.com/termage/termage) (2021-12-02)
 * Added new element `Canvas`.
