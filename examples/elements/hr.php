@@ -10,62 +10,62 @@ switch ($argv[1]) {
     case 'center':
         echo (
             hr('Stay RAD!', 'text-align-center color-pink').
-            hr('Stay RAD!', 'b-thin text-align-center color-pink').
-            hr('Stay RAD!', 'b-heavy text-align-center color-pink').
-            hr('Stay RAD!', 'b-super-heavy text-align-center color-pink').
-            hr('Stay RAD!', 'b-double text-align-center color-pink').
-            hr('Stay RAD!', 'b-triple text-align-center color-pink').
-            hr('Stay RAD!', 'b-arrow-down text-align-center color-pink').
-            hr('Stay RAD!', 'b-arrow-up text-align-center color-pink').
-            hr('Stay RAD!', 'b-dashed text-align-center color-pink').
-            hr('Stay RAD!', 'b-rope text-align-center color-pink').
-            hr('Stay RAD!', 'b-rope-heavy text-align-center color-pink').
-            hr('Stay RAD!', 'b-brick text-align-center color-pink').
-            hr('Stay RAD!', 'b-block-small text-align-center color-pink').
-            hr('Stay RAD!', 'b-block-small-heavy text-align-center color-pink').
-            hr('Stay RAD!', 'b-block text-align-center color-pink').
-            hr('Stay RAD!', 'b-noise text-align-center color-pink')
+            hr('Stay RAD!', 'border-thin text-align-center color-pink').
+            hr('Stay RAD!', 'border-heavy text-align-center color-pink').
+            hr('Stay RAD!', 'border-super-heavy text-align-center color-pink').
+            hr('Stay RAD!', 'border-double text-align-center color-pink').
+            hr('Stay RAD!', 'border-triple text-align-center color-pink').
+            hr('Stay RAD!', 'border-arrow-down text-align-center color-pink').
+            hr('Stay RAD!', 'border-arrow-up text-align-center color-pink').
+            hr('Stay RAD!', 'border-dashed text-align-center color-pink').
+            hr('Stay RAD!', 'border-rope text-align-center color-pink').
+            hr('Stay RAD!', 'border-rope-heavy text-align-center color-pink').
+            hr('Stay RAD!', 'border-brick text-align-center color-pink').
+            hr('Stay RAD!', 'border-block-small text-align-center color-pink').
+            hr('Stay RAD!', 'border-block-small-heavy text-align-center color-pink').
+            hr('Stay RAD!', 'border-block text-align-center color-pink').
+            hr('Stay RAD!', 'border-noise text-align-center color-pink')
         );
         break;
     case 'right':
         echo (
             hr('Stay RAD!', 'text-align-right color-pink').
-            hr('Stay RAD!', 'b-thin text-align-right color-pink').
-            hr('Stay RAD!', 'b-heavy text-align-right color-pink').
-            hr('Stay RAD!', 'b-super-heavy text-align-right color-pink').
-            hr('Stay RAD!', 'b-double text-align-right color-pink').
-            hr('Stay RAD!', 'b-triple text-align-right color-pink').
-            hr('Stay RAD!', 'b-arrow-down text-align-right color-pink').
-            hr('Stay RAD!', 'b-arrow-up text-align-right color-pink').
-            hr('Stay RAD!', 'b-dashed text-align-right color-pink').
-            hr('Stay RAD!', 'b-rope text-align-right color-pink').
-            hr('Stay RAD!', 'b-rope-heavy text-align-right color-pink').
-            hr('Stay RAD!', 'b-brick text-align-right color-pink').
-            hr('Stay RAD!', 'b-block-small text-align-right color-pink').
-            hr('Stay RAD!', 'b-block-small-heavy text-align-right color-pink').
-            hr('Stay RAD!', 'b-block text-align-right color-pink').
-            hr('Stay RAD!', 'b-noise text-align-right color-pink')
+            hr('Stay RAD!', 'border-thin text-align-right color-pink').
+            hr('Stay RAD!', 'border-heavy text-align-right color-pink').
+            hr('Stay RAD!', 'border-super-heavy text-align-right color-pink').
+            hr('Stay RAD!', 'border-double text-align-right color-pink').
+            hr('Stay RAD!', 'border-triple text-align-right color-pink').
+            hr('Stay RAD!', 'border-arrow-down text-align-right color-pink').
+            hr('Stay RAD!', 'border-arrow-up text-align-right color-pink').
+            hr('Stay RAD!', 'border-dashed text-align-right color-pink').
+            hr('Stay RAD!', 'border-rope text-align-right color-pink').
+            hr('Stay RAD!', 'border-rope-heavy text-align-right color-pink').
+            hr('Stay RAD!', 'border-brick text-align-right color-pink').
+            hr('Stay RAD!', 'border-block-small text-align-right color-pink').
+            hr('Stay RAD!', 'border-block-small-heavy text-align-right color-pink').
+            hr('Stay RAD!', 'border-block text-align-right color-pink').
+            hr('Stay RAD!', 'border-noise text-align-right color-pink')
         );
         break;
     case 'left':
     default:
         echo (
             hr('Stay RAD!', 'color-pink').
-            hr('Stay RAD!', 'b-thin color-pink').
-            hr('Stay RAD!', 'b-heavy color-pink').
-            hr('Stay RAD!', 'b-super-heavy color-pink').
-            hr('Stay RAD!', 'b-double color-pink').
-            hr('Stay RAD!', 'b-triple color-pink').
-            hr('Stay RAD!', 'b-arrow-down color-pink').
-            hr('Stay RAD!', 'b-arrow-up color-pink').
-            hr('Stay RAD!', 'b-dashed color-pink').
-            hr('Stay RAD!', 'b-rope color-pink').
-            hr('Stay RAD!', 'b-rope-heavy color-pink').
-            hr('Stay RAD!', 'b-brick color-pink').
-            hr('Stay RAD!', 'b-block-small color-pink').
-            hr('Stay RAD!', 'b-block-small-heavy color-pink').
-            hr('Stay RAD!', 'b-block color-pink').
-            hr('Stay RAD!', 'b-noise color-pink')
+            hr('Stay RAD!', 'border-thin color-pink').
+            hr('Stay RAD!', 'border-heavy color-pink').
+            hr('Stay RAD!', 'border-super-heavy color-pink').
+            hr('Stay RAD!', 'border-double color-pink').
+            hr('Stay RAD!', 'border-triple color-pink').
+            hr('Stay RAD!', 'border-arrow-down color-pink').
+            hr('Stay RAD!', 'border-arrow-up color-pink').
+            hr('Stay RAD!', 'border-dashed color-pink').
+            hr('Stay RAD!', 'border-rope color-pink').
+            hr('Stay RAD!', 'border-rope-heavy color-pink').
+            hr('Stay RAD!', 'border-brick color-pink').
+            hr('Stay RAD!', 'border-block-small color-pink').
+            hr('Stay RAD!', 'border-block-small-heavy color-pink').
+            hr('Stay RAD!', 'border-block color-pink').
+            hr('Stay RAD!', 'border-noise color-pink')
         );
         break;
 }
