@@ -1,5 +1,5 @@
 <a name="0.14.2"></a>
-# [0.14.2](https://github.com/termage/termage) (2021-12-xx)
+# [0.14.2](https://github.com/termage/termage) (2021-12-08)
 * Fixed `Element` display inline-block style.
 * Fixed `Element` display inline style.
 
