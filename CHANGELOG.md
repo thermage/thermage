@@ -1,3 +1,8 @@
+<a name="0.14.1"></a>
+# [0.14.1](https://github.com/termage/termage) (2021-12-07)
+* Fixed `Canvas` element notice: undefined variable `$result`.
+* Fixed `Element` vertical text align position.
+
 <a name="0.14.0"></a>
 # [0.14.0](https://github.com/termage/termage) (2021-12-02)
 * Added new element `Canvas`.
