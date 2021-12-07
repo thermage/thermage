@@ -1108,10 +1108,13 @@ abstract class Element
                 return $value;
             }
 
-            // Do not allow vertical margins for inline elements.
+            // Do not allow vertical margins and for inline (inline-block) elements,
+            // and reset horizontal paddings for inline (inline-block) elements, do not affect outer styles. 
             if ($this->styles->get('display') === 'inline' || $this->styles->get('display') === 'inline-block') {
                 $mt = 0;
                 $mb = 0;
+                $pl = 0;
+                $pr = 0;
             }
 
             return // Set margin top
