@@ -953,7 +953,7 @@ abstract class Element
 
         if (strings($method)->startsWith('textAlign')) {
             if (strings($method)->startsWith('textAlignVertical')) {
-                $this->textAlignVertical(strings($method)->substr(17)->kebab()->toString());
+                return $this->textAlignVertical(strings($method)->substr(17)->kebab()->toString());
             }
 
             return $this->textAlign(strings($method)->substr(9)->kebab()->toString());
