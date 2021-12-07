@@ -1109,25 +1109,25 @@ abstract class Element
             }
 
             // Do not allow vertical margins and for inline (inline-block) elements,
-            // and reset horizontal paddings for inline (inline-block) elements, do not affect outer styles. 
+            // and set negative horizontal paddings for inline (inline-block) elements, do not affect outer styles. 
             if ($this->styles->get('display') === 'inline' || $this->styles->get('display') === 'inline-block') {
                 $mt = 0;
                 $mb = 0;
-                $pl = 0;
-                $pr = 0;
+                $pl = -1;
+                $pr = -1;
             }
 
             return // Set margin top
                     ($mt > 0 ? strings(PHP_EOL)->repeat($mt) : '') .
 
                     // Set margin left, only if padding left is not set.
-                    ($ml > 0 && $pl == 0 ? strings(' ')->repeat($ml) : '') .
+                    ($ml > 0 && $pl < 0 ? strings(' ')->repeat($ml) : '') .
 
                     // Set Value
                     $value .
 
                     // Set margin right, only if padding right is not set.
-                    ($mr > 0 && $pr == 0 ? strings(' ')->repeat($mr) : '') .
+                    ($mr > 0 && $pr < 0 ? strings(' ')->repeat($mr) : '') .
 
                     // Set margin bottom
                     ($mb > 0 ? strings(PHP_EOL)->repeat($mb) : '');
