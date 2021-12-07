@@ -1108,22 +1108,25 @@ abstract class Element
                 return $value;
             }
 
-            // Do not allow vertical margins for inline elements.
+            // Do not allow vertical margins and for inline (inline-block) elements,
+            // and set negative horizontal paddings for inline (inline-block) elements, do not affect outer styles. 
             if ($this->styles->get('display') === 'inline' || $this->styles->get('display') === 'inline-block') {
                 $mt = 0;
                 $mb = 0;
+                $pl = -1;
+                $pr = -1;
             }
 
             return // Set margin top
                     ($mt > 0 ? strings(PHP_EOL)->repeat($mt) : '') .
 
-                    // Set margin left, only padding left is not set.
+                    // Set margin left, only if padding left is not set.
                     ($ml > 0 && $pl < 0 ? strings(' ')->repeat($ml) : '') .
 
                     // Set Value
                     $value .
 
-                    // Set margin right, only padding right is not set.
+                    // Set margin right, only if padding right is not set.
                     ($mr > 0 && $pr < 0 ? strings(' ')->repeat($mr) : '') .
 
                     // Set margin bottom
@@ -1376,13 +1379,9 @@ abstract class Element
             if ($widthStyle !== 'auto' && $displayStyle === 'block' || $displayStyle === 'inline-block') {
 
                 // Do not allow to use padding (top, bottom) for inline-block element. 
-                // Set text overflow hidden.
                 if ($displayStyle === 'inline-block') {
                     $pt = 0;
                     $pb = 0;
-                    $textOverflowStyle = 'hidden';
-                    $this->value = strings($this->value)->limit($widthStyle, '')->toString();
-                    $valueLength = $this->getLength($this->value);
                 }
 
                 $spaces = $widthStyle - $valueLength; 
