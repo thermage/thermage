@@ -890,7 +890,7 @@ abstract class Element
         $fontFile = $value . '.json';
 
         if (! file_exists($fontFile)) {
-            throw new FontNotFound("Font {$value} not found.");
+            throw new Exception("Font {$value} not found.");
         }
 
         $this->styles->set('font', json_decode(file_get_contents($fontFile), true));
