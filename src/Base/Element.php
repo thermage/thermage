@@ -17,6 +17,7 @@ namespace Termage\Base;
 use Atomastic\Arrays\Arrays as Collection;
 use Atomastic\Strings\Strings;
 use BadMethodCallException;
+use Exception;
 use Termage\Parsers\Shortcodes;
 use Termage\Themes\Theme;
 use Termage\Themes\ThemeInterface;
@@ -255,6 +256,8 @@ abstract class Element
             'italic',
             'bg',
             'color',
+            'colors',
+            'font',
             'dim',
             'strikethrough',
             'invisible',
@@ -836,6 +839,127 @@ abstract class Element
     }
 
     /**
+     * Set element colors style.
+     *
+     * @param string $values Colors style values.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function colors(string ...$values): self
+    {
+        $this->styles->set('colors', $values);
+
+        return $this;
+    }
+
+    /**
+     * Set element font style.
+     *
+     * @param string $value Font style value.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function font(string $value): self
+    {
+        $fontFile = __DIR__ . '/../../fonts/' . $value . '.json';
+
+        if (! file_exists($fontFile)) {
+            throw new Exception("Font {$value} not found.");
+        }
+
+        $this->styles->set('font', json_decode(file_get_contents($fontFile), true));
+        
+        return $this; 
+    }
+
+    /**
+     * Set element font style from not default fonts.
+     *
+     * @param string $value Font style value.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function fontFrom(string $value): self
+    {
+        $fontFile = $value . '.json';
+
+        if (! file_exists($fontFile)) {
+            throw new FontNotFound("Font {$value} not found.");
+        }
+
+        $this->styles->set('font', json_decode(file_get_contents($fontFile), true));
+        
+        return $this; 
+    }
+
+    /**
+     * Apply elemnt font style for element value.
+     *
+     * @param string $value Element value.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function applyFont(string $value): string
+    {
+        if (!$this->styles->has('font')) {
+            return $value;
+        }
+
+        $chars = [];
+        $colorsTags = [];
+        $colorsValues = [];
+        $result = '';
+
+        foreach(strings($value)->upper()->chars() as $char) {
+            $chars[] = $this->styles->get('font.chars.' . $char);
+        }
+
+        $charsCount  = count($chars);
+        $linesCount  = $this->styles->get('font.lines');
+        $colorsCount = $this->styles->get('font.colors');
+        $colors      = $this->styles->get('colors');
+
+        for ($i=0; $i < $colorsCount; $i++) { 
+            $colorsTags[] = '~\<c'. ($i + 1) . '\>(.*?)\</c'. ($i + 1) . '\>~s';
+        }
+        for ($i=0; $i < $colorsCount; $i++) { 
+            if (isset($colors[$i])) {
+                $colorsValues[] = "[color={$colors[($i)]}]$1[/color]";  
+            } else {
+                $colorsValues[] = "$1";
+            }
+        }
+
+        for ($j=0; $j < $linesCount; $j++) { 
+            for ($i=0; $i < $charsCount; $i++) {
+
+                if ($i == 0) {
+                    $result .= preg_replace($colorsTags, $colorsValues, $this->styles->get('font.buffer.' . $j));
+                }
+
+                $result .=  preg_replace($colorsTags, $colorsValues, $chars[$i][$j]) . preg_replace($colorsTags, $colorsValues, $this->styles->get('font.letterspace.' . $j));
+                
+                if ($i == $charsCount - 1) {
+                    $result .= preg_replace($colorsTags, $colorsValues, $this->styles->get('font.buffer.' . $j));
+                }
+            }
+            if ($j + 1 < $linesCount) {
+                $result .= PHP_EOL; 
+            }
+        }
+    
+        return $result;
+    }
+
+    /**
      * Set element value overflow.
      *
      * @param string $value Variant of value overflow.
@@ -880,7 +1004,14 @@ abstract class Element
         }
 
         if (strings($method)->startsWith('color')) {
+            if (strings($method)->startsWith('colors')) {
+                return $this->colors(...strings($method)->substr(6)->kebab()->segments('-')); 
+            }
             return $this->color(strings($method)->substr(5)->kebab()->toString());
+        }
+
+        if (strings($method)->startsWith('font')) {
+            return $this->font(strings($method)->substr(4)->kebab()->toString());
         }
 
         if (strings($method)->startsWith('m')) {
@@ -1041,7 +1172,7 @@ abstract class Element
         // │ │ | ┌─────────────────────────────────────────────────┐ │ │ │
         // │ │ │ │ bg, color                                       │ │ │ │
         // │ │ │ │ ┌─────────────────────────────────────────────┐ │ │ │ │
-        // │ │ │ │ │ inner: width, height paddings               │ │ │ │ │
+        // │ │ │ │ │ inner: width, height, paddings              │ │ │ │ │
         // │ │ │ │ │ ┌─────────────────────────────────────────┐ │ │ │ │ │
         // │ │ │ │ │ │ invisible, reverse, blink, dim, bold,   │ │ │ │ │ │
         // │ │ │ │ │ │ italic, underline, strikethrough.       │ │ │ │ │ │
@@ -1083,12 +1214,19 @@ abstract class Element
             $valueLength = ($widthStyle == 'auto' ? Terminal::getWidth() : $valueLength);
         }
 
+        // Apply font style for block element only.
+        if ($displayStyle == 'block') {
+            $this->value = $this->applyFont($this->value);
+        } else {
+            $this->styles->delete('font');
+        }
+    
         // Redefine value and value length if original value length is higher then width style or terminal width.
         if ($widthStyle !== 'auto' && $valueLength > $widthStyle) {
             if ($textOverflowStyle == 'hidden')  {
-                $this->value = strings($this->value)->limit($widthStyle - $ml - $mr - $pr - $pl - ($hasBorder() ? $borderSpaces : 0), '')->toString();
+                $this->value = strings($this->value)->limit($widthStyle - $pr - $pl - ($hasBorder() ? $borderSpaces : 0), '')->toString();
             } elseif($textOverflowStyle == 'ellipsis') {
-                $this->value = strings($this->value)->limit($widthStyle - 3 - $ml - $mr - $pr - $pl - ($hasBorder() ? $borderSpaces : 0))->toString();
+                $this->value = strings($this->value)->limit($widthStyle - 3 - $pr - $pl - ($hasBorder() ? $borderSpaces : 0))->toString();
             }
             $valueLength = $this->getLength($this->value);
         } elseif ($widthStyle == 'auto' && $valueLength > Terminal::getWidth()) {
@@ -1099,7 +1237,7 @@ abstract class Element
             }
             $valueLength = $this->getLength($this->value);
         }
-        
+
         // Process style: outer
         $outer = function ($value) use ($ml, $mr, $mt, $mb, $pl, $pr) {
 
@@ -1228,9 +1366,10 @@ abstract class Element
             if ($displayStyle === 'inline-block' && $widthStyle == 'auto') {
                 $widthStyle = $valueLength;
             }
-
+            
             // Set block element with auto width
             if ($widthStyle === 'auto' && $displayStyle === 'block') {
+                
                 // Do not allow width for block elements with clearfix flag.
                 if ($this->clearfix) {
                     return $value;
@@ -1246,7 +1385,11 @@ abstract class Element
                     if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden')  {
                         $lines = [$this->value];
                     } else {
-                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, Terminal::getWidth() - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        if ($this->styles->has('font')) {
+                            $lines = explode(PHP_EOL, $this->value);
+                        } else {
+                            $lines = explode(PHP_EOL, strings(wordwrap($this->value, Terminal::getWidth() - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0) + $this->getShortcodesStringSize($this->value), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        }
                     }
 
                     $linesValue = '';
@@ -1255,12 +1398,18 @@ abstract class Element
                         // paddings left and right,
                         // re-apply text and background colors,
                         // apply borders.
+                        $pr = Terminal::getWidth() - $this->getLength($line) - $pl - $ml - $mr - ($hasBorder() ? $borderSpaces : 0);
+                        
+                        if ($pr < 0) {
+                            $pr = 0;
+                        }
+
                         $linesValue .=  Styles::resetAll() .
                                         strings(' ')->repeat($ml) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
                                         $applyTextAndBackgroundColor(strings(' ')->repeat($pl) .
                                                                     $line .
-                                                                    strings(' ')->repeat(Terminal::getWidth() - $this->getLength($line) - $pl - $ml - $mr - ($hasBorder() ? $borderSpaces : 0))) .
+                                                                    strings(' ')->repeat($pr)) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
                                         ($key === array_key_last($lines) ? '' : PHP_EOL);
                     }
@@ -1287,7 +1436,11 @@ abstract class Element
                     if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden')  {
                         $lines = [$this->value];
                     } else {
-                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, Terminal::getWidth() - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        if ($this->styles->has('font')) {
+                            $lines = explode(PHP_EOL, $this->value);
+                        } else {
+                            $lines = explode(PHP_EOL, strings(wordwrap($this->value, Terminal::getWidth() - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0) + $this->getShortcodesStringSize($this->value), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        }
                     }
 
                     $linesValue = '';
@@ -1296,10 +1449,17 @@ abstract class Element
                         // paddings left and right,
                         // re-apply text and background colors,
                         // apply borders.
+
+                        $pl = Terminal::getWidth() - $this->getLength($line) - $pr - $ml - $mr - ($hasBorder() ? $borderSpaces : 0);
+
+                        if ($pl < 0) {
+                            $pl = 0;
+                        }
+
                         $linesValue .=  Styles::resetAll() .
                                         strings(' ')->repeat($ml) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
-                                        $applyTextAndBackgroundColor(strings(' ')->repeat(Terminal::getWidth() - $this->getLength($line) - $pr - $ml - $mr - ($hasBorder() ? $borderSpaces : 0)) .
+                                        $applyTextAndBackgroundColor(strings(' ')->repeat($pl) .
                                                                     $line .
                                                                     strings(' ')->repeat($pr)) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
@@ -1324,11 +1484,15 @@ abstract class Element
                 // Text align center
                 if ($textAlignStyle === 'center') {
                     $paddingsAndBordersY = $addPaddingsAndBordersY($spaces + $valueLength - $mr - $ml - ($hasBorder() ? $borderSpaces : 0));
-                    
+                
                     if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden')  {
                         $lines = [$this->value];
                     } else {
-                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, Terminal::getWidth() - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        if ($this->styles->has('font')) {
+                            $lines = explode(PHP_EOL, $this->value);
+                        } else {
+                            $lines = explode(PHP_EOL, strings(wordwrap($this->value, Terminal::getWidth() - $pr - $pl - $mr - $ml - ($hasBorder() ? $borderSpaces : 0) + $this->getShortcodesStringSize($this->value), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        }
                     }
 
                     $linesValue = '';
@@ -1344,7 +1508,11 @@ abstract class Element
                         if (intval($currentLeftSpaces * 2) < $spaces) {
                             $currentLeftSpaces++;
                         }
-                        
+
+                        $currentLine = strings(' ')->repeat($currentLeftSpaces + $pl) .
+                                      $line .
+                                      strings(' ')->repeat($currentRightSpaces + $pr);
+                                      
                         // Set box margin left,
                         // paddings left and right,
                         // re-apply text and background colors,
@@ -1352,9 +1520,7 @@ abstract class Element
                         $linesValue .= Styles::resetAll() .
                                         strings(' ')->repeat($ml) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
-                                        $applyTextAndBackgroundColor(strings(' ')->repeat($currentLeftSpaces + $pl) .
-                                                                    $line .
-                                                                    strings(' ')->repeat($currentRightSpaces + $pr)) .
+                                        $applyTextAndBackgroundColor($currentLine) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
                                         ($key === array_key_last($lines) ? '' : PHP_EOL);
                     }
@@ -1393,11 +1559,22 @@ abstract class Element
                     if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden')  {
                         $lines = [$this->value];
                     } else {
-                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        if ($this->styles->has('font')) {
+                            $lines = explode(PHP_EOL, $this->value);
+                        } else {
+                            $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - ($hasBorder() ? $borderSpaces : 0) + $this->getShortcodesStringSize($this->value), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        }
                     }
-            
+
                     $linesValue = '';
                     foreach ($lines as $key => $line) {
+
+                        // Fix right padding if it is < 0
+                        $prCurrent = $pr + $widthStyle - $this->getLength($line) - ($hasBorder() ? $borderSpaces : 0);
+                        if ($prCurrent < 0) {
+                            $prCurrent = 0;
+                        }
+                        
                         // Set box margin left,
                         // paddings left and right,
                         // re-apply text and background colors,
@@ -1407,7 +1584,7 @@ abstract class Element
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
                                         $applyTextAndBackgroundColor(strings(' ')->repeat($pl) .
                                                                     $line .
-                                                                    strings(' ')->repeat($pr + $widthStyle - $this->getLength($line) - ($hasBorder() ? $borderSpaces : 0))) .
+                                                                    strings(' ')->repeat($prCurrent)) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
                                         strings(' ')->repeat($mr) .
                                         ($key === array_key_last($lines) ? '' : PHP_EOL);
@@ -1436,11 +1613,22 @@ abstract class Element
                     if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden')  {
                         $lines = [$this->value];
                     } else {
-                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        if ($this->styles->has('font')) {
+                            $lines = explode(PHP_EOL, $this->value);
+                        } else {
+                            $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - ($hasBorder() ? $borderSpaces : 0) + $this->getShortcodesStringSize($this->value), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        }
                     }
             
                     $linesValue = '';
                     foreach ($lines as $key => $line) {
+
+                        // Fix left padding if it is < 0
+                        $plCurrent = $pl + $widthStyle - $this->getLength($line) - ($hasBorder() ? $borderSpaces : 0);
+                        if ($plCurrent < 0) {
+                            $plCurrent = 0;
+                        }
+
                         // Set box margin left,
                         // paddings left and right,
                         // re-apply text and background colors,
@@ -1448,7 +1636,7 @@ abstract class Element
                         $linesValue .=  Styles::resetAll() .
                                         strings(' ')->repeat($ml) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
-                                        $applyTextAndBackgroundColor(strings(' ')->repeat($pl + $widthStyle - $this->getLength($line) - ($hasBorder() ? $borderSpaces : 0)) .
+                                        $applyTextAndBackgroundColor(strings(' ')->repeat($plCurrent) .
                                                                     $line .
                                                                     strings(' ')->repeat($pr)) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
@@ -1473,11 +1661,15 @@ abstract class Element
 
                 // Text align center
                 if ($textAlignStyle === 'center') {
-                    
-                    if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden') {
+                
+                    if ($textOverflowStyle == 'ellipsis' || $textOverflowStyle == 'hidden')  {
                         $lines = [$this->value];
                     } else {
-                        $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - ($hasBorder() ? $borderSpaces : 0), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        if ($this->styles->has('font')) {
+                            $lines = explode(PHP_EOL, $this->value);
+                        } else {
+                            $lines = explode(PHP_EOL, strings(wordwrap($this->value, $widthStyle - $pr - $pl - ($hasBorder() ? $borderSpaces : 0) + $this->getShortcodesStringSize($this->value), PHP_EOL, false))->trimRight(PHP_EOL)->toString());
+                        }
                     }
 
                     foreach ($lines as $line) {
@@ -1505,14 +1697,17 @@ abstract class Element
                         $currentLine = strings(' ')->repeat($currentLeftSpaces + $pl) .
                                       $line .
                                       strings(' ')->repeat($currentRightSpaces + $pr);
-
-                        if ($this->getLength($currentLine) < $max) {
-                            $currentLine .= strings(' ')->repeat($max - $this->getLength($currentLine))->toString();
-                        } else if ($this->getLength($currentLine) > $max) {
-                            $currentLine = mb_substr($currentLine, 0, - ($this->getLength($currentLine) - $max));
+                                      
+                        if (!$this->styles->has('font')) {
+                            
+                            // Fix string length it is fit or not fit available printable area
+                            if ($this->getLength($currentLine) < $max) {
+                                $currentLine .= strings(' ')->repeat($max - $this->getLength($currentLine))->toString();
+                            } else if ($this->getLength($currentLine) > $max) {
+                                $currentLine = mb_substr($currentLine, 0, - ($this->getLength($currentLine) - $max));
+                            }
                         }
 
-                        //dump($this->getLength($currentLine));
                         // Set box margin left,
                         // paddings left and right,
                         // re-apply text and background colors,
@@ -1688,6 +1883,25 @@ abstract class Element
     public function getLength(string $value): int
     {
         return strings($this->stripDecorations($value))->replace(PHP_EOL, '')->length();
+    }
+
+    /**
+     * Get shortcodes string size.
+     *
+     * @param string $value Value.
+     *
+     * @return int Shortcodes string size.
+     *
+     * @access public
+     */
+    private function getShortcodesStringSize(string $value)
+    {
+        $counter = 0;
+        foreach($this->getShortcodes()->parseText($value) as $s) {
+            $counter += strings($s->getName())->length() + strings($s->getBbCode())->length();
+        }
+
+        return $counter;
     }
 
     /**
