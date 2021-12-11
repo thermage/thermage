@@ -1224,9 +1224,9 @@ abstract class Element
         // Redefine value and value length if original value length is higher then width style or terminal width.
         if ($widthStyle !== 'auto' && $valueLength > $widthStyle) {
             if ($textOverflowStyle == 'hidden')  {
-                $this->value = strings($this->value)->limit($widthStyle - $ml - $mr - $pr - $pl - ($hasBorder() ? $borderSpaces : 0), '')->toString();
+                $this->value = strings($this->value)->limit($widthStyle - $pr - $pl - ($hasBorder() ? $borderSpaces : 0), '')->toString();
             } elseif($textOverflowStyle == 'ellipsis') {
-                $this->value = strings($this->value)->limit($widthStyle - 3 - $ml - $mr - $pr - $pl - ($hasBorder() ? $borderSpaces : 0))->toString();
+                $this->value = strings($this->value)->limit($widthStyle - 3 - $pr - $pl - ($hasBorder() ? $borderSpaces : 0))->toString();
             }
             $valueLength = $this->getLength($this->value);
         } elseif ($widthStyle == 'auto' && $valueLength > Terminal::getWidth()) {
@@ -1697,8 +1697,9 @@ abstract class Element
                         $currentLine = strings(' ')->repeat($currentLeftSpaces + $pl) .
                                       $line .
                                       strings(' ')->repeat($currentRightSpaces + $pr);
-
+                                      
                         if (!$this->styles->has('font')) {
+                            
                             // Fix string length it is fit or not fit available printable area
                             if ($this->getLength($currentLine) < $max) {
                                 $currentLine .= strings(' ')->repeat($max - $this->getLength($currentLine))->toString();
