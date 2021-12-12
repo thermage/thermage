@@ -1530,9 +1530,9 @@ abstract class Element
                             $currentLeftSpaces++;
                         }
 
-                        $currentLine = strings(' ')->repeat($currentLeftSpaces + $pl) .
+                        $currentLine = strings(' ')->repeat((($currentLeftSpaces + $pl) < 0) ? 0 : $currentLeftSpaces + $pl) .
                                       $line .
-                                      strings(' ')->repeat($currentRightSpaces + $pr);
+                                      strings(' ')->repeat((($currentRightSpaces + $pr) < 0) ? 0 : $currentRightSpaces + $pr);
                                       
                         // Set box margin left,
                         // paddings left and right,
