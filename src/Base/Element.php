@@ -258,6 +258,7 @@ abstract class Element
             'color',
             'colors',
             'font',
+            'font-letter-spacing',
             'dim',
             'strikethrough',
             'invisible',
