@@ -962,7 +962,7 @@ abstract class Element
                 }
 
                 $result .=  preg_replace($colorsTags, $colorsValues, $chars[$i][$j]) . 
-                            strings(preg_replace($colorsTags, $colorsValues, $this->styles->get('font.letterspace.' . $j)))->repeat(($letterSpacing > 1) ? $letterSpacing : 0);
+                            strings(preg_replace($colorsTags, $colorsValues, $this->styles->get('font.letterspace.' . $j)))->repeat(($letterSpacing > 1) ? $letterSpacing : 1);
                 
                 if ($i == $charsCount - 1) {
                     $result .= preg_replace($colorsTags, $colorsValues, $this->styles->get('font.buffer.' . $j));
