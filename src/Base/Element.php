@@ -897,7 +897,23 @@ abstract class Element
     }
 
     /**
-     * Apply elemnt font style for element value.
+     * Set element font letter spacing style.
+     *
+     * @param int $value Font letter spacing style value.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function fontLetterSpacing(int $value): self
+    {
+        $this->styles->set('font-letter-spacing', $value);
+        
+        return $this; 
+    }
+
+    /**
+     * Apply elemnt style for element value.
      *
      * @param string $value Element value.
      *
@@ -920,10 +936,11 @@ abstract class Element
             $chars[] = $this->styles->get('font.chars.' . $char);
         }
 
-        $charsCount  = count($chars);
-        $linesCount  = $this->styles->get('font.lines');
-        $colorsCount = $this->styles->get('font.colors');
-        $colors      = $this->styles->get('colors');
+        $charsCount    = count($chars);
+        $linesCount    = $this->styles->get('font.lines');
+        $colorsCount   = $this->styles->get('font.colors');
+        $colors        = $this->styles->get('colors');
+        $letterSpacing = $this->styles->get('font-letter-spacing') ?? 1;
 
         for ($i=0; $i < $colorsCount; $i++) { 
             $colorsTags[] = '~\<c'. ($i + 1) . '\>(.*?)\</c'. ($i + 1) . '\>~s';
@@ -943,7 +960,8 @@ abstract class Element
                     $result .= preg_replace($colorsTags, $colorsValues, $this->styles->get('font.buffer.' . $j));
                 }
 
-                $result .=  preg_replace($colorsTags, $colorsValues, $chars[$i][$j]) . preg_replace($colorsTags, $colorsValues, $this->styles->get('font.letterspace.' . $j));
+                $result .=  preg_replace($colorsTags, $colorsValues, $chars[$i][$j]) . 
+                            strings(preg_replace($colorsTags, $colorsValues, $this->styles->get('font.letterspace.' . $j)))->repeat(($letterSpacing > 1) ? $letterSpacing : 0);
                 
                 if ($i == $charsCount - 1) {
                     $result .= preg_replace($colorsTags, $colorsValues, $this->styles->get('font.buffer.' . $j));
