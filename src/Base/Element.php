@@ -447,19 +447,18 @@ abstract class Element
     }
 
     /**
-     * Set element margin top, right, bottom, left style.
+     * Set element maring style.
      *
-     * @param int      $top    Margin top value.
-     * @param int|null $right  Margin right value.
-     * @param int|null $bottom Margin bottom value.
-     * @param int|null $left   Margin left value.
+     * @param mixed $margins Margins [top, right, bottom, left].
      *
      * @return self Returns instance of the Element class.
      *
      * @access public
      */
-    public function m(int $top, ?int $right = null, ?int $bottom = null, ?int $left = null): self
+    public function m(...$margins): self
     {
+        list($top, $right, $bottom, $left) = array_merge($margins, [null, null, null, null]);
+
         $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
         if (is_null($right) && is_null($bottom) && is_null($left)) {
@@ -661,19 +660,18 @@ abstract class Element
     }
 
     /**
-     * Set element padding top, right, bottom, left style.
+     * Set element padding style.
      *
-     * @param int      $top    Padding top value.
-     * @param int|null $right  Padding right value.
-     * @param int|null $bottom Padding bottom value.
-     * @param int|null $left   Padding left value.
+     * @param mixed $paddings Paddings [top, right, bottom, left].
      *
      * @return self Returns instance of the Element class.
      *
      * @access public
      */
-    public function p(int $top, ?int $right = null, ?int $bottom = null, ?int $left = null): self
+    public function p(...$paddings): self
     {
+        list($top, $right, $bottom, $left) = array_merge($paddings, [null, null, null, null]);
+
         $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
         if (is_null($right) && is_null($bottom) && is_null($left)) {
@@ -1143,6 +1141,7 @@ abstract class Element
         foreach ($classes->segments() as $class) {
             $methodName = (string) strings($class)->camel()->trim();
             foreach ($this->registeredClasses->toArray() as $registeredClass) {
+                
                 $registeredClassName = (string) strings($registeredClass)->camel()->trim();
 
                 if (! strings($methodName)->startsWith($registeredClassName)) {
