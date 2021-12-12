@@ -449,15 +449,15 @@ abstract class Element
     /**
      * Set element maring style.
      *
-     * @param mixed $margins Margins [top, right, bottom, left].
+     * @param mixed $values Margins [top, right, bottom, left].
      *
      * @return self Returns instance of the Element class.
      *
      * @access public
      */
-    public function m(...$margins): self
+    public function m(...$values): self
     {
-        list($top, $right, $bottom, $left) = array_merge($margins, [null, null, null, null]);
+        list($top, $right, $bottom, $left) = array_merge($values, [null, null, null, null]);
 
         $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
@@ -662,15 +662,15 @@ abstract class Element
     /**
      * Set element padding style.
      *
-     * @param mixed $paddings Paddings [top, right, bottom, left].
+     * @param mixed $values Paddings [top, right, bottom, left].
      *
      * @return self Returns instance of the Element class.
      *
      * @access public
      */
-    public function p(...$paddings): self
+    public function p(...$values): self
     {
-        list($top, $right, $bottom, $left) = array_merge($paddings, [null, null, null, null]);
+        list($top, $right, $bottom, $left) = array_merge($values, [null, null, null, null]);
 
         $themeSpacer = self::$theme->getVariables()->get('spacer', 1);
 
