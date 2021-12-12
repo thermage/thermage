@@ -1028,6 +1028,9 @@ abstract class Element
         }
 
         if (strings($method)->startsWith('font')) {
+            if (strings($method)->startsWith('fontLetterSpacing')) {
+                return $this->fontLetterSpacing(strings($method)->substr(17)->toInteger());
+            }
             return $this->font(strings($method)->substr(4)->kebab()->toString());
         }
 
