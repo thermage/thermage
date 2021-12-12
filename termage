@@ -34,7 +34,7 @@ if (isset($argv[1])) {
     echo (        
         Termage::div('TERMAGE')->font('block')->color('#41ff00')->colors('#41ff00', 'green')->pt2()->bg('#21183c')->textAlignCenter().
         Termage::div('TOTALLY')->font('chrome')->color('#41ff00')->pt1()->bg('#21183c')->textAlignCenter().
-        Termage::div('RAD TERMINAL Syling for PHP')->font('chrome')->color('#41ff00')->pt1()->pb2()->bg('#21183c')->textAlignCenter().
+        Termage::div('RAD TERMINAL STYLING FOR PHP')->font('chrome')->color('#41ff00')->pt1()->pb2()->bg('#21183c')->textAlignCenter().
         Termage::div('[u]Fluent[/u] and [u]incredible powerful[/u], object-oriented [u]interface[/u] for [u]customizing CLI[/u] output text color, background, formatting, theming and more!')->bg('#21183c')->p(3)->px(20)->bold()->pt0()->textAlignCenter()->color('#41ff00')
     );
     echo Termage::hr()->color('#41ff00')->borderArrowDown()->bg('#21183c');
