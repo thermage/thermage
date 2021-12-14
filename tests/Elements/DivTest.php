@@ -329,6 +329,15 @@ test('test font block with font letter spacing', function (): void {
     expect($value)->toBe($message);
 });
 
+
+test('test colors', function (): void {
+    $value = div()->colors('red', 'green', 'blue');
+
+    expect($value->getStyles()['colors'][0])->toBe('red');
+    expect($value->getStyles()['colors'][1])->toBe('green');
+    expect($value->getStyles()['colors'][2])->toBe('blue');
+});
+
 test('test getTheme', function (): void {
     $value = div()->getTheme();
     $this->assertInstanceOf(Theme::class, $value);
