@@ -1,3 +1,16 @@
+<a name="0.15.0"></a>
+# [0.15.0](https://github.com/termage/termage) (2021-12-14)
+- Added CFonts support.
+- Added new element public method `font`.
+- Added new element public method `fontFrom`.
+- Added new element public method `fontLetterSpacing`.
+- Added new element public method `colors`.
+- Added new element public method `applyFont`.
+- Added new public method `pixels` for `Canvas` element.
+- Added new magic classes `font`, `colors`.
+- Fixed issues with paddings calculations.
+- Fixed issues with value length calculations including shortcodes.
+
 <a name="0.14.2"></a>
 # [0.14.2](https://github.com/termage/termage) (2021-12-08)
 * Fixed `Element` display inline-block style.
