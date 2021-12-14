@@ -113,6 +113,21 @@ final class Canvas extends Element
         return $this;
     }
 
+    /**
+     * Set Canvas pixels.
+     * 
+     * @param array $pixles Canvas pixels array with colors.
+     * 
+     * @access public
+     */
+    public function pixels(array $pixels): self 
+    {
+        $this->initCanvas();
+
+        self::$canvas = array_replace(self::$canvas, $pixels);
+
+        return $this;
+    }
 
     /**
      * Get Canvas element variables.
