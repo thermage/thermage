@@ -301,6 +301,34 @@ test('test magic pl', function (): void {
     expect($value)->toBe(getCsi() . "0m          RAD       " . PHP_EOL);
 });
 
+test('test font block', function (): void {
+    $value = div()->value('RAD')->font('block')->render();
+    
+    $message = 
+    "\e[0m██████╗   █████╗  ██████╗  " . PHP_EOL .
+    "\e[0m██╔══██╗ ██╔══██╗ ██╔══██╗ " . PHP_EOL .
+    "\e[0m██████╔╝ ███████║ ██║  ██║ " . PHP_EOL .
+    "\e[0m██╔══██╗ ██╔══██║ ██║  ██║ " . PHP_EOL .
+    "\e[0m██║  ██║ ██║  ██║ ██████╔╝ " . PHP_EOL .
+    "\e[0m╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═════╝  " . PHP_EOL;
+
+    expect($value)->toBe($message);
+});
+
+test('test font block with font letter spacing', function (): void {
+    $value = div()->value('RAD')->font('block')->fontLetterSpacing(3)->render();
+    
+    $message = 
+    "\e[0m██████╗     █████╗    ██████╗    " . PHP_EOL .
+    "\e[0m██╔══██╗   ██╔══██╗   ██╔══██╗   " . PHP_EOL .
+    "\e[0m██████╔╝   ███████║   ██║  ██║   " . PHP_EOL .
+    "\e[0m██╔══██╗   ██╔══██║   ██║  ██║   " . PHP_EOL .
+    "\e[0m██║  ██║   ██║  ██║   ██████╔╝   " . PHP_EOL .
+    "\e[0m╚═╝  ╚═╝   ╚═╝  ╚═╝   ╚═════╝    " . PHP_EOL;
+
+    expect($value)->toBe($message);
+});
+
 test('test getTheme', function (): void {
     $value = div()->getTheme();
     $this->assertInstanceOf(Theme::class, $value);
