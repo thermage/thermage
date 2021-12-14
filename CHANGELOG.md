@@ -6,6 +6,7 @@
 - Added new element public method `fontLetterSpacing`.
 - Added new element public method `colors`.
 - Added new element public method `applyFont`.
+- Added new public method `pixels` for `Canvas` element.
 - Added new magic classes `font`, `colors`.
 - Fixed issues with paddings calculations.
 - Fixed issues with value length calculations including shortcodes.
