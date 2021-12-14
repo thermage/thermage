@@ -1,5 +1,5 @@
 <a name="0.15.0"></a>
-# [0.15.0](https://github.com/termage/termage) (2021-12-xx)
+# [0.15.0](https://github.com/termage/termage) (2021-12-14)
 - Added CFonts support.
 - Added new element public method `font`.
 - Added new element public method `fontFrom`.
