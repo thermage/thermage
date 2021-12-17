@@ -32,6 +32,9 @@
             "src/helpers.php"
         ]
     },
+    "bin": [
+        "bin/termage"
+    ],
     "require-dev": {
         "doctrine/coding-standard": "9.0.0",
         "pestphp/pest": "^1.19.0",
