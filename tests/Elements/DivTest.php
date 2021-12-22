@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-use Termage\Termage;
-use Termage\Themes\Theme;
-use Termage\Themes\ThemeInterface;
-use Termage\Elements\Div;
+use Thermage\Thermage;
+use Thermage\Themes\Theme;
+use Thermage\Themes\ThemeInterface;
+use Thermage\Elements\Div;
 use Atomastic\Arrays\Arrays as Collection;
 use function arrays as collection;
-use function Termage\div;
-use function Termage\span;
-use function Termage\setTheme;
-use function Termage\getCsi;
-use Termage\Parsers\Shortcodes;
+use function Thermage\div;
+use function Thermage\span;
+use function Thermage\setTheme;
+use function Thermage\getCsi;
+use Thermage\Parsers\Shortcodes;
 
 beforeEach(function() {
     setTheme(new DivTestTheme());
@@ -363,14 +363,14 @@ test('test setShortcodes', function (): void {
 });
 
 test('test textOverflow', function (): void {
-    $element = div()->value('Termage - Totally RAD Terminal styling for PHP!')->textOverflowHidden()->render();
-    expect($element)->toBe(getCsi() . "0mTermage - Totally RA" . PHP_EOL);
+    $element = div()->value('Thermage - Totally RAD Terminal styling for PHP!')->textOverflowHidden()->render();
+    expect($element)->toBe(getCsi() . "0mThermage - Totally RA" . PHP_EOL);
 
-    $element = div()->value('Termage - Totally RAD Terminal styling for PHP!')->textOverflowEllipsis()->render();
-    expect($element)->toBe(getCsi() . "0mTermage - Totally..." . PHP_EOL);
+    $element = div()->value('Thermage - Totally RAD Terminal styling for PHP!')->textOverflowEllipsis()->render();
+    expect($element)->toBe(getCsi() . "0mThermage - Totally..." . PHP_EOL);
 
-    $element = div()->value('Termage - Totally RAD Terminal styling for PHP!')->textOverflowClip()->render();
-    expect($element)->toBe(getCsi() . "0mTermage - Totally   " . PHP_EOL . getCsi() . "0mRAD Terminal styling" . PHP_EOL . getCsi() . "0mfor PHP!            " . PHP_EOL);
+    $element = div()->value('Thermage - Totally RAD Terminal styling for PHP!')->textOverflowClip()->render();
+    expect($element)->toBe(getCsi() . "0mThermage - Totally   " . PHP_EOL . getCsi() . "0mRAD Terminal styling" . PHP_EOL . getCsi() . "0mfor PHP!            " . PHP_EOL);
 });
 
 class DivTestTheme extends Theme implements ThemeInterface

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
  * Licensed under The MIT License.
@@ -12,7 +12,7 @@ declare(strict_types=1);
  * Redistributions of files must retain the above copyright notice.
  */
 
-namespace Termage\Base;
+namespace Thermage\Base;
 
 use function defined;
 use function fopen;
@@ -23,8 +23,8 @@ use function proc_open;
 use function shell_exec;
 use function sprintf;
 use function sscanf;
-use function Termage\getCsi;
-use function Termage\getEsc;
+use function Thermage\getCsi;
+use function Thermage\getEsc;
 use function trim;
 
 use const STDIN;

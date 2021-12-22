@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Termage\Base\Screen;
-use function Termage\getCsi;
-use function Termage\getEsc;
+use Thermage\Base\Screen;
+use function Thermage\getCsi;
+use function Thermage\getEsc;
 
 test('test eraseSavedLines', function (): void {
     expect(Screen::eraseSavedLines())->toEqual(getCsi() . '3J');

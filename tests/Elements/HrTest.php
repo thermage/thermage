@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use Termage\Termage;
-use Termage\Themes\Theme;
-use Termage\Themes\ThemeInterface;
+use Thermage\Thermage;
+use Thermage\Themes\Theme;
+use Thermage\Themes\ThemeInterface;
 use Atomastic\Arrays\Arrays as Collection;
 use function arrays as collection;
-use function Termage\setTheme;
-use function Termage\hr;
+use function Thermage\setTheme;
+use function Thermage\hr;
 
 beforeEach(function() {
     setTheme(new HrTestTheme());

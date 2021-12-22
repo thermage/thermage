@@ -1,10 +1,10 @@
 <a name="0.15.1"></a>
-# [0.15.1](https://github.com/termage/termage) (2021-12-17)
-* Moved termage playground to `bin` directory.
+# [0.15.1](https://github.com/thermage/thermage) (2021-12-17)
+* Moved thermage playground to `bin` directory.
 * Tests improvements. 
 
 <a name="0.15.0"></a>
-# [0.15.0](https://github.com/termage/termage) (2021-12-14)
+# [0.15.0](https://github.com/thermage/thermage) (2021-12-14)
 * Added CFonts support.
 * Added new element public method `font`.
 * Added new element public method `fontFrom`.
@@ -17,17 +17,17 @@
 * Fixed issues with value length calculations including shortcodes.
 
 <a name="0.14.2"></a>
-# [0.14.2](https://github.com/termage/termage) (2021-12-08)
+# [0.14.2](https://github.com/thermage/thermage) (2021-12-08)
 * Fixed `Element` display inline-block style.
 * Fixed `Element` display inline style.
 
 <a name="0.14.1"></a>
-# [0.14.1](https://github.com/termage/termage) (2021-12-07)
+# [0.14.1](https://github.com/thermage/thermage) (2021-12-07)
 * Fixed `Canvas` element notice: undefined variable `$result`.
 * Fixed `Element` vertical text align position.
 
 <a name="0.14.0"></a>
-# [0.14.0](https://github.com/termage/termage) (2021-12-02)
+# [0.14.0](https://github.com/thermage/thermage) (2021-12-02)
 * Added new element `Canvas`.
 * Added display `inline-block` for elements.
 * Added new magic class `text-overflow`.
@@ -43,14 +43,14 @@
 - public method `bColor` renamed to `borderColor` and magic class `b-color` renamed to `border-color`
 
 <a name="0.13.0"></a>
-# [0.13.0](https://github.com/termage/termage) (2021-11-26)
+# [0.13.0](https://github.com/thermage/thermage) (2021-11-26)
 * Added new public method `textOverflow` for element.
 * Added ability to set variants of predefined and custom borders for `hr` element.
 * Improved box model with new text overflow and word wrap functionality for muli-line values.
 * Improved calculations for text alignment center.
 
 <a name="0.12.0"></a>
-# [0.12.0](https://github.com/termage/termage) (2021-11-21)
+# [0.12.0](https://github.com/thermage/thermage) (2021-11-21)
 * Added `getEsc` for method `stripStyles`.
 * Fixed terminal width detection for `hr` element.
 * Fixed calculations for element width.
@@ -61,17 +61,17 @@
 * Removed unused helper functions.
 
 <a name="0.11.0"></a>
-# [0.11.0](https://github.com/termage/termage) (2021-11-17)
+# [0.11.0](https://github.com/thermage/thermage) (2021-11-17)
 * Added ability to set element custom borders.
 * Added new base class `Styles`.
 * Added new base class `Screen`.
 * Added new base class `Cursor`.
-* Added new public static termage method: `getCsi` to get Control Sequence Introducer.
-* Added new public static termage method: `setCsi` to set Control Sequence Introducer.
-* Added new public static termage method: `getEsc` to get Control Sequence Escape.
-* Added new public static termage method: `setEsc` to set Control Sequence Escape.
-* Added new public static termage method: `getOsc` to get Operating System Command.
-* Added new public static termage method: `setOsc` to set Operating System Command.
+* Added new public static thermage method: `getCsi` to get Control Sequence Introducer.
+* Added new public static thermage method: `setCsi` to set Control Sequence Introducer.
+* Added new public static thermage method: `getEsc` to get Control Sequence Escape.
+* Added new public static thermage method: `setEsc` to set Control Sequence Escape.
+* Added new public static thermage method: `getOsc` to get Operating System Command.
+* Added new public static thermage method: `setOsc` to set Operating System Command.
 * Added new public element method `b` to set border style.
 * Added new public element method `bColor` to set border color.
 * Added new magic classes: `b`, `b-color`.
@@ -87,7 +87,7 @@
 * Classes `Color` and `Terminal` moved from `Utils` to `Base`.
 
 <a name="0.10.0"></a>
-# [0.10.0](https://github.com/termage/termage) (2021-11-09)
+# [0.10.0](https://github.com/thermage/thermage) (2021-11-09)
 * Improved box model for elements with ability to manage element width, height, text alignment.
 * Added ability to set text alignment `center` for base element.
 * Added ability to set text alignment `center` for hr element.
@@ -106,7 +106,7 @@
 * Added new magic classes: `strikethrough`, `my`, `py`, `mt`, `mb`, `pt`, `pb`, `h`, `m`, `p`.
 
 <a name="0.9.0"></a>
-# [0.9.0](https://github.com/termage/termage) (2021-11-05)
+# [0.9.0](https://github.com/thermage/thermage) (2021-11-05)
 * Improved box model for elements with ability to set element display state and width. 
 * Added new public element method `p` to set left and right paddings.
 * Added new public element method `m` to set left and right margins.
@@ -123,7 +123,7 @@
 * Removed shortcodes `[p]`, `[px]`, `[pr]`, `[pl]`, `[m]`, `[mx]`, `[mr]`, `[ml]`
 
 <a name="0.8.0"></a>
-# [0.8.0](https://github.com/termage/termage) (2021-10-27)
+# [0.8.0](https://github.com/thermage/thermage) (2021-10-27)
 * Added `Heading` element.
 * Added new element methods `styles` and `getStyles`.
 * Added new element methods `classes` and `getClasses`.
@@ -141,7 +141,7 @@
 * Removed theme variables for margins and paddings, use spacer variable instead.
 
 <a name="0.7.0"></a>
-# [0.7.0](https://github.com/termage/termage) (2021-10-21)
+# [0.7.0](https://github.com/thermage/thermage) (2021-10-21)
 * Added new **rendering framework agnostic** logic instead of **old symfony** based. 
 * Added new powerful Shortcodes API with a lot of predefined shortcodes.
 * Added RGB Colors support.
@@ -177,24 +177,24 @@
 * Emojies removed.
 
 <a name="0.6.0"></a>
-# [0.6.0](https://github.com/termage/termage) (2021-10-08)
+# [0.6.0](https://github.com/thermage/thermage) (2021-10-08)
 * Added theme support for components: Alert, Rule.
 * Added new extended color scheme.
 
 <a name="0.5.1"></a>
-# [0.5.1](https://github.com/termage/termage) (2021-10-07)
-* Fixed `termage` helper 
+# [0.5.1](https://github.com/thermage/thermage) (2021-10-07)
+* Fixed `thermage` helper 
 
 <a name="0.5.0"></a>
-# [0.5.0](https://github.com/termage/termage) (2021-10-07)
-* Added new `getTerminal` method for Termage and Element class.
+# [0.5.0](https://github.com/thermage/thermage) (2021-10-07)
+* Added new `getTerminal` method for Thermage and Element class.
 
 ### BREAKING CHANGES
 
 * method `renderer` renamed to `output`
 
 <a name="0.4.0"></a>
-# [0.4.0](https://github.com/termage/termage) (2021-10-06)
+# [0.4.0](https://github.com/thermage/thermage) (2021-10-06)
 * Updated colors for default theme.
 * Added new method `getTheme` for `Element` Class.
 * Added new `Alert` Component.
@@ -202,7 +202,7 @@
 * Added new `Link` Component.
 
 <a name="0.3.0"></a>
-# [0.3.0](https://github.com/termage/termage) (2021-10-04)
+# [0.3.0](https://github.com/thermage/thermage) (2021-10-04)
 * Added Themes (instead of Colors)
 * Renderer engine imrovements.
 * Tests improvements. 
@@ -213,11 +213,11 @@
 * Colors removed, use Themes instead.
 
 <a name="0.2.0"></a>
-# [0.2.0](https://github.com/termage/termage) (2021-10-03)
+# [0.2.0](https://github.com/thermage/thermage) (2021-10-03)
 * Renderer engine imrovements.
 * New Emoji Emoji Component.
 * New Colors Class.
 
 <a name="0.1.0"></a>
-# [0.1.0](https://github.com/termage/termage) (2021-10-01)
+# [0.1.0](https://github.com/thermage/thermage) (2021-10-01)
 * Initial release

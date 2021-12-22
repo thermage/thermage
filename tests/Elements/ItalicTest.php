@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Termage\Termage;
-use function Termage\italic;
+use Thermage\Thermage;
+use function Thermage\italic;
 
 test('test italic', function (): void {
     $value = italic('RAD')->render();

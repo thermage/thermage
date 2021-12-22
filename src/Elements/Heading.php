@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
  * Licensed under The MIT License.
@@ -12,13 +12,13 @@ declare(strict_types=1);
  * Redistributions of files must retain the above copyright notice.
  */
 
-namespace Termage\Elements;
+namespace Thermage\Elements;
 
-use Termage\Base\Element;
-use Termage\Base\Terminal;
+use Thermage\Base\Element;
+use Thermage\Base\Terminal;
 
 use function strings;
-use function Termage\div;
+use function Thermage\div;
 
 use const PHP_EOL;
 

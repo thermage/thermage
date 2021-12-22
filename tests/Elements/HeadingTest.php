@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Termage\Termage;
-use function Termage\heading;
+use Thermage\Thermage;
+use function Thermage\heading;
 
 beforeEach(function() {
     putenv('COLUMNS=20');

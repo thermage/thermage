@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Termage\Base\Cursor;
-use function Termage\getCsi;
-use function Termage\getEsc;
+use Thermage\Base\Cursor;
+use function Thermage\getCsi;
+use function Thermage\getEsc;
 
 test('test show', function (): void {
     expect(Cursor::show())->toEqual(getCsi() . '?25h');

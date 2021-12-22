@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Termage\Termage;
-use function Termage\bold;
+use Thermage\Thermage;
+use function Thermage\bold;
 
 test('test bold', function (): void {
     $value = bold('RAD')->render();

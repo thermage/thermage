@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
  * Licensed under The MIT License.
@@ -12,17 +12,17 @@ declare(strict_types=1);
  * Redistributions of files must retain the above copyright notice.
  */
 
-namespace Termage\Base;
+namespace Thermage\Base;
 
 use Atomastic\Arrays\Arrays as Collection;
 use Atomastic\Strings\Strings;
 use BadMethodCallException;
 use Exception;
-use Termage\Parsers\Shortcodes;
-use Termage\Themes\Theme;
-use Termage\Themes\ThemeInterface;
-use Termage\Base\Color;
-use Termage\Base\Terminal;
+use Thermage\Parsers\Shortcodes;
+use Thermage\Themes\Theme;
+use Thermage\Themes\ThemeInterface;
+use Thermage\Base\Color;
+use Thermage\Base\Terminal;
 
 use function abs;
 use function arrays as collection;
@@ -31,7 +31,7 @@ use function is_null;
 use function preg_replace;
 use function sprintf;
 use function strings;
-use function Termage\getEsc;
+use function Thermage\getEsc;
 
 use const PHP_EOL;
 
@@ -1182,7 +1182,7 @@ abstract class Element
      */
     public function processStyles(): void
     {
-        // Termage box model and styles hierarchy.
+        // Thermage box model and styles hierarchy.
         //
         // ┌─────────────────────────────────────────────────────────────┐
         // │ display                                                     │
