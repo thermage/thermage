@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
  * Licensed under The MIT License.
@@ -12,11 +12,11 @@ declare(strict_types=1);
  * Redistributions of files must retain the above copyright notice.
  */
 
-namespace Termage\Elements;
+namespace Thermage\Elements;
 
 use Atomastic\Arrays\Arrays as Collection;
-use Termage\Base\Color;
-use Termage\Base\Element;
+use Thermage\Base\Color;
+use Thermage\Base\Element;
 
 use function arrays as collection;
 use function array_column;
@@ -26,8 +26,8 @@ use function intval;
 use function max;
 use function round;
 use function strings;
-use function Termage\breakline as br;
-use function Termage\span;
+use function Thermage\breakline as br;
+use function Thermage\span;
 
 final class Chart extends Element
 {

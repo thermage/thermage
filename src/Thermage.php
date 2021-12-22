@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
  * Licensed under The MIT License.
@@ -12,29 +12,29 @@ declare(strict_types=1);
  * Redistributions of files must retain the above copyright notice.
  */
 
-namespace Termage;
+namespace Thermage;
 
 use Atomastic\Macroable\Macroable;
-use Termage\Elements\Alert;
-use Termage\Elements\Anchor;
-use Termage\Elements\Bold;
-use Termage\Elements\Breakline;
-use Termage\Elements\Chart;
-use Termage\Elements\Div;
-use Termage\Elements\Heading;
-use Termage\Elements\Hr;
-use Termage\Elements\Italic;
-use Termage\Elements\Paragraph;
-use Termage\Elements\Span;
-use Termage\Elements\Spinner;
-use Termage\Elements\Strikethrough;
-use Termage\Elements\Underline;
-use Termage\Elements\Canvas;
-use Termage\Parsers\Shortcodes;
-use Termage\Themes\Theme;
-use Termage\Themes\ThemeInterface;
+use Thermage\Elements\Alert;
+use Thermage\Elements\Anchor;
+use Thermage\Elements\Bold;
+use Thermage\Elements\Breakline;
+use Thermage\Elements\Chart;
+use Thermage\Elements\Div;
+use Thermage\Elements\Heading;
+use Thermage\Elements\Hr;
+use Thermage\Elements\Italic;
+use Thermage\Elements\Paragraph;
+use Thermage\Elements\Span;
+use Thermage\Elements\Spinner;
+use Thermage\Elements\Strikethrough;
+use Thermage\Elements\Underline;
+use Thermage\Elements\Canvas;
+use Thermage\Parsers\Shortcodes;
+use Thermage\Themes\Theme;
+use Thermage\Themes\ThemeInterface;
 
-class Termage
+class Thermage
 {
     use Macroable;
 

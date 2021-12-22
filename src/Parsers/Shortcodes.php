@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
  * Licensed under The MIT License.
@@ -12,20 +12,20 @@ declare(strict_types=1);
  * Redistributions of files must retain the above copyright notice.
  */
 
-namespace Termage\Parsers;
+namespace Thermage\Parsers;
 
-use Termage\Base\Color;
-use Termage\Base\Styles;
-use Termage\Themes\Theme;
-use Termage\Themes\ThemeInterface;
+use Thermage\Base\Color;
+use Thermage\Base\Styles;
+use Thermage\Themes\Theme;
+use Thermage\Themes\ThemeInterface;
 use Thunder\Shortcode\Shortcode\ShortcodeInterface;
 use Thunder\Shortcode\ShortcodeFacade;
 
 use function str_replace;
 use function strip_tags;
-use function Termage\getOsc;
-use function Termage\getCsi;
-use function Termage\getEsc;
+use function Thermage\getOsc;
+use function Thermage\getCsi;
+use function Thermage\getEsc;
 
 class Shortcodes
 {

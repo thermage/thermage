@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use Termage\Termage;
-use Termage\Themes\Theme;
-use Termage\Themes\ThemeInterface;
+use Thermage\Thermage;
+use Thermage\Themes\Theme;
+use Thermage\Themes\ThemeInterface;
 use Atomastic\Arrays\Arrays as Collection;
 use function arrays as collection;
-use Termage\Elements\Chart;
-use function Termage\chart;
-use function Termage\setTheme;
+use Thermage\Elements\Chart;
+use function Thermage\chart;
+use function Thermage\setTheme;
 
 beforeEach(function() {
     setTheme(new ChartTestTheme());

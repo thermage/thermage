@@ -1,0 +1,54 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+use Thermage\Thermage;
+use Thermage\Base\Screen;
+use Thermage\Base\Terminal;
+
+$vendorPath = dirname(__DIR__, 4) . '/vendor/autoload.php';
+$localPath = dirname(__DIR__) . '/vendor/autoload.php';
+
+if (file_exists($vendorPath)) {
+    include_once $vendorPath;
+    $autoloadPath = $vendorPath;
+} else {
+    include_once $localPath;
+    $autoloadPath = $localPath;
+}
+
+echo chr(27).chr(91).'H'.chr(27).chr(91).'J';
+
+if (isset($argv[1])) {
+    if ($argv[1] == 'div' && !isset($argv[2])) {
+        echo (        
+            Thermage::div('TERMAGE')->font('block')->color('#41ff00')->colors('#41ff00', 'green')->pt2()->bg('#21183c')->textAlignCenter().
+            Thermage::div('Div')->font('chrome')->color('#41ff00')->pt1()->pb2()->bg('#21183c')->textAlignCenter()
+        );
+        echo Thermage::hr()->color('#41ff00')->borderArrowDown()->bg('#21183c');
+        echo (        
+            Thermage::div('Classes')->font('chrome')->color('#41ff00')->py2()->bg('#21183c')->textAlignCenter().
+            Thermage::div('m-{0-'.Terminal::getWidth().'} mx-{0-'.intval(Terminal::getWidth() / 2).'} | my-{0-'.intval(Terminal::getHeight() / 2).'} | mt-{0-'.Terminal::getHeight().'} | mb-{0-'.Terminal::getHeight() . '} | ml-{0-'.Terminal::getWidth().'} | mr-{0-'.Terminal::getWidth().'}')->bg('#21183c')->p(3)->px(10)->bold()->pt0()->pb1()->textAlignCenter()->color('#41ff00').
+            Thermage::div('p-{0-'.Terminal::getWidth().'} px-{0-'.intval(Terminal::getWidth() / 2).'} | py-{0-'.intval(Terminal::getHeight() / 2).'} | pt-{0-'.Terminal::getHeight().'} | pb-{0-'.Terminal::getHeight() . '} | pl-{0-'.Terminal::getWidth().'} | pr-{0-'.Terminal::getWidth().'}')->bg('#21183c')->p(3)->px(10)->bold()->pt0()->pb1()->textAlignCenter()->color('#41ff00').
+            Thermage::div('bg-{name} | color-{name} | d-{none,block,inline,inline-block}')->bg('#21183c')->p(3)->px(10)->bold()->pt0()->pb1()->textAlignCenter()->color('#41ff00').
+            Thermage::div('border-{square,rounded,double,heavy} | border-color-{name} | w-{0-'.Terminal::getWidth().'} | h-{0-'.Terminal::getWidth().'}')->bg('#21183c')->p(3)->px(10)->bold()->pt0()->pb1()->textAlignCenter()->color('#41ff00').
+            Thermage::div('bold | italic | underline | strikethrough | dim | blink | reverse | invisible')->bg('#21183c')->p(3)->px(10)->bold()->pt0()->pb1()->textAlignCenter()->color('#41ff00').
+            Thermage::div('text-align-{left,center,right} | text-vertical-align-{top,middle,bottom} | text-overflow-{clip,hidden,ellipsis}')->bg('#21183c')->p(3)->px(10)->bold()->pt0()->pb0()->textAlignCenter()->color('#41ff00').
+
+            Thermage::div('')->bg('#21183c')->p(3)->px(10)->bold()->pt0()->pb0()->textAlignCenter()->color('#41ff00')
+        );
+    } else {
+        echo Thermage::{$argv[1]}($argv[2] ?? 'Thermage', $argv[3] ?? '')->render();
+    }
+} else {
+    echo (        
+        Thermage::div('TERMAGE')->font('block')->color('#41ff00')->colors('#41ff00', 'green')->pt2()->bg('#21183c')->textAlignCenter().
+        Thermage::div('TOTALLY')->font('chrome')->color('#41ff00')->pt1()->bg('#21183c')->textAlignCenter().
+        Thermage::div('RAD TERMINAL STYLING FOR PHP')->font('chrome')->color('#41ff00')->pt1()->pb2()->bg('#21183c')->textAlignCenter().
+        Thermage::div('[u]Fluent[/u] and [u]incredible powerful[/u], object-oriented [u]interface[/u] for [u]customizing CLI[/u] output text color, background, formatting, theming and more!')->bg('#21183c')->p(3)->px(20)->bold()->pt0()->textAlignCenter()->color('#41ff00')
+    );
+    echo Thermage::hr()->color('#41ff00')->borderArrowDown()->bg('#21183c');
+    echo (        
+        Thermage::div('Elements')->font('chrome')->color('#41ff00')->py2()->bg('#21183c')->textAlignCenter().
+        Thermage::div('div | span | hr | chart | alert | paragraph | heading | anchor | bold | italic | strikethrough | underline')->bg('#21183c')->p(3)->px(10)->bold()->pt0()->textAlignCenter()->color('#41ff00')
+    );
+}

@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Termage\Termage;
-use function Termage\strikethrough;
+use Thermage\Thermage;
+use function Thermage\strikethrough;
 
 test('test strikethrough', function (): void {
     $value = strikethrough('RAD')->render();

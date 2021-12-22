@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Termage\Termage;
-use function Termage\paragraph;
+use Thermage\Thermage;
+use function Thermage\paragraph;
 
 test('test paragraph', function (): void {
     putenv('COLUMNS=20');

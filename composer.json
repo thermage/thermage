@@ -1,13 +1,13 @@
 {
-    "name": "termage/termage",
-    "description": "Termage provides a fluent and incredibly powerful object-oriented interface for customizing CLI output text color, background, formatting, theming and more.",
+    "name": "thermage/thermage",
+    "description": "Thermage provides a fluent and incredibly powerful object-oriented interface for customizing CLI output text color, background, formatting, theming and more.",
     "license": "MIT",
     "keywords": [
-        "Termage", "console", "cli", "console-colors", "console-tool", "terminal", "terminal-colors", "ansi-colors"
+        "Thermage", "console", "cli", "console-colors", "console-tool", "terminal", "terminal-colors", "ansi-colors"
     ],
     "support": {
-      "source": "https://github.com/termage/termage",
-      "issues": "https://github.com/termage/termage/issues"
+      "source": "https://github.com/thermage/thermage",
+      "issues": "https://github.com/thermage/thermage/issues"
     },
     "authors": [
         {
@@ -26,14 +26,14 @@
     },
     "autoload":{
         "psr-4": {
-            "Termage\\": "src/"
+            "Thermage\\": "src/"
         },
         "files": [
             "src/helpers.php"
         ]
     },
     "bin": [
-        "bin/termage"
+        "bin/thermage"
     ],
     "require-dev": {
         "doctrine/coding-standard": "9.0.0",

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Termage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/termage/)
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
  * Copyright (c) Sergey Romanenko (https://awilum.github.io)
  *
  * Licensed under The MIT License.
@@ -12,143 +12,143 @@ declare(strict_types=1);
  * Redistributions of files must retain the above copyright notice.
  */
 
-namespace Termage;
+namespace Thermage;
 
-use Termage\Base\Color;
-use Termage\Base\Terminal;
-use Termage\Elements\Alert;
-use Termage\Elements\Anchor;
-use Termage\Elements\Bold;
-use Termage\Elements\Breakline;
-use Termage\Elements\Chart;
-use Termage\Elements\Div;
-use Termage\Elements\Heading;
-use Termage\Elements\Hr;
-use Termage\Elements\Italic;
-use Termage\Elements\Paragraph;
-use Termage\Elements\Span;
-use Termage\Elements\Canvas;
-use Termage\Elements\Spinner;
-use Termage\Elements\Strikethrough;
-use Termage\Elements\Underline;
+use Thermage\Base\Color;
+use Thermage\Base\Terminal;
+use Thermage\Elements\Alert;
+use Thermage\Elements\Anchor;
+use Thermage\Elements\Bold;
+use Thermage\Elements\Breakline;
+use Thermage\Elements\Chart;
+use Thermage\Elements\Div;
+use Thermage\Elements\Heading;
+use Thermage\Elements\Hr;
+use Thermage\Elements\Italic;
+use Thermage\Elements\Paragraph;
+use Thermage\Elements\Span;
+use Thermage\Elements\Canvas;
+use Thermage\Elements\Spinner;
+use Thermage\Elements\Strikethrough;
+use Thermage\Elements\Underline;
 
 function setShortcodes($shortcodes): void
 {
-    Termage::setShortcodes($shortcodes);
+    Thermage::setShortcodes($shortcodes);
 }
 
 function getShortcodes()
 {
-    return Termage::getShortcodes();
+    return Thermage::getShortcodes();
 }
 
 function setTheme($theme): void
 {
-    Termage::setTheme($theme);
+    Thermage::setTheme($theme);
 }
 
 function getTheme()
 {
-    return Termage::getTheme();
+    return Thermage::getTheme();
 }
 
 function getCsi()
 {
-    return Termage::getCsi();
+    return Thermage::getCsi();
 }
 
 function setCsi($value)
 {
-    return Termage::setCsi($value);
+    return Thermage::setCsi($value);
 }
 
 function getOsc()
 {
-    return Termage::getOsc();
+    return Thermage::getOsc();
 }
 
 function setOsc($value)
 {
-    return Termage::setOsc($value);
+    return Thermage::setOsc($value);
 }
 
 function getEsc()
 {
-    return Termage::getEsc();
+    return Thermage::getEsc();
 }
 
 function setEsc($value)
 {
-    return Termage::setEsc($value);
+    return Thermage::setEsc($value);
 }
 
 function div(string $value = '', string $classes = '', array $styles = []): Div
 {
-    return Termage::div($value, $classes, $styles);
+    return Thermage::div($value, $classes, $styles);
 }
 
 function paragraph(string $value = '', string $classes = '', array $styles = []): Paragraph
 {
-    return Termage::paragraph($value, $classes, $styles);
+    return Thermage::paragraph($value, $classes, $styles);
 }
 
 function span(string $value = '', string $classes = '', array $styles = []): Span
 {
-    return Termage::span($value, $classes, $styles);
+    return Thermage::span($value, $classes, $styles);
 }
 
 function hr(string $value = '', string $classes = '', array $styles = []): Hr
 {
-    return Termage::hr($value, $classes, $styles);
+    return Thermage::hr($value, $classes, $styles);
 }
 
 function anchor(string $value = '', string $classes = '', array $styles = []): Anchor
 {
-    return Termage::anchor($value, $classes, $styles);
+    return Thermage::anchor($value, $classes, $styles);
 }
 
 function bold(string $value = '', string $classes = '', array $styles = []): Bold
 {
-    return Termage::bold($value, $classes, $styles);
+    return Thermage::bold($value, $classes, $styles);
 }
 
 function italic(string $value = '', string $classes = '', array $styles = []): Italic
 {
-    return Termage::italic($value, $classes, $styles);
+    return Thermage::italic($value, $classes, $styles);
 }
 
 function underline(string $value = '', string $classes = '', array $styles = []): Underline
 {
-    return Termage::underline($value, $classes, $styles);
+    return Thermage::underline($value, $classes, $styles);
 }
 
 function strikethrough(string $value = '', string $classes = '', array $styles = []): Strikethrough
 {
-    return Termage::strikethrough($value, $classes, $styles);
+    return Thermage::strikethrough($value, $classes, $styles);
 }
 
 function breakline(string $value = '', string $classes = '', array $styles = []): Breakline
 {
-    return Termage::breakline($value, $classes, $styles);
+    return Thermage::breakline($value, $classes, $styles);
 }
 
 function chart(string $value = '', string $classes = '', array $styles = []): Chart
 {
-    return Termage::chart($value, $classes, $styles);
+    return Thermage::chart($value, $classes, $styles);
 }
 
 function alert(string $value = '', string $classes = '', array $styles = []): Alert
 {
-    return Termage::alert($value, $classes, $styles);
+    return Thermage::alert($value, $classes, $styles);
 }
 
 function heading(string $value = '', string $classes = '', array $styles = []): Heading
 {
-    return Termage::heading($value, $classes, $styles);
+    return Thermage::heading($value, $classes, $styles);
 }
 
 function canvas(string $value = '', string $classes = '', array $styles = []): Canvas
 {
-    return Termage::canvas($value, $classes, $styles);
+    return Thermage::canvas($value, $classes, $styles);
 }
 

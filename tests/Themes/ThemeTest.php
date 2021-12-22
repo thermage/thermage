@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-use Termage\Termage;
-use Termage\Themes\Theme;
-use Termage\Themes\ThemeInterface;
+use Thermage\Thermage;
+use Thermage\Themes\Theme;
+use Thermage\Themes\ThemeInterface;
 use Atomastic\Arrays\Arrays as Collection;
 use function arrays as collection;
 
 test('test set and get theme', function (): void {
-    $this->assertInstanceOf(Theme::class, Termage::getTheme());
+    $this->assertInstanceOf(Theme::class, Thermage::getTheme());
 
-    Termage::setTheme(new FooTheme());
-    $this->assertInstanceOf(FooTheme::class, Termage::getTheme());
+    Thermage::setTheme(new FooTheme());
+    $this->assertInstanceOf(FooTheme::class, Thermage::getTheme());
 });
 
 test('test get theme variables', function (): void {
-    expect(Termage::getTheme()->getThemeVariables()->toArray())->toBeArray();
+    expect(Thermage::getTheme()->getThemeVariables()->toArray())->toBeArray();
 });
 
 test('test get theme variables object', function (): void {
-    expect(Termage::getTheme()->getVariables()->toArray())->toBeArray();
+    expect(Thermage::getTheme()->getVariables()->toArray())->toBeArray();
 });
 
 class FooTheme extends Theme implements ThemeInterface {

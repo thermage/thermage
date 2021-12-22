@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Termage\Termage;
-use function Termage\underline;
+use Thermage\Thermage;
+use function Thermage\underline;
 
 test('test underline', function (): void {
     $value = underline('RAD')->render();

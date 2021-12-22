@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-use Termage\Termage;
-use Termage\Themes\Theme;
-use Termage\Themes\ThemeInterface;
-use Termage\Elements\Alert;
+use Thermage\Thermage;
+use Thermage\Themes\Theme;
+use Thermage\Themes\ThemeInterface;
+use Thermage\Elements\Alert;
 use Atomastic\Arrays\Arrays as Collection;
 use function arrays as collection;
-use function Termage\alert;
-use function Termage\setTheme;
-use function Termage\getTheme;
-use function Termage\getCsi;
+use function Thermage\alert;
+use function Thermage\setTheme;
+use function Thermage\getTheme;
+use function Thermage\getCsi;
 
 beforeEach(function() {
     setTheme(new AlertTestTheme());
