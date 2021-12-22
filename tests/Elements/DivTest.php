@@ -364,7 +364,7 @@ test('test setShortcodes', function (): void {
 
 test('test textOverflow', function (): void {
     $element = div()->value('Thermage - Totally RAD Terminal styling for PHP!')->textOverflowHidden()->render();
-    expect($element)->toBe(getCsi() . "0mThermage - Totally RA" . PHP_EOL);
+    expect($element)->toBe(getCsi() . "0mThermage - Totally R" . PHP_EOL);
 
     $element = div()->value('Thermage - Totally RAD Terminal styling for PHP!')->textOverflowEllipsis()->render();
     expect($element)->toBe(getCsi() . "0mThermage - Totally..." . PHP_EOL);
