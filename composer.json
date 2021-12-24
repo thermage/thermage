@@ -19,9 +19,9 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "ext-mbstring": "*",
-        "atomastic/arrays": "^3.0.5",
-        "atomastic/strings": "^3.0.2",
-        "atomastic/macroable": "^2.0",
+        "glowy/arrays": "^4.0.0",
+        "glowy/strings": "^4.0.0",
+        "glowy/macroable": "^3.0",
         "thunderer/shortcode": "^0.7.4"
     },
     "autoload":{
@@ -37,8 +37,8 @@
     ],
     "require-dev": {
         "doctrine/coding-standard": "9.0.0",
-        "pestphp/pest": "^1.19.0",
-        "phpstan/phpstan": "^0.12.99",
-        "symfony/var-dumper": "^5.3.7"
+        "pestphp/pest": "^1.21.1",
+        "phpstan/phpstan": "^1.2.0",
+        "symfony/var-dumper": "^5.4.1"
     }
 }
