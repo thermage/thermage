@@ -6,7 +6,7 @@ use Thermage\Thermage;
 use Thermage\Themes\Theme;
 use Thermage\Themes\ThemeInterface;
 use Thermage\Elements\Alert;
-use Atomastic\Arrays\Arrays as Collection;
+use Glowy\Arrays\Arrays as Collection;
 use function arrays as collection;
 use function Thermage\alert;
 use function Thermage\setTheme;

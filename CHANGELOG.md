@@ -1,3 +1,8 @@
+<a name="0.15.2"></a>
+# [0.15.2](https://github.com/thermage/thermage) (2021-12-24)
+* Fixed dependencies.
+* Add tests for PHP 8.1
+
 <a name="0.15.1"></a>
 # [0.15.1](https://github.com/thermage/thermage) (2021-12-17)
 * Moved thermage playground to `bin` directory.

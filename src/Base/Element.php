@@ -14,8 +14,8 @@ declare(strict_types=1);
 
 namespace Thermage\Base;
 
-use Atomastic\Arrays\Arrays as Collection;
-use Atomastic\Strings\Strings;
+use Glowy\Arrays\Arrays as Collection;
+use Glowy\Strings\Strings;
 use BadMethodCallException;
 use Exception;
 use Thermage\Parsers\Shortcodes;

@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Thermage\Themes;
 
-use Atomastic\Arrays\Arrays as Collection;
+use Glowy\Arrays\Arrays as Collection;
 
 interface ThemeInterface
 {
