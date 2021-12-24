@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Thermage\Thermage;
 use Thermage\Themes\Theme;
 use Thermage\Themes\ThemeInterface;
-use Atomastic\Arrays\Arrays as Collection;
+use Glowy\Arrays\Arrays as Collection;
 use function arrays as collection;
 
 test('test set and get theme', function (): void {

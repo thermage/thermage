@@ -10,7 +10,7 @@ use Thunder\Shortcode\Events;
 use Thunder\Shortcode\Shortcode\ShortcodeInterface;
 use Thermage\Themes\Theme;
 use Thermage\Themes\ThemeInterface;
-use Atomastic\Arrays\Arrays as Collection;
+use Glowy\Arrays\Arrays as Collection;
 use function arrays as collection;
 
 test('test thermage getShortcodes method', function (): void {

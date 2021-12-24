@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Thermage;
 
-use Atomastic\Macroable\Macroable;
+use Glowy\Macroable\Macroable;
 use Thermage\Elements\Alert;
 use Thermage\Elements\Anchor;
 use Thermage\Elements\Bold;

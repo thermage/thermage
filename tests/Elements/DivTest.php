@@ -6,7 +6,7 @@ use Thermage\Thermage;
 use Thermage\Themes\Theme;
 use Thermage\Themes\ThemeInterface;
 use Thermage\Elements\Div;
-use Atomastic\Arrays\Arrays as Collection;
+use Glowy\Arrays\Arrays as Collection;
 use function arrays as collection;
 use function Thermage\div;
 use function Thermage\span;

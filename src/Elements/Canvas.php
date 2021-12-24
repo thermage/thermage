@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Thermage\Elements;
 
-use Atomastic\Arrays\Arrays as Collection;
+use Glowy\Arrays\Arrays as Collection;
 use Thermage\Base\Element;
 use function arrays as collection;
 use function Thermage\span;
