@@ -50,4 +50,4 @@ Run tests
 
 ### License
 [The MIT License (MIT)](https://github.com/thermage/thermage/blob/master/LICENSE)
-Copyright (c) 2021 [Sergey Romanenko](https://awilum.github.io)
+Copyright (c) 2022 [Sergey Romanenko](https://awilum.github.io)
