@@ -80,7 +80,7 @@ final class Color
      */
     public function applyForegroundColor(string $value, string $color): string
     {
-        $setCodes   = implode(';', collection(self::parseColor($color))->toArray());
+        $setCodes   = implode(';', collection($this->parseColor($color))->toArray());
         $unsetCodes = implode(';', collection(['39'])->toArray());
 
         return sprintf(terminal()->getCsi() . '%sm', $setCodes) . $value . sprintf(terminal()->getCsi() . '%sm', $unsetCodes);
@@ -98,7 +98,7 @@ final class Color
      */
     public function applyBackgroundColor(string $value, string $color): string
     {
-        $setCodes   = implode(';', collection(self::parseColor($color, true))->toArray());
+        $setCodes   = implode(';', collection($this->parseColor($color, true))->toArray());
         $unsetCodes = implode(';', collection(['49'])->toArray());
 
         return sprintf(terminal()->getCsi() . '%sm', $setCodes) . $value . sprintf(terminal()->getCsi() . '%sm', $unsetCodes);
@@ -160,7 +160,7 @@ final class Color
      *
      * @access public
      */
-    private static function parseColor(string $color, bool $background = false): string
+    private function parseColor(string $color, bool $background = false): string
     {
         if ($color === '') {
             return '';
@@ -181,7 +181,7 @@ final class Color
                 throw new InvalidArgumentException(sprintf('Invalid "%s" color.', $color));
             }
 
-            return ($background ? '4' : '3') . self::convertHexColorToAnsi(hexdec($color));
+            return ($background ? '4' : '3') . $this->convertHexColorToAnsi(hexdec($color));
         }
 
         if (isset(self::COLORS[$color])) {
@@ -204,14 +204,14 @@ final class Color
      *
      * @access private
      */
-    private static function convertHexColorToAnsi(int $color): string
+    private function convertHexColorToAnsi(int $color): string
     {
         $r = ($color >> 16) & 255;
         $g = ($color >> 8) & 255;
         $b = $color & 255;
 
         if (getenv('COLORTERM') !== 'truecolor') {
-            return (string) self::degradeHexColorToAnsi($r, $g, $b);
+            return (string) $this->degradeHexColorToAnsi($r, $g, $b);
         }
 
         return sprintf('8;2;%d;%d;%d', $r, $g, $b);
@@ -228,9 +228,9 @@ final class Color
      *
      * @access private
      */
-    private static function degradeHexColorToAnsi(int $r, int $g, int $b): int
+    private function degradeHexColorToAnsi(int $r, int $g, int $b): int
     {
-        if (round(self::getSaturation($r, $g, $b) / 50) === 0) {
+        if (round($this->getSaturation($r, $g, $b) / 50) === 0) {
             return 0;
         }
 
@@ -248,7 +248,7 @@ final class Color
      *
      * @access private
      */
-    private static function getSaturation(int $r, int $g, int $b): int
+    private function getSaturation(int $r, int $g, int $b): int
     {
         $r /= 255;
         $g /= 255;
