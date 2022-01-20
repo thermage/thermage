@@ -88,7 +88,7 @@ class Thermage
     /**
      * Render elements to the output.
      *
-     * @param $element Element.
+     * @param $elements Elements.
      * 
      * @access public
      */
@@ -100,13 +100,13 @@ class Thermage
     /**
      * Render elements to the file.
      * 
-     * @param $element Element.
-     * @param $file    File path.
+     * @param $elements Elements.
+     * @param $file     File path.
      *
      * @access public
      */
-    public static function renderToFile(string $element, string $file): void 
+    public static function renderToFile(string $elements, string $file): void 
     {
-        file_put_contents($file, $element);
+        file_put_contents($file, $elements);
     }
 }
