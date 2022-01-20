@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Thermage\Base;
 
-use function Thermage\getCsi;
+use function Thermage\terminal;
 
 final class Screen
 {
@@ -25,9 +25,9 @@ final class Screen
      *
      * @access public
      */
-    public static function eraseSavedLines(): string
+    public function eraseSavedLines(): string
     {
-        return getCsi() . '3J';
+        return terminal()->getCsi() . '3J';
     }
 
     /**
@@ -37,9 +37,9 @@ final class Screen
      *
      * @access public
      */
-    public static function eraseAll(): string
+    public function eraseAll(): string
     {
-        return getCsi() . '2J';
+        return terminal()->getCsi() . '2J';
     }
 
     /**
@@ -49,9 +49,9 @@ final class Screen
      *
      * @access public
      */
-    public static function eraseAbove(): string
+    public function eraseAbove(): string
     {
-        return getCsi() . '1J';
+        return terminal()->getCsi() . '1J';
     }
 
     /**
@@ -61,8 +61,8 @@ final class Screen
      *
      * @access public
      */
-    public static function eraseBelow(): string
+    public function eraseBelow(): string
     {
-        return getCsi() . '0J';
+        return terminal()->getCsi() . '0J';
     }
 }

@@ -16,8 +16,7 @@ namespace Thermage\Elements;
 
 use Thermage\Base\Element;
 
-use function Thermage\getOsc;
-use function Thermage\getEsc;
+use function Thermage\terminal;
 
 final class Anchor extends Element
 {
@@ -32,7 +31,7 @@ final class Anchor extends Element
      */
     public function href(string $value): self
     {
-        $this->value(getOsc() . "8;;" . $value . getEsc() . "\\" . $this->getValue() . getOsc() . "8;;" . getEsc() . "\\");
+        $this->value(terminal()->getOsc() . "8;;" . $value . terminal()->getEsc() . "\\" . $this->getValue() . terminal()->getOsc() . "8;;" . terminal()->getEsc() . "\\");
 
         return $this;
     }
@@ -44,10 +43,10 @@ final class Anchor extends Element
      *
      * @access public
      */
-    public function render(): string
+    public function renderToString(): string
     {
         $this->d($this->getStyles()->get('display') ?? 'inline');
 
-        return parent::render();
+        return parent::renderToString();
     }
 }

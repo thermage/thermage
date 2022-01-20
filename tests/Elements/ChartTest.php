@@ -34,31 +34,31 @@ beforeEach(function() {
 });
 
 test('test horizontal', function (): void {
-    $value = chart()->data($this->data)->horizontal()->render();
+    $value = chart()->data($this->data)->horizontal()->renderToString();
     $chart = "\e[31mApple\e[39m\e[41m\e[49m\e[33mOrange\e[39m\e[43m\e[49m\e[32mLime\e[39m\e[42m\e[49m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($chart);
 });
 
 test('test inline', function (): void {
-    $value = chart()->data($this->data)->inline()->render();
+    $value = chart()->data($this->data)->inline()->renderToString();
     $chart = "\e[41m\e[49m\e[43m\e[49m\e[42m\e[49m\e[31mApple\e[39m\e[33mOrange\e[39m\e[32mLime\e[39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($chart);
 });
 
 test('test showPercents', function (): void {
-    $value = chart()->data($this->data)->showPercents()->render();
+    $value = chart()->data($this->data)->showPercents()->renderToString();
     $chart = "\e[31mApple\e[39m\e[41m\e[49m\e[31m17%\e[39m\e[33mOrange\e[39m\e[43m\e[49m\e[33m46%\e[39m\e[32mLime\e[39m\e[42m\e[49m\e[32m37%\e[39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($chart);
 });
 
 test('test showValues', function (): void {
-    $value = chart()->data($this->data)->showValues()->render();
+    $value = chart()->data($this->data)->showValues()->renderToString();
     $chart = "\e[31mApple\e[39m\e[41m\e[49m\e[31m(100)\e[39m\e[33mOrange\e[39m\e[43m\e[49m\e[33m(270)\e[39m\e[32mLime\e[39m\e[42m\e[49m\e[32m(220)\e[39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($chart);
 });
 
 test('test valuesSufix', function (): void {
-    $value = chart()->data($this->data)->showValues()->valuesSufix('items')->render();
+    $value = chart()->data($this->data)->showValues()->valuesSufix('items')->renderToString();
     $chart = "\e[31mApple\e[39m\e[41m\e[49m\e[31m(100items)\e[39m\e[33mOrange\e[39m\e[43m\e[49m\e[33m(270items)\e[39m\e[32mLime\e[39m\e[42m\e[49m\e[32m(220items)\e[39m";
     expect(str_replace([PHP_EOL, " "], "", strings($value)->trim()->toString()))->toEqual($chart);
 });

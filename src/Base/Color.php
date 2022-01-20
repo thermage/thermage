@@ -31,7 +31,7 @@ use function round;
 use function sprintf;
 use function strings;
 use function substr;
-use function Thermage\getCsi;
+use function Thermage\terminal;
 
 final class Color
 {
@@ -78,12 +78,12 @@ final class Color
      *
      * @access public
      */
-    public static function applyForegroundColor(string $value, string $color): string
+    public function applyForegroundColor(string $value, string $color): string
     {
         $setCodes   = implode(';', collection(self::parseColor($color))->toArray());
         $unsetCodes = implode(';', collection(['39'])->toArray());
 
-        return sprintf(getCsi() . '%sm', $setCodes) . $value . sprintf(getCsi() . '%sm', $unsetCodes);
+        return sprintf(terminal()->getCsi() . '%sm', $setCodes) . $value . sprintf(terminal()->getCsi() . '%sm', $unsetCodes);
     }
 
     /**
@@ -96,12 +96,12 @@ final class Color
      *
      * @access public
      */
-    public static function applyBackgroundColor(string $value, string $color): string
+    public function applyBackgroundColor(string $value, string $color): string
     {
         $setCodes   = implode(';', collection(self::parseColor($color, true))->toArray());
         $unsetCodes = implode(';', collection(['49'])->toArray());
 
-        return sprintf(getCsi() . '%sm', $setCodes) . $value . sprintf(getCsi() . '%sm', $unsetCodes);
+        return sprintf(terminal()->getCsi() . '%sm', $setCodes) . $value . sprintf(terminal()->getCsi() . '%sm', $unsetCodes);
     }
 
     /**
@@ -111,7 +111,7 @@ final class Color
      *
      * @access public
      */
-    public static function getRandomHexColor(): string
+    public function getRandomHexColor(): string
     {
         return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
     }
@@ -123,13 +123,31 @@ final class Color
      *
      * @access public
      */
-    public static function getRandomRgbColor(): array
+    public function getRandomRgbColor(): array
     {
         return [
             'r' => mt_rand(0, 255),
             'g' => mt_rand(0, 255),
             'b' => mt_rand(0, 255),
         ];
+    }
+
+    /**
+     * Convert RGB Color to HEX.
+     *
+     * @param string $color Color.
+     *
+     * @return string Color.
+     *
+     * @access private
+     */
+    public function convertRgbColorToHex(string $color): string
+    {
+        if (preg_match('/(\d{1,3})\,?\s?(\d{1,3})\,?\s?(\d{1,3})/', $color, $matches)) {
+            $color = sprintf('%02x%02x%02x', $matches[1], $matches[2], $matches[3]);
+        }
+
+        return $color;
     }
 
     /**
@@ -149,7 +167,7 @@ final class Color
         }
 
         if (strings($color)->startsWith('rgb(') && strings($color)->endsWith(')')) {
-            $color = '#' . self::convertRgbColorToHex($color);
+            $color = '#' . $this->convertRgbColorToHex($color);
         }
 
         if (strings($color)->startsWith('#')) {
@@ -175,24 +193,6 @@ final class Color
         }
 
         throw new InvalidArgumentException(sprintf('Invalid "%s" color; expected one of (%s).', $color, implode(', ', array_merge(array_keys(self::COLORS), array_keys(self::BRIGHT_COLORS)))));
-    }
-
-    /**
-     * Convert RGB Color to HEX.
-     *
-     * @param string $color Color.
-     *
-     * @return string Color.
-     *
-     * @access private
-     */
-    public static function convertRgbColorToHex(string $color): string
-    {
-        if (preg_match('/(\d{1,3})\,?\s?(\d{1,3})\,?\s?(\d{1,3})/', $color, $matches)) {
-            $color = sprintf('%02x%02x%02x', $matches[1], $matches[2], $matches[3]);
-        }
-
-        return $color;
     }
 
     /**

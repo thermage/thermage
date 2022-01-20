@@ -14,6 +14,10 @@ declare(strict_types=1);
 
 namespace Thermage\Base;
 
+use Thermage\Base\Styles;
+use Thermage\Base\Color;
+use Thermage\Base\Cursor;
+use Thermage\Base\Screen;
 use function exec;
 use function fclose;
 use function fopen;
@@ -57,13 +61,158 @@ final class Terminal
     private static $stty;
 
     /**
+     * Control Sequence Escape.
+     *
+     * @access private
+     */
+    private static string $esc;
+
+    /**
+     * Control Sequence Introducer.
+     *
+     * @access private
+     */
+    private static string $csi;
+
+    /**
+     * Operating System Command.
+     *
+     * @access private
+     */
+    private static string $osc;
+
+    /**
+     * Styles.
+     *
+     * @return self Returns instance of The Styles class.
+     * 
+     * @access private
+     */
+    public function styles(): Styles
+    {
+        return new Styles();
+    }
+
+    /**
+     * Color.
+     *
+     * @return self Returns instance of The Color class.
+     * 
+     * @access private
+     */
+    public function color(): Color
+    {
+        return new Color();
+    }
+
+    /**
+     * Screen.
+     *
+     * @return self Returns instance of The Screen class.
+     * 
+     * @access private
+     */
+    public function screen(): Screen
+    {
+        return new Screen();
+    }
+
+    /**
+     * Cursor.
+     *
+     * @return self Returns instance of The Cursor class.
+     * 
+     * @access private
+     */
+    public function cursor(): Cursor
+    {
+        return new Cursor();
+    }
+
+    /**
+     * Get Control Sequence Introducer.
+     *
+     * @return string Control Sequence Introducer.
+     *
+     * @access public
+     */
+    public function getCsi(): string
+    {
+        return self::$csi ??= $this->getEsc() . '[';
+    }
+
+    /**
+     * Set Control Sequence Introducer.
+     *
+     * @param string $value Control Sequence Introducer.
+     *
+     * @access public
+     */
+    public function csi(string $value): self
+    {
+        self::$csi = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get Operating System Command.
+     *
+     * @return string Operating System Command.
+     *
+     * @access public
+     */
+    public function getOsc(): string
+    {
+        return self::$osc ??= $this->getEsc() . ']';
+    }
+
+    /**
+     * Set Operating System Command.
+     *
+     * @param string $value Operating System Command.
+     *
+     * @access public
+     */
+    public function osc(string $value): self
+    {
+        self::$osc = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get Control Sequence Escape.
+     *
+     * @return string Control Sequence Escape.
+     *
+     * @access public
+     */
+    public static function getEsc(): string
+    {
+        return self::$esc ??= "\033";
+    }
+
+    /**
+     * Set Control Sequence Escape.
+     *
+     * @param string $value Control Sequence Escape.
+     *
+     * @access public
+     */
+    public static function setEsc(string $value)
+    {
+        self::$esc = $value;
+    }
+
+    /**
      * Get terminal width.
      *
      * @return int Terminal width.
      *
      * @access public
      */
-    public static function getWidth(): int
+    public function getWidth(): int
     {
         $width = getenv('COLUMNS');
         if ($width !== false) {
@@ -84,7 +233,7 @@ final class Terminal
      *
      * @access public
      */
-    public static function getHeight(): int
+    public function getHeight(): int
     {
         $height = getenv('LINES');
         if ($height !== false) {
@@ -105,9 +254,11 @@ final class Terminal
      *
      * @access public
      */
-    public static function setWidth(int $value): void
+    public function width(int $value): self
     {
         putenv('COLUMNS=' . $value);
+
+        return $this;
     }
 
     /**
@@ -117,9 +268,11 @@ final class Terminal
      *
      * @access public
      */
-    public static function setHeight(int $value): void
+    public function height(int $value): self
     {
         putenv('ROWS=' . $value);
+
+        return $this;
     }
 
     /**
@@ -129,7 +282,7 @@ final class Terminal
      *
      * @access public
      */
-    public static function hasSttyAvailable(): bool
+    public function hasSttyAvailable(): bool
     {
         if (self::$stty !== null) {
             return self::$stty;

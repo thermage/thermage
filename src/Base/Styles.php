@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Thermage\Base;
 
-use function Thermage\getCsi;
+use function Thermage\terminal;
 
 final class Styles
 {
@@ -25,9 +25,9 @@ final class Styles
      *
      * @access public
      */
-    public static function resetAll(): string
+    public function resetAll(): string
     {
-        return getCsi() . '0m';
+        return terminal()->getCsi() . '0m';
     }
 
     /**
@@ -37,9 +37,9 @@ final class Styles
      *
      * @access public
      */
-    public static function setBold(): string
+    public function setBold(): string
     {
-        return getCsi() . '1m';
+        return terminal()->getCsi() . '1m';
     }
 
     /**
@@ -49,9 +49,9 @@ final class Styles
      *
      * @access public
      */
-    public static function resetBold(): string
+    public function resetBold(): string
     {
-        return getCsi() . '22m';
+        return terminal()->getCsi() . '22m';
     }
 
     /**
@@ -61,9 +61,9 @@ final class Styles
      *
      * @access public
      */
-    public static function setItalic(): string
+    public function setItalic(): string
     {
-        return getCsi() . '3m';
+        return terminal()->getCsi() . '3m';
     }
 
     /**
@@ -73,9 +73,9 @@ final class Styles
      *
      * @access public
      */
-    public static function resetItalic(): string
+    public function resetItalic(): string
     {
-        return getCsi() . '23m';
+        return terminal()->getCsi() . '23m';
     }
 
     /**
@@ -85,9 +85,9 @@ final class Styles
      *
      * @access public
      */
-    public static function setUnderline(): string
+    public function setUnderline(): string
     {
-        return getCsi() . '4m';
+        return terminal()->getCsi() . '4m';
     }
 
     /**
@@ -97,9 +97,9 @@ final class Styles
      *
      * @access public
      */
-    public static function resetUnderline(): string
+    public function resetUnderline(): string
     {
-        return getCsi() . '24m';
+        return terminal()->getCsi() . '24m';
     }
 
     /**
@@ -109,9 +109,9 @@ final class Styles
      *
      * @access public
      */
-    public static function setStrikethrough(): string
+    public function setStrikethrough(): string
     {
-        return getCsi() . '9m';
+        return terminal()->getCsi() . '9m';
     }
 
     /**
@@ -121,9 +121,9 @@ final class Styles
      *
      * @access public
      */
-    public static function resetStrikethrough(): string
+    public function resetStrikethrough(): string
     {
-        return getCsi() . '29m';
+        return terminal()->getCsi() . '29m';
     }
 
     /**
@@ -133,9 +133,9 @@ final class Styles
      *
      * @access public
      */
-    public static function setDim(): string
+    public function setDim(): string
     {
-        return getCsi() . '2m';
+        return terminal()->getCsi() . '2m';
     }
 
     /**
@@ -145,9 +145,9 @@ final class Styles
      *
      * @access public
      */
-    public static function resetDim(): string
+    public function resetDim(): string
     {
-        return getCsi() . '22m';
+        return terminal()->getCsi() . '22m';
     }
 
     /**
@@ -157,9 +157,9 @@ final class Styles
      *
      * @access public
      */
-    public static function setBlink(): string
+    public function setBlink(): string
     {
-        return getCsi() . '5m';
+        return terminal()->getCsi() . '5m';
     }
 
     /**
@@ -169,9 +169,9 @@ final class Styles
      *
      * @access public
      */
-    public static function resetBlink(): string
+    public function resetBlink(): string
     {
-        return getCsi() . '25m';
+        return terminal()->getCsi() . '25m';
     }
 
     /**
@@ -181,9 +181,9 @@ final class Styles
      *
      * @access public
      */
-    public static function setReverse(): string
+    public function setReverse(): string
     {
-        return getCsi() . '7m';
+        return terminal()->getCsi() . '7m';
     }
 
     /**
@@ -193,9 +193,9 @@ final class Styles
      *
      * @access public
      */
-    public static function resetReverse(): string
+    public function resetReverse(): string
     {
-        return getCsi() . '27m';
+        return terminal()->getCsi() . '27m';
     }
 
     /**
@@ -205,9 +205,9 @@ final class Styles
      *
      * @access public
      */
-    public static function setInvisible(): string
+    public function setInvisible(): string
     {
-        return getCsi() . '8m';
+        return terminal()->getCsi() . '8m';
     }
 
     /**
@@ -217,8 +217,8 @@ final class Styles
      *
      * @access public
      */
-    public static function resetInvisible(): string
+    public function resetInvisible(): string
     {
-        return getCsi() . '28m';
+        return terminal()->getCsi() . '28m';
     }
 }

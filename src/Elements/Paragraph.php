@@ -25,10 +25,10 @@ final class Paragraph extends Element
      *
      * @access public
      */
-    public function render(): string
+    public function renderToString(): string
     {
         $this->d($this->getStyles()->get('display') ?? 'block');
 
-        return parent::render();
+        return parent::renderToString();
     }
 }

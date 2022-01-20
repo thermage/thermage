@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace Thermage\Elements;
 
 use Glowy\Arrays\Arrays as Collection;
-use Thermage\Base\Color;
 use Thermage\Base\Element;
 
 use function arrays as collection;
@@ -28,6 +27,7 @@ use function round;
 use function strings;
 use function Thermage\breakline as br;
 use function Thermage\span;
+use function Thermage\terminal;
 
 final class Chart extends Element
 {
@@ -212,9 +212,9 @@ final class Chart extends Element
      *
      * @access public
      */
-    public function render(): string
+    public function renderToString(): string
     {
-        $value       = parent::render();
+        $value       = parent::renderToString();
         $theme       = self::getTheme();
         $chartData   = $this->сhartData;
         $chartType   = $this->chartType;
@@ -282,18 +282,18 @@ final class Chart extends Element
             $_labelSize        = strings($this->stripDecorations($value['label']))->length();
             $labelPaddingRight = $_labelSize < $labelSize ? $labelSize - $_labelSize + 2 : 2;
 
-            $color = $value['color'] ?? Color::getRandomHexColor();
+            $color = $value['color'] ?? terminal()->color()->getRandomHexColor();
 
             if ($borderStyle == 'filled') {
-                $borderValue = span(strings(' ')->repeat($value['percentage'])->toString())->bg($color)->render();
+                $borderValue = span(strings(' ')->repeat($value['percentage'])->toString())->bg($color)->renderToString();
             } else {
-                $borderValue = span(strings($borderCharacter)->repeat($value['percentage'])->toString())->color($color)->render();
+                $borderValue = span(strings($borderCharacter)->repeat($value['percentage'])->toString())->color($color)->renderToString();
             }
             
-            $line .= span((string) $value['label'])->pr($labelPaddingRight)->color($color)->render() .
+            $line .= span((string) $value['label'])->pr($labelPaddingRight)->color($color)->renderToString() .
                      $borderValue .
-                     ($showPercents ? span((string) $value['percentage'] . '%')->pl1()->color($color)->render() : '') .
-                     ($showValues ? span('(' . (string) $value['value'] . $valuesSufix . ')')->pl1()->color($color)->render() : '') .
+                     ($showPercents ? span((string) $value['percentage'] . '%')->pl1()->color($color)->renderToString() : '') .
+                     ($showValues ? span('(' . (string) $value['value'] . $valuesSufix . ')')->pl1()->color($color)->renderToString() : '') .
                      ($i < $count ? br() : '');
         }
 
@@ -318,16 +318,16 @@ final class Chart extends Element
         
         // Set random color if color isnt defined.
         foreach ($data as $key => $value) {
-            $data[$key]['color'] = $value['color'] ?? Color::getRandomHexColor();
+            $data[$key]['color'] = $value['color'] ?? terminal()->color()->getRandomHexColor();
         }
 
         $line = '';
         foreach ($data as $key => $value) {
 
             if ($borderStyle == 'filled') {
-                $borderValue = span(strings(' ')->repeat($value['percentage'])->toString())->bg($value['color'])->render();
+                $borderValue = span(strings(' ')->repeat($value['percentage'])->toString())->bg($value['color'])->renderToString();
             } else {
-                $borderValue = span(strings($borderCharacter)->repeat($value['percentage'])->toString())->color($value['color'])->render();
+                $borderValue = span(strings($borderCharacter)->repeat($value['percentage'])->toString())->color($value['color'])->renderToString();
             }
 
             $line .= $borderValue;
@@ -336,9 +336,9 @@ final class Chart extends Element
         $labels = '';
         $suffix = '';
         foreach ($data as $key => $value) {
-            $suffix  = ($showPercents ? span((string) $value['percentage'] . '%')->pr1()->color($value['color'])->render() : '') .
-                      ($showValues ? span('(' . (string) $value['value'] . $valuesSufix . ')')->pr1()->color($value['color'])->render() : '');
-                      $labels .= span($value['label'] . (empty($suffix) ? ' ' : ' ' . $suffix))->color($value['color'])->render();
+            $suffix  = ($showPercents ? span((string) $value['percentage'] . '%')->pr1()->color($value['color'])->renderToString() : '') .
+                      ($showValues ? span('(' . (string) $value['value'] . $valuesSufix . ')')->pr1()->color($value['color'])->renderToString() : '');
+                      $labels .= span($value['label'] . (empty($suffix) ? ' ' : ' ' . $suffix))->color($value['color'])->renderToString();
         }
 
         return $line . br() . br() . $labels;

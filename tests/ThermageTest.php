@@ -18,48 +18,61 @@ use Thermage\Elements\Underline;
 use Thermage\Themes\Theme;
 use Thermage\Parsers\Shortcodes;
 
+use function Thermage\terminal;
+use function Thermage\div;
+use function Thermage\span;
+use function Thermage\paragraph;
+use function Thermage\alert;
+use function Thermage\anchor;
+use function Thermage\bold;
+use function Thermage\italic;
+use function Thermage\breakline;
+use function Thermage\chart;
+use function Thermage\strikethrough;
+use function Thermage\underline;
+
 test('test getTheme', function (): void {
     $this->assertInstanceOf(Theme::class, Thermage::getTheme());
 });
 
 test('test alert', function (): void {
-    $this->assertInstanceOf(Alert::class, Thermage::alert());
+    $this->assertInstanceOf(Alert::class, alert());
 });
 
 test('test anchor', function (): void {
-    $this->assertInstanceOf(Anchor::class, Thermage::anchor());
+    $this->assertInstanceOf(Anchor::class, anchor());
 });
 
 test('test bold', function (): void {
-    $this->assertInstanceOf(Bold::class, Thermage::bold());
+    $this->assertInstanceOf(Bold::class, bold());
 });
 
 test('test breakline', function (): void {
-    $this->assertInstanceOf(Breakline::class, Thermage::breakline());
+    $this->assertInstanceOf(Breakline::class, breakline());
 });
 
 test('test chart', function (): void {
-    $this->assertInstanceOf(Chart::class, Thermage::chart());
+    $this->assertInstanceOf(Chart::class, chart());
 });
 
 test('test italic', function (): void {
-    $this->assertInstanceOf(Italic::class, Thermage::italic());
+    $this->assertInstanceOf(Italic::class, italic());
 });
 
 test('test paragraph', function (): void {
-    $this->assertInstanceOf(Paragraph::class, Thermage::paragraph());
+    $this->assertInstanceOf(Paragraph::class, paragraph());
 });
 
 test('test span', function (): void {
-    $this->assertInstanceOf(Span::class, Thermage::span());
+    $this->assertInstanceOf(Span::class, span());
 });
 
 test('test strikethrough', function (): void {
-    $this->assertInstanceOf(Strikethrough::class, Thermage::strikethrough());
+    $this->assertInstanceOf(Strikethrough::class, strikethrough());
 });
 
 test('test underline', function (): void {
-    $this->assertInstanceOf(Underline::class, Thermage::underline());
+    $this->assertInstanceOf(Underline::class, underline());
 });
 
 test('test getShortcodes', function (): void {
@@ -71,12 +84,14 @@ test('test setShortcodes', function (): void {
     $this->assertInstanceOf(Shortcodes::class, Thermage::getShortcodes());
 });
 
-test('test setCsi and getCsi', function (): void {
-    Thermage::setCsi('foo');
-    expect(Thermage::getCsi('foo'))->toEqual("foo");
+test('test csi and getCsi', function (): void {
+    terminal()->csi('foo');
+    terminal()->csi('bar');
+    expect(terminal()->getCsi('bar'))->toEqual("bar");
 });
 
-test('test setOsc and getOsc', function (): void {
-    Thermage::setOsc('foo');
-    expect(Thermage::getOsc('foo'))->toEqual("foo");
+test('test osc and getOsc', function (): void {
+    terminal()->osc('foo');
+    terminal()->osc('bar');
+    expect(terminal()->getOsc('bar'))->toEqual("bar");
 });

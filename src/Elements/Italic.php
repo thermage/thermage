@@ -25,12 +25,12 @@ final class Italic extends Element
      *
      * @access public
      */
-    public function render(): string
+    public function renderToString(): string
     {
         $this->italic();
 
         $this->d($this->getStyles()->get('display') ?? 'inline');
 
-        return parent::render();
+        return parent::renderToString();
     }
 }

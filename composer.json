@@ -40,5 +40,11 @@
         "pestphp/pest": "^1.21.1",
         "phpstan/phpstan": "^1.2.0",
         "symfony/var-dumper": "^5.4.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }

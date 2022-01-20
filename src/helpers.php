@@ -52,103 +52,171 @@ function getTheme()
     return Thermage::getTheme();
 }
 
-function getCsi()
+function terminal(): Terminal
 {
-    return Thermage::getCsi();
+    return new Terminal();
 }
 
-function setCsi($value)
+function render(string $elements)
 {
-    return Thermage::setCsi($value);
+    Thermage::render($elements);
 }
 
-function getOsc()
+function renderToFile(string $elements, string $file)
 {
-    return Thermage::getOsc();
-}
-
-function setOsc($value)
-{
-    return Thermage::setOsc($value);
-}
-
-function getEsc()
-{
-    return Thermage::getEsc();
-}
-
-function setEsc($value)
-{
-    return Thermage::setEsc($value);
+    Thermage::renderToFile($elements, $file);
 }
 
 function div(string $value = '', string $classes = '', array $styles = []): Div
 {
-    return Thermage::div($value, $classes, $styles);
+    return new Div(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
 }
 
 function paragraph(string $value = '', string $classes = '', array $styles = []): Paragraph
 {
-    return Thermage::paragraph($value, $classes, $styles);
+    return new Paragraph(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
 }
 
 function span(string $value = '', string $classes = '', array $styles = []): Span
 {
-    return Thermage::span($value, $classes, $styles);
+    return new Span(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
 }
 
 function hr(string $value = '', string $classes = '', array $styles = []): Hr
 {
-    return Thermage::hr($value, $classes, $styles);
+    return new Hr(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
 }
 
 function anchor(string $value = '', string $classes = '', array $styles = []): Anchor
 {
-    return Thermage::anchor($value, $classes, $styles);
+    return new Anchor(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
 }
 
 function bold(string $value = '', string $classes = '', array $styles = []): Bold
 {
-    return Thermage::bold($value, $classes, $styles);
+    return new Bold(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
 }
 
 function italic(string $value = '', string $classes = '', array $styles = []): Italic
 {
-    return Thermage::italic($value, $classes, $styles);
+    return new Italic(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
 }
 
 function underline(string $value = '', string $classes = '', array $styles = []): Underline
 {
-    return Thermage::underline($value, $classes, $styles);
+    return new Underline(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
 }
 
 function strikethrough(string $value = '', string $classes = '', array $styles = []): Strikethrough
 {
-    return Thermage::strikethrough($value, $classes, $styles);
+    return new Strikethrough(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
 }
 
 function breakline(string $value = '', string $classes = '', array $styles = []): Breakline
 {
-    return Thermage::breakline($value, $classes, $styles);
+    return new Breakline(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
 }
 
 function chart(string $value = '', string $classes = '', array $styles = []): Chart
 {
-    return Thermage::chart($value, $classes, $styles);
+    return new Chart(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
 }
 
 function alert(string $value = '', string $classes = '', array $styles = []): Alert
 {
-    return Thermage::alert($value, $classes, $styles);
+    return new Alert(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
 }
 
 function heading(string $value = '', string $classes = '', array $styles = []): Heading
 {
-    return Thermage::heading($value, $classes, $styles);
+    return new Heading(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
 }
 
 function canvas(string $value = '', string $classes = '', array $styles = []): Canvas
 {
-    return Thermage::canvas($value, $classes, $styles);
+    return new Canvas(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
 }
-

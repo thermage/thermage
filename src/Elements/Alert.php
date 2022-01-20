@@ -176,7 +176,7 @@ final class Alert extends Element
      *
      * @access public
      */
-    public function render(): string
+    public function renderToString(): string
     {
         $this->processClasses();
 

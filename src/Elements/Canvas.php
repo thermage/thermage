@@ -154,7 +154,7 @@ final class Canvas extends Element
      *
      * @access public
      */
-    public function render(): string
+    public function renderToString(): string
     {
         $theme            = $this->getTheme();
         $elementVariables = $this->getElementVariables();

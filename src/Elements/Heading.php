@@ -85,7 +85,7 @@ final class Heading extends Element
      *
      * @access public
      */
-    public function render(): string
+    public function renderToString(): string
     {
         $value = $this->getValue();
         $size  = $this->size;

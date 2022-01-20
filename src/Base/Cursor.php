@@ -23,8 +23,7 @@ use function proc_open;
 use function shell_exec;
 use function sprintf;
 use function sscanf;
-use function Thermage\getCsi;
-use function Thermage\getEsc;
+use function Thermage\terminal;
 use function trim;
 
 use const STDIN;
@@ -38,9 +37,9 @@ final class Cursor
      *
      * @access public
      */
-    public static function show(): string
+    public function show(): string
     {
-        return getCsi() . '?25h';
+        return terminal()->getCsi() . '?25h';
     }
 
     /**
@@ -50,9 +49,9 @@ final class Cursor
      *
      * @access public
      */
-    public static function hide(): string
+    public function hide(): string
     {
-        return getCsi() . '?25l';
+        return terminal()->getCsi() . '?25l';
     }
 
     /**
@@ -64,9 +63,9 @@ final class Cursor
      *
      * @access public
      */
-    public static function up(int $rows = 1): string
+    public function up(int $rows = 1): string
     {
-        return getCsi() . "{$rows}A";
+        return terminal()->getCsi() . "{$rows}A";
     }
 
     /**
@@ -78,9 +77,9 @@ final class Cursor
      *
      * @access public
      */
-    public static function upLine(int $rows = 1): string
+    public function upLine(int $rows = 1): string
     {
-        return getCsi() . "{$rows}F";
+        return terminal()->getCsi() . "{$rows}F";
     }
 
     /**
@@ -92,9 +91,9 @@ final class Cursor
      *
      * @access public
      */
-    public static function downLine(int $rows = 1): string
+    public function downLine(int $rows = 1): string
     {
-        return getCsi() . "{$rows}E";
+        return terminal()->getCsi() . "{$rows}E";
     }
 
     /**
@@ -106,9 +105,9 @@ final class Cursor
      *
      * @access public
      */
-    public static function down(int $rows = 1): string
+    public function down(int $rows = 1): string
     {
-        return getCsi() . "{$rows}B";
+        return terminal()->getCsi() . "{$rows}B";
     }
 
     /**
@@ -120,9 +119,9 @@ final class Cursor
      *
      * @access public
      */
-    public static function forward(int $cols = 1): string
+    public function forward(int $cols = 1): string
     {
-        return getCsi() . "{$cols}C";
+        return terminal()->getCsi() . "{$cols}C";
     }
 
     /**
@@ -134,9 +133,9 @@ final class Cursor
      *
      * @access public
      */
-    public static function back(int $cols = 1): string
+    public function back(int $cols = 1): string
     {
-        return getCsi() . "{$cols}D";
+        return terminal()->getCsi() . "{$cols}D";
     }
 
     /**
@@ -149,9 +148,9 @@ final class Cursor
      *
      * @access public
      */
-    public static function goTo(int $col = 1, int $row = 1): string
+    public function goTo(int $col = 1, int $row = 1): string
     {
-        return getCsi() . "{$row};{$col}f";
+        return terminal()->getCsi() . "{$row};{$col}f";
     }
 
     /**
@@ -163,9 +162,9 @@ final class Cursor
      *
      * @access public
      */
-    public static function absX(int $col = 1): string
+    public function absX(int $col = 1): string
     {
-        return getCsi() . "{$col}G";
+        return terminal()->getCsi() . "{$col}G";
     }
 
     /**
@@ -177,9 +176,9 @@ final class Cursor
      *
      * @access public
      */
-    public static function absY(int $row = 1): string
+    public function absY(int $row = 1): string
     {
-        return getCsi() . "{$row}d";
+        return terminal()->getCsi() . "{$row}d";
     }
 
     /**
@@ -189,9 +188,9 @@ final class Cursor
      *
      * @access public
      */
-    public static function savePosition(): string
+    public function savePosition(): string
     {
-        return getCsi() . 's';
+        return terminal()->getCsi() . 's';
     }
 
     /**
@@ -201,9 +200,9 @@ final class Cursor
      *
      * @access public
      */
-    public static function restorePosition(): string
+    public function restorePosition(): string
     {
-        return getCsi() . 'u';
+        return terminal()->getCsi() . 'u';
     }
 
     /**
@@ -213,9 +212,9 @@ final class Cursor
      *
      * @access public
      */
-    public static function save(): string
+    public function save(): string
     {
-        return getEsc() . '7';
+        return terminal()->getCsi() . '7';
     }
 
     /**
@@ -225,9 +224,9 @@ final class Cursor
      *
      * @access public
      */
-    public static function restore(): string
+    public function restore(): string
     {
-        return getEsc() . '8';
+        return terminal()->getCsi() . '8';
     }
 
     /**
@@ -237,7 +236,7 @@ final class Cursor
      *
      * @access public
      */
-    public static function getCurrentPosition(): array
+    public function getCurrentPosition(): array
     {
         static $isTtySupported;
 
@@ -254,13 +253,13 @@ final class Cursor
         $sttyMode = shell_exec('stty -g');
         shell_exec('stty -icanon -echo');
 
-        @fwrite($input, getCsi() . '6n');
+        @fwrite($input, terminal()->getCsi() . '6n');
 
         $code = trim(fread($input, 1024));
 
         shell_exec(sprintf('stty %s', $sttyMode));
 
-        sscanf($code, getCsi() . '%d;%dR', $row, $col);
+        sscanf($code, terminal()->getCsi() . '%d;%dR', $row, $col);
 
         return [$col, $row];
     }

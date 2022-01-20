@@ -14,8 +14,6 @@ declare(strict_types=1);
 
 namespace Thermage\Parsers;
 
-use Thermage\Base\Color;
-use Thermage\Base\Styles;
 use Thermage\Themes\Theme;
 use Thermage\Themes\ThemeInterface;
 use Thunder\Shortcode\Shortcode\ShortcodeInterface;
@@ -23,9 +21,7 @@ use Thunder\Shortcode\ShortcodeFacade;
 
 use function str_replace;
 use function strip_tags;
-use function Thermage\getOsc;
-use function Thermage\getCsi;
-use function Thermage\getEsc;
+use function Thermage\terminal;
 
 class Shortcodes
 {
@@ -233,7 +229,7 @@ class Shortcodes
      */
     protected function boldShortcode(ShortcodeInterface $s): string
     {
-        return Styles::setBold() . $s->getContent() . Styles::resetBold();
+        return terminal()->styles()->setBold() . $s->getContent() . terminal()->styles()->resetBold();
     }
 
     /**
@@ -247,7 +243,7 @@ class Shortcodes
      */
     protected function italicShortcode(ShortcodeInterface $s): string
     {
-        return Styles::setItalic() . $s->getContent() . Styles::resetItalic();
+        return terminal()->styles()->setItalic() . $s->getContent() . terminal()->styles()->resetItalic();
     }
 
     /**
@@ -261,7 +257,7 @@ class Shortcodes
      */
     protected function underlineShortcode(ShortcodeInterface $s): string
     {
-        return Styles::setUnderline() . $s->getContent() . Styles::resetUnderline();
+        return terminal()->styles()->setUnderline() . $s->getContent() . terminal()->styles()->resetUnderline();
     }
 
     /**
@@ -275,7 +271,7 @@ class Shortcodes
      */
     protected function strikethroughShortcode(ShortcodeInterface $s): string
     {
-        return Styles::setStrikethrough() . $s->getContent() . Styles::resetStrikethrough();
+        return terminal()->styles()->setStrikethrough() . $s->getContent() . terminal()->styles()->resetStrikethrough();
     }
 
     /**
@@ -289,7 +285,7 @@ class Shortcodes
      */
     protected function dimShortcode(ShortcodeInterface $s): string
     {
-        return Styles::setDim() . $s->getContent() . Styles::resetDim();
+        return terminal()->styles()->setDim() . $s->getContent() . terminal()->styles()->resetDim();
     }
 
     /**
@@ -303,7 +299,7 @@ class Shortcodes
      */
     protected function blinkShortcode(ShortcodeInterface $s): string
     {
-        return Styles::setBlink() . $s->getContent() . Styles::resetBlink();
+        return terminal()->styles()->setBlink() . $s->getContent() . terminal()->styles()->resetBlink();
     }
 
     /**
@@ -317,7 +313,7 @@ class Shortcodes
      */
     protected function reverseShortcode(ShortcodeInterface $s): string
     {
-        return Styles::setReverse() . $s->getContent() . Styles::resetReverse();
+        return terminal()->styles()->setReverse() . $s->getContent() . terminal()->styles()->resetReverse();
     }
 
     /**
@@ -331,7 +327,7 @@ class Shortcodes
      */
     protected function invisibleShortcode(ShortcodeInterface $s): string
     {
-        return Styles::setInvisible() . $s->getContent() . Styles::resetInvisible();
+        return terminal()->styles()->setInvisible() . $s->getContent() . terminal()->styles()->resetInvisible();
     }
 
     /**
@@ -345,7 +341,7 @@ class Shortcodes
      */
     protected function anchorShortcode(ShortcodeInterface $s): string
     {
-        return getOsc() . "8;;" . $s->getParameter('href') . getEsc() . "\\" . $s->getContent() . getOsc() . "8;;" . getEsc() . "\\";
+        return terminal()->getOsc() . "8;;" . $s->getParameter('href') . terminal()->getEsc() . "\\" . $s->getContent() . terminal()->getOsc() . "8;;" . terminal()->getEsc() . "\\";
     }
 
     /**
@@ -360,7 +356,7 @@ class Shortcodes
     protected function colorShortcode(ShortcodeInterface $s): string
     {
         if ($s->getBbCode()) {
-            return Color::applyForegroundColor($s->getContent(), self::$theme->getVariables()->get('colors.' . $s->getBbCode(), $s->getBbCode()));
+            return terminal()->color()->applyForegroundColor($s->getContent(), self::$theme->getVariables()->get('colors.' . $s->getBbCode(), $s->getBbCode()));
         }
 
         return $s->getContent();
@@ -378,7 +374,7 @@ class Shortcodes
     protected function bgShortcode(ShortcodeInterface $s): string
     {
         if ($s->getBbCode()) {
-            return Color::applyBackgroundColor($s->getContent(), self::$theme->getVariables()->get('colors.' . $s->getBbCode(), $s->getBbCode()));
+            return terminal()->color()->applyBackgroundColor($s->getContent(), self::$theme->getVariables()->get('colors.' . $s->getBbCode(), $s->getBbCode()));
         }
 
         return $s->getContent();

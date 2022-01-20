@@ -27,7 +27,7 @@ final class Breakline extends Element
      *
      * @access public
      */
-    public function render(): string
+    public function renderToString(): string
     {
         $this->value($this->getValue() . PHP_EOL);
 
