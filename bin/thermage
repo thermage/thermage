@@ -6,6 +6,7 @@ use Thermage\Base\Screen;
 use Thermage\Base\Terminal;
 use function Thermage\div;
 use function Thermage\hr;
+use function Thermage\render;
 use function Thermage\terminal;
 
 $vendorPath = dirname(__DIR__, 4) . '/vendor/autoload.php';
@@ -23,12 +24,12 @@ echo chr(27).chr(91).'H'.chr(27).chr(91).'J';
 
 if (isset($argv[1])) {
     if ($argv[1] == 'div' && !isset($argv[2])) {
-        echo (        
+        render(        
             div('TERMAGE')->font('block')->color('#41ff00')->colors('#41ff00', 'green')->pt2()->bg('#21183c')->textAlignCenter().
             div('Div')->font('chrome')->color('#41ff00')->pt1()->pb2()->bg('#21183c')->textAlignCenter()
         );
-        echo hr()->color('#41ff00')->borderArrowDown()->bg('#21183c');
-        echo (        
+        render(hr()->color('#41ff00')->borderArrowDown()->bg('#21183c'));
+        render(        
             div('Classes')->font('chrome')->color('#41ff00')->py2()->bg('#21183c')->textAlignCenter().
             div('m-{0-'.terminal()->getWidth().'} mx-{0-'.intval(terminal()->getWidth() / 2).'} | my-{0-'.intval(terminal()->getHeight() / 2).'} | mt-{0-'.terminal()->getHeight().'} | mb-{0-'.terminal()->getHeight() . '} | ml-{0-'.terminal()->getWidth().'} | mr-{0-'.terminal()->getWidth().'}')->bg('#21183c')->p(3)->px(10)->bold()->pt0()->pb1()->textAlignCenter()->color('#41ff00').
             div('p-{0-'.terminal()->getWidth().'} px-{0-'.intval(terminal()->getWidth() / 2).'} | py-{0-'.intval(terminal()->getHeight() / 2).'} | pt-{0-'.terminal()->getHeight().'} | pb-{0-'.terminal()->getHeight() . '} | pl-{0-'.terminal()->getWidth().'} | pr-{0-'.terminal()->getWidth().'}')->bg('#21183c')->p(3)->px(10)->bold()->pt0()->pb1()->textAlignCenter()->color('#41ff00').
@@ -40,17 +41,17 @@ if (isset($argv[1])) {
             div('')->bg('#21183c')->p(3)->px(10)->bold()->pt0()->pb0()->textAlignCenter()->color('#41ff00')
         );
     } else {
-        echo div($argv[2] ?? 'Thermage', $argv[3] ?? '')->renderToString();
+        render(div($argv[2] ?? 'Thermage', $argv[3] ?? ''));
     }
 } else {
-    echo (        
+    render (        
         div('TERMAGE')->font('block')->color('#41ff00')->colors('#41ff00', 'green')->pt2()->bg('#21183c')->textAlignCenter().
         div('TOTALLY')->font('chrome')->color('#41ff00')->pt1()->bg('#21183c')->textAlignCenter().
         div('RAD TERMINAL STYLING FOR PHP')->font('chrome')->color('#41ff00')->pt1()->pb2()->bg('#21183c')->textAlignCenter().
         div('[u]Fluent[/u] and [u]incredible powerful[/u], object-oriented [u]interface[/u] for [u]customizing CLI[/u] output text color, background, formatting, theming and more!')->bg('#21183c')->p(3)->px(20)->bold()->pt0()->textAlignCenter()->color('#41ff00')
     );
-    echo hr()->color('#41ff00')->borderArrowDown()->bg('#21183c');
-    echo (        
+    render(hr()->color('#41ff00')->borderArrowDown()->bg('#21183c'));
+    render(        
         div('Elements')->font('chrome')->color('#41ff00')->py2()->bg('#21183c')->textAlignCenter().
         div('div | span | hr | chart | alert | paragraph | heading | anchor | bold | italic | strikethrough | underline')->bg('#21183c')->p(3)->px(10)->bold()->pt0()->textAlignCenter()->color('#41ff00')
     );
