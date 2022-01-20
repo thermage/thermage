@@ -43,7 +43,7 @@ final class Chart extends Element
      *
      * @access private
      */
-    private array $сhartData = [];
+    private array $chartData = [];
 
     /**
      * Chart value sufix.
@@ -122,7 +122,7 @@ final class Chart extends Element
      */
     public function data(array $data): self
     {
-        $this->сhartData = $data;
+        $this->chartData = $data;
 
         return $this;
     }
@@ -178,7 +178,7 @@ final class Chart extends Element
      */
     public function getData(): array
     {
-        return $this->сhartData;
+        return $this->chartData;
     }
 
     /**
@@ -216,7 +216,7 @@ final class Chart extends Element
     {
         $value       = parent::renderToString();
         $theme       = self::getTheme();
-        $chartData   = $this->сhartData;
+        $chartData   = $this->chartData;
         $chartType   = $this->chartType;
         $borderStyle = $this->getStyles()['border'] ?? $theme->getVariables()->get('chart.border', $this->getElementVariables()['chart']['border']);
 
