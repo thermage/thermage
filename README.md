@@ -4,8 +4,7 @@
 <br>
 
 <p align="center">
-<a href="https://github.com/thermage/thermage/releases"><img alt="Version" src="https://img.shields.io/github/release/thermage/thermage.svg?label=version&color=1d7300"></a> <a href="https://github.com/thermage/thermage"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=1d7300" alt="License"></a> <a href="https://packagist.org/packages/thermage/thermage"> <img src="https://github.com/thermage/thermage/actions/workflows/ci.yml/badge.svg?branch=dev">
-    <img src="http://poser.pugx.org/thermage/thermage/require/php">
+<a href="https://github.com/thermage/thermage/releases"><img alt="Version" src="https://img.shields.io/github/release/thermage/thermage.svg?label=version&color=1d7300"></a> <a href="https://github.com/thermage/thermage"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=1d7300" alt="License"></a> <a href="https://packagist.org/packages/thermage/thermage"> <img src="https://github.com/thermage/thermage/actions/workflows/ci.yml/badge.svg?branch=dev"></a> <img src="http://poser.pugx.org/thermage/thermage/require/php">
 </p>
 
 <br>
