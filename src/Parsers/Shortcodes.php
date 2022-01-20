@@ -18,6 +18,8 @@ use Thermage\Themes\Theme;
 use Thermage\Themes\ThemeInterface;
 use Thunder\Shortcode\Shortcode\ShortcodeInterface;
 use Thunder\Shortcode\ShortcodeFacade;
+use Thunder\Shortcode\EventHandler\FilterRawEventHandler;
+use Thunder\Shortcode\Events;
 
 use function str_replace;
 use function strip_tags;
@@ -202,6 +204,10 @@ class Shortcodes
 
         // shortcode: [bg]Background Color[/color]
         $this->add('bg', fn (ShortcodeInterface $s) => $this->bgShortcode($s));
+
+        $this->add('raw', fn (ShortcodeInterface $s) => $s->getContent());
+
+        $this->addEvent(Events::FILTER_SHORTCODES, new FilterRawEventHandler(['raw']));
     }
 
     /**
@@ -378,5 +384,5 @@ class Shortcodes
         }
 
         return $s->getContent();
-    }
+    }  
 }
