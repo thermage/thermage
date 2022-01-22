@@ -285,7 +285,7 @@ final class Chart extends Element
             $color = $value['color'] ?? terminal()->color()->getRandomHexColor();
 
             if ($borderStyle == 'filled') {
-                $borderValue = span(strings(' ')->repeat($value['percentage'])->toString())->bg($color)->renderToString();
+                $borderValue = span(strings(Element::getSpace())->repeat($value['percentage'])->toString())->bg($color)->renderToString();
             } else {
                 $borderValue = span(strings($borderCharacter)->repeat($value['percentage'])->toString())->color($color)->renderToString();
             }
@@ -325,7 +325,7 @@ final class Chart extends Element
         foreach ($data as $key => $value) {
 
             if ($borderStyle == 'filled') {
-                $borderValue = span(strings(' ')->repeat($value['percentage'])->toString())->bg($value['color'])->renderToString();
+                $borderValue = span(strings(Element::getSpace())->repeat($value['percentage'])->toString())->bg($value['color'])->renderToString();
             } else {
                 $borderValue = span(strings($borderCharacter)->repeat($value['percentage'])->toString())->color($value['color'])->renderToString();
             }
@@ -338,7 +338,7 @@ final class Chart extends Element
         foreach ($data as $key => $value) {
             $suffix  = ($showPercents ? span((string) $value['percentage'] . '%')->pr1()->color($value['color'])->renderToString() : '') .
                       ($showValues ? span('(' . (string) $value['value'] . $valuesSufix . ')')->pr1()->color($value['color'])->renderToString() : '');
-                      $labels .= span($value['label'] . (empty($suffix) ? ' ' : ' ' . $suffix))->color($value['color'])->renderToString();
+                      $labels .= span($value['label'] . (empty($suffix) ? Element::getSpace() : Element::getSpace() . $suffix))->color($value['color'])->renderToString();
         }
 
         return $line . br() . br() . $labels;

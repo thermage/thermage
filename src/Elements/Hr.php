@@ -69,9 +69,9 @@ final class Hr extends Element
        
         if ($hrTextAlign === 'left' && $valueLength > 0) {
             $hr = strings($borderCharacter)->repeat($hrValueMarginX) .
-                    strings(' ')->repeat($hrValuePaddingX) .
+                    strings(Element::getSpace())->repeat($hrValuePaddingX) .
                     $this->getValue() .
-                    strings(' ')->repeat($hrValuePaddingX) .
+                    strings(Element::getSpace())->repeat($hrValuePaddingX) .
                     strings($borderCharacter)->repeat(terminal()->getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX * 2);
 
             return (string) div($hr)->styles($this->getStyles()->delete('border')->toArray())->textOverflow('hidden');
@@ -79,9 +79,9 @@ final class Hr extends Element
 
         if ($hrTextAlign === 'right' && $valueLength > 0) {
             $hr = strings($borderCharacter)->repeat(terminal()->getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX * 2) .
-                    strings(' ')->repeat($hrValuePaddingX) .
+                    strings(Element::getSpace())->repeat($hrValuePaddingX) .
                     $this->getValue() .
-                    strings(' ')->repeat($hrValuePaddingX) .
+                    strings(Element::getSpace())->repeat($hrValuePaddingX) .
                     strings($borderCharacter)->repeat($hrValueMarginX);
 
             return (string) div($hr)->styles($this->getStyles()->delete('border')->toArray())->textOverflow('hidden');
@@ -99,9 +99,9 @@ final class Hr extends Element
             }
 
             $hr = strings($borderCharacter)->repeat($leftSpaces) .
-                    strings(' ')->repeat($hrValuePaddingX) .
+                    strings(Element::getSpace())->repeat($hrValuePaddingX) .
                     $this->getValue() .
-                    strings(' ')->repeat($hrValuePaddingX) .
+                    strings(Element::getSpace())->repeat($hrValuePaddingX) .
                     strings($borderCharacter)->repeat($rightSpaces);
 
             return (string) div($hr)->styles($this->getStyles()->delete('border')->toArray())->textOverflow('hidden');
