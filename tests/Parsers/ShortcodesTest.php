@@ -39,11 +39,11 @@ test('test add and parse and parseText method', function (): void {
 });
 
 test('test addEventHandler', function (): void {
-    Thermage::getShortcodes()->add('raw', static function (ShortcodeInterface $s) {
+    Thermage::getShortcodes()->add('raw2', static function (ShortcodeInterface $s) {
         return $s->getContent();
     });
-    Thermage::getShortcodes()->addEvent(Events::FILTER_SHORTCODES, new FilterRawEventHandler(['raw']));
-    expect(Thermage::getShortcodes()->parse('[raw][foo][/raw]'))->toEqual('[foo]');
+    Thermage::getShortcodes()->addEvent(Events::FILTER_SHORTCODES, new FilterRawEventHandler(['raw2']));
+    expect(Thermage::getShortcodes()->parse('[raw2][foo][/raw2]'))->toEqual('[foo]');
 });
 
 test('test stripShortcodes method', function (): void {
