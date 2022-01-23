@@ -25,7 +25,7 @@ echo chr(27).chr(91).'H'.chr(27).chr(91).'J';
 if (isset($argv[1])) {
     if ($argv[1] == 'div' && !isset($argv[2])) {
         render(        
-            div('TERMAGE')->font('block')->color('#41ff00')->colors('#41ff00', 'green')->pt2()->bg('#21183c')->textAlignCenter().
+            div('THERMAGE')->font('block')->color('#41ff00')->colors('#41ff00', 'green')->pt2()->bg('#21183c')->textAlignCenter().
             div('Div')->font('chrome')->color('#41ff00')->pt1()->pb2()->bg('#21183c')->textAlignCenter()
         );
         render(hr()->color('#41ff00')->borderArrowDown()->bg('#21183c'));
@@ -45,7 +45,7 @@ if (isset($argv[1])) {
     }
 } else {
     render (        
-        div('TERMAGE')->font('block')->color('#41ff00')->colors('#41ff00', 'green')->pt2()->bg('#21183c')->textAlignCenter().
+        div('THERMAGE')->font('block')->color('#41ff00')->colors('#41ff00', 'green')->pt2()->bg('#21183c')->textAlignCenter().
         div('TOTALLY')->font('chrome')->color('#41ff00')->pt1()->bg('#21183c')->textAlignCenter().
         div('RAD TERMINAL STYLING FOR PHP')->font('chrome')->color('#41ff00')->pt1()->pb2()->bg('#21183c')->textAlignCenter().
         div('[u]Fluent[/u] and [u]incredible powerful[/u], object-oriented [u]interface[/u] for [u]customizing CLI[/u] output text color, background, formatting, theming and more!')->bg('#21183c')->p(3)->px(20)->bold()->pt0()->textAlignCenter()->color('#41ff00')
