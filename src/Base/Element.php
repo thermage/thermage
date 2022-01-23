@@ -81,6 +81,13 @@ abstract class Element
     private bool $clearfix;
 
     /**
+     * Specific space symbol that represents a single space.
+     *
+     * @access private
+     */
+    private static string $space = '§';
+
+    /**
      * Create a new Element instance.
      *
      * @param        $theme
@@ -236,6 +243,42 @@ abstract class Element
     public static function setTheme(ThemeInterface $theme): void
     {
         self::$theme = $theme;
+    }
+
+    /**
+     * Get specific space symbol that represents a single space.
+     *
+     * @return string Space symbol.
+     *
+     * @access public
+     */
+    public static function getSpace(): string
+    {
+        return self::$space ??= '§';
+    }
+
+    /**
+     * Set specific space symbol that represents a single space.
+     *
+     * @param string $value Space symbol.
+     *
+     * @access public
+     */
+    public static function space(string $value): void
+    {
+        self::$space = $value;
+    }
+
+    /**
+     * Replace element system chars.
+     *
+     * @param $value Element.
+     * 
+     * @access public
+     */
+    public static function replaceSystemChars($value): string 
+    {
+        return (string) strings($value)->replace(self::getSpace(), ' ');
     }
 
     /**
@@ -1276,13 +1319,13 @@ abstract class Element
                     ($mt > 0 ? strings(PHP_EOL)->repeat($mt) : '') .
 
                     // Set margin left, only if padding left is not set.
-                    ($ml > 0 && $pl < 0 ? strings(' ')->repeat($ml) : '') .
+                    ($ml > 0 && $pl < 0 ? strings(self::$space)->repeat($ml) : '') .
 
                     // Set Value
                     $value .
 
                     // Set margin right, only if padding right is not set.
-                    ($mr > 0 && $pr < 0 ? strings(' ')->repeat($mr) : '') .
+                    ($mr > 0 && $pr < 0 ? strings(self::$space)->repeat($mr) : '') .
 
                     // Set margin bottom
                     ($mb > 0 ? strings(PHP_EOL)->repeat($mb) : '');
@@ -1334,7 +1377,7 @@ abstract class Element
                 $btStyleValue = '';
                 if ($hasBorder()) {
                     $btStyleValue = terminal()->styles()->resetAll() .
-                                    strings(' ')->repeat($ml) .
+                                    strings(self::$space)->repeat($ml) .
                                     $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.top-left')) .
                                     $applyBorderColor((string) strings(self::$theme->getVariables()->get('borders.' . $borderStyle . '.top'))->repeat($valueSpaces)) .
                                     $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.top-right')) .
@@ -1346,7 +1389,7 @@ abstract class Element
                 $bbStyleValue = PHP_EOL;
                 if ($hasBorder()) {
                     $bbStyleValue = terminal()->styles()->resetAll() .
-                                    strings(' ')->repeat($ml) .
+                                    strings(self::$space)->repeat($ml) .
                                     $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.bottom-left')) .
                                     $applyBorderColor((string) strings(self::$theme->getVariables()->get('borders.' . $borderStyle . '.bottom'))->repeat($valueSpaces)) .
                                     $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.bottom-right')) .
@@ -1357,9 +1400,9 @@ abstract class Element
                 $ptStyleValue = '';
                 for ($i = 0; $i < $pt; $i++) {
                     $ptStyleValue .= terminal()->styles()->resetAll() .
-                                     strings(' ')->repeat($ml) .
+                                     strings(self::$space)->repeat($ml) .
                                      ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
-                                     $applyTextAndBackgroundColor((string) strings(' ')->repeat($valueSpaces)) .
+                                     $applyTextAndBackgroundColor((string) strings(self::$space)->repeat($valueSpaces)) .
                                      ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
                                      terminal()->styles()->resetAll() .
                                      PHP_EOL;
@@ -1369,9 +1412,9 @@ abstract class Element
                 $pbStyleValue = PHP_EOL;
                 for ($i = 0; $i < $pb; $i++) {
                     $pbStyleValue .= terminal()->styles()->resetAll() .
-                                    strings(' ')->repeat($ml) .
+                                    strings(self::$space)->repeat($ml) .
                                     ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
-                                    $applyTextAndBackgroundColor((string) strings(' ')->repeat($valueSpaces)) .
+                                    $applyTextAndBackgroundColor((string) strings(self::$space)->repeat($valueSpaces)) .
                                     ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
                                     terminal()->styles()->resetAll() .
                                     PHP_EOL;
@@ -1422,11 +1465,11 @@ abstract class Element
                         }
 
                         $linesValue .=  terminal()->styles()->resetAll() .
-                                        strings(' ')->repeat($ml) .
+                                        strings(self::$space)->repeat($ml) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
-                                        $applyTextAndBackgroundColor(strings(' ')->repeat($pl) .
+                                        $applyTextAndBackgroundColor(strings(self::$space)->repeat($pl) .
                                                                     $line .
-                                                                    strings(' ')->repeat($pr)) .
+                                                                    strings(self::$space)->repeat($pr)) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
                                         ($key === array_key_last($lines) ? '' : PHP_EOL);
                     }
@@ -1443,7 +1486,7 @@ abstract class Element
                             ($pb > 0 ? strings($paddingsAndBordersY['pb'])->trimRight(PHP_EOL) : '') .
 
                             // Set box border top style.
-                            ($hasBorder() ? strings(' ')->repeat($ml) . $paddingsAndBordersY['bb'] : '');
+                            ($hasBorder() ? strings(self::$space)->repeat($ml) . $paddingsAndBordersY['bb'] : '');
                 }
 
                 // Text align right
@@ -1474,11 +1517,11 @@ abstract class Element
                         }
 
                         $linesValue .=  terminal()->styles()->resetAll() .
-                                        strings(' ')->repeat($ml) .
+                                        strings(self::$space)->repeat($ml) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
-                                        $applyTextAndBackgroundColor(strings(' ')->repeat($pl) .
+                                        $applyTextAndBackgroundColor(strings(self::$space)->repeat($pl) .
                                                                     $line .
-                                                                    strings(' ')->repeat($pr)) .
+                                                                    strings(self::$space)->repeat($pr)) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
                                         ($key === array_key_last($lines) ? '' : PHP_EOL);
                     }
@@ -1495,7 +1538,7 @@ abstract class Element
                             ($pb > 0 ? strings($paddingsAndBordersY['pb'])->trimRight(PHP_EOL) : '') .
 
                             // Set box border top style.
-                            ($hasBorder() ? strings(' ')->repeat($ml) . $paddingsAndBordersY['bb'] : '');
+                            ($hasBorder() ? strings(self::$space)->repeat($ml) . $paddingsAndBordersY['bb'] : '');
                 }
 
                 // Text align center
@@ -1526,16 +1569,16 @@ abstract class Element
                             $currentLeftSpaces++;
                         }
 
-                        $currentLine = strings(' ')->repeat((($currentLeftSpaces + $pl) < 0) ? 0 : $currentLeftSpaces + $pl) .
+                        $currentLine = strings(self::$space)->repeat((($currentLeftSpaces + $pl) < 0) ? 0 : $currentLeftSpaces + $pl) .
                                       $line .
-                                      strings(' ')->repeat((($currentRightSpaces + $pr) < 0) ? 0 : $currentRightSpaces + $pr);
+                                      strings(self::$space)->repeat((($currentRightSpaces + $pr) < 0) ? 0 : $currentRightSpaces + $pr);
                                       
                         // Set box margin left,
                         // paddings left and right,
                         // re-apply text and background colors,
                         // apply borders.
                         $linesValue .= terminal()->styles()->resetAll() .
-                                        strings(' ')->repeat($ml) .
+                                        strings(self::$space)->repeat($ml) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
                                         $applyTextAndBackgroundColor($currentLine) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
@@ -1554,7 +1597,7 @@ abstract class Element
                             ($pb > 0 ? strings($paddingsAndBordersY['pb'])->trimRight(PHP_EOL) : '') .
 
                             // Set box border top style.
-                            ($hasBorder() ? strings(' ')->repeat($ml) . $paddingsAndBordersY['bb'] : '');
+                            ($hasBorder() ? strings(self::$space)->repeat($ml) . $paddingsAndBordersY['bb'] : '');
                 }
             }
 
@@ -1597,13 +1640,13 @@ abstract class Element
                         // re-apply text and background colors,
                         // apply borders.
                         $linesValue .=  terminal()->styles()->resetAll() .
-                                        strings(' ')->repeat($ml) .
+                                        strings(self::$space)->repeat($ml) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
-                                        $applyTextAndBackgroundColor(strings(' ')->repeat($pl) .
+                                        $applyTextAndBackgroundColor(strings(self::$space)->repeat($pl) .
                                                                     $line .
-                                                                    strings(' ')->repeat($prCurrent)) .
+                                                                    strings(self::$space)->repeat($prCurrent)) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
-                                        strings(' ')->repeat($mr) .
+                                        strings(self::$space)->repeat($mr) .
                                         ($key === array_key_last($lines) ? '' : PHP_EOL);
                     }
 
@@ -1619,7 +1662,7 @@ abstract class Element
                             ($pb > 0 ? strings($paddingsAndBordersY['pb'])->trimRight(PHP_EOL) : '') .
 
                             // Set box border top style.
-                            ($hasBorder() ? strings(' ')->repeat($ml) . PHP_EOL . $paddingsAndBordersY['bb'] : '');
+                            ($hasBorder() ? strings(self::$space)->repeat($ml) . PHP_EOL . $paddingsAndBordersY['bb'] : '');
                 }
 
                 // Text align right
@@ -1651,13 +1694,13 @@ abstract class Element
                         // re-apply text and background colors,
                         // apply borders.
                         $linesValue .=  terminal()->styles()->resetAll() .
-                                        strings(' ')->repeat($ml) .
+                                        strings(self::$space)->repeat($ml) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
-                                        $applyTextAndBackgroundColor(strings(' ')->repeat($plCurrent) .
+                                        $applyTextAndBackgroundColor(strings(self::$space)->repeat($plCurrent) .
                                                                     $line .
-                                                                    strings(' ')->repeat($pr)) .
+                                                                    strings(self::$space)->repeat($pr)) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
-                                        strings(' ')->repeat($mr) .
+                                        strings(self::$space)->repeat($mr) .
                                         ($key === array_key_last($lines) ? '' : PHP_EOL);
                     }
 
@@ -1673,7 +1716,7 @@ abstract class Element
                             ($pb > 0 ? strings($paddingsAndBordersY['pb'])->trimRight(PHP_EOL) : '') .
 
                             // Set box border top style.
-                            ($hasBorder() ? strings(' ')->repeat($ml) . PHP_EOL . $paddingsAndBordersY['bb'] : '');
+                            ($hasBorder() ? strings(self::$space)->repeat($ml) . PHP_EOL . $paddingsAndBordersY['bb'] : '');
                 }
 
                 // Text align center
@@ -1711,15 +1754,15 @@ abstract class Element
                         $currentLeftSpaces  = intval($currentSpaces / 2);
                         $currentRightSpaces = intval($currentSpaces / 2);
 
-                        $currentLine = strings(' ')->repeat($currentLeftSpaces + $pl) .
+                        $currentLine = strings(self::$space)->repeat($currentLeftSpaces + $pl) .
                                       $line .
-                                      strings(' ')->repeat($currentRightSpaces + $pr);
+                                      strings(self::$space)->repeat($currentRightSpaces + $pr);
                                       
                         if (!$this->styles->has('font')) {
                             
                             // Fix string length it is fit or not fit available printable area
                             if ($this->getLength($currentLine) < $max) {
-                                $currentLine .= strings(' ')->repeat($max - $this->getLength($currentLine))->toString();
+                                $currentLine .= strings(self::$space)->repeat($max - $this->getLength($currentLine))->toString();
                             } else if ($this->getLength($currentLine) > $max) {
                                 $currentLine = mb_substr($currentLine, 0, - ($this->getLength($currentLine) - $max));
                             }
@@ -1730,11 +1773,11 @@ abstract class Element
                         // re-apply text and background colors,
                         // apply borders.
                         $linesValue .=  terminal()->styles()->resetAll() .
-                                        strings(' ')->repeat($ml) .
+                                        strings(self::$space)->repeat($ml) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.left')) : '') .
                                         $applyTextAndBackgroundColor($currentLine) .
                                         ($hasBorder() ? $applyBorderColor(self::$theme->getVariables()->get('borders.' . $borderStyle . '.right')) : '') .
-                                        strings(' ')->repeat($mr) .
+                                        strings(self::$space)->repeat($mr) .
                                         ($key === array_key_last($lines) ? '' : PHP_EOL);
                     }
 
@@ -1750,13 +1793,13 @@ abstract class Element
                             ($pb > 0 ? strings($paddingsAndBordersY['pb'])->trimRight(PHP_EOL) : '') .
 
                             // Set box border top style.
-                            ($hasBorder() ? strings(' ')->repeat($ml) . PHP_EOL . $paddingsAndBordersY['bb'] : '');
+                            ($hasBorder() ? strings(self::$space)->repeat($ml) . PHP_EOL . $paddingsAndBordersY['bb'] : '');
                 }
             }
 
             // Display inline
             if ($displayStyle === 'inline') {
-                return strings(' ')->repeat($pl) . $value . strings(' ')->repeat($pr);
+                return strings(self::$space)->repeat($pl) . $value . strings(self::$space)->repeat($pr);
             }
         };
 
