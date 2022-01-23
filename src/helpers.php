@@ -31,6 +31,7 @@ use Thermage\Elements\Canvas;
 use Thermage\Elements\Spinner;
 use Thermage\Elements\Strikethrough;
 use Thermage\Elements\Underline;
+use Thermage\Elements\Spark;
 
 function setShortcodes($shortcodes): void
 {
@@ -57,12 +58,12 @@ function terminal(): Terminal
     return new Terminal();
 }
 
-function render(string $elements)
+function render($elements)
 {
     Thermage::render($elements);
 }
 
-function renderToFile(string $elements, string $file)
+function renderToFile($elements, string $file)
 {
     Thermage::renderToFile($elements, $file);
 }
@@ -213,6 +214,17 @@ function heading(string $value = '', string $classes = '', array $styles = []): 
 function canvas(string $value = '', string $classes = '', array $styles = []): Canvas
 {
     return new Canvas(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
+}
+
+function spark(string $value = '', string $classes = '', array $styles = []): Spark
+{
+    return new Spark(
         Thermage::getTheme(),
         Thermage::getShortcodes(),
         $value,
