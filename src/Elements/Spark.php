@@ -42,7 +42,7 @@ final class Spark extends Element
      *
      * @access public
      */
-    public function numbers(array $data): self
+    public function data(array $data): self
     {
         $this->sparkData = $data;
 
@@ -70,7 +70,7 @@ final class Spark extends Element
             $this->sparkTicks = [$this->sparkTicks[4]];
         }
         
-        foreach ($this->numbers as $number) {
+        foreach ($this->sparkData as $number) {
             $tickIndex = ceil(($number / $max) * count($this->sparkTicks)) - 1;
             if ($max === 0 || $tickIndex < 0) $tickIndex = 0;
             $result .= span($this->sparkTicks[$tickIndex])->color($this->getStyles()['color'] . (($tickIndex == 0) ? 100 : $tickIndex * 100))->renderToString();
