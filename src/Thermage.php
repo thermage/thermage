@@ -16,6 +16,7 @@ namespace Thermage;
 
 use Glowy\Macroable\Macroable;
 use Thermage\Parsers\Shortcodes;
+use Thermage\Base\Element;
 use Thermage\Themes\Theme;
 use Thermage\Themes\ThemeInterface;
 
@@ -88,25 +89,33 @@ class Thermage
     /**
      * Render elements to the output.
      *
-     * @param $elements Elements.
+     * @param string|Element $elements Elements.
      * 
      * @access public
      */
-    public static function render(string $elements): void
+    public static function render($elements): void
     {
-        echo $elements;
+        if ($elements instanceof Element) {
+            $elements = $elements->renderToString();
+        }
+
+        echo Element::replaceSystemChars($elements);
     }
 
     /**
      * Render elements to the file.
      * 
-     * @param $elements Elements.
-     * @param $file     File path.
+     * @param string|Element $elements Elements.
+     * @param                $filePath File path.
      *
      * @access public
      */
-    public static function renderToFile(string $elements, string $file): void 
+    public static function renderToFile($elements, string $filePath): void 
     {
-        file_put_contents($file, $elements);
+        if ($elements instanceof Element) {
+            $elements = $elements->renderToString();
+        }
+
+        file_put_contents($filePath, Element::replaceSystemChars($elements));
     }
 }
