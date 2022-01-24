@@ -87,19 +87,43 @@ class Thermage
     }
 
     /**
-     * Render elements to the output.
+     * Render elements to the output/string.
      *
      * @param string|Element $elements Elements.
      * 
      * @access public
      */
-    public static function render($elements): void
+    public static function render($elements, ?callable $callback = null, $output = true)
     {
         if ($elements instanceof Element) {
             $elements = $elements->renderToString();
         }
 
-        echo Element::replaceSystemChars($elements);
+        $elements = Element::replaceSystemChars($elements);
+
+        if ($output) {
+            echo ($callback === null) ? $elements : call_user_func($callback, $elements);
+        } else {
+            return ($callback === null) ? $elements : call_user_func($callback, $elements);
+        }
+    }
+
+    /**
+     * Render elements to the string.
+     *
+     * @param string|Element $elements Elements.
+     * 
+     * @access public
+     */
+    public static function renderToString($elements, ?callable $callback = null): string
+    {
+        if ($elements instanceof Element) {
+            $elements = $elements->renderToString();
+        }
+
+        $elements = Element::replaceSystemChars($elements);
+
+        return ($callback === null) ? $elements : call_user_func($callback, $elements);
     }
 
     /**
@@ -110,12 +134,14 @@ class Thermage
      *
      * @access public
      */
-    public static function renderToFile($elements, string $filePath): void 
+    public static function renderToFile($elements, string $filePath, ?callable $callback = null): void 
     {
         if ($elements instanceof Element) {
             $elements = $elements->renderToString();
         }
 
-        file_put_contents($filePath, Element::replaceSystemChars($elements));
+        $elements = Element::replaceSystemChars($elements);
+
+        file_put_contents($filePath, ($callback === null) ? $elements : call_user_func($callback, $elements));
     }
 }
