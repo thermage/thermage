@@ -1965,6 +1965,24 @@ abstract class Element
     }
 
     /**
+     * Render elements to the output/string.
+     *
+     * @param string|Element $elements Elements.
+     * 
+     * @access public
+     */
+    public function render($output = true)
+    {
+        $this->value = $this->renderToString($this->value);
+
+        if ($output) {
+            echo self::replaceSystemChars($this->value);
+        } else {
+            return self::replaceSystemChars($this->value);
+        }
+    }
+
+    /**
      * Get rendered element.
      *
      * @return string Returns rendered element.
@@ -1976,7 +1994,7 @@ abstract class Element
         $this->processClasses();
         $this->processStyles();
         $this->processShortcodes();
-
+        
         return $this->value;
     }
 
