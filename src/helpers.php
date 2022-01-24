@@ -58,9 +58,18 @@ function terminal(): Terminal
     return new Terminal();
 }
 
-function render($elements)
+function render($elements, ?callable $callback = null, $output = true)
 {
-    Thermage::render($elements);
+    if ($output) {
+        Thermage::render($elements, $callback, $output);
+    } else {
+        return Thermage::render($elements, $callback, $output);
+    }
+}
+
+function renderToString($elements, ?callable $callback = null): string
+{
+    return Thermage::renderToString($elements, $callback);
 }
 
 function renderToFile($elements, string $file)
