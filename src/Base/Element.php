@@ -1965,9 +1965,9 @@ abstract class Element
     }
 
     /**
-     * Render elements to the output/string.
+     * Render element to the output/string.
      *
-     * @param string|Element $elements Elements.
+     * @param bool $output Output or return rendered element.
      * 
      * @access public
      */

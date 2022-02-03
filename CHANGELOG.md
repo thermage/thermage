@@ -1,10 +1,10 @@
 <a name="0.16.0"></a>
-# [0.16.0](https://github.com/thermage/thermage) (2022-01-23)
-* Added new element `Spark`
-* Added new helper `render`
-* Added new helper `renderToFile`
-* Added new helper `terminal`
-* Added new shortcode `raw`
+# [0.16.0](https://github.com/thermage/thermage) (2022-02-xx)
+* Added new element `Spark`.
+* Added new helper `render`.
+* Added new helper `renderToFile`.
+* Added new helper `terminal`.
+* Added new shortcode `raw`.
 * Added new public static method `render` for Thermage.
 * Added new public static method `renderToFile` Thermage.
 * Added new system space symbol `§` and new public static methods `space`, `getSpace`, `replaceSystemChars` for Element.
