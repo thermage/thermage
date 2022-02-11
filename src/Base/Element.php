@@ -47,7 +47,7 @@ abstract class Element
      *
      * @access private
      */
-    private string $classes;
+    private array $classes = [];
 
     /**
      * Element styles.
@@ -107,10 +107,37 @@ abstract class Element
         self::$theme             = $theme ??= new Theme();
         self::$shortcodes        = $shortcodes ??= new Shortcodes(self::getTheme());
         $this->value             = $value;
-        $this->classes           = $classes;
+        $this->classes           = $this->makeClasses($classes);
         $this->registeredClasses = collection($this->getDefaultClasses())->merge($this->getElementClasses(), true);
         $this->styles            = collection($styles);
         $this->clearfix          = false;
+    }
+
+    /**
+     * Make array of classes from string of classes.
+     * 
+     * @param string $classes String of classes.
+     * 
+     * @return array Returns array of classes.
+     * 
+     * @access public 
+     */
+    public function makeClasses(string $classes): array
+    {
+        $medias  = self::$theme->getVariables()->get('media');
+        $classes = explode(' ', $classes);
+        $result = [];
+
+        foreach($classes as $class) {           
+            $media = explode(':', $class)[0];
+            if (in_array($media, array_keys($medias))) {
+                $result[$media][] = strings($class)->replace($media . ':', '')->toString();
+                continue;
+            }
+            $result['global'][] = $class;
+        }
+
+        return $result;
     }
 
     /**
@@ -172,11 +199,11 @@ abstract class Element
     /**
      * Get element classes.
      *
-     * @return string Returns Element classes.
+     * @return array Returns Element classes.
      *
      * @access public
      */
-    public function getClasses(): string
+    public function getClasses(): array
     {
         return $this->classes;
     }
@@ -192,7 +219,7 @@ abstract class Element
      */
     public function classes(string $classes = ''): self
     {
-        $this->classes = $classes;
+        $this->classes = $this->makeClasses($classes);
 
         return $this;
     }
@@ -893,6 +920,32 @@ abstract class Element
     }
 
     /**
+     * Set classes for specific media.
+     *
+     * @param string $size    Media size.
+     * @param string $classes Media classes. 
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function media(string $size, string $classes): self 
+    {
+        $medias = self::$theme->getVariables()->get('media');
+
+        $preparedClasses = '';
+        foreach(explode(' ', $classes) as $class) {
+            $preparedClasses .= $size . ':' . $class;
+        }
+
+        if (in_array($size, array_keys($medias))) {
+            $this->classes = array_replace_recursive($this->classes, $this->makeClasses($preparedClasses));
+        }
+
+        return $this;
+    }
+
+    /**
      * Set element font style.
      *
      * @param string $value Font style value.
@@ -1193,13 +1246,17 @@ abstract class Element
      */
     public function processClasses(): void
     {
-        $classes = strings($this->classes)->trim();
+        $classes = $this->classes;
 
-        if ($classes->length() <= 0) {
+        if (count($classes) <= 0) {
             return;
         }
 
-        foreach ($classes->segments() as $class) {
+        $width  = terminal()->getWidth();
+        $medias = self::$theme->getVariables()->get('media');
+
+        // Process global classes 
+        foreach ($classes['global'] as $class) {
             $methodName = (string) strings($class)->camel()->trim();
             foreach ($this->registeredClasses->toArray() as $registeredClass) {
                 
@@ -1210,6 +1267,27 @@ abstract class Element
                 }
 
                 $this->{$methodName}();
+            }
+        }
+
+        // Process specific media classes
+        foreach ($medias as $key => $media) {
+            if ($width >= $media['min'] && $width <= $media['max']) {
+                if (isset($classes[$key])) {
+                    foreach ($classes[$key] as $class) {
+                        $methodName = (string) strings($class)->camel()->trim();
+                        foreach ($this->registeredClasses->toArray() as $registeredClass) {
+                            
+                            $registeredClassName = (string) strings($registeredClass)->camel()->trim();
+            
+                            if (! strings($methodName)->startsWith($registeredClassName)) {
+                                continue;
+                            }
+            
+                            $this->{$methodName}();
+                        }
+                    }
+                }
             }
         }
     }

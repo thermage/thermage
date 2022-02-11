@@ -95,7 +95,7 @@ test('test value and getValue', function (): void {
 
 test('test classes and getClasses', function (): void {
     $value = div()->classes('RAD');
-    expect($value->getClasses())->toBe('RAD');
+    expect($value->getClasses())->toBe(['global' => ['RAD']]);
 });
 
 test('test m', function (): void {
@@ -301,6 +301,16 @@ test('test pl', function (): void {
 test('test magic pl', function (): void {
     $value = div()->value('RAD')->pl10()->renderToString();
     expect($value)->toBe(terminal()->getCsi() . "0m§§§§§§§§§§RAD§§§§§§§" . PHP_EOL);
+});
+
+test('test media', function (): void {
+    $value = div()->media('md', 'bg-red')->media('lg', 'bg-green')->getClasses();
+    expect($value)->toBe(['global' => [''], 'md' => ['bg-red'], 'lg' => ['bg-green']]);
+});
+
+test('test makeClasses', function (): void {
+    $value = div()->makeClasses('md:bg-red lg:bg-green');
+    expect($value)->toBe(['md' => ['bg-red'], 'lg' => ['bg-green']]);
 });
 
 test('test font block', function (): void {
