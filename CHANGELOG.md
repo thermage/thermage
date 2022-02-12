@@ -1,5 +1,5 @@
 <a name="0.16.0"></a>
-# [0.16.0](https://github.com/thermage/thermage) (2022-02-xx)
+# [0.16.0](https://github.com/thermage/thermage) (2022-02-12)
 * Added new element `Spark`.
 * Added new helper `render`.
 * Added new helper `renderToFile`.
