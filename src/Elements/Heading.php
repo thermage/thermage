@@ -35,7 +35,7 @@ final class Heading extends Element
     /**
      * Set Heading size.
      *
-     * @param int $value Heading size 1 - 5.
+     * @param int $size Heading size 1 - 5.
      *
      * @return self Returns instance of the Heading class.
      *

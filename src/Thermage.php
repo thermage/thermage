@@ -90,10 +90,12 @@ class Thermage
      * Render elements to the output/string.
      *
      * @param string|Element $elements Elements.
+     * @param Callable|null  $callback Callback function.
+     * @param bool           $output   Output renderend elements.
      * 
      * @access public
      */
-    public static function render($elements, ?callable $callback = null, $output = true)
+    public static function render($elements, ?callable $callback = null, bool $output = true)
     {
         if ($elements instanceof Element) {
             $elements = $elements->renderToString();
@@ -112,6 +114,7 @@ class Thermage
      * Render elements to the string.
      *
      * @param string|Element $elements Elements.
+     * @param Callable|null  $callback Callback function.
      * 
      * @access public
      */
@@ -130,7 +133,8 @@ class Thermage
      * Render elements to the file.
      * 
      * @param string|Element $elements Elements.
-     * @param                $filePath File path.
+     * @param string         $filePath File path.
+     * @param Callable|null  $callback Callback function.
      *
      * @access public
      */

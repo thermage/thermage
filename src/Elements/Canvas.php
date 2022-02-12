@@ -116,7 +116,7 @@ final class Canvas extends Element
     /**
      * Set Canvas pixels.
      * 
-     * @param array $pixles Canvas pixels array with colors.
+     * @param array $pixels Canvas pixels array with colors.
      * 
      * @access public
      */
