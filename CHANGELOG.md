@@ -15,10 +15,10 @@
 
 BREAKING CHANGES
 
-- Use new `renderToString` element method instead of `render`.
-- Use new `render` or `renderToFile` helper to render element(s).
-- All public methods for Base Classes are not static anymore, use helpers to access them, or create instance of the Classes.
-- Method `getClasses` returns array of classes instead of string.
+* Use new `renderToString` element method instead of `render`.
+* Use new `render` or `renderToFile` helper to render element(s).
+* All public methods for Base Classes are not static anymore, use helpers to access them, or create instance of the Classes.
+* Method `getClasses` returns Collection of classes instead of string.
 
 
 <a name="0.15.2"></a>

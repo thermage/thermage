@@ -47,7 +47,7 @@ abstract class Element
      *
      * @access private
      */
-    private array $classes = [];
+    private Collection $classes;
 
     /**
      * Element styles.
@@ -90,10 +90,10 @@ abstract class Element
     /**
      * Create a new Element instance.
      *
-     * @param        $theme
-     * @param        $shortcodes
-     * @param string     $value   Element value.
-     * @param string     $classes Element classes.
+     * @param        $theme       Element theme.
+     * @param        $shortcodes  Element shortcodes.
+     * @param string $value       Element value.
+     * @param string $classes     Element classes.
      *
      * @access public
      */
@@ -108,21 +108,21 @@ abstract class Element
         self::$shortcodes        = $shortcodes ??= new Shortcodes(self::getTheme());
         $this->value             = $value;
         $this->classes           = $this->makeClasses($classes);
-        $this->registeredClasses = collection($this->getDefaultClasses())->merge($this->getElementClasses(), true);
+        $this->registeredClasses = $this->getDefaultClasses()->merge($this->getElementClasses(), true);
         $this->styles            = collection($styles);
         $this->clearfix          = false;
     }
 
     /**
-     * Make array of classes from string of classes.
+     * Make collection of classes from string of classes.
      * 
      * @param string $classes String of classes.
      * 
-     * @return array Returns array of classes.
+     * @return array Returns collection of classes.
      * 
      * @access public 
      */
-    public function makeClasses(string $classes): array
+    public function makeClasses(string $classes): Collection
     {
         $medias  = self::$theme->getVariables()->get('media');
         $classes = explode(' ', $classes);
@@ -137,7 +137,7 @@ abstract class Element
             $result['global'][] = $class;
         }
 
-        return $result;
+        return collection($result);
     }
 
     /**
@@ -203,7 +203,7 @@ abstract class Element
      *
      * @access public
      */
-    public function getClasses(): array
+    public function getClasses(): Collection
     {
         return $this->classes;
     }
@@ -311,13 +311,13 @@ abstract class Element
     /**
      * Get default element classes.
      *
-     * @return array Array of default classes.
+     * @return Collection Collection of default classes.
      *
      * @access public
      */
-    final public function getDefaultClasses(): array
+    final public function getDefaultClasses(): Collection
     {
-        return [
+        return collection([
             'bold',
             'italic',
             'bg',
@@ -354,19 +354,19 @@ abstract class Element
             'w',
             'h',
             'd',
-        ];
+        ]);
     }
 
     /**
      * Get element classes.
      *
-     * @return array Array of element classes.
+     * @return Collection Collection of element classes.
      *
      * @access public
      */
-    public function getElementClasses(): array
+    public function getElementClasses(): Collection
     {
-        return [];
+        return collection();
     }
 
     /**
@@ -939,7 +939,7 @@ abstract class Element
         }
 
         if (in_array($size, array_keys($medias))) {
-            $this->classes = array_replace_recursive($this->classes, $this->makeClasses($preparedClasses));
+            $this->classes = $this->getClasses()->replace($this->makeClasses($preparedClasses), true);
         }
 
         return $this;

@@ -196,13 +196,13 @@ final class Chart extends Element
     /**
      * Get element classes.
      *
-     * @return array Array of element classes.
+     * @return Collection Collection of element classes.
      *
      * @access public
      */
-    public function getElementClasses(): array
+    public function getElementClasses(): Collection
     {
-        return ['show-values', 'show-percents', 'inline', 'horizontal'];
+        return collection(['show-values', 'show-percents', 'inline', 'horizontal']);
     }
 
     /**

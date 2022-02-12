@@ -95,7 +95,7 @@ test('test value and getValue', function (): void {
 
 test('test classes and getClasses', function (): void {
     $value = div()->classes('RAD');
-    expect($value->getClasses())->toBe(['global' => ['RAD']]);
+    expect($value->getClasses()->toArray())->toBe(['global' => ['RAD']]);
 });
 
 test('test m', function (): void {
@@ -304,12 +304,12 @@ test('test magic pl', function (): void {
 });
 
 test('test media', function (): void {
-    $value = div()->media('md', 'bg-red')->media('lg', 'bg-green')->getClasses();
+    $value = div()->media('md', 'bg-red')->media('lg', 'bg-green')->getClasses()->toArray();
     expect($value)->toBe(['global' => [''], 'md' => ['bg-red'], 'lg' => ['bg-green']]);
 });
 
 test('test makeClasses', function (): void {
-    $value = div()->makeClasses('md:bg-red lg:bg-green');
+    $value = div()->makeClasses('md:bg-red lg:bg-green')->toArray();
     expect($value)->toBe(['md' => ['bg-red'], 'lg' => ['bg-green']]);
 });
 

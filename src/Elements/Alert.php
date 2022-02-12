@@ -32,13 +32,13 @@ final class Alert extends Element
     /**
      * Get Alert element classes.
      *
-     * @return array Array of element classes.
+     * @return Collection Collection of element classes.
      *
      * @access public
      */
-    public function getElementClasses(): array
+    public function getElementClasses(): Collection
     {
-        return ['danger', 'info', 'warning', 'success', 'success', 'primary', 'secondary'];
+        return collection(['danger', 'info', 'warning', 'success', 'success', 'primary', 'secondary']);
     }
 
     /**
