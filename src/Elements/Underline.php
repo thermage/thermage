@@ -25,12 +25,12 @@ final class Underline extends Element
      *
      * @access public
      */
-    public function render(): string
+    public function renderToString(): string
     {
         $this->underline();
 
         $this->d($this->getStyles()->get('display') ?? 'inline');
 
-        return parent::render();
+        return parent::renderToString();
     }
 }

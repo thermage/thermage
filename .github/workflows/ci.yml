@@ -1,7 +1,16 @@
-name: Tests
+name: CI
 on: ['push', 'pull_request']
 jobs:
-  build:
+  phpstan:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: PHPStan
+      uses: docker://oskarstark/phpstan-ga
+      with:
+        args: analyse src/ -c phpstan.neon
+  tests:
     name: PHP ${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency-version }}
     runs-on: ${{ matrix.os }}
     strategy:

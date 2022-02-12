@@ -14,9 +14,10 @@ declare(strict_types=1);
 
 namespace Thermage\Elements;
 
+use Glowy\Arrays\Arrays as Collection;
 use Thermage\Base\Element;
 use Thermage\Base\Terminal;
-
+use function arrays as collection;
 use function strings;
 use function Thermage\div;
 
@@ -34,7 +35,7 @@ final class Heading extends Element
     /**
      * Set Heading size.
      *
-     * @param int $value Heading size 1 - 5.
+     * @param int $size Heading size 1 - 5.
      *
      * @return self Returns instance of the Heading class.
      *
@@ -50,13 +51,13 @@ final class Heading extends Element
     /**
      * Get Heading element classes.
      *
-     * @return array Array of element classes.
+     * @return Collection Collection of element classes.
      *
      * @access public
      */
-    public function getElementClasses(): array
+    public function getElementClasses(): Collection
     {
-        return ['size'];
+        return collection(['size']);
     }
 
     /**
@@ -85,7 +86,7 @@ final class Heading extends Element
      *
      * @access public
      */
-    public function render(): string
+    public function renderToString(): string
     {
         $value = $this->getValue();
         $size  = $this->size;

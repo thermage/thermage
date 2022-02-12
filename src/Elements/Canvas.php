@@ -116,7 +116,7 @@ final class Canvas extends Element
     /**
      * Set Canvas pixels.
      * 
-     * @param array $pixles Canvas pixels array with colors.
+     * @param array $pixels Canvas pixels array with colors.
      * 
      * @access public
      */
@@ -154,7 +154,7 @@ final class Canvas extends Element
      *
      * @access public
      */
-    public function render(): string
+    public function renderToString(): string
     {
         $theme            = $this->getTheme();
         $elementVariables = $this->getElementVariables();

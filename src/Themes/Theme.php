@@ -179,6 +179,15 @@ class Theme implements ThemeInterface
                 'dark'      => '#212529', // gray900
             ],
 
+            // Media
+            'media' => [
+                'xs' => ['min' => 0, 'max' => 81],    // 577px
+                'sm' => ['min' => 82, 'max' => 90],   // 640px
+                'md' => ['min' => 91, 'max' => 108],  // 766px
+                'lg' => ['min' => 109, 'max' => 145], // 1025px
+                'xl' => ['min' => 146, 'max' => 181], // 1280px
+            ],
+
             // Borders.
             'borders' => [
                 'square' => [

@@ -3,7 +3,7 @@
     "description": "Thermage provides a fluent and incredibly powerful object-oriented interface for customizing CLI output text color, background, formatting, theming and more.",
     "license": "MIT",
     "keywords": [
-        "Thermage", "console", "cli", "console-colors", "console-tool", "terminal", "terminal-colors", "ansi-colors"
+        "thermage", "console", "cli", "console-colors", "console-tool", "terminal", "terminal-colors", "ansi-colors"
     ],
     "support": {
       "source": "https://github.com/thermage/thermage",
@@ -40,5 +40,11 @@
         "pestphp/pest": "^1.21.1",
         "phpstan/phpstan": "^1.2.0",
         "symfony/var-dumper": "^5.4.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
 }

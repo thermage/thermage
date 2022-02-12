@@ -14,6 +14,10 @@ declare(strict_types=1);
 
 namespace Thermage\Base;
 
+use Thermage\Base\Styles;
+use Thermage\Base\Color;
+use Thermage\Base\Cursor;
+use Thermage\Base\Screen;
 use function exec;
 use function fclose;
 use function fopen;
@@ -57,13 +61,158 @@ final class Terminal
     private static $stty;
 
     /**
+     * Control Sequence Escape.
+     *
+     * @access private
+     */
+    private static string $esc;
+
+    /**
+     * Control Sequence Introducer.
+     *
+     * @access private
+     */
+    private static string $csi;
+
+    /**
+     * Operating System Command.
+     *
+     * @access private
+     */
+    private static string $osc;
+
+    /**
+     * Styles.
+     *
+     * @return self Returns instance of The Styles class.
+     * 
+     * @access private
+     */
+    public function styles(): Styles
+    {
+        return new Styles();
+    }
+
+    /**
+     * Color.
+     *
+     * @return self Returns instance of The Color class.
+     * 
+     * @access private
+     */
+    public function color(): Color
+    {
+        return new Color();
+    }
+
+    /**
+     * Screen.
+     *
+     * @return self Returns instance of The Screen class.
+     * 
+     * @access private
+     */
+    public function screen(): Screen
+    {
+        return new Screen();
+    }
+
+    /**
+     * Cursor.
+     *
+     * @return self Returns instance of The Cursor class.
+     * 
+     * @access private
+     */
+    public function cursor(): Cursor
+    {
+        return new Cursor();
+    }
+
+    /**
+     * Get Control Sequence Introducer.
+     *
+     * @return string Control Sequence Introducer.
+     *
+     * @access public
+     */
+    public function getCsi(): string
+    {
+        return self::$csi ??= $this->getEsc() . '[';
+    }
+
+    /**
+     * Set Control Sequence Introducer.
+     *
+     * @param string $value Control Sequence Introducer.
+     *
+     * @access public
+     */
+    public function csi(string $value): self
+    {
+        self::$csi = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get Operating System Command.
+     *
+     * @return string Operating System Command.
+     *
+     * @access public
+     */
+    public function getOsc(): string
+    {
+        return self::$osc ??= $this->getEsc() . ']';
+    }
+
+    /**
+     * Set Operating System Command.
+     *
+     * @param string $value Operating System Command.
+     *
+     * @access public
+     */
+    public function osc(string $value): self
+    {
+        self::$osc = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get Control Sequence Escape.
+     *
+     * @return string Control Sequence Escape.
+     *
+     * @access public
+     */
+    public static function getEsc(): string
+    {
+        return self::$esc ??= "\033";
+    }
+
+    /**
+     * Set Control Sequence Escape.
+     *
+     * @param string $value Control Sequence Escape.
+     *
+     * @access public
+     */
+    public static function setEsc(string $value)
+    {
+        self::$esc = $value;
+    }
+
+    /**
      * Get terminal width.
      *
      * @return int Terminal width.
      *
      * @access public
      */
-    public static function getWidth(): int
+    public function getWidth(): int
     {
         $width = getenv('COLUMNS');
         if ($width !== false) {
@@ -71,7 +220,7 @@ final class Terminal
         }
 
         if (self::$width === null) {
-            self::initDimensions();
+            $this->initDimensions();
         }
 
         return self::$width ?: 80;
@@ -84,7 +233,7 @@ final class Terminal
      *
      * @access public
      */
-    public static function getHeight(): int
+    public function getHeight(): int
     {
         $height = getenv('LINES');
         if ($height !== false) {
@@ -92,7 +241,7 @@ final class Terminal
         }
 
         if (self::$height === null) {
-            self::initDimensions();
+            $this->initDimensions();
         }
 
         return self::$height ?: 50;
@@ -105,9 +254,11 @@ final class Terminal
      *
      * @access public
      */
-    public static function setWidth(int $value): void
+    public function width(int $value): self
     {
         putenv('COLUMNS=' . $value);
+
+        return $this;
     }
 
     /**
@@ -117,9 +268,11 @@ final class Terminal
      *
      * @access public
      */
-    public static function setHeight(int $value): void
+    public function height(int $value): self
     {
         putenv('ROWS=' . $value);
+
+        return $this;
     }
 
     /**
@@ -129,7 +282,7 @@ final class Terminal
      *
      * @access public
      */
-    public static function hasSttyAvailable(): bool
+    public function hasSttyAvailable(): bool
     {
         if (self::$stty !== null) {
             return self::$stty;
@@ -150,7 +303,7 @@ final class Terminal
      *
      * @access private
      */
-    private static function initDimensions(): void
+    private function initDimensions(): void
     {
         if (DIRECTORY_SEPARATOR === '\\') {
             if (preg_match('/^(\d+)x(\d+)(?: \((\d+)x(\d+)\))?$/', trim(getenv('ANSICON')), $matches)) {
@@ -158,17 +311,17 @@ final class Terminal
                 // or [w, h] from "wxh"
                 self::$width  = (int) $matches[1];
                 self::$height = isset($matches[4]) ? (int) $matches[4] : (int) $matches[2];
-            } elseif (! self::hasVt100Support() && self::hasSttyAvailable()) {
+            } elseif (! $this->hasVt100Support() && $this->hasSttyAvailable()) {
                 // only use stty on Windows if the terminal does not support vt100 (e.g. Windows 7 + git-bash)
                 // testing for stty in a Windows 10 vt100-enabled console will implicitly disable vt100 support on STDOUT
-                self::initDimensionsUsingStty();
-            } elseif (null !== $dimensions = self::getConsoleMode()) {
+                $this->initDimensionsUsingStty();
+            } elseif (null !== $dimensions = $this->getConsoleMode()) {
                 // extract [w, h] from "wxh"
                 self::$width  = (int) $dimensions[0];
                 self::$height = (int) $dimensions[1];
             }
         } else {
-            self::initDimensionsUsingStty();
+            $this->initDimensionsUsingStty();
         }
     }
 
@@ -179,7 +332,7 @@ final class Terminal
      *
      * @access private
      */
-    private static function hasVt100Support(): bool
+    private function hasVt100Support(): bool
     {
         return function_exists('sapi_windows_vt100_support') && sapi_windows_vt100_support(fopen('php://stdout', 'w'));
     }
@@ -189,9 +342,9 @@ final class Terminal
      *
      * @access private
      */
-    private static function initDimensionsUsingStty(): void
+    private function initDimensionsUsingStty(): void
     {
-        if (! $sttyString = self::getSttyColumns()) {
+        if (! $sttyString = $this->getSttyColumns()) {
             return;
         }
 
@@ -213,9 +366,9 @@ final class Terminal
      *
      * @access private
      */
-    private static function getConsoleMode(): ?array
+    private function getConsoleMode(): ?array
     {
-        $info = self::readFromProcess('mode CON');
+        $info = $this->readFromProcess('mode CON');
 
         if ($info === null || ! preg_match('/--------+\r?\n.+?(\d+)\r?\n.+?(\d+)\r?\n/', $info, $matches)) {
             return null;
@@ -229,9 +382,9 @@ final class Terminal
      *
      * @access private
      */
-    private static function getSttyColumns(): ?string
+    private function getSttyColumns(): ?string
     {
-        return self::readFromProcess('stty -a | grep columns');
+        return $this->readFromProcess('stty -a | grep columns');
     }
 
     /**
@@ -239,7 +392,7 @@ final class Terminal
      *
      * @access private
      */
-    private static function readFromProcess(string $command): ?string
+    private function readFromProcess(string $command): ?string
     {
         if (! function_exists('proc_open')) {
             return null;

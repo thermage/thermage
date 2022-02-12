@@ -7,6 +7,6 @@ use function Thermage\paragraph;
 
 test('test paragraph', function (): void {
     putenv('COLUMNS=20');
-    $value = paragraph('RAD')->render();
-    expect($value)->toBe("\e[0mRAD                 " . PHP_EOL);
+    $value = paragraph('RAD')->renderToString();
+    expect($value)->toBe("\e[0mRAD§§§§§§§§§§§§§§§§§" . PHP_EOL);
 });

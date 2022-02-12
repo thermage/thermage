@@ -16,12 +16,12 @@ namespace Thermage\Elements;
 
 use Glowy\Arrays\Arrays as Collection;
 use Thermage\Base\Element;
-use Thermage\Base\Terminal;
 
 use function arrays as collection;
 use function intval;
 use function strings;
 use function Thermage\div;
+use function Thermage\terminal;
 
 final class Hr extends Element
 {
@@ -49,7 +49,7 @@ final class Hr extends Element
      *
      * @access public
      */
-    public function render(): string
+    public function renderToString(): string
     {
         $this->processClasses();
 
@@ -69,19 +69,19 @@ final class Hr extends Element
        
         if ($hrTextAlign === 'left' && $valueLength > 0) {
             $hr = strings($borderCharacter)->repeat($hrValueMarginX) .
-                    strings(' ')->repeat($hrValuePaddingX) .
+                    strings(Element::getSpace())->repeat($hrValuePaddingX) .
                     $this->getValue() .
-                    strings(' ')->repeat($hrValuePaddingX) .
-                    strings($borderCharacter)->repeat(Terminal::getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX * 2);
+                    strings(Element::getSpace())->repeat($hrValuePaddingX) .
+                    strings($borderCharacter)->repeat(terminal()->getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX * 2);
 
             return (string) div($hr)->styles($this->getStyles()->delete('border')->toArray())->textOverflow('hidden');
         }
 
         if ($hrTextAlign === 'right' && $valueLength > 0) {
-            $hr = strings($borderCharacter)->repeat(Terminal::getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX * 2) .
-                    strings(' ')->repeat($hrValuePaddingX) .
+            $hr = strings($borderCharacter)->repeat(terminal()->getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX * 2) .
+                    strings(Element::getSpace())->repeat($hrValuePaddingX) .
                     $this->getValue() .
-                    strings(' ')->repeat($hrValuePaddingX) .
+                    strings(Element::getSpace())->repeat($hrValuePaddingX) .
                     strings($borderCharacter)->repeat($hrValueMarginX);
 
             return (string) div($hr)->styles($this->getStyles()->delete('border')->toArray())->textOverflow('hidden');
@@ -89,7 +89,7 @@ final class Hr extends Element
 
         if ($hrTextAlign === 'center' && $valueLength > 0) {
             $mod    = ($hrValuePaddingX + $hrValueMarginX) % 2 === 0 ? 0 : 1;
-            $spaces = Terminal::getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX + $mod;
+            $spaces = terminal()->getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX + $mod;
 
             $leftSpaces  = intval($spaces / 2);
             $rightSpaces = intval($spaces / 2);
@@ -99,14 +99,14 @@ final class Hr extends Element
             }
 
             $hr = strings($borderCharacter)->repeat($leftSpaces) .
-                    strings(' ')->repeat($hrValuePaddingX) .
+                    strings(Element::getSpace())->repeat($hrValuePaddingX) .
                     $this->getValue() .
-                    strings(' ')->repeat($hrValuePaddingX) .
+                    strings(Element::getSpace())->repeat($hrValuePaddingX) .
                     strings($borderCharacter)->repeat($rightSpaces);
 
             return (string) div($hr)->styles($this->getStyles()->delete('border')->toArray())->textOverflow('hidden');
         }
 
-        return (string) div(strings($borderCharacter)->repeat(Terminal::getWidth())->toString())->styles($this->getStyles()->delete('border')->toArray())->textOverflow('hidden');
+        return (string) div(strings($borderCharacter)->repeat(terminal()->getWidth())->toString())->styles($this->getStyles()->delete('border')->toArray())->textOverflow('hidden');
     }
 }

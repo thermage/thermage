@@ -31,7 +31,7 @@ use function round;
 use function sprintf;
 use function strings;
 use function substr;
-use function Thermage\getCsi;
+use function Thermage\terminal;
 
 final class Color
 {
@@ -78,12 +78,12 @@ final class Color
      *
      * @access public
      */
-    public static function applyForegroundColor(string $value, string $color): string
+    public function applyForegroundColor(string $value, string $color): string
     {
-        $setCodes   = implode(';', collection(self::parseColor($color))->toArray());
+        $setCodes   = implode(';', collection($this->parseColor($color))->toArray());
         $unsetCodes = implode(';', collection(['39'])->toArray());
 
-        return sprintf(getCsi() . '%sm', $setCodes) . $value . sprintf(getCsi() . '%sm', $unsetCodes);
+        return sprintf(terminal()->getCsi() . '%sm', $setCodes) . $value . sprintf(terminal()->getCsi() . '%sm', $unsetCodes);
     }
 
     /**
@@ -96,12 +96,12 @@ final class Color
      *
      * @access public
      */
-    public static function applyBackgroundColor(string $value, string $color): string
+    public function applyBackgroundColor(string $value, string $color): string
     {
-        $setCodes   = implode(';', collection(self::parseColor($color, true))->toArray());
+        $setCodes   = implode(';', collection($this->parseColor($color, true))->toArray());
         $unsetCodes = implode(';', collection(['49'])->toArray());
 
-        return sprintf(getCsi() . '%sm', $setCodes) . $value . sprintf(getCsi() . '%sm', $unsetCodes);
+        return sprintf(terminal()->getCsi() . '%sm', $setCodes) . $value . sprintf(terminal()->getCsi() . '%sm', $unsetCodes);
     }
 
     /**
@@ -111,7 +111,7 @@ final class Color
      *
      * @access public
      */
-    public static function getRandomHexColor(): string
+    public function getRandomHexColor(): string
     {
         return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
     }
@@ -123,13 +123,31 @@ final class Color
      *
      * @access public
      */
-    public static function getRandomRgbColor(): array
+    public function getRandomRgbColor(): array
     {
         return [
             'r' => mt_rand(0, 255),
             'g' => mt_rand(0, 255),
             'b' => mt_rand(0, 255),
         ];
+    }
+
+    /**
+     * Convert RGB Color to HEX.
+     *
+     * @param string $color Color.
+     *
+     * @return string Color.
+     *
+     * @access private
+     */
+    public function convertRgbColorToHex(string $color): string
+    {
+        if (preg_match('/(\d{1,3})\,?\s?(\d{1,3})\,?\s?(\d{1,3})/', $color, $matches)) {
+            $color = sprintf('%02x%02x%02x', $matches[1], $matches[2], $matches[3]);
+        }
+
+        return $color;
     }
 
     /**
@@ -142,14 +160,14 @@ final class Color
      *
      * @access public
      */
-    private static function parseColor(string $color, bool $background = false): string
+    private function parseColor(string $color, bool $background = false): string
     {
         if ($color === '') {
             return '';
         }
 
         if (strings($color)->startsWith('rgb(') && strings($color)->endsWith(')')) {
-            $color = '#' . self::convertRgbColorToHex($color);
+            $color = '#' . $this->convertRgbColorToHex($color);
         }
 
         if (strings($color)->startsWith('#')) {
@@ -163,7 +181,7 @@ final class Color
                 throw new InvalidArgumentException(sprintf('Invalid "%s" color.', $color));
             }
 
-            return ($background ? '4' : '3') . self::convertHexColorToAnsi(hexdec($color));
+            return ($background ? '4' : '3') . $this->convertHexColorToAnsi(hexdec($color));
         }
 
         if (isset(self::COLORS[$color])) {
@@ -178,24 +196,6 @@ final class Color
     }
 
     /**
-     * Convert RGB Color to HEX.
-     *
-     * @param string $color Color.
-     *
-     * @return string Color.
-     *
-     * @access private
-     */
-    public static function convertRgbColorToHex(string $color): string
-    {
-        if (preg_match('/(\d{1,3})\,?\s?(\d{1,3})\,?\s?(\d{1,3})/', $color, $matches)) {
-            $color = sprintf('%02x%02x%02x', $matches[1], $matches[2], $matches[3]);
-        }
-
-        return $color;
-    }
-
-    /**
      * Convert HEX Color to ANSI.
      *
      * @param int $color Color.
@@ -204,14 +204,14 @@ final class Color
      *
      * @access private
      */
-    private static function convertHexColorToAnsi(int $color): string
+    private function convertHexColorToAnsi(int $color): string
     {
         $r = ($color >> 16) & 255;
         $g = ($color >> 8) & 255;
         $b = $color & 255;
 
         if (getenv('COLORTERM') !== 'truecolor') {
-            return (string) self::degradeHexColorToAnsi($r, $g, $b);
+            return (string) $this->degradeHexColorToAnsi($r, $g, $b);
         }
 
         return sprintf('8;2;%d;%d;%d', $r, $g, $b);
@@ -228,9 +228,9 @@ final class Color
      *
      * @access private
      */
-    private static function degradeHexColorToAnsi(int $r, int $g, int $b): int
+    private function degradeHexColorToAnsi(int $r, int $g, int $b): int
     {
-        if (round(self::getSaturation($r, $g, $b) / 50) === 0) {
+        if (round($this->getSaturation($r, $g, $b) / 50) === 0) {
             return 0;
         }
 
@@ -248,7 +248,7 @@ final class Color
      *
      * @access private
      */
-    private static function getSaturation(int $r, int $g, int $b): int
+    private function getSaturation(int $r, int $g, int $b): int
     {
         $r /= 255;
         $g /= 255;

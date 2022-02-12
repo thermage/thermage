@@ -1,3 +1,26 @@
+<a name="0.16.0"></a>
+# [0.16.0](https://github.com/thermage/thermage) (2022-02-12)
+* Added new element `Spark`.
+* Added new helper `render`.
+* Added new helper `renderToFile`.
+* Added new helper `terminal`.
+* Added new shortcode `raw`.
+* Added new public static method `render` for Thermage.
+* Added new public static method `renderToFile` Thermage.
+* Added new system space symbol `§` and new public static methods `space`, `getSpace`, `replaceSystemChars` for Element.
+* Added`makeClasses` to create collection of classes from string of classes.
+* Added `media` to set classes for specific media.
+* Added ability to set specific classes for specific media queries.
+* Fixed chart element issue with cyrillic char in variable chartData.
+
+### BREAKING CHANGES
+
+* Use new `renderToString` element method instead of `render`.
+* Use new `render` or `renderToFile` helper to render element(s).
+* All public methods for Base Classes are not static anymore, use helpers to access them, or create instance of the Classes.
+* Method `getClasses` returns Collection of classes instead of string.
+
+
 <a name="0.15.2"></a>
 # [0.15.2](https://github.com/thermage/thermage) (2021-12-24)
 * Fixed dependencies.

@@ -9,6 +9,7 @@ use Glowy\Arrays\Arrays as Collection;
 use function arrays as collection;
 use function Thermage\setTheme;
 use function Thermage\hr;
+use function Thermage\terminal;
 
 beforeEach(function() {
     setTheme(new HrTestTheme());
@@ -16,43 +17,43 @@ beforeEach(function() {
 
 test('test hr', function (): void {
     putenv('COLUMNS=20');
-    $value = hr('Stay RAD!')->render();
-    $hr = "\e[0m───  Stay RAD!  ────" . PHP_EOL;
+    $value = hr('Stay RAD!')->renderToString();
+    $hr = terminal()->getCsi() . "0m───§§Stay RAD!§§────" . PHP_EOL;
     expect(strings($value)->toString())->toEqual($hr);
 });
 
 test('test hr without value', function (): void {
     putenv('COLUMNS=20');
-    $value = hr()->render();
-    $hr = "\e[0m────────────────────" . PHP_EOL;
+    $value = hr()->renderToString();
+    $hr = terminal()->getCsi() . "0m────────────────────" . PHP_EOL;
     expect(strings($value)->toString())->toEqual($hr);
 });
 
 test('test hr with text align left', function (): void {
     putenv('COLUMNS=20');
-    $value = hr('Stay RAD!')->textAlignLeft()->render();
-    $hr = "\e[0m───  Stay RAD!  ────" . PHP_EOL;
+    $value = hr('Stay RAD!')->textAlignLeft()->renderToString();
+    $hr = terminal()->getCsi() . "0m───§§Stay RAD!§§────" . PHP_EOL;
     expect(strings($value)->toString())->toEqual($hr);
 });
 
 test('test hr with text align right', function (): void {
     putenv('COLUMNS=20');
-    $value = hr('Stay RAD!')->textAlignRight()->render();
-    $hr =  "\e[0m────  Stay RAD!  ───" . PHP_EOL;
+    $value = hr('Stay RAD!')->textAlignRight()->renderToString();
+    $hr =  terminal()->getCsi() . "0m────§§Stay RAD!§§───" . PHP_EOL;
     expect(strings($value)->toString())->toEqual($hr);
 });
 
 test('test hr with text align center', function (): void {
     putenv('COLUMNS=20');
-    $value = hr('Stay RAD!')->textAlignCenter()->render();
-    $hr = "\e[0m────  Stay RAD!  ───" . PHP_EOL;
+    $value = hr('Stay RAD!')->textAlignCenter()->renderToString();
+    $hr = terminal()->getCsi() . "0m────§§Stay RAD!§§───" . PHP_EOL;
     expect(strings($value)->toString())->toEqual($hr);
 });
 
 test('test hr with double border', function (): void {
     putenv('COLUMNS=20');
-    $value = hr('Stay RAD!')->borderDouble()->render();
-    $hr = "\e[0m═══  Stay RAD!  ════" . PHP_EOL;
+    $value = hr('Stay RAD!')->borderDouble()->renderToString();
+    $hr = terminal()->getCsi() . "0m═══§§Stay RAD!§§════" . PHP_EOL;
     expect(strings($value)->toString())->toEqual($hr);
 });
 
