@@ -131,10 +131,11 @@ abstract class Element
         foreach($classes as $class) {           
             $media = explode(':', $class)[0];
             if (in_array($media, array_keys($medias))) {
-                $result[$media][] = strings($class)->replace($media . ':', '')->toString();
+                $className = strings($class)->replace($media . ':', '')->toString();
+                $result[$media][$className] = $className;
                 continue;
             }
-            $result['global'][] = $class;
+            $result['global'][$class] = $class;
         }
 
         return collection($result);
@@ -236,6 +237,22 @@ abstract class Element
     public function classes(string $classes = ''): self
     {
         $this->classes = $this->makeClasses($classes);
+
+        return $this;
+    }
+
+    /**
+     * Add element classes.
+     *
+     * @param string $classes Element classes.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function addClasses(string $classes = ''): self
+    {
+        $this->classes->replace($this->makeClasses($classes), true);
 
         return $this;
     }
