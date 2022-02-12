@@ -8,12 +8,12 @@
 * Added new public static method `render` for Thermage.
 * Added new public static method `renderToFile` Thermage.
 * Added new system space symbol `§` and new public static methods `space`, `getSpace`, `replaceSystemChars` for Element.
-* Added`makeClasses` to create array of classes from string of classes.
+* Added`makeClasses` to create collection of classes from string of classes.
 * Added `media` to set classes for specific media.
 * Added ability to set specific classes for specific media queries.
 * Fixed chart element issue with cyrillic char in variable chartData.
 
-BREAKING CHANGES
+### BREAKING CHANGES
 
 * Use new `renderToString` element method instead of `render`.
 * Use new `render` or `renderToFile` helper to render element(s).
