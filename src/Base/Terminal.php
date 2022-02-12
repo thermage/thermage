@@ -415,4 +415,73 @@ final class Terminal
 
         return $info;
     }
+
+    /**
+     * Set title.
+     * 
+     * @param string $title Title.
+     * 
+     * @access public
+     * 
+     * @return string
+     */
+    public function setTitle(string $title): string
+    {
+        return $this->isXterm() ? "\033]0;{$title}\007" : '';
+    }
+
+    /**
+     * Check if terminal has 256 color support.
+     * 
+     * @access public
+     * 
+     * @return bool
+     */
+    public function has256ColorSupport(): bool
+    {
+        return $this->checkEnvVariable('TERM', '256color') || $this->checkEnvVariable('DOCKER_TERM', '256color');
+    }
+
+    /**
+     * Check if terminal is xterm.
+     * 
+     * @access public
+     * 
+     * @return bool
+     */
+    public function isXterm(): bool
+    {
+        return $this->checkEnvVariable('TERM', 'xterm') || $this->checkEnvVariable('DOCKER_TERM', 'xterm');
+    }
+
+    /**
+     * Check if terminal has true color support.
+     * 
+     * @access public
+     * 
+     * @return bool
+     */
+    public function hasTrueColorSupport(): bool
+    {
+        return $this->checkEnvVariable('COLORTERM', 'truecolor');
+    }
+
+    /**
+     * Check environment variable.
+     * 
+     * @param string $varName  Name.
+     * @param string $checkFor Check for.
+     * 
+     * @access public
+     * 
+     * @return bool
+     */
+    public function checkEnvVariable(string $varName, string $checkFor): bool
+    {
+        if ($t = getenv($varName)) {
+            return false !== strpos($t, $checkFor);
+        }
+
+        return false;
+    }
 }
