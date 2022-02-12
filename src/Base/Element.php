@@ -141,6 +141,22 @@ abstract class Element
     }
 
     /**
+     * Call the given callback.
+     *
+     * @param callable $callback Callback function.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function pipe(callable $callback): self
+    {
+        $callback($this);
+
+        return $this;
+    }
+
+    /**
      * Get element value.
      *
      * @return Strings Returns element value.

@@ -98,6 +98,13 @@ test('test classes and getClasses', function (): void {
     expect($value->getClasses()->toArray())->toBe(['global' => ['RAD']]);
 });
 
+test('test pipe', function (): void {
+    $value = div()->pipe(function ($el) { 
+        $el->value('RAD');
+    });
+    expect($value->renderToString())->toBe(terminal()->getCsi() . '0mRAD§§§§§§§§§§§§§§§§§' . PHP_EOL);
+});
+
 test('test m', function (): void {
     putenv('COLUMNS=40');
 
