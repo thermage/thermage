@@ -110,6 +110,13 @@ test('test addClasses', function (): void {
     expect($value)->toBe(['global' => ['color-green' => 'color-green', 'bg-green' => 'bg-green']]);
 });
 
+test('test removeClasses', function (): void {
+    $value  = div('', 'bg-red color-green md:bg-red md:color-green md:bold')->getClasses()->toArray();
+    expect($value)->toBe(['global' => ['bg-red' => 'bg-red', 'color-green' => 'color-green'], 'md' => ['bg-red' => 'bg-red', 'color-green' => 'color-green', 'bold' => 'bold']]);
+    $value2 = div('', 'bg-red color-green md:bg-red md:color-green md:bold')->removeClasses('md:bold md:color-green')->getClasses()->toArray();
+    expect($value2)->toBe(['global' => ['bg-red' => 'bg-red', 'color-green' => 'color-green'], 'md' => ['bg-red' => 'bg-red']]);
+});
+
 test('test m', function (): void {
     putenv('COLUMNS=40');
 

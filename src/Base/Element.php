@@ -258,6 +258,22 @@ abstract class Element
     }
 
     /**
+     * Remove element classes.
+     *
+     * @param string $classes Element classes.
+     *
+     * @return self Returns instance of the Element class.
+     *
+     * @access public
+     */
+    public function removeClasses(string $classes = ''): self
+    {
+        $this->classes->delete($this->makeClasses($classes)->dot()->divide()[0]);
+       
+        return $this;
+    }
+
+    /**
      * Get Shortcodes instance.
      *
      * @return Shortcodes Shortcodes instance.
