@@ -427,7 +427,7 @@ final class Terminal
      */
     public function setTitle(string $title): string
     {
-        return $this->isXterm() ? "\033]0;{$title}\007" : '';
+        return $this->isXterm() ? $this->getOsc() . "0;{$title}\007" : '';
     }
 
     /**
