@@ -2051,7 +2051,7 @@ abstract class Element
      */
     public function render($output = true)
     {
-        $this->value = $this->renderToString($this->value);
+        $this->value = $this->renderToString();
 
         if ($output) {
             echo self::replaceSystemChars($this->value);
