@@ -1,3 +1,9 @@
+<a name="0.17.0"></a>
+# [0.17.0](https://github.com/thermage/thermage) (2022-02-xx)
+* Added new `pipe` method.
+* Added new `addClasses` method.
+* Added new `removeClasses` method.
+
 <a name="0.16.0"></a>
 # [0.16.0](https://github.com/thermage/thermage) (2022-02-12)
 * Added new element `Spark`.
