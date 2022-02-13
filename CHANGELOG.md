@@ -1,8 +1,13 @@
 <a name="0.17.0"></a>
-# [0.17.0](https://github.com/thermage/thermage) (2022-02-xx)
-* Added new `pipe` method.
-* Added new `addClasses` method.
-* Added new `removeClasses` method.
+# [0.17.0](https://github.com/thermage/thermage) (2022-02-13)
+* Added new public method `pipe` for Element.
+* Added new public method `addClasses` for Element.
+* Added new public method `removeClasses` for Element.
+* Added new public method `setTitle` for Terminal.
+* Added new public method `has256ColorSupport` for Terminal.
+* Added new public method `isXterm` for Terminal.
+* Added new public method `hasTrueColorSupport` for Terminal.
+* Added new public method `checkEnvVariable` for Terminal.
 
 <a name="0.16.0"></a>
 # [0.16.0](https://github.com/thermage/thermage) (2022-02-12)
