@@ -95,7 +95,26 @@ test('test value and getValue', function (): void {
 
 test('test classes and getClasses', function (): void {
     $value = div()->classes('RAD');
-    expect($value->getClasses()->toArray())->toBe(['global' => ['RAD']]);
+    expect($value->getClasses()->toArray())->toBe(['global' => ['RAD' => 'RAD']]);
+});
+
+test('test pipe', function (): void {
+    $value = div()->pipe(function ($el) { 
+        $el->value('RAD');
+    });
+    expect($value->renderToString())->toBe(terminal()->getCsi() . '0mRAD§§§§§§§§§§§§§§§§§' . PHP_EOL);
+});
+
+test('test addClasses', function (): void {
+    $value = div()->classes('color-green')->addClasses('bg-green')->getClasses()->toArray();
+    expect($value)->toBe(['global' => ['color-green' => 'color-green', 'bg-green' => 'bg-green']]);
+});
+
+test('test removeClasses', function (): void {
+    $value  = div('', 'bg-red color-green md:bg-red md:color-green md:bold')->getClasses()->toArray();
+    expect($value)->toBe(['global' => ['bg-red' => 'bg-red', 'color-green' => 'color-green'], 'md' => ['bg-red' => 'bg-red', 'color-green' => 'color-green', 'bold' => 'bold']]);
+    $value2 = div('', 'bg-red color-green md:bg-red md:color-green md:bold')->removeClasses('md:bold md:color-green')->getClasses()->toArray();
+    expect($value2)->toBe(['global' => ['bg-red' => 'bg-red', 'color-green' => 'color-green'], 'md' => ['bg-red' => 'bg-red']]);
 });
 
 test('test m', function (): void {
@@ -305,12 +324,12 @@ test('test magic pl', function (): void {
 
 test('test media', function (): void {
     $value = div()->media('md', 'bg-red')->media('lg', 'bg-green')->getClasses()->toArray();
-    expect($value)->toBe(['global' => [''], 'md' => ['bg-red'], 'lg' => ['bg-green']]);
+    expect($value)->toBe(['global' => ['' => ''], 'md' => ['bg-red' => 'bg-red'], 'lg' => ['bg-green' => 'bg-green']]);
 });
 
 test('test makeClasses', function (): void {
     $value = div()->makeClasses('md:bg-red lg:bg-green')->toArray();
-    expect($value)->toBe(['md' => ['bg-red'], 'lg' => ['bg-green']]);
+    expect($value)->toBe(['md' => ['bg-red' => 'bg-red'], 'lg' => ['bg-green' => 'bg-green']]);
 });
 
 test('test font block', function (): void {
