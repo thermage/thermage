@@ -1,3 +1,11 @@
+<a name="0.18.0"></a>
+# [0.18.0](https://github.com/thermage/thermage) (2022-02-15)
+* Added new element `Image`.
+* Added new public method `isTerm` for Terminal.
+* Added new public method `isAppleTerminal` for Terminal.
+* Added new public method `getVersion` for Terminal.
+* Added new public method `getName` for Terminal.
+
 <a name="0.17.0"></a>
 # [0.17.0](https://github.com/thermage/thermage) (2022-02-13)
 * Added new public method `pipe` for Element.
@@ -30,7 +38,6 @@
 * Use new `render` or `renderToFile` helper to render element(s).
 * All public methods for Base Classes are not static anymore, use helpers to access them, or create instance of the Classes.
 * Method `getClasses` returns Collection of classes instead of string.
-
 
 <a name="0.15.2"></a>
 # [0.15.2](https://github.com/thermage/thermage) (2021-12-24)
@@ -78,8 +85,8 @@
 
 ### BREAKING CHANGES
 
-- public method `b` renamed to `border` and magic class `b` renamed to `b`
-- public method `bColor` renamed to `borderColor` and magic class `b-color` renamed to `border-color`
+* public method `b` renamed to `border` and magic class `b` renamed to `b`
+* public method `bColor` renamed to `borderColor` and magic class `b-color` renamed to `border-color`
 
 <a name="0.13.0"></a>
 # [0.13.0](https://github.com/thermage/thermage) (2021-11-26)
