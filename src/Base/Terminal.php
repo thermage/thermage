@@ -431,6 +431,54 @@ final class Terminal
     }
 
     /**
+     * Get program name.
+     * 
+     * @access public
+     * 
+     * @return string
+     */
+    public function getName(): string
+    {
+        return getenv('TERM_PROGRAM') !== false ? getenv('TERM_PROGRAM') : '';
+    }
+
+    /**
+     * Get program version.
+     * 
+     * @access public
+     * 
+     * @return string
+     */
+    public function getVersion(): string
+    {
+        return getenv('TERM_PROGRAM_VERSION') !== false ? getenv('TERM_PROGRAM_VERSION') : '';
+    }
+
+    /**
+     * Determines if terminal is iTerm.app
+     *
+     * @access public
+     * 
+     * @return bool Returns TRUE if terminal is iTerm.app. FALSE otherwise.
+     */
+    public function isIterm(): bool
+    {
+        return $this->getName() === 'iTerm.app';
+    }
+
+    /**
+     * Determines if terminal is Apple_Terminal
+     *
+     * @access public
+     * 
+     * @return bool Returns TRUE if terminal is Apple_Terminal. FALSE otherwise.
+     */
+    public function isAppleTerminal(): bool
+    {
+        return $this->getName() === 'Apple_Terminal';
+    }
+
+    /**
      * Check if terminal has 256 color support.
      * 
      * @access public
