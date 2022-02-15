@@ -47,7 +47,8 @@ final class Image extends Element
     {
         $this->d($this->getStyles()->get('display') ?? 'block');
 
-        $src = $this->getStyles()['src'];
+        $src         = $this->getStyles()['src'];
+        $fileContent = '';
 
         if (! strings($src)->isBase64()) {
             if (! file_exists($src)) {
