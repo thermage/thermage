@@ -32,6 +32,7 @@ use Thermage\Elements\Spinner;
 use Thermage\Elements\Strikethrough;
 use Thermage\Elements\Underline;
 use Thermage\Elements\Spark;
+use Thermage\Elements\Image;
 
 function setShortcodes($shortcodes): void
 {
@@ -75,6 +76,17 @@ function renderToString($elements, ?callable $callback = null): string
 function renderToFile($elements, string $file)
 {
     Thermage::renderToFile($elements, $file);
+}
+
+function image(string $value = '', string $classes = '', array $styles = []): Image
+{
+    return new Image(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
 }
 
 function div(string $value = '', string $classes = '', array $styles = []): Div
