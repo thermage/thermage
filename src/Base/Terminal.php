@@ -431,7 +431,7 @@ final class Terminal
     }
 
     /**
-     * Get programm name.
+     * Get program name.
      * 
      * @access public
      * 
@@ -443,7 +443,7 @@ final class Terminal
     }
 
     /**
-     * Get programm version.
+     * Get program version.
      * 
      * @access public
      * 
