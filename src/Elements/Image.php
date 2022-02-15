@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Thermage\Elements;
 
 use Thermage\Base\Element;
+use Exception;
 use function Thermage\terminal;
 
 final class Image extends Element
