@@ -1,9 +1,9 @@
 <?php 
 echo <<<EOT
-           $thoughts     (      )
-            $thoughts    ~(^^^^)~
-             $thoughts    ) $eyes \\~_          |\\
-              $thoughts  /     | \\        \\~ /
+           {$thoughts}     (      )
+            {$thoughts}    ~(^^^^)~
+             {$thoughts}    ) {$eyes} \\~_          |\\
+              {$thoughts}  /     | \\        \\~ /
                 ( 0  0  ) \\        | |
                  ---___/~  \\       | |
                   /'__/ |   ~-_____/ |

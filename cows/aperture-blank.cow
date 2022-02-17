@@ -2,8 +2,8 @@
 # Aperture Science logo, without the text inside
 # via http://pastebin.com/1AZwKrKp 
 echo <<<EOT
-    $thoughts
-     $thoughts
+    {$thoughts}
+     {$thoughts}
               .,-:;//;:=,
           . :H\@\@\@MM\@M#H/.,+%;,
        ,/X+ +M\@\@M\@MM%=,-%HMMM\@X/,

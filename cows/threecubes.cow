@@ -5,8 +5,8 @@
 #   also available at https://gist.github.com/th3m4ri0/6e3f631866da31d05030
 # 
 echo <<<EOT
-  $thoughts
-   $thoughts
+  {$thoughts}
+   {$thoughts}
         ____________
        /\\  ________ \\
       /  \\ \\______/\\ \\

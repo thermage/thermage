@@ -4,10 +4,10 @@
 #	Transformed into cowfile by Myroslav Golub
 #
 echo <<<EOT
-       $thoughts  
-        $thoughts
-         $thoughts
-          $thoughts
+       {$thoughts}  
+        {$thoughts}
+         {$thoughts}
+          {$thoughts}
           |\\___/|
          =) {$eyeLeft} {$eyeRight} (=            
           \\  ^  /

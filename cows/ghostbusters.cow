@@ -3,9 +3,9 @@
 ## Ghostbusters!
 ##
 echo <<<EOT
-          $thoughts
-           $thoughts
-            $thoughts          __---__
+          {$thoughts}
+           {$thoughts}
+            {$thoughts}          __---__
                     _-       /--______
                __--( /     \\ )XXXXXXXXXXX\\v.
              .-XXX(   {$eyeLeft}   {$eyeRight}  )XXXXXXXXXXXXXXX-

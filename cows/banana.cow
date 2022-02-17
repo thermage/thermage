@@ -2,8 +2,8 @@
 # Banana 
 #  http://www.ascii-art.de/ascii/ab/banana.txt
 echo <<<EOT
-       $thoughts
-        $thoughts
+       {$thoughts}
+        {$thoughts}
 
      ".           ,#  
      \\ `-._____,-'=/

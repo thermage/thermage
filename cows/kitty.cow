@@ -3,8 +3,8 @@
 ## A kitten of sorts, I think
 ##
 echo <<<EOT
-     $thoughts
-      $thoughts
+     {$thoughts}
+      {$thoughts}
        ("`-'  '-/") .___..--' ' "`-._
          ` {$eyeLeft}_ {$eyeRight}  )    `-.   (      ) .`-.__. `)
          (_Y_.) ' ._   )   `._` ;  `` -. .-'

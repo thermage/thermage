@@ -4,9 +4,9 @@
 #
 
 echo <<<EOT
-  $thoughts
-   $thoughts
-    $thoughts            ________
+  {$thoughts}
+   {$thoughts}
+    {$thoughts}            ________
              .:          :｀丶
            /.:   ｛ :｜､  .: .:＼
           /   |.: /\.:|ﾉ＼.} .: :.

@@ -3,11 +3,11 @@
 ## Hello Kitty
 ##
 echo <<<EOT
-  $thoughts
-   $thoughts
+  {$thoughts}
+   {$thoughts}
       /\\_)o<
      |      \\
      | {$eyeLeft} . {$eyeRight} |
       \\_____/
-         $tongue
+         {$tongue}
 EOT;

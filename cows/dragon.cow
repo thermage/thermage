@@ -3,8 +3,8 @@
 ## The Whitespace Dragon
 ##
 echo <<<EOT
-      $thoughts                    / \\  //\\
-       $thoughts    |\\___/|      /   \\//  \\\\
+      {$thoughts}                    / \\  //\\
+       {$thoughts}    |\\___/|      /   \\//  \\\\
             /{$eyeLeft}  {$eyeRight}  \\__  /    //  | \\ \\    
            /     /  \\/_/    //   |  \\  \\  
            \@_^_\@'/   \\/_   //    |   \\   \\ 

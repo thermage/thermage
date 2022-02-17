@@ -4,9 +4,9 @@
 ## {appel,kube,rowe}@csua.berkeley.edu
 ##
 echo <<<EOT
-          $thoughts      (__)      
-           $thoughts     /$eyes|  
-            $thoughts   (_"_)*+++++++++*
+          {$thoughts}      (__)      
+           {$thoughts}     /{$eyes}|  
+            {$thoughts}   (_"_)*+++++++++*
                    //I#\\\\\\\\\\\\\\\\I\\
                    I[I|I|||||I I `
                    I`I'///'' I I

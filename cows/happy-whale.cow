@@ -3,9 +3,9 @@
 #
 # modified from http://www.chris.com/ascii/index.php?art=animals/other%20(water)
 echo <<<EOT
-   $thoughts
-    $thoughts
-     $thoughts
+   {$thoughts}
+    {$thoughts}
+     {$thoughts}
         __ \ / __
        /  \\ | /  \\
            \\|/

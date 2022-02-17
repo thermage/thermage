@@ -4,13 +4,13 @@
 #	Transformed into cowfile by Myroslav Golub
 #
 echo <<<EOT
-       $thoughts     *     ,MMM8&&&.            *
+       {$thoughts}     *     ,MMM8&&&.            *
                   MMMM88&&&&&    .
-        $thoughts        MMMM88&&&&&&&
+        {$thoughts}        MMMM88&&&&&&&
      *           MMM88&&&&&&&&
-         $thoughts       MMM88&&&&&&&&
+         {$thoughts}       MMM88&&&&&&&&
                  'MMM88&&&&&&'
-          $thoughts        'MMM8&&&'      *
+          {$thoughts}        'MMM8&&&'      *
           |\\___/|
          =) {$eyeLeft} {$eyeRight} (=            .              '
           \\  ^  /

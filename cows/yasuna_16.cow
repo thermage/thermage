@@ -1,7 +1,7 @@
 <?php 
 echo <<<EOT
-   $thoughts
-    $thoughts
+   {$thoughts}
+    {$thoughts}
          ..: ￣￣￣￣: :.
        ／::  /｜.:/ |.: .:＼
       ,  /｜/  |./  |.ﾊ.: .:ヽ

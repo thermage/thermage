@@ -2,8 +2,8 @@
 # Personality Sphere from Portal/Portal 2
 # via http://pastebin.com/1AZwKrKp
 echo <<<EOT
-   $thoughts
-    $thoughts
+   {$thoughts}
+    {$thoughts}
       .-+\$H###MM\@MMMMM##\@\$+-,. ....
 -\@\$+%\$+%HX+--..  .  . .,:X\$/+/++\$#:
 -#MXH\$=                      \$HXH#:

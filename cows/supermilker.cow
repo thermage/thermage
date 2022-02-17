@@ -3,9 +3,9 @@
 ## A cow being milked, probably from Lars Smith (lars@csua.berkeley.edu)
 ##
 echo <<<EOT
-  $thoughts   ^__^
-   $thoughts  ($eyes)\\_______        ________
+  {$thoughts}   ^__^
+   {$thoughts}  ({$eyes})\\_______        ________
       (__)\\       )\\/\\    |Super |
-       $tongue ||----W |       |Milker|
+       {$tongue} ||----W |       |Milker|
           ||    UDDDDDDDDD|______|
 EOT;

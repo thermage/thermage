@@ -1,8 +1,8 @@
 <?php 
 # World
 echo <<<EOT
-   $thoughts
-    $thoughts
+   {$thoughts}
+    {$thoughts}
           _,--',   _._.--._____
    .--.--';_'-.', ";_      _.,-'
   .'--'.  _.'    {`'-;_ .-.>.'

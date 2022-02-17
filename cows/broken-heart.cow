@@ -3,8 +3,8 @@
 # via http://pastebin.com/1AZwKrKp
 # TODO: replace "thoughts" with "feelings"
 echo <<<EOT
-     $thoughts
-      $thoughts
+     {$thoughts}
+      {$thoughts}
                           .,---.
                         ,/XM#MMMX;,
                       -%##########M%,

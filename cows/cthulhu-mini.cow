@@ -2,8 +2,8 @@
 # Cthulhu
 #
 echo <<<EOT
-  $thoughts
-   $thoughts
+  {$thoughts}
+   {$thoughts}
 
       ^(;,;)^
 

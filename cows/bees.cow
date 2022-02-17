@@ -2,8 +2,8 @@
 # Bees/beehive
 #  http://www.asciiworld.com/-Bees-.html
 echo <<<EOT
-          $thoughts
-           $thoughts
+          {$thoughts}
+           {$thoughts}
 
 
       ^^      .-=-=-=-.  ^^

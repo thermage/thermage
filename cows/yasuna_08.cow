@@ -4,9 +4,9 @@
 #
 
 $the_cow << EOT;;
-  $thoughts
-   $thoughts
-    $thoughts
+  {$thoughts}
+   {$thoughts}
+    {$thoughts}
           ,.:──‐-:.,
         ／:.           ＼
       ／:. :. :. }:. :. :.ヽ

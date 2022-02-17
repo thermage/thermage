@@ -3,8 +3,8 @@
 #
 # from http://www.heartnsoul.com/ascii_art/mona_lisa_ascii.htm
 echo <<<EOT
-          $thoughts
-           $thoughts
+          {$thoughts}
+           {$thoughts}
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

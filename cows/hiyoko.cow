@@ -3,9 +3,9 @@
 ## ひよ子
 ##
 echo <<<EOT
-  $thoughts
-   $thoughts
-    $thoughts
+  {$thoughts}
+   {$thoughts}
+    {$thoughts}
       ,､ ,._
       ﾉ ・  ヽ
      / :::   i  

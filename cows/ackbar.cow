@@ -3,8 +3,8 @@
 #
 # based on 'ack --bar' from http://beyondgrep.com/
 echo <<<EOT
-         $thoughts
-          $thoughts
+         {$thoughts}
+          {$thoughts}
                       ?IIIIIII7II?????+
                    ~III777II777I?+==++==+:
                   ???I7I???I7II++=====++===

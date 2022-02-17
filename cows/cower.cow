@@ -3,12 +3,12 @@
 ## A cowering cow
 ##
 echo <<<EOT
-     $thoughts
-      $thoughts
+     {$thoughts}
+      {$thoughts}
         ,__, |    | 
-        ($eyes)\\|    |___
+        ({$eyes})\\|    |___
         (__)\\|    |   )\\_
-         $tongue  |    |_w |  \\
+         {$tongue}  |    |_w |  \\
              |    |  ||   *
 
              Cower....

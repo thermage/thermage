@@ -1,8 +1,8 @@
 <?php 
 # Elephant
 echo <<<EOT
-  $thoughts
-   $thoughts                                 
+  {$thoughts}
+   {$thoughts}                                 
       /  \\~~~/  \\         
      (    ..     )----,      
       \\__     __/      \\     

@@ -3,8 +3,8 @@
 ## Doge
 ##
 echo <<<EOT
-   $thoughts
-    $thoughts
+   {$thoughts}
+    {$thoughts}
 
            _                _
           / /.           _-//

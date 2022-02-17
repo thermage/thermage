@@ -3,12 +3,12 @@
 ## The non-flaming sheep.
 ##
 $the_cow = <<EOT;
-  $thoughts
-   $thoughts
+  {$thoughts}
+   {$thoughts}
        __     
       U${eyes}U\\.'\@\@\@\@\@\@`.
       \\__/(\@\@\@\@\@\@\@\@\@\@)
-        $tongue (\@\@\@\@\@\@\@\@)
+        {$tongue} (\@\@\@\@\@\@\@\@)
            `YY~~~~YY'
             ||    ||
 EOT;

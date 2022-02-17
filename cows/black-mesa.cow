@@ -2,8 +2,8 @@
 # Black Mesa logo
 # via http://pastebin.com/1AZwKrKp
 echo <<<EOT
-    $thoughts
-     $thoughts
+    {$thoughts}
+     {$thoughts}
            .-;+\$XHHHHHHX\$+;-.
         ,;X\@\@X%/;=----=:/%X\@\@X/,
       =\$\@\@%=.              .=+H\@X:

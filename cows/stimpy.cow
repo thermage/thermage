@@ -3,8 +3,8 @@
 ## Stimpy!
 ##
 echo <<<EOT
-  $thoughts     .    _  .    
-   $thoughts    |\\_|/__/|    
+  {$thoughts}     .    _  .    
+   {$thoughts}    |\\_|/__/|    
        / / \\/ \\  \\  
       /__|{$eyeLeft}||{$eyeRight}|__ \\ 
      |/_ \\_/\\_/ _\\ |  

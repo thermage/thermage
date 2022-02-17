@@ -3,8 +3,8 @@
 ## A lovers' empbrace
 ##
 echo <<<EOT
-     $thoughts
-      $thoughts
+     {$thoughts}
+      {$thoughts}
              ,;;;;;;;,
             ;;;;;;;;;;;,
            ;;;;;'_____;'

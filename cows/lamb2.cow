@@ -1,13 +1,13 @@
 <?php 
 echo <<<EOT
- $thoughts
-  $thoughts
+ {$thoughts}
+  {$thoughts}
   ,-''''-.
  (.  ,.   L        ___...__
  /{$eyeLeft}} ,-`  `'-==''``        ''._
 //{                           '`.
 \\_,X ,                         : )
- $tongue 7                          ;`
+ {$tongue} 7                          ;`
     :                  ,       /
      \\_,                \\     ;
        Y   L_    __..--':`.    L

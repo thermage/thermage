@@ -1,10 +1,10 @@
 <?php 
 echo <<<EOT
-                       $thoughts              ___
-                        $thoughts            ///\\\\\\/----
-                         $thoughts           ||//\\///\\\\\\\\
-                          $thoughts         /`-.__\\\\\\\\///|
-                           $thoughts       /_  _   `--._|
+                       {$thoughts}              ___
+                        {$thoughts}            ///\\\\\\/----
+                         {$thoughts}           ||//\\///\\\\\\\\
+                          {$thoughts}         /`-.__\\\\\\\\///|
+                           {$thoughts}       /_  _   `--._|
                                ___-`---.___     |
                           ----------       `-.__|
                        ----------( \\.-.{$eyeLeft} {$eyeRight};_  \\\\\\\\\\\\

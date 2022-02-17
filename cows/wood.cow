@@ -5,8 +5,8 @@
 #
 
 echo <<<EOT
-  $thoughts
-   $thoughts   --木--
+  {$thoughts}
+   {$thoughts}   --木--
        ／｜＼
      ／  ｜  ＼
   --木-- ｜ --木--

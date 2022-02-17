@@ -1,8 +1,8 @@
 <?php 
 # Box
 echo <<<EOT
-     $thoughts
-      $thoughts
+     {$thoughts}
+      {$thoughts}
          __________________
         /\\  ______________ \\
        /::\\ \\ZZZZZZZZZZZZ/\\ \\

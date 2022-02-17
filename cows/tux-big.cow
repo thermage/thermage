@@ -2,9 +2,9 @@
 # Tux the Penguin (large version)
 #  seen when connected to irc.uslug.org
 echo <<<EOT
-       $thoughts
-        $thoughts          .88888888:.
-         $thoughts        88888888.88888.
+       {$thoughts}
+        {$thoughts}          .88888888:.
+         {$thoughts}        88888888.88888.
                .8888888888888888.
                888888888888888888
                88' _`88'_  `88888

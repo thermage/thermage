@@ -3,8 +3,8 @@
 #
 # from http://www.ascii-art.de/ascii/s/starwars.txt
 echo <<<EOT
-   $thoughts
-    $thoughts
+   {$thoughts}
+    {$thoughts}
          _____
        .\'/L|__`.
       / =[_]O|` \\

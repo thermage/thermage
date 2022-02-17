@@ -3,9 +3,9 @@
 ## acsii picture from http://www.ascii-art.de/ascii/s/snoopy.txt
 ##
 echo <<<EOT
-       $thoughts
-        $thoughts       __---__                         ______
-         $thoughts     /    ___\\_             o  O  O _(      )__
+       {$thoughts}
+        {$thoughts}       __---__                         ______
+         {$thoughts}     /    ___\\_             o  O  O _(      )__
               /====(_____\\___---_  o        _(           )_
              |                    \\        (_  AI-YA!!!!   )
              |                     |@        (_  Shot      _)

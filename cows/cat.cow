@@ -7,8 +7,8 @@
 #  cat cat_flipped | sed 's/\\/\\\\/g' > cat.cow
 #
 echo <<<EOT
-  $thoughts
-   $thoughts                       _
+  {$thoughts}
+   {$thoughts}                       _
                           / )      
                          / /       
       //|                \\ \\       

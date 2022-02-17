@@ -2,8 +2,8 @@
 # octopus
 #   http://www.ascii-art.de/ascii/mno/octopus.txt
 echo <<<EOT
-        $thoughts               ___
-         $thoughts           .-'   `'.
+        {$thoughts}               ___
+         {$thoughts}           .-'   `'.
                     /         \\
                     |         ;
                     |         |           ___.--,

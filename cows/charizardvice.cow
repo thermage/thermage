@@ -1,11 +1,11 @@
 <?php 
 $the_cow = <<"EOT;";
-                        $thoughts
-                         $thoughts     ___.
-                          $thoughts    L._, \\
-               _.,         $thoughts   <  <\\                _
-             ,' '           $thoughts  `.   | \\            ( `
-          ../, `.            $thoughts  |    .\\`.           \\ \\_
+                        {$thoughts}
+                         {$thoughts}     ___.
+                          {$thoughts}    L._, \\
+               _.,         {$thoughts}   <  <\\                _
+             ,' '           {$thoughts}  `.   | \\            ( `
+          ../, `.            {$thoughts}  |    .\\`.           \\ \\_
          ,' ,..  .           _.,'    ||\\l            )  '".
         , ,'   \\           ,'.-.`-._,'  |           .  _._`.
       ,' /      \\ \\        `' ' `--/   | \\          / /   ..\\

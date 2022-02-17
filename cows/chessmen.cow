@@ -6,10 +6,10 @@
 # used https://github.com/paulkaefer/connectFiles.py
 #   to "glue" the pieces together into one file
 echo <<<EOT
-    $thoughts
-     $thoughts 
-      $thoughts
-       $thoughts
+    {$thoughts}
+     {$thoughts} 
+      {$thoughts}
+       {$thoughts}
                                            .::.                      
                                            _::_                      
                                  ()      _/____\\_                    

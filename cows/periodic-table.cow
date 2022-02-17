@@ -1,7 +1,7 @@
 <?php 
 echo <<<EOT
-$thoughts
- $thoughts
+{$thoughts}
+ {$thoughts}
    1A   2A                                         3A  4A  5A  6A  7A  8A
   -----                                                               -----
 1 | H |                                                               |He |

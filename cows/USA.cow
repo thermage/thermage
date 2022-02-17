@@ -3,8 +3,8 @@
 #
 # from http://chris.com/ascii/index.php?art=objects/flags
 echo <<<EOT
-   $thoughts
-    $thoughts
+   {$thoughts}
+    {$thoughts}
 
   |* * * * * * * * * * OOOOOOOOOOOOOOOOOOOOOOOOO|
   | * * * * * * * * *  :::::::::::::::::::::::::|

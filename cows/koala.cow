@@ -3,8 +3,8 @@
 ## From the canonical koala collection
 ##
 echo <<<EOT
-  $thoughts
-   $thoughts
+  {$thoughts}
+   {$thoughts}
        ___  
      {~{$eyeLeft}_{$eyeRight}~}
       ( Y )

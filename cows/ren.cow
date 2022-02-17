@@ -3,8 +3,8 @@
 ## Ren 
 ##
 echo <<<EOT
-   $thoughts
-    $thoughts
+   {$thoughts}
+    {$thoughts}
     ____  
    /# /_\\_
   |  |/{$eyeLeft}\\{$eyeRight}\\

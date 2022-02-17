@@ -4,9 +4,9 @@
 #   a pterodactyl with its mouth open
 #
 echo <<<EOT
-    $thoughts
-     $thoughts
-      $thoughts
+    {$thoughts}
+     {$thoughts}
+      {$thoughts}
                                                                                  -/- 
                                                                               -/ --/    
                                                                             /- -  /     

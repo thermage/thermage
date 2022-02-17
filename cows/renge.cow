@@ -3,9 +3,9 @@
 ## Nyanpasu~
 ##
 echo <<<EOT
-     $thoughts               _
-      $thoughts            ´   ＼   __
-       $thoughts        ／ ／⌒\\ | ／   ＼
+     {$thoughts}               _
+      {$thoughts}            ´   ＼   __
+       {$thoughts}        ／ ／⌒\\ | ／   ＼
    f|{r、       | /     '|/ ／⌒＼＼
    ||J |        \\/＞--＜\\/ /--    |
 (＼|`` し]ﾄ----／          ⌒` ＼| /

@@ -3,8 +3,8 @@
 ## Beavis, with Zen philosophy removed.
 ##
 echo <<<EOT
-   $thoughts         __------~~-,
-    $thoughts      ,'            ,
+   {$thoughts}         __------~~-,
+    {$thoughts}      ,'            ,
           /               \\
          /                :
         |                  '

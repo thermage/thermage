@@ -3,8 +3,8 @@
 ## Evil-looking eyes
 ##
 echo <<<EOT
-    $thoughts
-     $thoughts
+    {$thoughts}
+     {$thoughts}
                                    .::!!!!!!!:.
   .!!!!!:.                        .:!!!!!!!!!!!!
   ~~~~!!!!!!.                 .:!!!!!!!!!UWWW\$\$\$ 

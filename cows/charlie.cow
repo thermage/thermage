@@ -3,9 +3,9 @@
 ## KMB is God.
 ##
 echo <<<EOT
-  $thoughts
-   $thoughts
-    $thoughts     ,, ＿
+  {$thoughts}
+   {$thoughts}
+    {$thoughts}     ,, ＿
         ／      ｀､
        /   (_ﾉL_） ヽ
       /   ´・ ・｀  l

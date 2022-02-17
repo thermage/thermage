@@ -3,8 +3,8 @@
 # ちーちゃん
 #
 echo <<<EOT
-   $thoughts
-    $thoughts
+   {$thoughts}
+    {$thoughts}
                 -一     一-
         ／                       ＼
        /             ________

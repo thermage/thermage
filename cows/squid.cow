@@ -4,9 +4,9 @@
 #
 
 echo <<<EOT
-    $thoughts
-     $thoughts                                                           ＿＿＿ノ^l
-      $thoughts                                            ＿,,ノ``ｰ-'￣￣        ｌ
+    {$thoughts}
+     {$thoughts}                                                           ＿＿＿ノ^l
+      {$thoughts}                                            ＿,,ノ``ｰ-'￣￣        ｌ
                                                  く                       /
                                                   `ヽ,   __､-'           /
                                                     __＞‐´               |

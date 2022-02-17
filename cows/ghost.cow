@@ -1,10 +1,10 @@
 <?php 
 # art by Joan G. Stark, https://en.wikipedia.org/wiki/Joan_Stark
 $the_cow = <<"EOT;";
-     $thoughts     .-.
-      $thoughts  .'   `.
-       $thoughts :g g   :
-        $thoughts: o    `.
+     {$thoughts}     .-.
+      {$thoughts}  .'   `.
+       {$thoughts} :g g   :
+        {$thoughts}: o    `.
         :         ``.
        :             `.
       :  :         .   `.

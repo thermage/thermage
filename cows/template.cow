@@ -1,6 +1,6 @@
 <?php 
 # 
 echo <<<EOT
-$thoughts
- $thoughts
+{$thoughts}
+ {$thoughts}
 EOT;

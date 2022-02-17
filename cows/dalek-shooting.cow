@@ -2,8 +2,8 @@
 # Dalek
 # from http://www.asciiworld.com/-Robots,24-.html (accessed 4/30/2014)
 echo <<<EOT
-                                    $thoughts
-                                     $thoughts
+                                    {$thoughts}
+                                     {$thoughts}
                                                          ____                   
                                                [(=]|[==/   @  \\     
                                                       |--------|                

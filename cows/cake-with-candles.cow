@@ -2,9 +2,9 @@
 # cake with candles
 # via http://chris.com/ascii/index.php?art=events/birthday
 echo <<<EOT
-     $thoughts
-      $thoughts
-       $thoughts
+     {$thoughts}
+      {$thoughts}
+       {$thoughts}
                                     (
                        (
                )                    )             (

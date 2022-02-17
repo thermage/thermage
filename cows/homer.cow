@@ -4,8 +4,8 @@
 # from http://www.reddit.com/r/textfiles/comments/2s9ybk/random_ascii_art/
 #
 echo <<<EOT
-            $thoughts
-             $thoughts                __ 
+            {$thoughts}
+             {$thoughts}                __ 
                    _ ,___,-'",-=-. 
        __,-- _ _,-'_)_  (""`'-._\\ `. 
     _,'  __ |,' ,-' __)  ,-     /. | 

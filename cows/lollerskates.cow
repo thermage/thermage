@@ -1,8 +1,8 @@
 <?php 
 # LOLLERSKATES
 echo <<<EOT
-   $thoughts
-    $thoughts
+   {$thoughts}
+    {$thoughts}
         /\\O
          /\\/
         /\\

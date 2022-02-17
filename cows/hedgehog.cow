@@ -3,8 +3,8 @@
 ## A cute little hedgehog
 ##
 echo <<<EOT
-  $thoughts
-   $thoughts ..:::::::::.
+  {$thoughts}
+   {$thoughts} ..:::::::::.
     ::::::::::::::
    /. `::::::::::::
   O__,_:::::::::::'

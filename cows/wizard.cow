@@ -2,8 +2,8 @@
 # Wizard
 #
 echo <<<EOT
-  $thoughts
-   $thoughts
+  {$thoughts}
+   {$thoughts}
                      _____
                    .\'* *.\'
                ___/_*_(_

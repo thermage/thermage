@@ -2,8 +2,8 @@
 # Cake, from Portal 
 # via http://pastebin.com/1AZwKrKp
 echo <<<EOT
-    $thoughts
-     $thoughts
+    {$thoughts}
+     {$thoughts}
             ,:/+/-
             /M/              .,-=;//;-
        .:/= ;MH/,    ,=/+%\$XH@MM#@:

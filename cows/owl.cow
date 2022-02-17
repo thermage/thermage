@@ -3,8 +3,8 @@
 ## An owl
 ##
 echo <<<EOT
-         $thoughts
-          $thoughts
+         {$thoughts}
+          {$thoughts}
            ___
           (o o)
          (  V  )

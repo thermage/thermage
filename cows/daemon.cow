@@ -3,9 +3,9 @@
 ## 4.4 >> 5.4
 ##
 echo <<<EOT
-   $thoughts         ,        ,
-    $thoughts       /(        )`
-     $thoughts      \\ \\___   / |
+   {$thoughts}         ,        ,
+    {$thoughts}       /(        )`
+     {$thoughts}      \\ \\___   / |
             /- _  `-/  '
            (/\\/ \\ \\   /\\
            / /   | `    \\

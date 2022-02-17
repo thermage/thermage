@@ -3,8 +3,8 @@
 #
 # from http://ascii.co.uk/art/taxi
 echo <<<EOT
-     $thoughts
-      $thoughts
+     {$thoughts}
+      {$thoughts}
                    [\\
               .----' `-----.
              //^^^^;;^^^^^^`\\

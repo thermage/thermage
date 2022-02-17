@@ -3,9 +3,9 @@
 ## ejm97 http://www.ascii-art.de/ascii/ghi/goat.txt
 ##
 echo <<<EOT
-       $thoughts
-        $thoughts
-         $thoughts  _))
+       {$thoughts}
+        {$thoughts}
+         {$thoughts}  _))
            > {$eyeLeft}\\     _~
            `;'\\\\__-' \\_
               | )  _ \\ \\

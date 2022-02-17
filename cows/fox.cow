@@ -2,8 +2,8 @@
 # Fox
 # http://www.retrojunkie.com/asciiart/animals/foxes.htm
 echo <<<EOT
-$thoughts
- $thoughts
+{$thoughts}
+ {$thoughts}
    /\\   /\\   Todd Vargo
   //\\\\_//\\\\     ____
   \\_     _/    /   /

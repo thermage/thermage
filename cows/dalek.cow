@@ -2,8 +2,8 @@
 # Dalek
 # from http://www.ascii-art.de/ascii/def/dr_who.txt (accessed 4/30/2014)
 echo <<<EOT
-   $thoughts
-    $thoughts
+   {$thoughts}
+    {$thoughts}
               ___
       D>=G==='   '.
             |======|

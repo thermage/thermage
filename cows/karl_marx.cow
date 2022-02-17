@@ -4,8 +4,8 @@
 ##  
 ##
 echo <<<EOT
-       $thoughts
-        $thoughts
+       {$thoughts}
+        {$thoughts}
                    ,―ヾヽヽ/ｖへ／⌒ー
                 , ⌒ヽ ヽ ヽ / ／ ノ  ⌒ヽ、
               / ／ヾ,ゞ -ゞゞゞ､_ ⌒  ノ ヽ

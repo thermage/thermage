@@ -3,8 +3,8 @@
 #
 # adapted from 'telnet -e x towel.blinkenlights.nl'
 echo <<<EOT
-   $thoughts
-    $thoughts
+   {$thoughts}
+    {$thoughts}
        /~\\
       |oo )
       _\\=/_

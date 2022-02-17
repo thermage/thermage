@@ -3,10 +3,10 @@
 ## MOOfasa.
 ##
 echo <<<EOT
-       $thoughts    ____
-        $thoughts  /    \\
+       {$thoughts}    ____
+        {$thoughts}  /    \\
           | ^__^ |
-          | ($eyes) |______
+          | ({$eyes}) |______
           | (__) |      )\\/\\
            \\____/|----w |
                 ||     ||

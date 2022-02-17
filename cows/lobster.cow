@@ -3,8 +3,8 @@
 #   lobster jgs   10/96
 #   http://ascii.co.uk/art/lobster
 echo <<<EOT
-             $thoughts
-              $thoughts
+             {$thoughts}
+              {$thoughts}
                              ,.---._
                    ,,,,     /       `,
                     \\\\\\\\   /    '\\_  ;

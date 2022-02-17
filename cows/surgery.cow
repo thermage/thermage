@@ -3,10 +3,10 @@
 ## A cow operation, artist unknown
 ##
 echo <<<EOT
-          $thoughts           \\  / 
-           $thoughts           \\/  
+          {$thoughts}           \\  / 
+           {$thoughts}           \\/  
                (__)    /\\         
-               ($eyes)   O  O        
+               ({$eyes})   O  O        
                _\\/_   //         
          *    (    ) //       
           \\  (\\\\    //       

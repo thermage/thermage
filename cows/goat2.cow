@@ -3,12 +3,12 @@
 #	CodeGoat.io: https://github.com/danyshaanan/goatsay
 #
 echo <<<EOT
-        $thoughts
-         $thoughts
+        {$thoughts}
+         {$thoughts}
           )__(
-         '|$eyes|'________/
+         '|{$eyes}|'________/
           |__|         |
-           $tongue||"""""""||
+           {$tongue}||"""""""||
              ||       ||
 
 EOT;

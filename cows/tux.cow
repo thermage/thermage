@@ -4,8 +4,8 @@
 ## (c) pborys@p-soft.silesia.linux.org.pl 
 ##
 echo <<<EOT
-   $thoughts
-    $thoughts
+   {$thoughts}
+    {$thoughts}
         .--.
        |{$eyeLeft}_{$eyeRight} |
        |:_/ |

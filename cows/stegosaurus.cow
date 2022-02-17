@@ -3,10 +3,10 @@
 ## A stegosaur with a top hat?
 ##
 echo <<<EOT
-$thoughts                             .       .
- $thoughts                           / `.   .' " 
-  $thoughts                  .---.  <    > <    >  .---.
-   $thoughts                 |    \\  \\ - ~ ~ - /  /    |
+{$thoughts}                             .       .
+ {$thoughts}                           / `.   .' " 
+  {$thoughts}                  .---.  <    > <    >  .---.
+   {$thoughts}                 |    \\  \\ - ~ ~ - /  /    |
          _____          ..-~             ~-..-~
         |     |   \\~~~\\.'                    `./~~~/
        ---------   \\__/                        \\__/

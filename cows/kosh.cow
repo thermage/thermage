@@ -3,9 +3,9 @@
 ## It's a Kosh Cow!
 ##
 echo <<<EOT
-    $thoughts
-     $thoughts
-      $thoughts
+    {$thoughts}
+     {$thoughts}
+      {$thoughts}
   ___       _____     ___
  /   \\     /    /|   /   \\
 |     |   /    / |  |     |

@@ -2,8 +2,8 @@
 # fatter banana
 # via https://www.reddit.com/r/cowsay/comments/3bkpwv/any_love_for_bananasay/
 echo <<<EOT
-           $thoughts
-            $thoughts
+           {$thoughts}
+            {$thoughts}
         "-.. __      __.='>
          `.     """""   ,'
            "-..__   _.-"

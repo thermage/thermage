@@ -3,9 +3,9 @@
 # プロデューサーさんは独特の変わったセンスをしてますね！
 #
 echo <<<EOT
-     $thoughts
-      $thoughts
-       $thoughts
+     {$thoughts}
+      {$thoughts}
+       {$thoughts}
              , -――- 、
           ／          ヽ、
         /爻ﾉﾘﾉﾊﾉﾘlﾉ ゝ  l

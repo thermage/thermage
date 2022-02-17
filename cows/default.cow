@@ -1,8 +1,8 @@
 <?php 
 $the_cow = <<"EOT;";
-        $thoughts   ^__^
-         $thoughts  ($eyes)\\_______
+        {$thoughts}   ^__^
+         {$thoughts}  ({$eyes})\\_______
             (__)\\       )\\/\\
-             $tongue ||----w |
+             {$tongue} ||----w |
                 ||     ||
 EOT;

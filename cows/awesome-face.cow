@@ -2,8 +2,8 @@
 # awesome face
 # via http://pastebin.com/1AZwKrKp
 echo <<<EOT
-    $thoughts
-     $thoughts
+    {$thoughts}
+     {$thoughts}
                   \#[/[#:xxxxxx:#[/[\\x
              [/\\ &3N            W3& \\/[x
           [[x\@W                      W\@x[[\\

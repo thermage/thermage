@@ -2,11 +2,11 @@
 # Golden Eagle (Marquette University mascot)
 # 
 echo <<<EOT
-    $thoughts                                       ,:=+++++???++?+=+=
-     $thoughts                               :+?????\$MUUUUUUUUUMO+??~
-      $thoughts                         :+I??\$UUUUMUMMMMUUMUMUUMUUMM???I+:
-       $thoughts                     ,+??+ZOUUMMUMMMUUUUUMUUUMUUUMUMUUMZI+?+:
-        $thoughts                 ~I?+MMUMUUUMUUUOOUMMMMMMUUUUUMMMUUUUUUMMUM$??~
+    {$thoughts}                                       ,:=+++++???++?+=+=
+     {$thoughts}                               :+?????\$MUUUUUUUUUMO+??~
+      {$thoughts}                         :+I??\$UUUUMUMMMMUUMUMUUMUUMM???I+:
+       {$thoughts}                     ,+??+ZOUUMMUMMMUUUUUMUUUMUUUMUMUUMZI+?+:
+        {$thoughts}                 ~I?+MMUMUUUMUUUOOUMMMMMMUUUUUMMMUUUUUUMMUM$??~
                        I?+7MMMMMUUO7?+?IUMMMMMMMMUUMUUMUUUUUUUUUUMMMUMO?I
                     ~I?+MMMUUUO????+?IOUZ7?,.......,+\$\$OUMUUUUUUMUMUUUMUU+I:
                    =??\$UMUUU7++??????II???????=.....,?OUUMMMUUMUUUUUUUMMUUU+=

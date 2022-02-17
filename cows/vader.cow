@@ -3,10 +3,10 @@
 ## Cowth Vader, from geordan@csua.berkeley.edu
 ##
 echo <<<EOT
-        $thoughts    ,-^-.
-         $thoughts   !${eyeLeft} {$eyeRight}!
-          $thoughts /./=\\.\\______
-               ##      $tongue)\\/\\
+        {$thoughts}    ,-^-.
+         {$thoughts}   !${eyeLeft} {$eyeRight}!
+          {$thoughts} /./=\\.\\______
+               ##      {$tongue})\\/\\
                 ||-----w||
                 ||      ||
 

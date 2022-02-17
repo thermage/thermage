@@ -3,8 +3,8 @@
 ## An elephant out and about
 ##
 echo <<<EOT
- $thoughts     /\\  ___  /\\
-  $thoughts   // \\/   \\/ \\\\
+ {$thoughts}     /\\  ___  /\\
+  {$thoughts}   // \\/   \\/ \\\\
      ((    {$eyeLeft} {$eyeRight}    ))
       \\\\ /     \\ //
        \\/  | |  \\/ 

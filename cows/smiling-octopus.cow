@@ -1,9 +1,9 @@
 <?php 
 # 
 echo <<<EOT
-      $thoughts
-       $thoughts
-        $thoughts                                     ,
+      {$thoughts}
+       {$thoughts}
+        {$thoughts}                                     ,
                                             ,o
                                             :o
                    _....._                  `:o

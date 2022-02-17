@@ -1,10 +1,10 @@
 <?php 
 echo <<<EOT
-  $thoughts
-   $thoughts   \\_\\_    _/_/
-    $thoughts      \\__/
-           ($eyes)\\_______
+  {$thoughts}
+   {$thoughts}   \\_\\_    _/_/
+    {$thoughts}      \\__/
+           ({$eyes})\\_______
            (__)\\       )\\/\\
-            $tongue ||----- |
+            {$tongue} ||----- |
                ||     ||
 EOT;

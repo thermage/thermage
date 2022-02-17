@@ -1,12 +1,12 @@
 <?php 
 echo <<<EOT
-        $thoughts         ____________________
-         $thoughts       |                    |
-          $thoughts      |     PSYCHIATRIC    |
-           $thoughts     |        HELP        |
-            $thoughts    |____________________|
-             $thoughts   ||  ,-..'``.        ||
-              $thoughts  || (,-..'`. )       ||
+        {$thoughts}         ____________________
+         {$thoughts}       |                    |
+          {$thoughts}      |     PSYCHIATRIC    |
+           {$thoughts}     |        HELP        |
+            {$thoughts}    |____________________|
+             {$thoughts}   ||  ,-..'``.        ||
+              {$thoughts}  || (,-..'`. )       ||
                  ||   )-c - `)\\      ||
    ,.,._.-.,_,.,-||,.(`.--  ,`',.-,_,||.-.,.,-,._.
               ___||____,`,'--._______||

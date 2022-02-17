@@ -3,11 +3,11 @@
 ## Satanic cow, source unknown.
 ##
 echo <<<EOT
-     $thoughts
-      $thoughts  (__)  
+     {$thoughts}
+      {$thoughts}  (__)  
          (\\/)  
   /-------\\/    
- / | 666 ||$tongue  
+ / | 666 ||{$tongue}  
 *  ||----||      
    ~~    ~~      
 EOT;

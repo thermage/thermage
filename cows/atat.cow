@@ -2,9 +2,9 @@
 # ATAT
 # from http://www.asciiworld.com/-Robots,24-.html (accessed 4/30/2014)
 echo <<<EOT
-  $thoughts                         ________
-   $thoughts                    _.-Y  |  |  Y-.,_
-    $thoughts                .-"   |  |  |  ||   "~-.      
+  {$thoughts}                         ________
+   {$thoughts}                    _.-Y  |  |  Y-.,_
+    {$thoughts}                .-"   |  |  |  ||   "~-.      
           _____     |""[]"|" !""! "|"=="" "I      
        .-"{-. "I----]_   :|------..| []  __L      
       P-=}=(r\_I]_[L__] _l|______l |..  |___I     

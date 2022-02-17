@@ -5,8 +5,8 @@
 # http://robotfindskitten.org/aw.cgi?main=software.rfk#rfksay
 #
 echo <<<EOT
-  $thoughts
-   $thoughts
+  {$thoughts}
+   {$thoughts}
 
     [-]   |\\_/|
     (+)=C |o o|__

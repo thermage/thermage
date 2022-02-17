@@ -3,8 +3,8 @@
 ## docker whale
 ##
 echo <<<EOT
-         $thoughts
-          $thoughts
+         {$thoughts}
+          {$thoughts}
                     ##        .
               ## ## ##       ==
            ## ## ## ##      ===

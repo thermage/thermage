@@ -3,8 +3,8 @@
 ## Do we need to explain this?
 ##
 echo <<<EOT
-   $thoughts
-    $thoughts              ....       
+   {$thoughts}
+    {$thoughts}              ....       
            ........    .      
           .            .      
          .             .      

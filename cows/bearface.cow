@@ -2,8 +2,8 @@
 ## acsii picture from http://www.ascii-art.de/ascii/ab/bear.txt
 ##
 echo <<<EOT
- $thoughts
-  $thoughts
+ {$thoughts}
+  {$thoughts}
      .--.              .--.
     : (\\ ". _......_ ." /) :
      '.    `        `    .'

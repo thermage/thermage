@@ -4,8 +4,8 @@
 ##  
 ##
 echo <<<EOT
-       $thoughts
-        $thoughts
+       {$thoughts}
+        {$thoughts}
                            __ 
                   l^ヽ    /  }    _
                   |  |   /  /   ／  )

@@ -3,8 +3,8 @@
 ## A cute little wabbit
 ##
 echo <<<EOT
-  $thoughts
-   $thoughts   \\
+  {$thoughts}
+   {$thoughts}   \\
         \\ /\\
         ( )
       .( o ).

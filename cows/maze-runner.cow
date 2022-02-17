@@ -5,9 +5,9 @@
 #   found at http://pip.readthedocs.org/en/user_builds/pip/rtd-builds/latest/installing/
 #
 echo <<<EOT
-    $thoughts
-     $thoughts
-      $thoughts
+    {$thoughts}
+     {$thoughts}
+      {$thoughts}
        \\
         \\
          \\

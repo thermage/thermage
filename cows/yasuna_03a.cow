@@ -3,9 +3,9 @@
 ## ソーニャちゃんおめでとー！ソーニャちゃんおめでとー！
 ##
 echo <<<EOT
- $thoughts
-  $thoughts
-   $thoughts
+ {$thoughts}
+  {$thoughts}
+   {$thoughts}
             . .: -----  .
          ／: .: .: .:.: .:＼
         /    ..  . l.: .: .:ヽ

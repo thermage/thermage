@@ -5,8 +5,8 @@
 #   by David Moeser
 #
 echo <<<EOT
- $thoughts
-  $thoughts
+ {$thoughts}
+  {$thoughts}
   __/"""\\
  ]___ 0  }
      /   }

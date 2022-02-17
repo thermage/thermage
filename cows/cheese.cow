@@ -3,8 +3,8 @@
 ## The cheese from milk & cheese
 ##
 echo <<<EOT
-   $thoughts
-    $thoughts
+   {$thoughts}
+    {$thoughts}
       _____   _________
      /     \\_/         |
     |                 ||
@@ -15,7 +15,7 @@ echo <<<EOT
  / |        <        |\\ \\
 | /|                 | | |
 | |     \\_______/   |  | |
-| |        $tongue       | / /
+| |        {$tongue}       | / /
 /||                 /|||
    ----------------|
         | |    | |

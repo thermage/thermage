@@ -3,9 +3,9 @@
 ## picture from http://www.ascii-art.de/ascii/ab/beagle.txt
 ## 
 echo <<<EOT
- $thoughts
-  $thoughts
-   $thoughts     O_      __)(
+ {$thoughts}
+  {$thoughts}
+   {$thoughts}     O_      __)(
        ,'  `.   (_".`.
       :      :    /|`
       |      |   ((|_  ,-.

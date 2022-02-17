@@ -4,8 +4,8 @@
 # https://gist.github.com/rzabcik/9233650/
 #
 echo <<<EOT
-     $thoughts
-      $thoughts
+     {$thoughts}
+      {$thoughts}
      _              __
     / `\\  (~._    ./  )
     \\__/ __`-_\\__/ ./

@@ -3,9 +3,9 @@
 # くっ、くぅー！
 #
 echo <<<EOT
-       $thoughts
-        $thoughts
-         $thoughts
+       {$thoughts}
+        {$thoughts}
+         {$thoughts}
                  .:-────-:.  .
              .: .: .: .: .: .: .: :.
           ／.: .: .: .: .: .: .: .:  ＼

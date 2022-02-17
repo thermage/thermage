@@ -8,8 +8,8 @@
 #   and http://infinitywave.deviantart.com/art/Don-t-Blink-tee-391963389
 #
 echo <<<EOT
-       $thoughts
-        $thoughts
+       {$thoughts}
+        {$thoughts}
 
                                      ...I..
                             :XX:X\$ . .7N..            ..\$\$.. .:~..

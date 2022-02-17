@@ -3,8 +3,8 @@
 #
 # view-source:http://mailchimp.com/
 echo <<<EOT
-$thoughts
- $thoughts
+{$thoughts}
+ {$thoughts}
     ______
    / ___M ]__
 C{ ( o o )}

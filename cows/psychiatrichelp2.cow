@@ -1,12 +1,12 @@
 <?php 
 use utf8;
 echo <<<EOT
- $thoughts      .------------------------.
-  $thoughts     |       PSYCHIATRIC      |
-   $thoughts    |         HELP  5¢       |
-    $thoughts   |________________________|
-     $thoughts  ||     .-"""--.         ||
-      $thoughts ||    /        \\.-.     ||
+ {$thoughts}      .------------------------.
+  {$thoughts}     |       PSYCHIATRIC      |
+   {$thoughts}    |         HELP  5¢       |
+    {$thoughts}   |________________________|
+     {$thoughts}  ||     .-"""--.         ||
+      {$thoughts} ||    /        \\.-.     ||
         ||   |     ._,     \\    ||
         ||   \\_/`-'   '-.,_/    ||
         ||   (_   (' _)') \\     ||

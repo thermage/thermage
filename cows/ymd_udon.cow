@@ -3,8 +3,8 @@
 ## 山田うどん
 ##
 echo <<<EOT
-   $thoughts
-    $thoughts
+   {$thoughts}
+    {$thoughts}
   
              _ - ￣ - _
            _-_＿＿＿＿_- _

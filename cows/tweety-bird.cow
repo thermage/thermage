@@ -2,9 +2,9 @@
 # Tweety bird
 #  from http://pastebin.com/isRcSy01
 echo <<<EOT
-    $thoughts
-     $thoughts
-      $thoughts
+    {$thoughts}
+     {$thoughts}
+      {$thoughts}
                     ___
                 _.-'   ```'--.._    
               .'                `-._ 
