@@ -1,0 +1,29 @@
+<?php 
+##
+## acsii picture From: kwok@menpachi.nmfs.hawaii.edu (William Kwok)
+## from http://www.ascii-art.de/ascii/s/snoopy.txt
+echo <<<EOT
+ $thoughts
+  $thoughts          , ----.
+   $thoughts        -  -     `
+      ,__.,'           \\
+    .'                 *`
+   /       $eye   $eye     / **\\
+  .                 / ****.
+  |    mm           | ****|
+   \\                | ****|
+    ` ._______      \\ ****/
+              \\      /`---'
+               \\___(
+               /~~~~\\
+              /      \\
+             /      | \\
+            |       |  \\
+  , ~~ .    |, ~~ . |  |\\
+ ( |||| )   ( |||| )(,,,)`
+( |||||| )-( |||||| )    | ^
+( |||||| ) ( |||||| )    |'/
+( |||||| )-( |||||| )___,'-
+ ( |||| )   ( |||| )
+  ` ~~ '     ` ~~ '
+EOT;

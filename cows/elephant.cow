@@ -1,0 +1,16 @@
+<?php 
+##
+## An elephant out and about
+##
+echo <<<EOT
+ $thoughts     /\\  ___  /\\
+  $thoughts   // \\/   \\/ \\\\
+     ((    $eye $eye    ))
+      \\\\ /     \\ //
+       \\/  | |  \\/ 
+        |  | |  |  
+        |  | |  |  
+        |   o   |  
+        | |   | |  
+        |m|   |m|  
+EOT;

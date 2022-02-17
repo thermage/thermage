@@ -1,0 +1,12 @@
+<?php 
+# Banana 
+#  http://www.ascii-art.de/ascii/ab/banana.txt
+echo <<<EOT
+       $thoughts
+        $thoughts
+
+     ".           ,#  
+     \\ `-._____,-'=/
+  ____`._ ----- _,'_____PhS
+         `-----'
+EOT;

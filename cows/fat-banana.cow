@@ -1,0 +1,11 @@
+<?php 
+# fatter banana
+# via https://www.reddit.com/r/cowsay/comments/3bkpwv/any_love_for_bananasay/
+echo <<<EOT
+           $thoughts
+            $thoughts
+        "-.. __      __.='>
+         `.     """""   ,'
+           "-..__   _.-"
+   ~ ~~ ~ ~  ~   """  ~~  ~
+EOT;

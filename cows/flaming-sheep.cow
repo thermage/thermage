@@ -1,0 +1,16 @@
+<?php 
+##
+## The flaming sheep, contributed by Geordan Rosario (geordan@csua.berkeley.edu)
+##
+echo <<<EOT
+  $thoughts            .    .     .   
+   $thoughts      .  . .     `  ,     
+    $thoughts    .; .  : .' :  :  : . 
+     $thoughts   i..`: i` i.i.,i  i . 
+      $thoughts   `,--.|i |i|ii|ii|i: 
+           U${eyes}U\\.'\@\@\@\@\@\@`.||' 
+           \\__/(\@\@\@\@\@\@\@\@\@\@)'  
+             $tongue (\@\@\@\@\@\@\@\@)    
+                `YY~~~~YY'    
+                 ||    ||     
+EOT;

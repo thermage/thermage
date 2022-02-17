@@ -1,0 +1,15 @@
+<?php 
+##
+## MOOfasa.
+##
+echo <<<EOT
+       $thoughts    ____
+        $thoughts  /    \\
+          | ^__^ |
+          | ($eyes) |______
+          | (__) |      )\\/\\
+           \\____/|----w |
+                ||     ||
+
+	         Moofasa
+EOT;

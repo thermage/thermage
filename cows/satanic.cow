@@ -1,0 +1,13 @@
+<?php 
+##
+## Satanic cow, source unknown.
+##
+echo <<<EOT
+     $thoughts
+      $thoughts  (__)  
+         (\\/)  
+  /-------\\/    
+ / | 666 ||$tongue  
+*  ||----||      
+   ~~    ~~      
+EOT;

@@ -1,0 +1,15 @@
+<?php 
+##
+## Do we need to explain this?
+##
+echo <<<EOT
+   $thoughts
+    $thoughts              ....       
+           ........    .      
+          .            .      
+         .             .      
+.........              .......
+..............................
+
+Elephant inside ASCII snake
+EOT;

@@ -1,0 +1,17 @@
+<?php 
+# Knight (Chess piece)
+#
+# from http://www.chessvariants.org/d.pieces/ascii.html
+#   by David Moeser
+#
+echo <<<EOT
+ $thoughts
+  $thoughts
+  __/"""\\
+ ]___ 0  }
+     /   }
+   /~    }
+   \\____/
+   /____\\
+  (______)
+EOT;

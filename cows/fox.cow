@@ -1,0 +1,16 @@
+<?php 
+# Fox
+# http://www.retrojunkie.com/asciiart/animals/foxes.htm
+echo <<<EOT
+$thoughts
+ $thoughts
+   /\\   /\\   Todd Vargo
+  //\\\\_//\\\\     ____
+  \\_     _/    /   /
+   / * * \\    /^^^]
+   \\_\\O/_/    [   ]
+    /   \\_    [   /
+    \\     \\_  /  /
+     [ [ /  \\/ _/
+    _[ [ \\  /_/
+EOT;

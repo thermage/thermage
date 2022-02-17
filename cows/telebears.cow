@@ -1,0 +1,13 @@
+<?php 
+##
+## A cow performing an unnatural act, artist unknown.
+##
+echo <<<EOT
+      $thoughts                _
+       $thoughts              (_)   <-- TeleBEARS
+        $thoughts   ^__^       / \\
+         $thoughts  ($eyes)\\_____/_\\ \\
+            (__)\\  you  ) /
+             $tongue ||----w ((
+                ||     ||>> 
+EOT;

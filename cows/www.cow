@@ -1,0 +1,11 @@
+<?php 
+##
+## A cow wadvertising the World Wide Web, from lim@csua.berkeley.edu
+##
+echo <<<EOT
+        $thoughts   ^__^
+         $thoughts  ($eyes)\\_______
+            (__)\\       )\\/\\
+             $tongue ||--WWW |
+                ||     ||
+EOT;

@@ -1,0 +1,16 @@
+<?php 
+##
+## From the canonical koala collection
+##
+echo <<<EOT
+  $thoughts
+   $thoughts          .
+       ___   //
+     {~$eye_$eye~}// 
+      ( Y )K/  
+     ()~*~()   
+     (_)-(_)   
+     Luke    
+     Skywalker
+     koala   
+EOT;

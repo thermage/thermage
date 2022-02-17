@@ -1,0 +1,20 @@
+<?php 
+# happy whale
+#
+# modified from http://www.chris.com/ascii/index.php?art=animals/other%20(water)
+echo <<<EOT
+   $thoughts
+    $thoughts
+     $thoughts
+        __ \ / __
+       /  \\ | /  \\
+           \\|/
+       _.---v---.,_
+      /            \\  /\\__/\\
+     /              \\ \\_  _/
+     |__ @           |_/ /
+      _/                / 
+      \\       \\__,     /  
+   ~~~~\\~~~~~~~~~~~~~~`~~~
+
+EOT;

@@ -1,0 +1,15 @@
+<?php 
+##
+## A cowering cow
+##
+echo <<<EOT
+     $thoughts
+      $thoughts
+        ,__, |    | 
+        ($eyes)\\|    |___
+        (__)\\|    |   )\\_
+         $tongue  |    |_w |  \\
+             |    |  ||   *
+
+             Cower....
+EOT;

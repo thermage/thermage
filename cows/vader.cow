@@ -1,0 +1,14 @@
+<?php 
+##
+## Cowth Vader, from geordan@csua.berkeley.edu
+##
+echo <<<EOT
+        $thoughts    ,-^-.
+         $thoughts   !$eyeY$eye!
+          $thoughts /./=\\.\\______
+               ##      $tongue)\\/\\
+                ||-----w||
+                ||      ||
+
+               Cowth Vader
+EOT;

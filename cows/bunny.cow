@@ -1,0 +1,11 @@
+<?php 
+##
+## A cute little wabbit
+##
+echo <<<EOT
+  $thoughts
+   $thoughts   \\
+        \\ /\\
+        ( )
+      .( o ).
+EOT;

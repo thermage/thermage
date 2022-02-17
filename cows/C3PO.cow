@@ -1,0 +1,21 @@
+<?php 
+# C3PO
+#
+# adapted from 'telnet -e x towel.blinkenlights.nl'
+echo <<<EOT
+   $thoughts
+    $thoughts
+       /~\\
+      |oo )
+      _\\=/_
+     /     \\
+    //|/.\\|\\\\
+   ||  \\_/  ||
+   || |\\ /| ||
+    \# \\_ _/  \#
+      | | |
+      | | |
+      []|[]
+      | | |
+     /_]_[_\\
+EOT;

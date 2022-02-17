@@ -1,0 +1,11 @@
+<?php 
+# Cthulhu
+#
+echo <<<EOT
+  $thoughts
+   $thoughts
+
+      ^(;,;)^
+
+EOT;
+

@@ -1,0 +1,13 @@
+<?php 
+# Bill the Cat
+#
+# Based on 'ack --th[pt]+t+'
+#  from http://beyondgrep.com/ack-2.14-single-file
+echo <<<EOT
+ $thoughts
+  $thoughts
+ _   /|
+ \\'o.O'
+ =(___)=
+    U
+EOT;

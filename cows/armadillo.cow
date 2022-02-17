@@ -1,0 +1,16 @@
+<?php 
+# armadillo
+#
+# based on http://ascii.co.uk/art/armadillo
+echo <<<EOT
+         $thoughts
+          $thoughts
+               ,.-----__
+            ,:::://///,:::-.
+           /:''/////// ``:::`;/|/
+          /'   ||||||     :://'`\\
+        .' ,   ||||||     `/(  e \\
+  -===~__-'\\__X_`````\\_____/~`-._ `.
+              ~~        ~~       `~-'
+EOT;
+

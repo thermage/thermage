@@ -1,0 +1,12 @@
+<?php 
+# LOLLERSKATES
+echo <<<EOT
+   $thoughts
+    $thoughts
+        /\\O
+         /\\/
+        /\\
+       /  \\
+      LOL LOL
+:-D LOLLERSKATES :-D
+EOT;

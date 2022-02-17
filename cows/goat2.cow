@@ -1,0 +1,14 @@
+<?php 
+#
+#	CodeGoat.io: https://github.com/danyshaanan/goatsay
+#
+echo <<<EOT
+        $thoughts
+         $thoughts
+          )__(
+         '|$eyes|'________/
+          |__|         |
+           $tongue||"""""""||
+             ||       ||
+
+EOT;

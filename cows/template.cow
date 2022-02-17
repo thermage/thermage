@@ -1,0 +1,6 @@
+<?php 
+# 
+echo <<<EOT
+$thoughts
+ $thoughts
+EOT;

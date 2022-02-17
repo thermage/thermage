@@ -1,0 +1,17 @@
+<?php 
+##
+## Another canonical koala?
+##
+echo <<<EOT
+   $thoughts
+    $thoughts        .
+     .---.  //
+    Y|$eye $eye|Y// 
+   /_(i=i)K/ 
+   ~()~*~()~  
+    (_)-(_)   
+
+     Darth 
+     Vader    
+     koala        
+EOT;

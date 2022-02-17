@@ -1,0 +1,19 @@
+<?php 
+##
+## ejm97 http://www.ascii-art.de/ascii/ghi/goat.txt
+##
+echo <<<EOT
+       $thoughts
+        $thoughts
+         $thoughts  _))
+           > $eye\\     _~
+           `;'\\\\__-' \\_
+              | )  _ \\ \\
+             / / ``   w w
+            w w
+EOT;
+
+
+
+
+

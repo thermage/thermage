@@ -1,0 +1,11 @@
+<?php 
+##
+## A small cow, artist unknown
+##
+$eyes = ".." unless ($eyes);
+echo <<<EOT
+       $thoughts   ,__,
+        $thoughts  ($eyes)____
+           (__)    )\\
+            $tongue||--|| *
+EOT;

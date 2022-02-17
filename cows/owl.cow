@@ -1,0 +1,12 @@
+<?php 
+##
+## An owl
+##
+echo <<<EOT
+         $thoughts
+          $thoughts
+           ___
+          (o o)
+         (  V  )
+        /--m-m-
+EOT;

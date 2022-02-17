@@ -1,0 +1,13 @@
+<?php 
+##
+## Hello Kitty
+##
+echo <<<EOT
+  $thoughts
+   $thoughts
+      /\\_)o<
+     |      \\
+     | $eye . $eye|
+      \\_____/
+         $tongue
+EOT;

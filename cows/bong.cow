@@ -1,0 +1,17 @@
+<?php 
+##
+## A cow with a bong, from lars@csua.berkeley.edu
+##
+echo <<<EOT
+         $thoughts
+          $thoughts
+            ^__^ 
+    _______/($eyes)
+/\\/(       /(__)
+   | W----|| |~|
+   ||     || |~|  ~~
+             |~|  ~
+             |_| o
+             |#|/
+            _+#+_
+EOT;

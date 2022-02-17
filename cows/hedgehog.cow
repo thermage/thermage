@@ -1,0 +1,11 @@
+<?php 
+##
+## A cute little hedgehog
+##
+echo <<<EOT
+  $thoughts
+   $thoughts ..:::::::::.
+    ::::::::::::::
+   /. `::::::::::::
+  O__,_:::::::::::'
+EOT;

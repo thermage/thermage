@@ -1,0 +1,14 @@
+<?php 
+# MailChimp
+#
+# view-source:http://mailchimp.com/
+echo <<<EOT
+$thoughts
+ $thoughts
+    ______
+   / ___M ]__
+C{ ( o o )}
+    {     ••
+      \\___
+      ----´
+EOT;

@@ -1,0 +1,20 @@
+<?php 
+# Queen (Chess piece)
+#
+# from http://www.chessvariants.org/d.pieces/ascii.html
+#   by David Moeser
+#
+echo <<<EOT
+ $thoughts
+  $thoughts
+     ()
+   <~~~~>
+    \\__/
+   (____)
+    |  |
+    |  |
+    |__|
+   /____\\
+  (______)
+ (________)
+EOT;

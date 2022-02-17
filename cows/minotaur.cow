@@ -1,0 +1,11 @@
+<?php 
+$the_cow = <<"EOT;";
+        $thoughts   ^__^
+         $thoughts  ($eyes)
+            (__)
+           /-||-\\
+           \\|\\/|/
+            o==o 
+            ||||
+            ()()
+EOT;

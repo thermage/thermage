@@ -1,0 +1,14 @@
+<?php 
+##
+## The non-flaming sheep.
+##
+$the_cow = <<EOT;
+  $thoughts
+   $thoughts
+       __     
+      U${eyes}U\\.'\@\@\@\@\@\@`.
+      \\__/(\@\@\@\@\@\@\@\@\@\@)
+        $tongue (\@\@\@\@\@\@\@\@)
+           `YY~~~~YY'
+            ||    ||
+EOT;

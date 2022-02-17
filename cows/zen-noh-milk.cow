@@ -1,0 +1,14 @@
+<?php 
+echo <<<EOT
+  $thoughts
+   $thoughts
+    $thoughts
+
+     iﾆﾆi
+    /   /ヽ
+   ｜農｜｜
+   ｜協｜｜
+   ｜牛｜｜＿
+ ／｜乳｜｜／
+ ￣￣￣￣￣
+EOT;

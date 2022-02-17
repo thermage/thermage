@@ -1,0 +1,21 @@
+<?php 
+#
+#	Cat picture by Joan Stark
+#	Transformed into cowfile by Myroslav Golub
+#
+echo <<<EOT
+       $thoughts  
+        $thoughts
+         $thoughts
+          $thoughts
+          |\\___/|
+         =) $eyeY$eye (=            
+          \\  ^  /
+           )=*=(       
+          /     \\
+          |     |
+         /| | | |\\
+         \\| | |_|/\\
+         //_// ___/
+             \\_) 
+EOT;
