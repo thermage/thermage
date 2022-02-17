@@ -7,7 +7,7 @@ echo <<<EOT
    $thoughts
     $thoughts
         .--.
-       |$eye_$eye |
+       |{$eyeLeft}_{$eyeRight} |
        |:_/ |
       //   \\ \\
      (|     | )

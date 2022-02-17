@@ -3,7 +3,7 @@ echo <<<EOT
                  $thoughts
                   $thoughts  _,._
                  __.'   _)
-                <_,)'.-"$eye\\
+                <_,)'.-"{$eyeLeft}\\
                   /' (    \\
       _.-----..,-'   (`"--^
      //              |   $tongue

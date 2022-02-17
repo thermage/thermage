@@ -8,7 +8,7 @@ echo <<<EOT
    $thoughts        -  -     `
       ,__.,'           \\
     .'                 *`
-   /       $eye   $eye     / **\\
+   /       {$eyeLeft}   {$eyeRight}     / **\\
   .                 / ****.
   |    mm           | ****|
    \\                | ****|

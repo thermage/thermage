@@ -1,5 +1,4 @@
-<?php 
-##
+<?php ##
 ## acsii picture from http://www.ascii-art.de/ascii/ab/bear.txt
 ##
 echo <<<EOT
@@ -9,7 +8,7 @@ echo <<<EOT
     : (\\ ". _......_ ." /) :
      '.    `        `    .'
       /'   _        _   `\\
-     /     $eye}      {$eye     \\
+     /      {$eyeLeft}      {$eyeRight}       \\
     |       /      \\       |
     |     /'        `\\     |
      \\   | .  .==.  . |   /

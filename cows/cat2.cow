@@ -9,7 +9,7 @@ echo <<<EOT
          $thoughts
           $thoughts
           |\\___/|
-         =) $eyeY$eye (=            
+         =) {$eyeLeft} {$eyeRight} (=            
           \\  ^  /
            )=*=(       
           /     \\

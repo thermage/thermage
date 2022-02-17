@@ -5,7 +5,7 @@
 echo <<<EOT
  $thoughts     /\\  ___  /\\
   $thoughts   // \\/   \\/ \\\\
-     ((    $eye $eye    ))
+     ((    {$eyeLeft} {$eyeRight}    ))
       \\\\ /     \\ //
        \\/  | |  \\/ 
         |  | |  |  

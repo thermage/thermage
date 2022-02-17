@@ -8,7 +8,7 @@ echo <<<EOT
             $thoughts          __---__
                     _-       /--______
                __--( /     \\ )XXXXXXXXXXX\\v.
-             .-XXX(   $eye   $eye  )XXXXXXXXXXXXXXX-
+             .-XXX(   {$eyeLeft}   {$eyeRight}  )XXXXXXXXXXXXXXX-
             /XXX(       U     )        XXXXXXX\\
           /XXXXX(              )--_  XXXXXXXXXXX\\
          /XXXXX/ (      O     )   XXXXXX   \\XXXXX\\
