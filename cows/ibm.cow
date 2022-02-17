@@ -3,7 +3,7 @@
 # International Business Machines
 #
 
-$the_cow = << EOT;;
+echo <<<EOT
   $thoughts
    $thoughts
 

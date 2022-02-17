@@ -1,5 +1,5 @@
 <?php 
-$the_cow =<<"EOT;"
+echo <<<EOT
   $thoughts
      ___        _--_
     /    -    /     \\
