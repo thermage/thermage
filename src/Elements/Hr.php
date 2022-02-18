@@ -56,7 +56,7 @@ final class Hr extends Element
         $theme           = self::getTheme();
         $hrValuePaddingX = 2;
         $hrValueMarginX  = 3;
-        $valueLength     = strings($this->stripDecorations($this->getValue() ?? ''))->length();
+        $valueLength     = strings($this->stripDecorations($this->getValue()))->length();
         $hrTextAlign     = $this->getStyles()['text-align'] ?? $theme->getVariables()->get('hr.text-align', $this->getElementVariables()['hr']['text-align']);
         $borderStyle     = $this->getStyles()['border'] ?? $theme->getVariables()->get('hr.border', $this->getElementVariables()['hr']['border']);
 
@@ -88,7 +88,7 @@ final class Hr extends Element
         }
 
         if ($hrTextAlign === 'center' && $valueLength > 0) {
-            $mod    = ($hrValuePaddingX + $hrValueMarginX) % 2 === 0 ? 0 : 1;
+            $mod    = ($hrValuePaddingX + $hrValueMarginX) % 2 == 0 ? 0 : 1;
             $spaces = terminal()->getWidth() - $this->getLength($this->getValue()) - $hrValueMarginX - $hrValuePaddingX + $mod;
 
             $leftSpaces  = intval($spaces / 2);

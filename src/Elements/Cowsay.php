@@ -306,7 +306,7 @@ final class Cowsay extends Element
                         }
                     })
                     ->w(isset($this->getStyles()['width']) ? $this->getStyles()['width'] : $theme->getVariables()->get('cowsay.width', $elementVariables['cowsay']['width']))
-                    ->px1()
+                    ->px(1)
                     ->renderToString();
     }
 

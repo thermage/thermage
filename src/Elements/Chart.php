@@ -292,8 +292,8 @@ final class Chart extends Element
             
             $line .= span((string) $value['label'])->pr($labelPaddingRight)->color($color)->renderToString() .
                      $borderValue .
-                     ($showPercents ? span((string) $value['percentage'] . '%')->pl1()->color($color)->renderToString() : '') .
-                     ($showValues ? span('(' . (string) $value['value'] . $valuesSufix . ')')->pl1()->color($color)->renderToString() : '') .
+                     ($showPercents ? span((string) $value['percentage'] . '%')->pl(1)->color($color)->renderToString() : '') .
+                     ($showValues ? span('(' . (string) $value['value'] . $valuesSufix . ')')->pl(1)->color($color)->renderToString() : '') .
                      ($i < $count ? br() : '');
         }
 
@@ -336,8 +336,8 @@ final class Chart extends Element
         $labels = '';
         $suffix = '';
         foreach ($data as $key => $value) {
-            $suffix  = ($showPercents ? span((string) $value['percentage'] . '%')->pr1()->color($value['color'])->renderToString() : '') .
-                      ($showValues ? span('(' . (string) $value['value'] . $valuesSufix . ')')->pr1()->color($value['color'])->renderToString() : '');
+            $suffix  = ($showPercents ? span((string) $value['percentage'] . '%')->pr(1)->color($value['color'])->renderToString() : '') .
+                      ($showValues ? span('(' . (string) $value['value'] . $valuesSufix . ')')->pr(1)->color($value['color'])->renderToString() : '');
                       $labels .= span($value['label'] . (empty($suffix) ? Element::getSpace() : Element::getSpace() . $suffix))->color($value['color'])->renderToString();
         }
 

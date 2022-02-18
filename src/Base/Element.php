@@ -90,10 +90,11 @@ abstract class Element
     /**
      * Create a new Element instance.
      *
-     * @param        $theme       Element theme.
-     * @param        $shortcodes  Element shortcodes.
-     * @param string $value       Element value.
-     * @param string $classes     Element classes.
+     * @param ThemeInterface|null $theme       Element theme.
+     * @param Shortcodes|null     $shortcodes  Element shortcodes.
+     * @param string              $value       Element value.
+     * @param string              $classes     Element classes.
+     * @param array               $styles      Element styles.
      *
      * @access public
      */
