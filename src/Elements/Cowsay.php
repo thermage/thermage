@@ -97,15 +97,15 @@ final class Cowsay extends Element
 
     private function getTemplate(string $template, array $vars): string
     {
-        $fontFile = __DIR__ . '/../../cows/' . $template . '.cow';
+        $cowFile = __DIR__ . '/../../cows/' . $template . '.cow';
 
-        if (! file_exists($fontFile)) {
+        if (! file_exists($cowFile)) {
             throw new Exception("Template {$template} not found.");
         }
 
         extract($vars, EXTR_REFS);
         ob_start();
-        include $fontFile;
+        include $cowFile;
         return ob_get_clean() ?: '';
     }
 
@@ -143,6 +143,7 @@ final class Cowsay extends Element
 
         $this->value(
             $this->getBallon() .
+            PHP_EOL .
             $this->getTemplate($template, ['thoughts' => $thoughts, 'eyes' => $eyes, 'tongue' => $tongue, 'eyeLeft' => $eyeLeft, 'eyeRight' => $eyeRight]) .
             PHP_EOL
         );
