@@ -286,9 +286,9 @@ final class Cowsay extends Element
         return div($this->getValue())
                     ->pipe(function($el) {
                         if ($this->think) {
-                            $el->borderCowThink();
+                            $el->borderCloud();
                         } else {
-                            $el->borderCowSay();
+                            $el->borderBox();
                         }
                     })
                     ->w(isset($this->getStyles()['width']) ? $this->getStyles()['width'] : $theme->getVariables()->get('cowsay.width', $elementVariables['cowsay']['width']))
