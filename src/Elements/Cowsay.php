@@ -20,6 +20,7 @@ use Exception;
 
 use function arrays as collection;
 use function Thermage\terminal;
+use function Thermage\div;
 
 final class Cowsay extends Element
 {
@@ -30,6 +31,7 @@ final class Cowsay extends Element
     private string $eyeRight;
     private string $mode;
     private string $tongue;
+    private bool $think = false;
 
     public function thoughts($value) {
         $this->thoughts = $value;
@@ -57,6 +59,12 @@ final class Cowsay extends Element
 
     public function eyeRight($value) {
         $this->eyeRight = $value;
+
+        return $this;
+    }
+
+    public function think() {
+        $this->think = true;
 
         return $this;
     }
@@ -91,6 +99,7 @@ final class Cowsay extends Element
                 'eye-right' => 'o', // Select the appearance of the cow's eye right.
                 'tongue' => '',     // The tongue is configurable similarly to the eyes.
                 'mode' => 'b',      // One of "b", "d", "g", "p", "s", "t", "w", "y".
+                'width' => 50,
             ],
         ]);
     }
@@ -110,14 +119,21 @@ final class Cowsay extends Element
     }
 
     private function getBallon(): string
-    {
-        $result = <<<EOT
-          ------------
-        < {$this->getValue()} >
-          ------------
-        EOT;
-
-        return $result;
+    {   
+        $elementVariables = $this->getElementVariables();
+        $theme            = $this->getTheme();
+        
+        return div($this->getValue())
+                    ->pipe(function($el) {
+                        if ($this->think) {
+                            $el->borderCowThink();
+                        } else {
+                            $el->borderCowSay();
+                        }
+                    })
+                    ->w(isset($this->getStyles()['width']) ? $this->getStyles()['width'] : $theme->getVariables()->get('cowsay.width', $elementVariables['cowsay']['width']))
+                    ->px1()
+                    ->renderToString();
     }
 
     /**
@@ -137,13 +153,12 @@ final class Cowsay extends Element
         $thoughts = $this->thoughts ?? $theme->getVariables()->get('cowsay.thoughts', $elementVariables['cowsay']['thoughts']);
         $template = $this->template ?? $theme->getVariables()->get('cowsay.template', $elementVariables['cowsay']['template']);
         $eyes = $this->eyes ?? $theme->getVariables()->get('cowsay.eyes', $elementVariables['cowsay']['eyes']);
-        $tongue = $this->tongue ?? $theme->getVariables()->get('cowsay.tongue', $elementVariables['cowsay']['tongue']);
-        $eyeLeft = $this->eyeLeft ?? $theme->getVariables()->get('cowsay.eye-left', $elementVariables['cowsay']['eye-left']);
-        $eyeRight = $this->eyeRight ?? $theme->getVariables()->get('cowsay.eye-right', $elementVariables['cowsay']['eye-right']);
-
+        $tongue = $this->tongue ?? $theme->getVariables()->get('cowsay.tongue', $elementVariables['cowsay']['tongue']); 
+        $eyeLeft  = isset($this->eyes[0]) ? $this->eyes[0] : $this->eyeLeft ?? $theme->getVariables()->get('cowsay.eye-left', $elementVariables['cowsay']['eye-left']);
+        $eyeRight = isset($this->eyes[1]) ? $this->eyes[1] : $this->eyeRight ?? $theme->getVariables()->get('cowsay.eye-right', $elementVariables['cowsay']['eye-right']);
+        
         $this->value(
             $this->getBallon() .
-            PHP_EOL .
             $this->getTemplate($template, ['thoughts' => $thoughts, 'eyes' => $eyes, 'tongue' => $tongue, 'eyeLeft' => $eyeLeft, 'eyeRight' => $eyeRight]) .
             PHP_EOL
         );
