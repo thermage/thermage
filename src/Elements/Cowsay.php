@@ -24,58 +24,218 @@ use function Thermage\div;
 
 final class Cowsay extends Element
 {
+    /**
+     * Cowsay thoughts.
+     *
+     * @access private
+     */
     private string $thoughts;
+
+    /**
+     * Cowsay template.
+     *
+     * @access private
+     */
     private string $template;
+
+    /**
+     * Cowsay eyes.
+     *
+     * @access private
+     */
     private string $eyes;
+
+    /**
+     * Cowsay eye left.
+     *
+     * @access private
+     */
     private string $eyeLeft;
+
+    /**
+     * Cowsay eye right.
+     *
+     * @access private
+     */
     private string $eyeRight;
-    private string $mode;
+
+    /**
+     * Cowsay tongue.
+     *
+     * @access private
+     */
     private string $tongue;
+
+    /**
+     * Cowsay template.
+     *
+     * @access private
+     */
     private bool $think = false;
 
-    public function thoughts($value) {
+    /**
+     * Cowsay thoughts.
+     * 
+     * @param sting $value Thoughts symbol.
+     * 
+     * @return self Returns instance of the Cowsay class.
+     *
+     * @access public
+     */
+    public function thoughts(string $value): self
+    {
         $this->thoughts = $value;
 
         return $this;
     }
 
-    public function template($value) {
+    /**
+     * Cowsay template.
+     * 
+     * @param sting $value Template name.
+     * 
+     * @return self Returns instance of the Cowsay class.
+     *
+     * @access public
+     */
+    public function template(string $value): self
+    {
         $this->template = $value;
         
         return $this;
     }
 
-    public function eyes($value) {
+    /**
+     * Cowsay eyes.
+     * 
+     * @param sting $value Eyes symbol.
+     * 
+     * @return self Returns instance of the Cowsay class.
+     *
+     * @access public
+     */
+    public function eyes(string $value): self
+    {
         $this->eyes = $value;
 
         return $this;
     }
 
-    public function eyeLeft($value) {
+    /**
+     * Cowsay eye left.
+     * 
+     * @param sting $value Eye left symbol.
+     * 
+     * @return self Returns instance of the Cowsay class.
+     *
+     * @access public
+     */
+    public function eyeLeft(string $value): self
+    {
         $this->eyeLeft = $value;
 
         return $this;
     }
 
-    public function eyeRight($value) {
+    /**
+     * Cowsay eye right.
+     * 
+     * @param sting $value Eye right symbol.
+     * 
+     * @return self Returns instance of the Cowsay class.
+     *
+     * @access public
+     */
+    public function eyeRight(string $value): self
+    {
         $this->eyeRight = $value;
 
         return $this;
     }
 
-    public function think() {
+    /**
+     * Set cowsay think state.
+     * 
+     * @return self Returns instance of the Cowsay class.
+     *
+     * @access public
+     */
+    public function think(): self
+    {
         $this->think = true;
 
         return $this;
     }
 
-    public function mode($value) {
-        $this->mode = $value;
+    /**
+     * Set cowsay face mode.
+     * 
+     * @param sting $value Cowsay face mode. One of "b", "d", "g", "p", "s", "t", "w", "y".
+     * 
+     * @return self Returns instance of the Cowsay class.
+     *
+     * @access public
+     */
+    public function mode(string $value): self
+    {
+        $modes = ['b', 'd', 'g', 'p', 's', 't', 'w', 'y'];
+
+        if (in_array($value, $modes)) {
+            switch ($value) {
+                // borg
+                case 'b':
+                    $this->eyes = "==";
+                    $this->tongue = "  ";
+                    break;
+                // dead
+                case 'd':
+                    $this->eyes = "xx";
+                    $this->tongue = "U ";
+                // greedy
+                case 'g':
+                    $this->eyes = "$$";
+                    $this->tongue = "  ";
+                // paranoia
+                case 'p':
+                    $this->eyes = "@@";
+                    $this->tongue = "  ";
+                // stoned
+                case 's':
+                    $this->eyes = "**";
+                    $this->tongue = "U ";
+                // tired
+                case 't':
+                    $this->eyes = "--";
+                    $this->tongue = "  ";
+                // wired
+                case 'w':
+                    $this->eyes = "OO";
+                    $this->tongue = "  ";
+                // wired
+                case 'y':
+                    $this->eyes = "..";
+                    $this->tongue = "  ";
+                    break;
+                // youthful
+                default:
+                    break;
+            }
+        }
 
         return $this;
     }
 
-    public function tongue($value) {
+    /**
+     * Cowsay tongue.
+     * 
+     * @param sting $value Cowsay tongue symbol.
+     * 
+     * @return self Returns instance of the Cowsay class.
+     *
+     * @access public
+     */
+    public function tongue(string $value): self 
+    {
         $this->tongue = $value;
 
         return $this;
@@ -99,7 +259,7 @@ final class Cowsay extends Element
                 'eye-right' => 'o', // Select the appearance of the cow's eye right.
                 'tongue' => '',     // The tongue is configurable similarly to the eyes.
                 'mode' => 'b',      // One of "b", "d", "g", "p", "s", "t", "w", "y".
-                'width' => 50,
+                'width' => 50,      // Width
             ],
         ]);
     }
@@ -122,7 +282,7 @@ final class Cowsay extends Element
     {   
         $elementVariables = $this->getElementVariables();
         $theme            = $this->getTheme();
-        
+
         return div($this->getValue())
                     ->pipe(function($el) {
                         if ($this->think) {
