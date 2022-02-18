@@ -1,3 +1,8 @@
+<a name="0.19.0"></a>
+# [0.19.0](https://github.com/thermage/thermage) (2022-02-18)
+* Added new element `Cowsay`.
+* Added new borders type: `box` and `cloud`.
+
 <a name="0.18.0"></a>
 # [0.18.0](https://github.com/thermage/thermage) (2022-02-15)
 * Added new element `Image`.
