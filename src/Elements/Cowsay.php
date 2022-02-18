@@ -76,7 +76,7 @@ final class Cowsay extends Element
     /**
      * Cowsay thoughts.
      * 
-     * @param sting $value Thoughts symbol.
+     * @param string $value Thoughts symbol.
      * 
      * @return self Returns instance of the Cowsay class.
      *
@@ -92,7 +92,7 @@ final class Cowsay extends Element
     /**
      * Cowsay template.
      * 
-     * @param sting $value Template name.
+     * @param string $value Template name.
      * 
      * @return self Returns instance of the Cowsay class.
      *
@@ -108,7 +108,7 @@ final class Cowsay extends Element
     /**
      * Cowsay eyes.
      * 
-     * @param sting $value Eyes symbol.
+     * @param string $value Eyes symbol.
      * 
      * @return self Returns instance of the Cowsay class.
      *
@@ -124,7 +124,7 @@ final class Cowsay extends Element
     /**
      * Cowsay eye left.
      * 
-     * @param sting $value Eye left symbol.
+     * @param string $value Eye left symbol.
      * 
      * @return self Returns instance of the Cowsay class.
      *
@@ -140,7 +140,7 @@ final class Cowsay extends Element
     /**
      * Cowsay eye right.
      * 
-     * @param sting $value Eye right symbol.
+     * @param string $value Eye right symbol.
      * 
      * @return self Returns instance of the Cowsay class.
      *
@@ -170,7 +170,7 @@ final class Cowsay extends Element
     /**
      * Set cowsay face mode.
      * 
-     * @param sting $value Cowsay face mode. One of "b", "d", "g", "p", "s", "t", "w", "y".
+     * @param string $value Cowsay face mode. One of "b", "d", "g", "p", "s", "t", "w", "y".
      * 
      * @return self Returns instance of the Cowsay class.
      *
@@ -228,7 +228,7 @@ final class Cowsay extends Element
     /**
      * Cowsay tongue.
      * 
-     * @param sting $value Cowsay tongue symbol.
+     * @param string $value Cowsay tongue symbol.
      * 
      * @return self Returns instance of the Cowsay class.
      *

@@ -38,7 +38,7 @@ final class Terminal
     /**
      * Terminal width.
      *
-     * @param int Width.
+     * @var int|null Width.
      *
      * @access private
      */
@@ -47,7 +47,7 @@ final class Terminal
     /**
      * Terminal height.
      *
-     * @param int Width.
+     * @var int|null Width.
      *
      * @access private
      */
@@ -84,7 +84,7 @@ final class Terminal
     /**
      * Styles.
      *
-     * @return self Returns instance of The Styles class.
+     * @return Styles Returns instance of The Styles class.
      * 
      * @access private
      */
@@ -96,7 +96,7 @@ final class Terminal
     /**
      * Color.
      *
-     * @return self Returns instance of The Color class.
+     * @return Color Returns instance of The Color class.
      * 
      * @access private
      */
@@ -108,7 +108,7 @@ final class Terminal
     /**
      * Screen.
      *
-     * @return self Returns instance of The Screen class.
+     * @return Screen Returns instance of The Screen class.
      * 
      * @access private
      */
@@ -120,7 +120,7 @@ final class Terminal
     /**
      * Cursor.
      *
-     * @return self Returns instance of The Cursor class.
+     * @return Cursor Returns instance of The Cursor class.
      * 
      * @access private
      */

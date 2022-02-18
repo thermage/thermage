@@ -118,7 +118,7 @@ abstract class Element
      * 
      * @param string $classes String of classes.
      * 
-     * @return array Returns collection of classes.
+     * @return Collection Returns collection of classes.
      * 
      * @access public 
      */
@@ -160,7 +160,7 @@ abstract class Element
     /**
      * Get element value.
      *
-     * @return Strings Returns element value.
+     * @return string Returns element value.
      *
      * @access public
      */
@@ -200,7 +200,7 @@ abstract class Element
     /**
      * Set element styles.
      *
-     * @param string $styles Element styles.
+     * @param array $styles Element styles.
      *
      * @return self Returns instance of the Element class.
      *
@@ -216,7 +216,7 @@ abstract class Element
     /**
      * Get element classes.
      *
-     * @return array Returns Element classes.
+     * @return Collection Returns Element classes.
      *
      * @access public
      */
@@ -348,11 +348,13 @@ abstract class Element
     /**
      * Replace element system chars.
      *
-     * @param $value Element.
+     * @param string $value Element.
+     * 
+     * @return string Returns value with replaced system chars.
      * 
      * @access public
      */
-    public static function replaceSystemChars($value): string 
+    public static function replaceSystemChars(string $value): string 
     {
         return (string) strings($value)->replace(self::getSpace(), ' ');
     }
@@ -843,7 +845,7 @@ abstract class Element
     /**
      * Set element text align style.
      *
-     * @param mixed $value Text align value.
+     * @param string $value Text align value.
      *
      * @return self Returns instance of the Element class.
      *
@@ -859,7 +861,7 @@ abstract class Element
     /**
      * Set element text align vertical style.
      *
-     * @param mixed $value Text align vertical value.
+     * @param string $value Text align vertical value.
      *
      * @return self Returns instance of the Element class.
      *
@@ -1055,11 +1057,11 @@ abstract class Element
     }
 
     /**
-     * Apply elemnt style for element value.
+     * Apply element style for element value.
      *
      * @param string $value Element value.
      *
-     * @return self Returns instance of the Element class.
+     * @return string Value with applied font.
      *
      * @access public
      */

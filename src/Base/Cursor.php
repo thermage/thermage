@@ -232,7 +232,7 @@ final class Cursor
     /**
      * Returns the current cursor position as x,y coordinates.
      *
-     * @return string Returns the current cursor position as x,y coordinates.
+     * @return array Returns the current cursor position as x,y coordinates.
      *
      * @access public
      */
