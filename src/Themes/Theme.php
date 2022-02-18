@@ -345,6 +345,7 @@ class Theme implements ThemeInterface
                 'pixel-width' => 3,
             ],
 
+            // Cowsay element.
             'cowsay' => [
                 'thoughts' => '\\', // Thoughts symbol.
                 'template' => '',   // Template for a cow, get inspiration from `./cows`.
@@ -353,7 +354,7 @@ class Theme implements ThemeInterface
                 'eye-right' => 'o', // Select the appearance of the cow's eye right.
                 'tongue' => '',     // The tongue is configurable similarly to the eyes.
                 'mode' => 'b',      // One of "b", "d", "g", "p", "s", "t", "w", "y".
-                'width' => 50,
+                'width' => 50,      // Message box Width.
             ],
             
             // Hr element.

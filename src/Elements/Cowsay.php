@@ -259,7 +259,7 @@ final class Cowsay extends Element
                 'eye-right' => 'o', // Select the appearance of the cow's eye right.
                 'tongue' => '',     // The tongue is configurable similarly to the eyes.
                 'mode' => 'b',      // One of "b", "d", "g", "p", "s", "t", "w", "y".
-                'width' => 50,      // Width
+                'width' => 50,      // Message box Width.
             ],
         ]);
     }
