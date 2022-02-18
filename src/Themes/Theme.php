@@ -324,6 +324,16 @@ class Theme implements ThemeInterface
                 'height' => 16,
                 'pixel-width' => 3,
             ],
+
+            'cowsay' => [
+                'thoughts' => '\\', // Thoughts symbol.
+                'template' => '',   // Template for a cow, get inspiration from `./cows`.
+                'eyes' => 'oo',     // Select the appearance of the cow's eyes.
+                'eye-left' => 'o',  // Select the appearance of the cow's eye left.
+                'eye-right' => 'o', // Select the appearance of the cow's eye right.
+                'tongue' => '',     // The tongue is configurable similarly to the eyes.
+                'mode' => 'b',      // One of "b", "d", "g", "p", "s", "t", "w", "y".
+            ],
             
             // Hr element.
             'hr' => [
