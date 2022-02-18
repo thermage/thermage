@@ -25,7 +25,7 @@ use function Thermage\div;
 final class Cowsay extends Element
 {
     /**
-     * Cowsay thoughts.
+     * Cowsay thoughts symbol.
      *
      * @access private
      */
@@ -39,35 +39,35 @@ final class Cowsay extends Element
     private string $template;
 
     /**
-     * Cowsay eyes.
+     * Cowsay eyes symbol.
      *
      * @access private
      */
     private string $eyes;
 
     /**
-     * Cowsay eye left.
+     * Cowsay eye left symbol.
      *
      * @access private
      */
     private string $eyeLeft;
 
     /**
-     * Cowsay eye right.
+     * Cowsay eye right symbol.
      *
      * @access private
      */
     private string $eyeRight;
 
     /**
-     * Cowsay tongue.
+     * Cowsay tongue symbol.
      *
      * @access private
      */
     private string $tongue;
 
     /**
-     * Cowsay template.
+     * Cowsay think flag.
      *
      * @access private
      */
@@ -264,6 +264,13 @@ final class Cowsay extends Element
         ]);
     }
 
+    /**
+     * Get Cowsay template.
+     *
+     * @return string Cowsay template.
+     *
+     * @access private
+     */
     private function getTemplate(string $template, array $vars): string
     {
         $cowFile = __DIR__ . '/../../cows/' . $template . '.cow';
@@ -278,6 +285,13 @@ final class Cowsay extends Element
         return ob_get_clean() ?: '';
     }
 
+    /**
+     * Get Cowsay ballon.
+     *
+     * @return string Cowsay ballon.
+     *
+     * @access private
+     */
     private function getBallon(): string
     {   
         $elementVariables = $this->getElementVariables();
