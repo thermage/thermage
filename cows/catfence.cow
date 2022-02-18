@@ -1,0 +1,40 @@
+<?php 
+
+/**
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
+ * Copyright (c) Sergey Romanenko (https://awilum.github.io)
+ *
+ * Licensed under The MIT License.
+ *
+ * For full copyright and license information, please see the LICENSE
+ * Redistributions of files must retain the above copyright notice.
+ */
+
+#
+#	Cat picture by Joan Stark
+#	Transformed into cowfile by Myroslav Golub
+#
+echo <<<EOT
+       {$thoughts}     *     ,MMM8&&&.            *
+                  MMMM88&&&&&    .
+        {$thoughts}        MMMM88&&&&&&&
+     *           MMM88&&&&&&&&
+         {$thoughts}       MMM88&&&&&&&&
+                 'MMM88&&&&&&'
+          {$thoughts}        'MMM8&&&'      *
+          |\\___/|
+         =) {$eyeLeft} {$eyeRight} (=            .              '
+          \\  ^  /
+           )=*=(       *
+          /     \\
+          |     |
+         /| | | |\\
+         \\| | |_|/\\
+  _/\\_/\\_//_// ___/\\_/\\_/\\_/\\_/\\_/\\_/\\_/\\_/\\_
+  |  |  |  | \\_) |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |     
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+EOT;

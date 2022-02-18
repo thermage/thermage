@@ -1,0 +1,32 @@
+<?php 
+
+/**
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
+ * Copyright (c) Sergey Romanenko (https://awilum.github.io)
+ *
+ * Licensed under The MIT License.
+ *
+ * For full copyright and license information, please see the LICENSE
+ * Redistributions of files must retain the above copyright notice.
+ */
+
+echo <<<EOT
+ {$thoughts}       {$thoughts}      {$thoughts}      
+  {$thoughts}        ^__^  {$thoughts}        
+    ^__^   ({$eyes})   ^__^  
+    ({$eyes})   (__)   ({$eyes})   
+    (__)    {$tongue}    (__)   
+oyo/:{$tongue}            {$tongue}:/oy+
+/mmmmm+   syyyyo  `ommmmm/
+ smmmmms. -ymmy. .smmmmmo 
+ `+dmmmmd+``::``+dmmmmd+  
+   -ymmmmmh/``+hmmmmmy-   
+    `/hmmmmmhhmmmmmh/`    
+      `/hmmmmmmmmh/`      
+        `/hmmmmmd/        
+      `oo.`/dmmmmdo`      
+     `ymmd+``ommmmmy`     
+     smmmmd-  /mmmmms     
+    -mmmmm+    ommmmm-    
+    -ooooo`    .ooooo.     
+EOT;

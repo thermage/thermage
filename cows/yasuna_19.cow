@@ -1,0 +1,35 @@
+<?php 
+
+/**
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
+ * Copyright (c) Sergey Romanenko (https://awilum.github.io)
+ *
+ * Licensed under The MIT License.
+ *
+ * For full copyright and license information, please see the LICENSE
+ * Redistributions of files must retain the above copyright notice.
+ */
+
+#
+# やすなちゃんのまんまるお目目
+#
+
+echo <<<EOT
+  {$thoughts}
+   {$thoughts}
+
+:. :.孑|:/仔:./  ＼:.| V｜:. ﾄ:. :.
+:. :/  |/  |:/     ヽ|   \/:!\/:.:
+:. / ,ィf芋ミ     ィf芋｀:V  .\/.
+:./ ,' :'::::ﾊ      ,':::::ﾊ ヽ /:.
+:t  { {k)::::!     !k)::::!  },'.:
+:ﾊ    弋 一ソ      弋 一 ｿ ,: ::
+:.{      ￣    ,       ￣  ; :./
+:.| ''                  '' |:./
+:.ﾄ､      ` ､      ノ     ﾉ!:/ノ
+ﾄ､!:＞ ､.     一  '   .,＜:|/::.
+:: :: :: ::>z-一-z<:: :: :: :: :.
+V|＼:/}ﾍ/  `ー又ー' \/}ノ{／|:／
+  ,z'￣ ﾍ   /{ .ﾄ､  /￣  ヽ
+／      /\./x 一 ﾐ./       ＼ 
+EOT;

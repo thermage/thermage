@@ -1,0 +1,48 @@
+<?php 
+
+/**
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
+ * Copyright (c) Sergey Romanenko (https://awilum.github.io)
+ *
+ * Licensed under The MIT License.
+ *
+ * For full copyright and license information, please see the LICENSE
+ * Redistributions of files must retain the above copyright notice.
+ */
+
+# maze-runner.cow
+#
+#   a guy running through an ASCII maze
+#   found at http://pip.readthedocs.org/en/user_builds/pip/rtd-builds/latest/installing/
+#
+echo <<<EOT
+    {$thoughts}
+     {$thoughts}
+      {$thoughts}
+       \\
+        \\
+         \\
+    \\     \\                     /
+     \\     \\                   /
+      \\     \\                 /
+       ]     \\               [    ,'|
+       ]      \\              [   /  |
+       ]___               ___[ ,'   |
+       ]  ]\\             /[  [ |:   |
+       ]  ] \\           / [  [ |:   |
+       ]  ]  ]         [  [  [ |:   |
+       ]  ]  ]__     __[  [  [ |:   |
+       ]  ]  ] ]\\ _ /[ [  [  [ |:   |
+       ]  ]  ] ] (#) [ [  [  [ :===='
+       ]  ]  ]_].nHn.[_[  [  [
+       ]  ]  ]  HHHHH. [  [  [
+       ]  ] /   `HH("N  \\ [  [
+       ]__]/     HHH  "  \\[__[
+       ]         NNN         [
+       ]         N/"         [
+       ]         N H         [
+      /          N            \\
+     /           q,            \\
+    /                           \\
+EOT;
+

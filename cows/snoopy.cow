@@ -1,0 +1,40 @@
+<?php 
+
+/**
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
+ * Copyright (c) Sergey Romanenko (https://awilum.github.io)
+ *
+ * Licensed under The MIT License.
+ *
+ * For full copyright and license information, please see the LICENSE
+ * Redistributions of files must retain the above copyright notice.
+ */
+
+##
+## acsii picture From: kwok@menpachi.nmfs.hawaii.edu (William Kwok)
+## from http://www.ascii-art.de/ascii/s/snoopy.txt
+echo <<<EOT
+ {$thoughts}
+  {$thoughts}          , ----.
+   {$thoughts}        -  -     `
+      ,__.,'           \\
+    .'                 *`
+   /       {$eyeLeft}   {$eyeRight}     / **\\
+  .                 / ****.
+  |    mm           | ****|
+   \\                | ****|
+    ` ._______      \\ ****/
+              \\      /`---'
+               \\___(
+               /~~~~\\
+              /      \\
+             /      | \\
+            |       |  \\
+  , ~~ .    |, ~~ . |  |\\
+ ( |||| )   ( |||| )(,,,)`
+( |||||| )-( |||||| )    | ^
+( |||||| ) ( |||||| )    |'/
+( |||||| )-( |||||| )___,'-
+ ( |||| )   ( |||| )
+  ` ~~ '     ` ~~ '
+EOT;

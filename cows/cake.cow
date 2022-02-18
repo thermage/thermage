@@ -1,0 +1,38 @@
+<?php 
+
+/**
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
+ * Copyright (c) Sergey Romanenko (https://awilum.github.io)
+ *
+ * Licensed under The MIT License.
+ *
+ * For full copyright and license information, please see the LICENSE
+ * Redistributions of files must retain the above copyright notice.
+ */
+
+# Cake, from Portal 
+# via http://pastebin.com/1AZwKrKp
+echo <<<EOT
+    {$thoughts}
+     {$thoughts}
+            ,:/+/-
+            /M/              .,-=;//;-
+       .:/= ;MH/,    ,=/+%\$XH@MM#@:
+      -\$##@+\$###@H@MMM#######H:.    -/H#
+ .,H@H@ X######@ -H#####@+-     -+H###@X
+  .,@##H;      +XM##M/,     =%@###@X;-
+X%-  :M##########$.    .:%M###@%:
+M##H,   +H@@@$/-.  ,;\$M###@%,          -
+M####M=,,---,.-%%H####M\$:          ,+@##
+@##################@/.         :%H##@\$-
+M###############H,         ;HM##M\$=
+\#################.    .=\$M##M\$=
+\#################H..;XM##M\$=          .:+
+M###################@%=           =+@MH%
+@################M/.          =+H#X%=
+=+M##############M,       -/X#X+;.
+  .;XM##########H=    ,/X#H+:,
+     .=+HM######M+/+HM@+=.
+         ,:/%XM####H/.
+              ,.:=-.
+EOT;

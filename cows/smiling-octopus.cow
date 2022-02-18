@@ -1,0 +1,51 @@
+<?php 
+
+/**
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
+ * Copyright (c) Sergey Romanenko (https://awilum.github.io)
+ *
+ * Licensed under The MIT License.
+ *
+ * For full copyright and license information, please see the LICENSE
+ * Redistributions of files must retain the above copyright notice.
+ */
+
+# 
+echo <<<EOT
+      {$thoughts}
+       {$thoughts}
+        {$thoughts}                                     ,
+                                            ,o
+                                            :o
+                   _....._                  `:o
+                 .\'       ``-.                \\o
+                /  _      _   \\                \\o
+               :  /*\\    /*\\   )                ;o
+               |  \\_/    \\_/   /                ;o
+               (       U      /                 ;o
+                \\  (\\_____/) /                  /o
+                 \\   \\_m_/  (                  /o
+                  \\         (                ,o:
+                  )          \\,           .o;o\'           ,o\'o\'o.
+                ./          /\\o;o,,,,,;o;o;\'\'         _,-o,-\'\'\'-o:o.
+ .             ./o./)        \\    \'o\'o\'o\'\'         _,-\'o,o\'         o
+ o           ./o./ /       .o \\.              __,-o o,o\'
+ \\o.       ,/o /  /o/)     | o o\'-..____,,-o\'o o_o-\'
+ `o:o...-o,o-\' ,o,/ |     \\   \'o.o_o_o_o,o--\'\'
+ .,  ``o-o\'  ,.oo/   \'o /\\.o`.
+ `o`o-....o\'o,-\'   /o /   \\o \\.                       ,o..         o
+   ``o-o.o--      /o /      \\o.o--..          ,,,o-o\'o.--o:o:o,,..:o
+                 (oo(          `--o.o`o---o\'o\'o,o,-\'\'\'        o\'o\'o
+                  \\ o\\              ``-o-o\'\'\'\'
+   ,-o;o           \\o \\
+  /o/               )o )  Carl Pilcher
+ (o(               /o /                |
+  \\o\.       ...-o\'o /              \\   |
+    \\o`o`-o\'o o,o,--\'       ~~~~~~~~\\~~|~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      ```o--\'\'\'                       \\| /
+                                       |/
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                       |
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+EOT;

@@ -1,0 +1,39 @@
+<?php 
+
+/**
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
+ * Copyright (c) Sergey Romanenko (https://awilum.github.io)
+ *
+ * Licensed under The MIT License.
+ *
+ * For full copyright and license information, please see the LICENSE
+ * Redistributions of files must retain the above copyright notice.
+ */
+
+# broken heart
+# via http://pastebin.com/1AZwKrKp
+# TODO: replace "thoughts" with "feelings"
+echo <<<EOT
+     {$thoughts}
+      {$thoughts}
+                          .,---.
+                        ,/XM#MMMX;,
+                      -%##########M%,
+                     -\@######%  \$###\@=
+      .,--,         -H#######\$   \$###M:
+   ,;\$M###MMX;     .;##########\$;HM###X=
+ ,/\@##########H=      ;################+
+-+#############M/,      %##############+
+%M###############=      /##############:
+H################      .M#############;.
+\@###############M      ,\@###########M:.
+X################,      -\$=X#######\@:
+/\@##################%-     +######\$-
+.;##################X     .X#####+,
+ .;H################/     -X####+.
+   ,;X##############,       .MM/
+      ,:+\$H\@M#######M#\$-    .\$\$=
+           .,-=;+\$\@###X:    ;/=.
+                  .,/X\$;   .::,
+                      .,    ..
+EOT;

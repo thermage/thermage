@@ -1,0 +1,38 @@
+<?php 
+
+/**
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
+ * Copyright (c) Sergey Romanenko (https://awilum.github.io)
+ *
+ * Licensed under The MIT License.
+ *
+ * For full copyright and license information, please see the LICENSE
+ * Redistributions of files must retain the above copyright notice.
+ */
+
+##
+## Ghostbusters!
+##
+echo <<<EOT
+          {$thoughts}
+           {$thoughts}
+            {$thoughts}          __---__
+                    _-       /--______
+               __--( /     \\ )XXXXXXXXXXX\\v.
+             .-XXX(   {$eyeLeft}   {$eyeRight}  )XXXXXXXXXXXXXXX-
+            /XXX(       U     )        XXXXXXX\\
+          /XXXXX(              )--_  XXXXXXXXXXX\\
+         /XXXXX/ (      O     )   XXXXXX   \\XXXXX\\
+         XXXXX/   /            XXXXXX   \\__ \\XXXXX
+         XXXXXX__/          XXXXXX         \\__---->
+ ---___  XXX__/          XXXXXX      \\__         /
+   \\-  --__/   ___/\\  XXXXXX            /  ___--/=
+    \\-\\    ___/    XXXXXX              '--- XXXXXX
+       \\-\\/XXX\\ XXXXXX                      /XXXXX
+         \\XXXXXXXXX   \\                    /XXXXX/
+          \\XXXXXX      >                 _/XXXXX/
+            \\XXXXX--__/              __-- XXXX/
+             -XXXXXXXX---------------  XXXXXX-
+                \\XXXXXXXXXXXXXXXXXXXXXXXXXX/
+                  ""VXXXXXXXXXXXXXXXXXXV""
+EOT;

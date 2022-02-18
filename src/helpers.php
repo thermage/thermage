@@ -33,6 +33,7 @@ use Thermage\Elements\Strikethrough;
 use Thermage\Elements\Underline;
 use Thermage\Elements\Spark;
 use Thermage\Elements\Image;
+use Thermage\Elements\Cowsay;
 
 function setShortcodes($shortcodes): void
 {
@@ -76,6 +77,17 @@ function renderToString($elements, ?callable $callback = null): string
 function renderToFile($elements, string $file)
 {
     Thermage::renderToFile($elements, $file);
+}
+
+function cowsay(string $value = '', string $classes = '', array $styles = []): Cowsay
+{
+    return new Cowsay(
+        Thermage::getTheme(),
+        Thermage::getShortcodes(),
+        $value,
+        $classes,
+        $styles
+    );
 }
 
 function image(string $value = '', string $classes = '', array $styles = []): Image

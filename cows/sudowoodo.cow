@@ -1,0 +1,34 @@
+<?php 
+
+/**
+ * Thermage - Totally RAD Terminal styling for PHP! (https://digital.flextype.org/thermage/)
+ * Copyright (c) Sergey Romanenko (https://awilum.github.io)
+ *
+ * Licensed under The MIT License.
+ *
+ * For full copyright and license information, please see the LICENSE
+ * Redistributions of files must retain the above copyright notice.
+ */
+
+# Sudowoodo (Pokémon)
+#
+# https://gist.github.com/rzabcik/9233650/
+#
+echo <<<EOT
+     {$thoughts}
+      {$thoughts}
+     _              __
+    / `\\  (~._    ./  )
+    \\__/ __`-_\\__/ ./
+   _ \\ \\/  \\   \\ |_   __
+ (   )  \\__/ -^    \\ /  \\
+  \\_/ "  \\  | o  o  |.. /  __
+       \\. --' ====  /  || /  \\
+         \\   .  .  |---__.\\__/
+         /  :     /   |   |
+         /   :   /     \\_/
+      --/ ::    (
+     (  |     (  (____
+   .--  .. ----**.____)
+   \\___/
+EOT;
