@@ -37,7 +37,7 @@ composer require thermage/thermage
 ```
 
 ### Resources
-* [Documentation](https://digital.flextype.org/thermage)
+* [Documentation](https://awilum.github.io/thermage/)
 
 ### Tests
 
