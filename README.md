@@ -4,7 +4,7 @@
 <br>
 
 <p align="center">
-<a href="https://github.com/thermage/thermage/releases"><img alt="Version" src="https://img.shields.io/github/release/thermage/thermage.svg?label=version&color=1d7300"></a> <a href="https://packagist.org/packages/thermage/thermage"><img src="https://poser.pugx.org/thermage/thermage/downloads" alt="Total downloads"></a> <a href="https://github.com/thermage/thermage"><img src="https://img.shields.io/badge/license-MIT-blue.svg?color=1d7300" alt="License"></a> <a href="https://packagist.org/packages/thermage/thermage"> <img src="https://github.com/thermage/thermage/actions/workflows/ci.yml/badge.svg?branch=dev"></a> <img src="http://poser.pugx.org/thermage/thermage/require/php">
+<img src="https://img.shields.io/badge/license-MIT-blue.svg?label=License" alt="License MIT"> <a href="https://packagist.org/packages/thermage/thermage"><img src="https://poser.pugx.org/thermage/thermage/downloads" alt="Total downloads"></a> <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/thermage/thermage?label=Stars"> <img alt="GitHub forks" src="https://img.shields.io/github/forks/thermage/thermage?label=Forks"> <a href="https://hitsofcode.com"><img alt="Hits of Code" src="https://hitsofcode.com/github/thermage/thermage?branch=dev"></a> <a href="https://discord.gg/ewQkqgfBAc"><img src="https://img.shields.io/discord/423097982498635778.svg?logo=discord&label=Discord%20Chat" alt="Discord"></a>
 </p>
 
 <br>
