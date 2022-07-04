@@ -17,7 +17,7 @@ namespace Thermage\Elements;
 use Glowy\Arrays\Arrays as Collection;
 use Thermage\Base\Element;
 
-use function arrays as collection;
+use function Glowy\Arrays\arrays as collection;
 use function Thermage\div;
 
 final class Alert extends Element

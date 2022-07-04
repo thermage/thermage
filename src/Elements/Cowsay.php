@@ -18,7 +18,7 @@ use Thermage\Base\Element;
 use Glowy\Arrays\Arrays as Collection;
 use Exception;
 
-use function arrays as collection;
+use function Glowy\Arrays\arrays as collection;
 use function Thermage\terminal;
 use function Thermage\div;
 

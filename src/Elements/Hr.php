@@ -17,9 +17,9 @@ namespace Thermage\Elements;
 use Glowy\Arrays\Arrays as Collection;
 use Thermage\Base\Element;
 
-use function arrays as collection;
+use function Glowy\Arrays\arrays as collection;
 use function intval;
-use function strings;
+use function Glowy\Strings\strings;
 use function Thermage\div;
 use function Thermage\terminal;
 

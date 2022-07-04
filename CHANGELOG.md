@@ -1,3 +1,11 @@
+<a name="0.20.0"></a>
+# [0.20.0](https://github.com/thermage/thermage) (2022-07-04)
+* Fixes for element `Cowsay`.
+
+### BREAKING CHANGES
+
+* Moving to PHP 8.1
+
 <a name="0.19.0"></a>
 # [0.19.0](https://github.com/thermage/thermage) (2022-02-18)
 * Added new element `Cowsay`.

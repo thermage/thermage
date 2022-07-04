@@ -18,7 +18,8 @@ use InvalidArgumentException;
 
 use function array_keys;
 use function array_merge;
-use function arrays as collection;
+use function Glowy\Arrays\arrays as collection;
+use function Glowy\Strings\strings;
 use function getenv;
 use function hexdec;
 use function implode;
@@ -29,7 +30,6 @@ use function mt_rand;
 use function preg_match;
 use function round;
 use function sprintf;
-use function strings;
 use function substr;
 use function Thermage\terminal;
 

@@ -16,7 +16,7 @@ namespace Thermage\Themes;
 
 use Glowy\Arrays\Arrays as Collection;
 
-use function arrays as collection;
+use function Glowy\Arrays\arrays as collection;
 
 class Theme implements ThemeInterface
 {

@@ -16,8 +16,9 @@ namespace Thermage\Elements;
 
 use Glowy\Arrays\Arrays as Collection;
 use Thermage\Base\Element;
-use function arrays as collection;
+use function Glowy\Arrays\arrays as collection;
 use function Thermage\span;
+use function Glowy\Strings\strings;
 
 use InvalidArgumentException;
 

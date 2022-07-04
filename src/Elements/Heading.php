@@ -17,8 +17,8 @@ namespace Thermage\Elements;
 use Glowy\Arrays\Arrays as Collection;
 use Thermage\Base\Element;
 use Thermage\Base\Terminal;
-use function arrays as collection;
-use function strings;
+use function Glowy\Arrays\arrays as collection;
+use function Glowy\Strings\strings;
 use function Thermage\div;
 
 use const PHP_EOL;

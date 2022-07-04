@@ -17,14 +17,14 @@ namespace Thermage\Elements;
 use Glowy\Arrays\Arrays as Collection;
 use Thermage\Base\Element;
 
-use function arrays as collection;
+use function Glowy\Arrays\arrays as collection;
 use function array_column;
 use function array_sum;
 use function count;
 use function intval;
 use function max;
 use function round;
-use function strings;
+use function Glowy\Strings\strings;
 use function Thermage\breakline as br;
 use function Thermage\span;
 use function Thermage\terminal;

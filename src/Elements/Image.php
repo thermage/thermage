@@ -17,6 +17,7 @@ namespace Thermage\Elements;
 use Thermage\Base\Element;
 use Exception;
 use function Thermage\terminal;
+use function Glowy\Strings\strings;
 
 final class Image extends Element
 {
