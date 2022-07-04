@@ -1,22 +1,13 @@
 name: CI
 on: ['push', 'pull_request']
 jobs:
-  phpstan:
-    name: PHPStan
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: PHPStan
-      uses: docker://oskarstark/phpstan-ga
-      with:
-        args: analyse src/ -c phpstan.neon
-  tests:
+  ci:
     name: PHP ${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency-version }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        php: ['7.4', '8.0', '8.1']
+        php: ['8.1']
         dependency-version: [prefer-stable]
 
     steps:
@@ -27,7 +18,8 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php }}
-        extensions:  fileinfo, spl, json, dom, mbstring
+        extensions:  json, mbstring, pcntl
+        ini-values: disable_functions, error_reporting=E_ALL
         tools: composer:v2
         coverage: xdebug
 
@@ -36,13 +28,23 @@ jobs:
         echo "::add-matcher::${{ runner.tool_cache }}/php.json"
         echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
-    - name: Install PHP 7 dependencies
+    - name: Install PHP 8.1 dependencies
       run: composer update --${{ matrix.dependency-version }} --no-interaction --no-progress
-      if: "matrix.php < 8"
-
-    - name: Install PHP 8 dependencies
-      if: "matrix.php >= 8"
-      run: composer update --${{ matrix.dependency-version }} --ignore-platform-req=php --no-interaction --no-progress
-
-    - name: Run Tests
+      
+    - name: PHP Static Analysis for PHP 8.1
+      run: ./vendor/bin/phpstan
+      
+    - name: Run Tests for PHP 8.1
       run: ./vendor/bin/pest --coverage
+      
+  support:
+    needs: [ci]
+    name: Discord Notification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: sebastianpopp/discord-action@releases/v1
+        with:
+          webhook: ${{ secrets.WEBHOOK_TOKEN }}
+          message: "**❤️ SUPPORT ONGOING DEVELOPMENT**\n➡️ https://github.com/Awilum#support-me"
