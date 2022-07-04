@@ -12,17 +12,17 @@
     "authors": [
         {
             "name": "Sergey Romanenko",
-            "email": "sergey.romanenko@flextype.org",
+            "email": "awilum@msn.com",
             "homepage": "https://awilum.github.io"
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
+        "php": "^8.1",
         "ext-mbstring": "*",
-        "glowy/arrays": "^4.0.0",
-        "glowy/strings": "^4.0.0",
-        "glowy/macroable": "^3.0",
-        "thunderer/shortcode": "^0.7.4"
+        "glowy/arrays": "^5.0.0",
+        "glowy/macroable": "^4.0.0",
+        "glowy/strings": "^5.0.1",
+        "thunderer/shortcode": "^0.7.5"
     },
     "autoload":{
         "psr-4": {
@@ -35,16 +35,21 @@
     "bin": [
         "bin/thermage"
     ],
-    "require-dev": {
-        "doctrine/coding-standard": "9.0.0",
-        "pestphp/pest": "^1.21.1",
-        "phpstan/phpstan": "^1.2.0",
-        "symfony/var-dumper": "^5.4.1"
-    },
     "config": {
+        "apcu-autoloader": true,
+        "optimize-autoloader": true,
+        "platform-check": false,
+        "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
+    },
+    "require-dev": {
+        "ext-iconv": "*",
+        "doctrine/coding-standard": "9.0.0",
+        "pestphp/pest": "^1.21.1",
+        "phpstan/phpstan": "^1.8.0",
+        "symfony/var-dumper": "^6.1.0"
     }
 }
