@@ -11,7 +11,7 @@ use Thunder\Shortcode\Shortcode\ShortcodeInterface;
 use Thermage\Themes\Theme;
 use Thermage\Themes\ThemeInterface;
 use Glowy\Arrays\Arrays as Collection;
-use function arrays as collection;
+use function Glowy\Arrays\arrays as collection;
 
 test('test thermage getShortcodes method', function (): void {
     $this->assertInstanceOf(Shortcodes::class, Thermage::getShortcodes());

@@ -6,7 +6,7 @@ use Thermage\Thermage;
 use Thermage\Themes\Theme;
 use Thermage\Themes\ThemeInterface;
 use Glowy\Arrays\Arrays as Collection;
-use function arrays as collection;
+use function Glowy\Arrays\arrays as collection;
 
 test('test set and get theme', function (): void {
     $this->assertInstanceOf(Theme::class, Thermage::getTheme());

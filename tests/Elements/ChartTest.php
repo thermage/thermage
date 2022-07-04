@@ -6,11 +6,12 @@ use Thermage\Thermage;
 use Thermage\Themes\Theme;
 use Thermage\Themes\ThemeInterface;
 use Glowy\Arrays\Arrays as Collection;
-use function arrays as collection;
+use function Glowy\Arrays\arrays as collection;
 use Thermage\Elements\Chart;
 use Thermage\Base\Element;
 use function Thermage\chart;
 use function Thermage\setTheme;
+use function Glowy\Strings\strings;
 
 beforeEach(function() {
     setTheme(new ChartTestTheme());

@@ -8,11 +8,12 @@ use Thermage\Themes\ThemeInterface;
 use Thermage\Elements\Alert;
 use Thermage\Base\Element;
 use Glowy\Arrays\Arrays as Collection;
-use function arrays as collection;
+use function Glowy\Arrays\arrays as collection;
 use function Thermage\alert;
 use function Thermage\setTheme;
 use function Thermage\getTheme;
 use function Thermage\terminal;
+use function Glowy\Strings\strings;
 
 beforeEach(function() {
     setTheme(new AlertTestTheme());

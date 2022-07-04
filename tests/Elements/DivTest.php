@@ -7,7 +7,7 @@ use Thermage\Themes\Theme;
 use Thermage\Themes\ThemeInterface;
 use Thermage\Elements\Div;
 use Glowy\Arrays\Arrays as Collection;
-use function arrays as collection;
+use function Glowy\Arrays\arrays as collection;
 use function Thermage\div;
 use function Thermage\span;
 use function Thermage\setTheme;
