@@ -13,8 +13,8 @@
 ##
 ## A small cow, artist unknown
 ##
-{$eyes} = ".." unless ({$eyes});
 echo <<<EOT
+{$eyes} = ".." unless ({$eyes});
        {$thoughts}   ,__,
         {$thoughts}  ({$eyes})____
            (__)    )\\

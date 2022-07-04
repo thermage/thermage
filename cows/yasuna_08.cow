@@ -14,7 +14,7 @@
 # ごぼう2
 #
 
-$the_cow << EOT;;
+echo <<<EOT
   {$thoughts}
    {$thoughts}
     {$thoughts}

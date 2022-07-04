@@ -13,7 +13,7 @@
 ##
 ## The non-flaming sheep.
 ##
-$the_cow = <<EOT;
+echo <<<EOT
   {$thoughts}
    {$thoughts}
        __     
