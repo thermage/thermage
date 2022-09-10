@@ -1,3 +1,7 @@
+<a name="0.20.1"></a>
+# [0.20.1](https://github.com/thermage/thermage) (2022-09-10)
+* Fix issue with `degradeHexColorToAnsi` method.
+
 <a name="0.20.0"></a>
 # [0.20.0](https://github.com/thermage/thermage) (2022-07-04)
 * Fixes for element `Cowsay`.
