@@ -230,7 +230,7 @@ final class Color
      */
     private function degradeHexColorToAnsi(int $r, int $g, int $b): int
     {
-        if (round($this->getSaturation($r, $g, $b) / 50) == 0) {
+        if (0 === round($this->getSaturation($r, $g, $b) / 50)) {
             return 0;
         }
 
